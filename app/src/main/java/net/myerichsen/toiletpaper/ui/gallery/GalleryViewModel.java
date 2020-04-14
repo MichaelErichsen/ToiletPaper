@@ -1,16 +1,16 @@
-package net.myerichsen.toiletpaper.ui.about;
+package net.myerichsen.toiletpaper.ui.gallery;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class AboutViewModel extends ViewModel {
+public class GalleryViewModel extends ViewModel {
 
     private MutableLiveData<String> mText;
 
-    public AboutViewModel() {
+    public GalleryViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("This is the about fragment");
+        mText.setValue("This is gallery fragment");
     }
 
     public LiveData<String> getText() {

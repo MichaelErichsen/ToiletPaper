@@ -8,16 +8,20 @@
             android:id="@+id/nav_home"
             android:icon="@drawable/ic_menu_camera"
             android:title="@string/menu_home" />
-
         <item
-            android:id="@+id/nav_about"
-            android:icon="@drawable/baseline_help_black_48dp"
-            android:title="@string/action_about" />
+            android:id="@+id/nav_gallery"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="@string/menu_gallery" />
+        <item
+            android:id="@+id/nav_slideshow"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="@string/menu_slideshow" />
 
         <item
             android:id="@+id/action_calculate"
             android:icon="@drawable/calculator"
             android:title="@string/action_calculate" />
+
 
         <item
             android:id="@+id/action_save"
@@ -45,5 +49,9 @@
             android:icon="@drawable/baseline_store_mall_directory_black_48dp"
             android:title="@string/action_supplier_list" />
 
+        <item
+            android:id="@+id/action_about"
+            android:icon="@drawable/baseline_help_black_48dp"
+            android:title="@string/action_about" />
     </group>
 </menu>
