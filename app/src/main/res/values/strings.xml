@@ -20,4 +20,5 @@
     <string name="action_productdata">Produktliste</string>
     <string name="action_supplier_list">Butiksliste</string>
     <string name="action_about">Om</string>
+    <string name="test_button">Tryk her</string>
 </resources>
