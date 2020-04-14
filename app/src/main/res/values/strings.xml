@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">ToiletPaper</string>
+    <string name="app_name">Toiletpapir</string>
     <string name="navigation_drawer_open">Åben skuffen</string>
     <string name="navigation_drawer_close">Luk skuffen</string>
     <string name="nav_header_title">Toiletpapir</string>
@@ -9,8 +9,6 @@
 
     <string name="menu_home">Toiletpapir</string>
     <string name="menu_about">Om</string>
-    <string name="menu_slideshow">Slideshow</string>
-    <string name="home_second">Home Second</string>
 
     <!--    TP added-->
     <string name="action_calculate">Beregn</string>
