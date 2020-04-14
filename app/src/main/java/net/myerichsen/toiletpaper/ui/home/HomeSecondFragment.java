@@ -22,7 +22,7 @@ public class HomeSecondFragment extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
         homeSecondViewModel =
                 ViewModelProviders.of(this).get(HomeSecondViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_second_home, container, false);
+        View root = inflater.inflate(R.layout.fragment_home_second, container, false);
         final TextView textView = root.findViewById(R.id.text_second_home);
         homeSecondViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
