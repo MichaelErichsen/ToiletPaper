@@ -10,7 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
+import androidx.lifecycle.ViewModelProvider;
 
 import net.myerichsen.toiletpaper.R;
 
@@ -20,8 +20,7 @@ public class HomeSecondFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        homeSecondViewModel =
-                ViewModelProviders.of(this).get(HomeSecondViewModel.class);
+        homeSecondViewModel = new ViewModelProvider(this).get(HomeSecondViewModel.class);
         View root = inflater.inflate(R.layout.fragment_home_second, container, false);
         final TextView textView = root.findViewById(R.id.text_second_home);
         homeSecondViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {

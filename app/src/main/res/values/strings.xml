@@ -21,4 +21,16 @@
     <string name="action_supplier_list">Butiksliste</string>
     <string name="action_about">Om</string>
     <string name="test_button">Tryk her</string>
+    <string name="item_no">Varenummer</string>
+    <string name="brand">Varemærke</string>
+    <string name="layers">Lag</string>
+    <string name="package_rolls">Ruller pr. pakke</string>
+    <string name="count">Antal</string>
+    <string name="roll_sheets">Ark pr. rulle</string>
+    <string name="sheet_width">Arkbredde</string>
+    <string name="mm">mm</string>
+    <string name="sheet_length">Arklængde</string>
+    <string name="calculated">Beregnet</string>
+    <string name="roll_length">Rullelængde</string>
+    <string name="m">meter</string>
 </resources>
