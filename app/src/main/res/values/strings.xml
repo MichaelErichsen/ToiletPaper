@@ -10,6 +10,14 @@
     <string name="menu_home">Home</string>
     <string name="menu_gallery">Gallery</string>
     <string name="menu_slideshow">Slideshow</string>
-
     <string name="home_second">Home Second</string>
+
+    <!--    TP added-->
+    <string name="action_calculate">Beregn</string>
+    <string name="action_save">Gem</string>
+    <string name="action_suppliers">Søg hos butikken</string>
+    <string name="action_pricerunner">Pricerunner</string>
+    <string name="action_productdata">Produktliste</string>
+    <string name="action_supplier_list">Butiksliste</string>
+    <string name="action_about">Om</string>
 </resources>
