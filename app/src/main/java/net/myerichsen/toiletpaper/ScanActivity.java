@@ -24,7 +24,6 @@ import java.io.IOException;
 public class ScanActivity extends AppCompatActivity {
     private static final int REQUEST_CAMERA_PERMISSION = 201;
     private SurfaceView surfaceView;
-    private BarcodeDetector barcodeDetector;
     private CameraSource cameraSource;
     private ToneGenerator toneGen1;
     private TextView barcodeText;
@@ -41,7 +40,7 @@ public class ScanActivity extends AppCompatActivity {
     }
 
     private void initialiseDetectorsAndSources() {
-        barcodeDetector = new BarcodeDetector.Builder(this)
+        BarcodeDetector barcodeDetector = new BarcodeDetector.Builder(this)
                 .setBarcodeFormats(Barcode.ALL_FORMATS)
                 .build();
 

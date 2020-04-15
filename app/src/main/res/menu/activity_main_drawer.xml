@@ -20,7 +20,7 @@
             android:title="@string/action_save" />
 
         <item
-            android:id="@+id/action_supplier"
+            android:id="@+id/nav_supplier"
             android:icon="@drawable/baseline_storefront_black_48dp"
             android:title="@string/action_suppliers" />
 

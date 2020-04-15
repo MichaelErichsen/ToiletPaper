@@ -15,11 +15,13 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.google.android.material.navigation.NavigationView;
+import com.google.android.material.snackbar.Snackbar;
 
 import static androidx.navigation.Navigation.findNavController;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private AppBarConfiguration mAppBarConfiguration;
+//    Context context;
 
     // TODO implement SQLite database and pd table
     // TODO Implement save activity
@@ -29,36 +31,13 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+//        context = getApplicationContext();
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        navigationView.setNavigationItemSelectedListener(this);
 
-
-                int id = item.getItemId();
-
-//                if (id == R.id.action_settings) {
-//                    Intent intent = new Intent(this, SettingsActivity.class);
-//                    startActivity(intent);
-//
-//                    return true;
-//                }
-
-                // TODO URI call does not work
-                if (id == R.id.nav_pricerunner) {
-                    Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.google.com"));
-                    startActivity(browserIntent);
-
-                    return true;
-                }
-
-                return false;
-
-            }
-        });
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
@@ -97,5 +76,32 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        int id = item.getItemId();
 
+        // TODO Does not work
+        Snackbar snackbar = Snackbar
+                .make(item.getActionView(), "Navigation item id " + id, Snackbar.LENGTH_INDEFINITE);
+        snackbar.show();
+
+        if (id == R.id.nav_pricerunner) {
+            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.pricerunner.dk/results?q=toiletpapir"));
+
+            if (browserIntent.resolveActivity(getPackageManager()) != null) {
+                startActivity(browserIntent);
+            }
+
+            return true;
+        } else if (id == R.id.nav_supplier) {
+            // TODO Read URI from supplier table
+            snackbar = Snackbar
+                    .make(item.getActionView(), "Her skal butikken kaldes", Snackbar.LENGTH_INDEFINITE);
+            snackbar.show();
+
+            return true;
+        }
+
+        return false;
+    }
 }

@@ -24,10 +24,10 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.google.android.material.snackbar.Snackbar;
 
-import net.myerichsen.toiletpaper.ProductData;
+import net.myerichsen.toiletpaper.ProductDbAdapter;
 import net.myerichsen.toiletpaper.R;
 import net.myerichsen.toiletpaper.ScanActivity;
-import net.myerichsen.toiletpaper.myDbAdapter;
+import net.myerichsen.toiletpaper.ui.products.ProductData;
 
 import java.util.ArrayList;
 
@@ -36,9 +36,7 @@ import static android.app.Activity.RESULT_OK;
 public class HomeFragment extends Fragment {
     private final static int REQUEST_CODE_1 = 1;
 
-    private HomeViewModel homeViewModel;
-    private myDbAdapter helper;
-    private ProductData productData;
+    private ProductDbAdapter helper;
 
     private View root;
     private EditText itemNoEditText;
@@ -50,11 +48,11 @@ public class HomeFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        homeViewModel = new ViewModelProvider(this).get(HomeViewModel.class);
+        HomeViewModel homeViewModel = new ViewModelProvider(this).get(HomeViewModel.class);
         root = inflater.inflate(R.layout.fragment_home, container, false);
         Context context = getContext();
-        helper = new myDbAdapter(context);
-        productData = new ProductData();
+        helper = new ProductDbAdapter(context);
+        ProductData productData = new ProductData();
 
         itemNoEditText = root.findViewById(R.id.itemNoEditText);
 
