@@ -1,6 +1,5 @@
 package net.myerichsen.toiletpaper;
 
-
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -39,8 +38,6 @@ public class ScanActivity extends AppCompatActivity {
         surfaceView = findViewById(R.id.surface_view);
         barcodeText = findViewById(R.id.barcode_text);
         initialiseDetectorsAndSources();
-
-
     }
 
     private void initialiseDetectorsAndSources() {

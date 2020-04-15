@@ -1,6 +1,7 @@
 package net.myerichsen.toiletpaper.ui.home;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -12,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -20,16 +22,24 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
+import net.myerichsen.toiletpaper.ProductData;
 import net.myerichsen.toiletpaper.R;
 
 import java.util.ArrayList;
 
+import static android.app.Activity.RESULT_OK;
+
 public class HomeFragment extends Fragment {
+    private final static int REQUEST_CODE_1 = 1;
 
     private HomeViewModel homeViewModel;
+    private ProductData productData;
+
+    private View root;
+    private EditText itemNoEditText;
+    private Button scanBtn;
     private EditText sheetLengthEditText;
     private CheckBox sheetLengthCheckBox;
-    private View root;
     private EditText rollLengthEditText;
     private EditText rollSheetsEditText;
     private CheckBox rollLengthCheckBox;
@@ -39,6 +49,19 @@ public class HomeFragment extends Fragment {
         homeViewModel = new ViewModelProvider(this).get(HomeViewModel.class);
         root = inflater.inflate(R.layout.fragment_home, container, false);
         Context context = getContext();
+        productData = new ProductData();
+
+        itemNoEditText = root.findViewById(R.id.itemNoEditText);
+//       scanBtn = root.findViewById(R.id.scanBtn);
+//        scanBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                int requestCode = RESULT_OK;
+//                Intent openScanIntent = new Intent(getContext(), ScanActivity.class);
+//                openScanIntent.putExtra("item_no", "");
+//                startActivityForResult(openScanIntent, REQUEST_CODE_1);
+//            }
+//        });
 
         Spinner layersSpinner = root.findViewById(R.id.layersSpinner);
         ArrayList<String> layerArrayList = new ArrayList<>();
@@ -142,6 +165,7 @@ public class HomeFragment extends Fragment {
         return super.onOptionsItemSelected(item);
     }
 
+    // TODO Add more calculations
     private boolean calculate(MenuItem item) {
         try {
             return multiply(sheetLengthEditText, sheetLengthCheckBox, rollSheetsEditText, null, rollLengthEditText, rollLengthCheckBox, 100);
@@ -189,5 +213,25 @@ public class HomeFragment extends Fragment {
         product.setText(String.valueOf(i3));
         cb3.setChecked(true);
         return true;
+    }
+
+    // This method is invoked when target activity return result data back.
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent dataIntent) {
+        super.onActivityResult(requestCode, resultCode, dataIntent);
+
+        // The returned result data is identified by requestCode.
+        // The request code is specified in startActivityForResult(intent, REQUEST_CODE_1); method.
+        switch (requestCode) {
+            // This request code is set by startActivityForResult(intent, REQUEST_CODE_1) method.
+            case REQUEST_CODE_1:
+                itemNoEditText = root.findViewById(R.id.itemNoEditText);
+
+                if (resultCode == RESULT_OK) {
+                    String messageReturn = dataIntent.getStringExtra("item_no");
+                    itemNoEditText.setText(messageReturn);
+                    ProductData.setItemNo(itemNoEditText.getText().toString());
+                }
+        }
     }
 }

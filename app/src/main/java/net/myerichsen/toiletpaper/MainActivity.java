@@ -22,7 +22,6 @@ import static androidx.navigation.Navigation.findNavController;
 public class MainActivity extends AppCompatActivity {
     private AppBarConfiguration mAppBarConfiguration;
 
-    // TODO About activity
     // TODO Scan activity
     // TODO Update PD class
     // TODO implement SQLite database and pd table
