@@ -13,8 +13,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ProductDbAdapter {
-    ProductHelper myhelper;
-    String[] columns = {ProductHelper.UID, ProductHelper.LAYERS, ProductHelper.PACKAGE_ROLLS,
+    final ProductHelper myhelper;
+    final String[] columns = {ProductHelper.UID, ProductHelper.LAYERS, ProductHelper.PACKAGE_ROLLS,
             ProductHelper.ROLL_SHEETS, ProductHelper.SHEET_WIDTH, ProductHelper.SHEET_LENGTH,
             ProductHelper.SHEET_LENGTH_C, ProductHelper.PACKAGE_PRICE, ProductHelper.PACKAGE_PRICE_C,
             ProductHelper.ROLL_LENGTH, ProductHelper.ROLL_LENGTH_C,
@@ -234,7 +234,7 @@ public class ProductDbAdapter {
                 TIME_STAMP + " TEXT);";
 
         private static final String DROP_TABLE = "DROP TABLE IF EXISTS " + TABLE_NAME;
-        private Context context;
+        private final Context context;
 
         public ProductHelper(Context context) {
             super(context, DATABASE_NAME, null, DATABASE_Version);

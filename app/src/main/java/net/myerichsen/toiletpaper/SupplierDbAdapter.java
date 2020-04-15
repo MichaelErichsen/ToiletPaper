@@ -13,8 +13,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SupplierDbAdapter {
-    SupplierHelper supplierHelper;
-    String[] columns = {SupplierHelper.UID, SupplierHelper.SUPPLIER, SupplierHelper.URI,
+    final SupplierHelper supplierHelper;
+    final String[] columns = {SupplierHelper.UID, SupplierHelper.SUPPLIER, SupplierHelper.URI,
             SupplierHelper.TIME_STAMP};
 
     public SupplierDbAdapter(Context context) {
@@ -83,7 +83,7 @@ public class SupplierDbAdapter {
     static class SupplierHelper extends SQLiteOpenHelper {
 
         private static final String DATABASE_NAME = "TOILET_PAPER_DATABASE";
-        private static final String TABLE_NAME = "TABLE_PACKAGE";
+        private static final String TABLE_NAME = "TABLE_SUPPLIER";
         private static final String UID = "UID";
         private static final String SUPPLIER = "SUPPLIER";
         private static final String URI = "URI";
@@ -97,7 +97,7 @@ public class SupplierDbAdapter {
                 TIME_STAMP + " TEXT);";
 
         private static final String DROP_TABLE = "DROP TABLE IF EXISTS " + TABLE_NAME;
-        private Context context;
+        private final Context context;
 
         public SupplierHelper(Context context) {
             super(context, DATABASE_NAME, null, DATABASE_Version);

@@ -24,7 +24,7 @@ import java.util.List;
 
 public class SupplierFragment extends Fragment {
     SupplierDbAdapter helper;
-    TableRow.LayoutParams llp = new TableRow.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+    final TableRow.LayoutParams llp = new TableRow.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
     private View root;
 
     public static SupplierFragment newInstance() {
