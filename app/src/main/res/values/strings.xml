@@ -51,4 +51,5 @@
     <string name="meter_price">Pris pr. meter</string>
     <string name="menu_products">Produkter</string>
     <string name="menu_suppliers">Butikker</string>
+    <string name="uri">URI</string>
 </resources>
