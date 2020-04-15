@@ -8,19 +8,12 @@
             android:id="@+id/nav_home"
             android:icon="@drawable/ic_menu_camera"
             android:title="@string/menu_home" />
-        <item
-            android:id="@+id/nav_gallery"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="@string/menu_gallery" />
-        <item
-            android:id="@+id/nav_slideshow"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="@string/menu_slideshow" />
 
         <item
             android:id="@+id/nav_about"
             android:icon="@drawable/baseline_help_black_48dp"
             android:title="@string/action_about" />
+
         <item
             android:id="@+id/action_save"
             android:icon="@drawable/baseline_save_black_48dp"
@@ -30,7 +23,6 @@
             android:id="@+id/action_suppliers"
             android:icon="@drawable/baseline_storefront_black_48dp"
             android:title="@string/action_suppliers" />
-
 
         <item
             android:id="@+id/action_pricerunner"
