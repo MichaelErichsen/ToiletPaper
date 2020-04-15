@@ -20,12 +20,12 @@
             android:title="@string/action_save" />
 
         <item
-            android:id="@+id/action_suppliers"
+            android:id="@+id/action_supplier"
             android:icon="@drawable/baseline_storefront_black_48dp"
             android:title="@string/action_suppliers" />
 
         <item
-            android:id="@+id/action_pricerunner"
+            android:id="@+id/nav_pricerunner"
             android:icon="@drawable/baseline_rate_review_black_48dp"
             android:title="@string/action_pricerunner" />
 
