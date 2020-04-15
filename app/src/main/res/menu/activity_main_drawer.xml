@@ -30,7 +30,7 @@
             android:title="@string/action_pricerunner" />
 
         <item
-            android:id="@+id/action_productdata"
+            android:id="@+id/nav_pd"
             android:icon="@drawable/baseline_list_alt_black_48dp"
             android:title="@string/action_productdata" />
 

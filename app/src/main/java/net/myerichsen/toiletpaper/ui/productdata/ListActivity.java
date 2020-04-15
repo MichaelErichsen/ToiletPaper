@@ -1,4 +1,4 @@
-package net.myerichsen.toiletpaper;
+package net.myerichsen.toiletpaper.ui.productdata;
 
 import android.graphics.Color;
 import android.os.Bundle;
@@ -9,6 +9,9 @@ import android.widget.TableRow;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import net.myerichsen.toiletpaper.R;
+import net.myerichsen.toiletpaper.myDbAdapter;
 
 import java.util.List;
 

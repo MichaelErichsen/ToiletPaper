@@ -1,4 +1,4 @@
-package net.myerichsen.toiletpaper;
+package net.myerichsen.toiletpaper.ui.productdata;
 
 /**
  * Class to encapsulate all toilet paper product data.
@@ -12,6 +12,8 @@ public class ProductData {
     private static int sheetWidth = 0;
     private static int sheetLength = 0;
     private static int sheetLength_c = 0;
+    private static float rollLength = 0;
+    private static int rollLength_c = 0;
     private static float packagePrice = 0;
     private static int packagePrice_c = 0;
     private static float rollPrice = 0;
@@ -19,6 +21,23 @@ public class ProductData {
     private static float paperWeight = 0;
     private static int paperWeight_c = 0;
     private static float kiloPrice = 0;
+
+    public static float getRollLength() {
+        return rollLength;
+    }
+
+    public static void setRollLength(float rollLength) {
+        ProductData.rollLength = rollLength;
+    }
+
+    public static int getRollLength_c() {
+        return rollLength_c;
+    }
+
+    public static void setRollLength_c(int rollLength_c) {
+        ProductData.rollLength_c = rollLength_c;
+    }
+
     private static int kiloPrice_c = 0;
     private static float meterPrice = 0;
     private static int meterPrice_c = 0;
@@ -221,10 +240,4 @@ public class ProductData {
     public static void setUid(int uid) {
         ProductData.uid = uid;
     }
-
-    public void calculate() {
-        // TODO calculate all calculatable fields
-    }
-
-
 }

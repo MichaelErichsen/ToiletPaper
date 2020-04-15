@@ -46,4 +46,7 @@
     <string name="about_heading">Inspiration, kilder og kodestumper er planket fra\n\n</string>
     <string name="scan">Scan</string>
     <string name="search">Søg</string>
+    <string name="uid">UID</string>
+    <string name="menu_pd">Produktdata</string>
+    <string name="meter_price">Pris pr. meter</string>
 </resources>

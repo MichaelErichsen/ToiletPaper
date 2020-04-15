@@ -22,9 +22,12 @@ import androidx.appcompat.widget.AppCompatImageButton;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import net.myerichsen.toiletpaper.ProductData;
+import com.google.android.material.snackbar.Snackbar;
+
 import net.myerichsen.toiletpaper.R;
 import net.myerichsen.toiletpaper.ScanActivity;
+import net.myerichsen.toiletpaper.myDbAdapter;
+import net.myerichsen.toiletpaper.ui.productdata.ProductData;
 
 import java.util.ArrayList;
 
@@ -34,11 +37,11 @@ public class HomeFragment extends Fragment {
     private final static int REQUEST_CODE_1 = 1;
 
     private HomeViewModel homeViewModel;
+    private myDbAdapter helper;
     private ProductData productData;
 
     private View root;
     private EditText itemNoEditText;
-    //    private Button scanBtn;
     private EditText sheetLengthEditText;
     private CheckBox sheetLengthCheckBox;
     private EditText rollLengthEditText;
@@ -50,6 +53,7 @@ public class HomeFragment extends Fragment {
         homeViewModel = new ViewModelProvider(this).get(HomeViewModel.class);
         root = inflater.inflate(R.layout.fragment_home, container, false);
         Context context = getContext();
+        helper = new myDbAdapter(context);
         productData = new ProductData();
 
         itemNoEditText = root.findViewById(R.id.itemNoEditText);
@@ -163,13 +167,7 @@ public class HomeFragment extends Fragment {
 
     // TODO Add more calculations
     private boolean calculate(MenuItem item) {
-        try {
             return multiply(sheetLengthEditText, sheetLengthCheckBox, rollSheetsEditText, null, rollLengthEditText, rollLengthCheckBox, 100);
-        } catch (Exception e) {
-            EditText messageET = root.findViewById(R.id.messageTextView);
-            messageET.setText(e.getMessage());
-            return false;
-        }
     }
 
     //    private int multiply(EditText dividend, EditText divisor, EditText quotient) {
@@ -229,5 +227,41 @@ public class HomeFragment extends Fragment {
                     ProductData.setItemNo(itemNoEditText.getText().toString());
                 }
         }
+    }
+
+    public void addProduct(View view) {
+        ProductData pd = new ProductData();
+
+        String itemNo = ((EditText) root.findViewById(R.id.itemNoEditText)).getText().toString();
+        if (itemNo.isEmpty()) {
+            itemNo = "";
+        }
+        ProductData.setItemNo(itemNo);
+        helper.insertData(pd);
+    }
+
+    /**
+     * @param view
+     */
+    public void getDataByItemNo(View view) {
+        EditText itemNoEditText = root.findViewById(R.id.itemNoEditText);
+        ProductData pd = helper.getDataByItemNo(itemNoEditText.getText().toString());
+        Snackbar snackbar = Snackbar
+                .make(view, "Found item no. " + ProductData.getItemNo(), Snackbar.LENGTH_LONG);
+        snackbar.show();
+        // TODO move data to activity fields
+    }
+
+
+    /**
+     * @param view
+     */
+    public void getDataByBrand(View view) {
+        EditText brandEditText = root.findViewById(R.id.brandEditText);
+        ProductData pd = helper.getDataByBrand(brandEditText.getText().toString());
+        Snackbar snackbar = Snackbar
+                .make(view, "Found brand. " + ProductData.getItemNo(), Snackbar.LENGTH_LONG);
+        snackbar.show();
+        // TODO move data to activity fields
     }
 }

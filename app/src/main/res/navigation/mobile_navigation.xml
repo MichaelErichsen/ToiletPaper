@@ -14,6 +14,9 @@
         <action
             android:id="@+id/action_nav_home_to_nav_about"
             app:destination="@id/nav_about" />
+        <action
+            android:id="@+id/action_nav_home_to_nav_pd"
+            app:destination="@id/nav_pd" />
     </fragment>
 
     <fragment
@@ -23,6 +26,17 @@
         tools:layout="@layout/fragment_about">
         <action
             android:id="@+id/action_nav_about_to_nav_home"
+            app:destination="@id/nav_home" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_pd"
+        android:name="net.myerichsen.toiletpaper.ui.productdata.PDFragment"
+        android:label="@string/menu_pd"
+        tools:layout="@layout/fragment_pd">
+
+        <action
+            android:id="@+id/action_nav_pd_to_nav_home"
             app:destination="@id/nav_home" />
     </fragment>
 

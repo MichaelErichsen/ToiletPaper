@@ -19,7 +19,6 @@ import static androidx.navigation.Navigation.findNavController;
 public class MainActivity extends AppCompatActivity {
     private AppBarConfiguration mAppBarConfiguration;
 
-    // TODO Update PD class
     // TODO implement SQLite database and pd table
     // TODO Implement save activity
     // TODO List pd fragment
@@ -32,21 +31,12 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-//        FloatingActionButton fab = findViewById(R.id.fab);
-//        fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
-//
-//            }
-//        });
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home, R.id.nav_about)
+                R.id.nav_home, R.id.nav_about, R.id.nav_pd)
                 .setDrawerLayout(drawer)
                 .build();
         NavController navController = findNavController(this, R.id.nav_host_fragment);

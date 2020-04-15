@@ -7,15 +7,18 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.widget.Toast;
 
+import net.myerichsen.toiletpaper.ui.productdata.ProductData;
+
 import java.util.ArrayList;
 import java.util.List;
-
 
 public class myDbAdapter {
     myDbHelper myhelper;
     String[] columns = {myDbHelper.UID, myDbHelper.LAYERS, myDbHelper.PACKAGE_ROLLS,
             myDbHelper.ROLL_SHEETS, myDbHelper.SHEET_WIDTH, myDbHelper.SHEET_LENGTH,
             myDbHelper.SHEET_LENGTH_C, myDbHelper.PACKAGE_PRICE, myDbHelper.PACKAGE_PRICE_C,
+            myDbHelper.ROLL_LENGTH, myDbHelper.ROLL_LENGTH_C,
+            myDbHelper.PACKAGE_PRICE, myDbHelper.PACKAGE_PRICE_C,
             myDbHelper.ROLL_PRICE, myDbHelper.ROLL_PRICE_C, myDbHelper.PAPER_WEIGHT,
             myDbHelper.PAPER_WEIGHT_C, myDbHelper.KILO_PRICE, myDbHelper.KILO_PRICE_C,
             myDbHelper.METER_PRICE, myDbHelper.METER_PRICE_C, myDbHelper.SHEET_PRICE,
@@ -86,7 +89,6 @@ public class myDbAdapter {
 
         SQLiteDatabase db = myhelper.getWritableDatabase();
 
-
         Cursor cursor = null;
         cursor = db.query(myDbHelper.TABLE_NAME, columns, null, null, null, null, null);
 
@@ -106,6 +108,8 @@ public class myDbAdapter {
         contentValues.put(myDbHelper.SHEET_WIDTH, ProductData.getSheetWidth());
         contentValues.put(myDbHelper.SHEET_LENGTH, ProductData.getSheetLength());
         contentValues.put(myDbHelper.SHEET_LENGTH_C, ProductData.getSheetLength_c());
+        contentValues.put(myDbHelper.ROLL_LENGTH, ProductData.getRollLength());
+        contentValues.put(myDbHelper.ROLL_LENGTH_C, ProductData.getRollLength_c());
         contentValues.put(myDbHelper.PACKAGE_PRICE, ProductData.getPackagePrice());
         contentValues.put(myDbHelper.PACKAGE_PRICE_C, ProductData.getPackagePrice_c());
         contentValues.put(myDbHelper.ROLL_PRICE, ProductData.getRollPrice());
@@ -134,7 +138,9 @@ public class myDbAdapter {
         ProductData.setRollSheets(cursor.getInt(cursor.getColumnIndex(myDbHelper.ROLL_SHEETS)));
         ProductData.setSheetWidth(cursor.getInt(cursor.getColumnIndex(myDbHelper.SHEET_WIDTH)));
         ProductData.setSheetLength(cursor.getInt(cursor.getColumnIndex(myDbHelper.SHEET_LENGTH)));
-        ProductData.setSheetLength_c(cursor.getInt(cursor.getColumnIndex(myDbHelper.SHEET_LENGTH_C)));
+        ProductData.setSheetLength_c(cursor.getInt(cursor.getColumnIndex(myDbHelper.ROLL_LENGTH_C)));
+        ProductData.setRollLength(cursor.getInt(cursor.getColumnIndex(myDbHelper.ROLL_LENGTH)));
+        ProductData.setRollLength_c(cursor.getInt(cursor.getColumnIndex(myDbHelper.SHEET_LENGTH_C)));
         ProductData.setPackagePrice(cursor.getFloat(cursor.getColumnIndex(myDbHelper.PACKAGE_PRICE)));
         ProductData.setPackagePrice_c(cursor.getInt(cursor.getColumnIndex(myDbHelper.PACKAGE_PRICE_C)));
         ProductData.setRollPrice(cursor.getFloat(cursor.getColumnIndex(myDbHelper.ROLL_PRICE)));
@@ -168,6 +174,7 @@ public class myDbAdapter {
      * Inner helper class
      */
     static class myDbHelper extends SQLiteOpenHelper {
+
         private static final String DATABASE_NAME = "TOILET_PAPER_DATABASE";
         private static final String TABLE_NAME = "TABLE_PACKAGE";
         private static final String UID = "UID";
@@ -177,6 +184,8 @@ public class myDbAdapter {
         private static final String SHEET_WIDTH = "SHEET_WIDTH";
         private static final String SHEET_LENGTH = "SHEET_LENGTH";
         private static final String SHEET_LENGTH_C = "SHEET_LENGTH_C";
+        private static final String ROLL_LENGTH = "ROLL_LENGTH";
+        private static final String ROLL_LENGTH_C = "ROLL_LENGTH_C";
         private static final String PACKAGE_PRICE = "PACKAGE_PRICE";
         private static final String PACKAGE_PRICE_C = "PACKAGE_PRICE_C";
         private static final String ROLL_PRICE = "ROLL_PRICE";
@@ -205,6 +214,8 @@ public class myDbAdapter {
                 SHEET_WIDTH + " INTEGER, " +
                 SHEET_LENGTH + " INTEGER, " +
                 SHEET_LENGTH_C + " INTEGER, " +
+                ROLL_LENGTH + " NUMERIC, " +
+                ROLL_LENGTH_C + " INTEGER, " +
                 PACKAGE_PRICE + " NUMERIC, " +
                 PACKAGE_PRICE_C + " INTEGER, " +
                 ROLL_PRICE + " NUMERIC, " +
