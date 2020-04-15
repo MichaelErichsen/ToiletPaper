@@ -238,9 +238,7 @@ public class HomeFragment extends Fragment {
         helper.insertData(pd);
     }
 
-    /**
-     * @param view
-     */
+
     public void getDataByItemNo(View view) {
         EditText itemNoEditText = root.findViewById(R.id.itemNoEditText);
         ProductData pd = helper.getDataByItemNo(itemNoEditText.getText().toString());
@@ -251,9 +249,6 @@ public class HomeFragment extends Fragment {
     }
 
 
-    /**
-     * @param view
-     */
     public void getDataByBrand(View view) {
         EditText brandEditText = root.findViewById(R.id.brandEditText);
         ProductData pd = helper.getDataByBrand(brandEditText.getText().toString());

@@ -40,8 +40,6 @@
     <string name="comment">Kommentar</string>
     <string name="suppliers">Butikker</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="menu_about">Om</string>
     <string name="about_heading">Inspiration, kilder og kodestumper er planket fra\n\n</string>
     <string name="scan">Scan</string>
