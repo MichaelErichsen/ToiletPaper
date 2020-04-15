@@ -13,17 +13,18 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Spinner;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.AppCompatImageButton;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import net.myerichsen.toiletpaper.ProductData;
 import net.myerichsen.toiletpaper.R;
+import net.myerichsen.toiletpaper.ScanActivity;
 
 import java.util.ArrayList;
 
@@ -37,7 +38,7 @@ public class HomeFragment extends Fragment {
 
     private View root;
     private EditText itemNoEditText;
-    private Button scanBtn;
+    //    private Button scanBtn;
     private EditText sheetLengthEditText;
     private CheckBox sheetLengthCheckBox;
     private EditText rollLengthEditText;
@@ -52,16 +53,17 @@ public class HomeFragment extends Fragment {
         productData = new ProductData();
 
         itemNoEditText = root.findViewById(R.id.itemNoEditText);
-//       scanBtn = root.findViewById(R.id.scanBtn);
-//        scanBtn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                int requestCode = RESULT_OK;
-//                Intent openScanIntent = new Intent(getContext(), ScanActivity.class);
-//                openScanIntent.putExtra("item_no", "");
-//                startActivityForResult(openScanIntent, REQUEST_CODE_1);
-//            }
-//        });
+
+        AppCompatImageButton scanBtn = root.findViewById(R.id.scanBtn);
+        scanBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int requestCode = RESULT_OK;
+                Intent openScanIntent = new Intent(getContext(), ScanActivity.class);
+                openScanIntent.putExtra("item_no", "");
+                startActivityForResult(openScanIntent, REQUEST_CODE_1);
+            }
+        });
 
         Spinner layersSpinner = root.findViewById(R.id.layersSpinner);
         ArrayList<String> layerArrayList = new ArrayList<>();
@@ -131,13 +133,7 @@ public class HomeFragment extends Fragment {
 //            }
 //        });
 //
-//        Button testBtn = root.findViewById(R.id.testBtn);
-//        testBtn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                findNavController(v).navigate(R.id.action_HomeFragment_to_HomeSecondFragment);
-//            }
-//        });
+
         return root;
     }
 
