@@ -1,18 +1,17 @@
 <resources>
     <string name="app_name">ToiletPaper</string>
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nav_header_title">Android Studio</string>
-    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="navigation_drawer_open">Luk navigationsskuffen</string>
+    <string name="navigation_drawer_close">Åben navigationsskuffen</string>
+    <string name="nav_header_title">Toiletpapir</string>
+    <string name="nav_header_subtitle">info@myerichsen.net</string>
     <string name="nav_header_desc">Navigation header</string>
-    <string name="action_settings">Settings</string>
+    <string name="action_settings">Indstillinger</string>
 
-    <string name="menu_home">Home</string>
+    <string name="menu_home">Toiletpapir</string>
     <string name="menu_gallery">Gallery</string>
     <string name="menu_slideshow">Slideshow</string>
     <string name="home_second">Home Second</string>
 
-    <!--    TP added-->
     <string name="action_calculate">Beregn</string>
     <string name="action_save">Gem</string>
     <string name="action_suppliers">Søg hos butikken</string>
@@ -33,4 +32,11 @@
     <string name="calculated">Beregnet</string>
     <string name="roll_length">Rullelængde</string>
     <string name="m">meter</string>
+    <string name="package_price">Pris pr. pakke</string>
+    <string name="kr">kr.</string>
+    <string name="gm2">g pr. m2</string>
+    <string name="paper_weight">Papirvægt</string>
+    <string name="kilo_price">Kilopris</string>
+    <string name="comment">Kommentar</string>
+    <string name="suppliers">Butikker</string>
 </resources>
