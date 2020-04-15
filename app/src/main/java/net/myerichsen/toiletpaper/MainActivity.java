@@ -2,8 +2,10 @@ package net.myerichsen.toiletpaper;
 
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -19,6 +21,15 @@ import static androidx.navigation.Navigation.findNavController;
 
 public class MainActivity extends AppCompatActivity {
     private AppBarConfiguration mAppBarConfiguration;
+
+    // TODO About activity
+    // TODO Scan activity
+    // TODO Update PD class
+    // TODO implement SQLite database and pd table
+    // TODO Implement save activity
+    // TODO List pd fragment
+    // TODO suppliers table
+    // TODO List suppliers fragment
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,5 +71,17 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = findNavController(this, R.id.nav_host_fragment);
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_calculate:
+                return false;
+
+            default:
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

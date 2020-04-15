@@ -18,12 +18,6 @@
             android:title="@string/menu_slideshow" />
 
         <item
-            android:id="@+id/action_calculate"
-            android:icon="@drawable/calculator"
-            android:title="@string/action_calculate" />
-
-
-        <item
             android:id="@+id/action_save"
             android:icon="@drawable/baseline_save_black_48dp"
             android:title="@string/action_save" />

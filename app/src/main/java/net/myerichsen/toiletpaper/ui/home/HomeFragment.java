@@ -2,11 +2,18 @@ package net.myerichsen.toiletpaper.ui.home;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.Spinner;
 
 import androidx.annotation.NonNull;
@@ -20,11 +27,17 @@ import java.util.ArrayList;
 public class HomeFragment extends Fragment {
 
     private HomeViewModel homeViewModel;
+    private EditText sheetLengthEditText;
+    private CheckBox sheetLengthCheckBox;
+    private View root;
+    private EditText rollLengthEditText;
+    private EditText rollSheetsEditText;
+    private CheckBox rollLengthCheckBox;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         homeViewModel = new ViewModelProvider(this).get(HomeViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_home, container, false);
+        root = inflater.inflate(R.layout.fragment_home, container, false);
         Context context = getContext();
 
         Spinner layersSpinner = root.findViewById(R.id.layersSpinner);
@@ -33,7 +46,7 @@ public class HomeFragment extends Fragment {
         layerArrayList.add("3");
         layerArrayList.add("4");
         layerArrayList.add("5");
-        ArrayAdapter<String> layerArrayAdapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_item, layerArrayList);
+        ArrayAdapter<String> layerArrayAdapter = new ArrayAdapter<>(context, android.R.layout.simple_spinner_item, layerArrayList);
         layerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         layersSpinner.setAdapter(layerArrayAdapter);
         layersSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -47,6 +60,25 @@ public class HomeFragment extends Fragment {
             }
         });
 
+        rollSheetsEditText = root.findViewById(R.id.rollSheetsEditText);
+        sheetLengthEditText = root.findViewById(R.id.sheetLengthEditText);
+        sheetLengthCheckBox = root.findViewById(R.id.sheetLengthCheckBox);
+        rollLengthEditText = root.findViewById(R.id.rollLengthEditText);
+        rollLengthCheckBox = root.findViewById(R.id.rollLengthCheckBox);
+        rollLengthEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                rollLengthCheckBox.setChecked(false);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+            }
+        });
 
         Spinner suppliersSpinner = root.findViewById(R.id.suppliersSpinner);
         ArrayList<String> supplierArrayList = new ArrayList<>();
@@ -55,7 +87,7 @@ public class HomeFragment extends Fragment {
         supplierArrayList.add("Coop");
         supplierArrayList.add("REMA 1000");
         supplierArrayList.add("Spar");
-        ArrayAdapter<String> supplierArrayAdapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_item, supplierArrayList);
+        ArrayAdapter<String> supplierArrayAdapter = new ArrayAdapter<>(context, android.R.layout.simple_spinner_item, supplierArrayList);
         supplierArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         suppliersSpinner.setAdapter(supplierArrayAdapter);
         suppliersSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -84,5 +116,78 @@ public class HomeFragment extends Fragment {
 //            }
 //        });
         return root;
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_calculate:
+                calculate(item);
+                return true;
+
+            default:
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    private boolean calculate(MenuItem item) {
+        try {
+            return multiply(sheetLengthEditText, sheetLengthCheckBox, rollSheetsEditText, null, rollLengthEditText, rollLengthCheckBox, 100);
+        } catch (Exception e) {
+            EditText messageET = root.findViewById(R.id.messageTextView);
+            messageET.setText(e.getMessage());
+            return false;
+        }
+    }
+
+    //    private int multiply(EditText dividend, EditText divisor, EditText quotient) {
+    private boolean multiply(EditText multiplicand, CheckBox cb1, EditText multiplier, CheckBox cb2, EditText product, CheckBox cb3, int precision) {
+        String s1, s2 = "";
+        String s3;
+
+        // First test if calculated
+        if ((cb1 != null) && (cb1.isSelected())) {
+            return false;
+        }
+        if ((cb2 != null) && (cb2.isSelected())) {
+            return false;
+        }
+
+
+        if ((cb3 != null) && !(cb3.isSelected())) {
+            s3 = product.getText().toString();
+
+            if ((!s3.isEmpty()) && (Integer.getInteger(s3) > 0)) {
+                return false;
+            }
+        }
+
+        // Then test for zero values
+        s1 = multiplicand.getText().toString();
+        if ((s1.isEmpty()) || (s1.equals("0"))) {
+            return false;
+        }
+        s2 = multiplier.getText().toString();
+        if ((s2.isEmpty()) || (s2.equals("0"))) {
+            return false;
+        }
+
+        // Now do the calculation
+        float i3 = Float.parseFloat(s1) * Float.parseFloat(s2) / precision;
+        product.setText(String.valueOf(i3));
+        cb3.setChecked(true);
+        return true;
     }
 }
