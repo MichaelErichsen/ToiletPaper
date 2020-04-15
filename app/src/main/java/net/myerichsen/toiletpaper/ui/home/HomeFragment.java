@@ -24,10 +24,10 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.google.android.material.snackbar.Snackbar;
 
+import net.myerichsen.toiletpaper.ProductData;
 import net.myerichsen.toiletpaper.R;
 import net.myerichsen.toiletpaper.ScanActivity;
 import net.myerichsen.toiletpaper.myDbAdapter;
-import net.myerichsen.toiletpaper.ui.productdata.ProductData;
 
 import java.util.ArrayList;
 

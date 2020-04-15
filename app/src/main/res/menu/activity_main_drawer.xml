@@ -30,12 +30,12 @@
             android:title="@string/action_pricerunner" />
 
         <item
-            android:id="@+id/nav_pd"
+            android:id="@+id/nav_products"
             android:icon="@drawable/baseline_list_alt_black_48dp"
             android:title="@string/action_productdata" />
 
         <item
-            android:id="@+id/action_supplier_list"
+            android:id="@+id/nav_suppliers"
             android:icon="@drawable/baseline_store_mall_directory_black_48dp"
             android:title="@string/action_supplier_list" />
 

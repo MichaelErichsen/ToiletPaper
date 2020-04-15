@@ -4,7 +4,7 @@
     android:id="@+id/pdListTableLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.productdata.ListActivity">
+    tools:context=".ListActivity">
 
     <LinearLayout
         android:id="@+id/tableListLayout"

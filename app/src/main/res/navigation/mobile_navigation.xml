@@ -15,8 +15,12 @@
             android:id="@+id/action_nav_home_to_nav_about"
             app:destination="@id/nav_about" />
         <action
-            android:id="@+id/action_nav_home_to_nav_pd"
-            app:destination="@id/nav_pd" />
+            android:id="@+id/action_nav_home_to_nav_products"
+            app:destination="@id/nav_products">
+            <action
+                android:id="@+id/action_action_nav_home_to_nav_products_to_nav_suppliers"
+                app:destination="@id/nav_suppliers" />
+        </action>
     </fragment>
 
     <fragment
@@ -30,13 +34,22 @@
     </fragment>
 
     <fragment
-        android:id="@+id/nav_pd"
-        android:name="net.myerichsen.toiletpaper.ui.productdata.PDFragment"
-        android:label="@string/menu_pd"
-        tools:layout="@layout/fragment_pd">
-
+        android:id="@+id/nav_products"
+        android:name="net.myerichsen.toiletpaper.ui.products.ProductFragment"
+        android:label="@string/menu_products"
+        tools:layout="@layout/product_fragment">
         <action
-            android:id="@+id/action_nav_pd_to_nav_home"
+            android:id="@+id/action_nav_products_to_nav_home"
+            app:destination="@id/nav_home" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_suppliers"
+        android:name="net.myerichsen.toiletpaper.ui.suppliers.SupplierFragment"
+        android:label="@string/menu_suppliers"
+        tools:layout="@layout/supplier_fragment">>
+        <action
+            android:id="@+id/action_nav_suppliers_to_nav_home"
             app:destination="@id/nav_home" />
     </fragment>
 

@@ -49,4 +49,6 @@
     <string name="uid">UID</string>
     <string name="menu_pd">Produktdata</string>
     <string name="meter_price">Pris pr. meter</string>
+    <string name="menu_products">Produkter</string>
+    <string name="menu_suppliers">Butikker</string>
 </resources>

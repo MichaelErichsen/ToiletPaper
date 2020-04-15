@@ -1,4 +1,4 @@
-package net.myerichsen.toiletpaper.ui.productdata;
+package net.myerichsen.toiletpaper;
 
 /**
  * Class to encapsulate all toilet paper product data.
