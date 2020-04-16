@@ -18,7 +18,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import net.myerichsen.toiletpaper.R;
-import net.myerichsen.toiletpaper.SupplierDbAdapter;
+import net.myerichsen.toiletpaper.database.SupplierDbAdapter;
 
 import java.util.List;
 

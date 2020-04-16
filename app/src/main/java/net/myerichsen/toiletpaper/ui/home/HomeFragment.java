@@ -16,6 +16,7 @@ import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatImageButton;
@@ -24,9 +25,9 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.google.android.material.snackbar.Snackbar;
 
-import net.myerichsen.toiletpaper.ProductDbAdapter;
 import net.myerichsen.toiletpaper.R;
 import net.myerichsen.toiletpaper.ScanActivity;
+import net.myerichsen.toiletpaper.database.ProductDbAdapter;
 import net.myerichsen.toiletpaper.ui.products.ProductData;
 
 import java.util.ArrayList;
@@ -37,20 +38,38 @@ public class HomeFragment extends Fragment {
     private final static int REQUEST_CODE_1 = 1;
 
     private ProductDbAdapter helper;
-
     private View root;
+    private AppCompatImageButton calculateBtn;
+    private AppCompatImageButton saveBtn;
+    private AppCompatImageButton supplierBtn;
+    private AppCompatImageButton pricerunnerBtn;
     private EditText itemNoEditText;
+    private AppCompatImageButton scanBtn;
+    private AppCompatImageButton searchItemNoBtn;
+    private EditText brandEditText;
+    private AppCompatImageButton searchBrandBtn;
+    private Spinner layersSpinner;
+    private EditText packageRollsEditText;
+    private EditText rollSheetsEditText;
+    private EditText sheetWidthEditText;
     private EditText sheetLengthEditText;
     private CheckBox sheetLengthCheckBox;
     private EditText rollLengthEditText;
-    private EditText rollSheetsEditText;
     private CheckBox rollLengthCheckBox;
+    private EditText packagePriceEditText;
+    private EditText rollPriceEditText;
     private CheckBox rollPriceCheckBox;
-    //    private CheckBox packagePriceCheckBox;
+    private EditText paperWeightEditText;
     private CheckBox paperWeightCheckBox;
+    private EditText kiloPriceEditText;
     private CheckBox kiloPriceCheckBox;
+    private EditText meterPriceEditText;
     private CheckBox meterPriceCheckBox;
+    private EditText sheetPriceEditText;
     private CheckBox sheetPriceCheckBox;
+    private Spinner suppliersSpinner;
+    private EditText commentEditText;
+    private TextView messageTextView;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -61,7 +80,7 @@ public class HomeFragment extends Fragment {
         final ProductData productData = new ProductData();
 
         // Buttons
-        AppCompatImageButton calculateBtn = root.findViewById(R.id.calculateBtn);
+        calculateBtn = root.findViewById(R.id.calculateBtn);
         calculateBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -69,7 +88,7 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        AppCompatImageButton saveBtn = root.findViewById(R.id.saveBtn);
+        saveBtn = root.findViewById(R.id.saveBtn);
         saveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -78,9 +97,9 @@ public class HomeFragment extends Fragment {
         });
 
         // TODO Implement supplier web site lookup
-        AppCompatImageButton supplierBtn = root.findViewById(R.id.supplierBtn);
+        supplierBtn = root.findViewById(R.id.supplierBtn);
 
-        AppCompatImageButton pricerunnerBtn = root.findViewById(R.id.pricerunnerBtn);
+        pricerunnerBtn = root.findViewById(R.id.pricerunnerBtn);
         pricerunnerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -89,7 +108,7 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        AppCompatImageButton scanBtn = root.findViewById(R.id.scanBtn);
+        scanBtn = root.findViewById(R.id.scanBtn);
         scanBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -106,7 +125,7 @@ public class HomeFragment extends Fragment {
         // Brand
 
         // Layers
-        Spinner layersSpinner = root.findViewById(R.id.layersSpinner);
+        layersSpinner = root.findViewById(R.id.layersSpinner);
         ArrayList<String> layerArrayList = new ArrayList<>();
         layerArrayList.add("2");
         layerArrayList.add("3");
@@ -170,25 +189,10 @@ public class HomeFragment extends Fragment {
         });
 
         // Package price
-        EditText packagePriceEditText = root.findViewById(R.id.packagePriceEditText);
-//        packagePriceCheckBox = root.findViewById(R.id.packagePriceCheckBox);
-//        packagePriceEditText.addTextChangedListener(new TextWatcher() {
-//            @Override
-//            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-//            }
-//
-//            @Override
-//            public void onTextChanged(CharSequence s, int start, int before, int count) {
-//                packagePriceCheckBox.setChecked(false);
-//            }
-//
-//            @Override
-//            public void afterTextChanged(Editable s) {
-//            }
-//        });
+        packagePriceEditText = root.findViewById(R.id.packagePriceEditText);
 
         // Roll price
-        EditText rollPriceEditText = root.findViewById(R.id.rollPriceEditText);
+        rollPriceEditText = root.findViewById(R.id.rollPriceEditText);
         rollPriceCheckBox = root.findViewById(R.id.rollPriceCheckBox);
         rollPriceEditText.addTextChangedListener(new TextWatcher() {
             @Override
@@ -206,7 +210,7 @@ public class HomeFragment extends Fragment {
         });
 
         // Paper weight
-        EditText paperWeightEditText = root.findViewById(R.id.paperWeightEditText);
+        paperWeightEditText = root.findViewById(R.id.paperWeightEditText);
         paperWeightCheckBox = root.findViewById(R.id.paperWeightCheckBox);
         paperWeightEditText.addTextChangedListener(new TextWatcher() {
             @Override
@@ -224,7 +228,7 @@ public class HomeFragment extends Fragment {
         });
 
         // Kilo price
-        EditText kiloPriceEditText = root.findViewById(R.id.kiloPriceEditText);
+        kiloPriceEditText = root.findViewById(R.id.kiloPriceEditText);
         kiloPriceCheckBox = root.findViewById(R.id.kiloPriceCheckBox);
         kiloPriceEditText.addTextChangedListener(new TextWatcher() {
             @Override
@@ -242,7 +246,7 @@ public class HomeFragment extends Fragment {
         });
 
         // Meter price
-        EditText meterPriceEditText = root.findViewById(R.id.meterPriceEditText);
+        meterPriceEditText = root.findViewById(R.id.meterPriceEditText);
         meterPriceCheckBox = root.findViewById(R.id.meterPriceCheckBox);
         meterPriceEditText.addTextChangedListener(new TextWatcher() {
             @Override
@@ -260,7 +264,7 @@ public class HomeFragment extends Fragment {
         });
 
         // Sheet price
-        EditText sheetPriceEditText = root.findViewById(R.id.sheetPriceEditText);
+        sheetPriceEditText = root.findViewById(R.id.sheetPriceEditText);
         sheetPriceCheckBox = root.findViewById(R.id.sheetPriceCheckBox);
         sheetPriceEditText.addTextChangedListener(new TextWatcher() {
             @Override
@@ -278,7 +282,7 @@ public class HomeFragment extends Fragment {
         });
 
         // Suppliers
-        Spinner suppliersSpinner = root.findViewById(R.id.suppliersSpinner);
+        suppliersSpinner = root.findViewById(R.id.suppliersSpinner);
         ArrayList<String> supplierArrayList = new ArrayList<>();
         // TODO Move to SQLite table
         supplierArrayList.add("Aldi");
@@ -320,17 +324,20 @@ public class HomeFragment extends Fragment {
         super.onCreateOptionsMenu(menu, inflater);
     }
 
-    // TODO Add more calculations
+    /**
+     * Calculate all calculable fields
+     *
+     * @return boolean true if one or more calculations have been done
+     */
     private boolean calculate() {
-        boolean fSheetLength = multiply(sheetLengthEditText, sheetLengthCheckBox, rollSheetsEditText, null, rollLengthEditText, rollLengthCheckBox, 100);
+        boolean fSheetLength = divide(rollLengthEditText, rollLengthCheckBox, rollSheetsEditText, null, sheetLengthEditText, sheetLengthCheckBox, 100);
         boolean fRollLength = multiply(sheetLengthEditText, sheetLengthCheckBox, rollSheetsEditText, null, rollLengthEditText, rollLengthCheckBox, 100);
-        boolean fPackagePrice = multiply(sheetLengthEditText, sheetLengthCheckBox, rollSheetsEditText, null, rollLengthEditText, rollLengthCheckBox, 100);
-        boolean fRollPrice = multiply(sheetLengthEditText, sheetLengthCheckBox, rollSheetsEditText, null, rollLengthEditText, rollLengthCheckBox, 100);
+        boolean fRollPrice = divide(packagePriceEditText, null, rollSheetsEditText, null, rollLengthEditText, rollLengthCheckBox, 100);
         boolean fPaperWeight = multiply(sheetLengthEditText, sheetLengthCheckBox, rollSheetsEditText, null, rollLengthEditText, rollLengthCheckBox, 100);
         boolean fKiloPrice = multiply(sheetLengthEditText, sheetLengthCheckBox, rollSheetsEditText, null, rollLengthEditText, rollLengthCheckBox, 100);
         boolean fmeterPrice = multiply(sheetLengthEditText, sheetLengthCheckBox, rollSheetsEditText, null, rollLengthEditText, rollLengthCheckBox, 100);
         boolean fSheetPrice = multiply(sheetLengthEditText, sheetLengthCheckBox, rollSheetsEditText, null, rollLengthEditText, rollLengthCheckBox, 100);
-        return fKiloPrice | fmeterPrice | fPackagePrice | fPaperWeight | fRollLength | fRollPrice | fSheetLength | fSheetPrice;
+        return fKiloPrice | fmeterPrice | fPaperWeight | fRollLength | fRollPrice | fSheetLength | fSheetPrice;
     }
 
     private boolean multiply(EditText multiplicand, CheckBox cb1, EditText multiplier, CheckBox cb2, EditText product, CheckBox cb3, int precision) {

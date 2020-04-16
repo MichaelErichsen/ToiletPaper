@@ -17,8 +17,8 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import net.myerichsen.toiletpaper.ProductDbAdapter;
 import net.myerichsen.toiletpaper.R;
+import net.myerichsen.toiletpaper.database.ProductDbAdapter;
 
 import java.util.List;
 

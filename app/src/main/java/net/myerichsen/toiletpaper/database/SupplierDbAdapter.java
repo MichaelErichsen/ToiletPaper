@@ -1,4 +1,4 @@
-package net.myerichsen.toiletpaper;
+package net.myerichsen.toiletpaper.database;
 
 import android.content.ContentValues;
 import android.content.Context;
