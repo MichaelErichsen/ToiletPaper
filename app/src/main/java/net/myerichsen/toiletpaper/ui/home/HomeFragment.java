@@ -2,13 +2,13 @@ package net.myerichsen.toiletpaper.ui.home;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -62,6 +62,15 @@ public class HomeFragment extends Fragment {
             }
         });
 
+        AppCompatImageButton pricerunnerBtn = root.findViewById(R.id.pricerunnerBtn);
+        pricerunnerBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.pricerunner.dk/results?q=toiletpapir"));
+                startActivity(browserIntent);
+
+            }
+        });
 
         itemNoEditText = root.findViewById(R.id.itemNoEditText);
 
@@ -159,22 +168,22 @@ public class HomeFragment extends Fragment {
         super.onCreateOptionsMenu(menu, inflater);
     }
 
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.action_calculate:
-                calculate();
-                return true;
-
-            default:
-                break;
-        }
-        return super.onOptionsItemSelected(item);
-    }
+//    @Override
+//    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+//        switch (item.getItemId()) {
+//            case R.id.action_calculate:
+//                calculate();
+//                return true;
+//
+//            default:
+//                break;
+//        }
+//        return super.onOptionsItemSelected(item);
+//    }
 
     // TODO Add more calculations
     private boolean calculate() {
-            return multiply(sheetLengthEditText, sheetLengthCheckBox, rollSheetsEditText, null, rollLengthEditText, rollLengthCheckBox, 100);
+        return multiply(sheetLengthEditText, sheetLengthCheckBox, rollSheetsEditText, null, rollLengthEditText, rollLengthCheckBox, 100);
     }
 
     //    private int multiply(EditText dividend, EditText divisor, EditText quotient) {

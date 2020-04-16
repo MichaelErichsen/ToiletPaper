@@ -79,7 +79,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
 
-        // TODO Does not work
+
         Snackbar snackbar = Snackbar
                 .make(item.getActionView(), "Navigation item id " + id, Snackbar.LENGTH_INDEFINITE);
         snackbar.show();
