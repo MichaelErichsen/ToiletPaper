@@ -45,6 +45,12 @@ public class HomeFragment extends Fragment {
     private EditText rollLengthEditText;
     private EditText rollSheetsEditText;
     private CheckBox rollLengthCheckBox;
+    private CheckBox rollPriceCheckBox;
+    private CheckBox packagePriceCheckBox;
+    private CheckBox paperWeightCheckBox;
+    private CheckBox kiloPriceCheckBox;
+    private CheckBox meterPriceCheckBox;
+    private CheckBox sheetPriceCheckBox;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -54,6 +60,7 @@ public class HomeFragment extends Fragment {
         helper = new ProductDbAdapter(context);
         final ProductData productData = new ProductData();
 
+        // Buttons
         AppCompatImageButton calculateBtn = root.findViewById(R.id.calculateBtn);
         calculateBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,7 +69,6 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        // TODO Implement save
         AppCompatImageButton saveBtn = root.findViewById(R.id.saveBtn);
         saveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -80,11 +86,8 @@ public class HomeFragment extends Fragment {
             public void onClick(View v) {
                 Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.pricerunner.dk/results?q=toiletpapir"));
                 startActivity(browserIntent);
-
             }
         });
-
-        itemNoEditText = root.findViewById(R.id.itemNoEditText);
 
         AppCompatImageButton scanBtn = root.findViewById(R.id.scanBtn);
         scanBtn.setOnClickListener(new View.OnClickListener() {
@@ -97,6 +100,12 @@ public class HomeFragment extends Fragment {
             }
         });
 
+        // Item no
+        itemNoEditText = root.findViewById(R.id.itemNoEditText);
+
+        // Brand
+
+        // Layers
         Spinner layersSpinner = root.findViewById(R.id.layersSpinner);
         ArrayList<String> layerArrayList = new ArrayList<>();
         layerArrayList.add("2");
@@ -117,9 +126,32 @@ public class HomeFragment extends Fragment {
             }
         });
 
+        // Package rolls
+
+        // Roll sheets
         rollSheetsEditText = root.findViewById(R.id.rollSheetsEditText);
+
+        // Sheet width
+
+        // Sheet length
         sheetLengthEditText = root.findViewById(R.id.sheetLengthEditText);
         sheetLengthCheckBox = root.findViewById(R.id.sheetLengthCheckBox);
+        sheetLengthEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                sheetLengthCheckBox.setChecked(false);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+            }
+        });
+
+        // Roll length
         rollLengthEditText = root.findViewById(R.id.rollLengthEditText);
         rollLengthCheckBox = root.findViewById(R.id.rollLengthCheckBox);
         rollLengthEditText.addTextChangedListener(new TextWatcher() {
@@ -137,11 +169,122 @@ public class HomeFragment extends Fragment {
             }
         });
 
+        // Package price
+        EditText packagePriceEditText = root.findViewById(R.id.packagePriceEditText);
+        packagePriceCheckBox = root.findViewById(R.id.packagePriceCheckBox);
+        packagePriceEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                packagePriceCheckBox.setChecked(false);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+            }
+        });
+
+        // Roll price
+        EditText rollPriceEditText = root.findViewById(R.id.rollPriceEditText);
+        rollPriceCheckBox = root.findViewById(R.id.rollPriceCheckBox);
+        rollPriceEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                rollPriceCheckBox.setChecked(false);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+            }
+        });
+
+        // Paper weight
+        EditText paperWeightEditText = root.findViewById(R.id.paperWeightEditText);
+        paperWeightCheckBox = root.findViewById(R.id.paperWeightCheckBox);
+        paperWeightEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                kiloPriceCheckBox.setChecked(false);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+            }
+        });
+
+        // Kilo price
+        EditText kiloPriceEditText = root.findViewById(R.id.kiloPriceEditText);
+        kiloPriceCheckBox = root.findViewById(R.id.kiloPriceCheckBox);
+        kiloPriceEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                kiloPriceCheckBox.setChecked(false);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+            }
+        });
+
+        // Meter price
+        EditText meterPriceEditText = root.findViewById(R.id.meterPriceEditText);
+        meterPriceCheckBox = root.findViewById(R.id.meterPriceCheckBox);
+        meterPriceEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                meterPriceCheckBox.setChecked(false);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+            }
+        });
+
+        // Sheet price
+        EditText sheetPriceEditText = root.findViewById(R.id.sheetPriceEditText);
+        sheetPriceCheckBox = root.findViewById(R.id.sheetPriceCheckBox);
+        sheetPriceEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                sheetPriceCheckBox.setChecked(false);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+            }
+        });
+
+        // Suppliers
         Spinner suppliersSpinner = root.findViewById(R.id.suppliersSpinner);
         ArrayList<String> supplierArrayList = new ArrayList<>();
         // TODO Move to SQLite table
+        supplierArrayList.add("Aldi");
         supplierArrayList.add("Bilka");
         supplierArrayList.add("Coop");
+        supplierArrayList.add("Lidl");
         supplierArrayList.add("REMA 1000");
         supplierArrayList.add("Spar");
         ArrayAdapter<String> supplierArrayAdapter = new ArrayAdapter<>(context, android.R.layout.simple_spinner_item, supplierArrayList);
@@ -157,14 +300,11 @@ public class HomeFragment extends Fragment {
             public void onNothingSelected(AdapterView<?> parent) {
             }
         });
-//        final TextView textView = root.findViewById(R.id.text_home);
-//        homeViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
-//            @Override
-//            public void onChanged(@Nullable String s) {
-//                textView.setText(s);
-//            }
-//        });
-//
+
+        // Comments
+
+        // Time stamp
+
 
         return root;
     }
@@ -179,19 +319,6 @@ public class HomeFragment extends Fragment {
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
     }
-
-//    @Override
-//    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-//        switch (item.getItemId()) {
-//            case R.id.action_calculate:
-//                calculate();
-//                return true;
-//
-//            default:
-//                break;
-//        }
-//        return super.onOptionsItemSelected(item);
-//    }
 
     // TODO Add more calculations
     private boolean calculate() {

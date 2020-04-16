@@ -19,17 +19,14 @@ import static androidx.navigation.Navigation.findNavController;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private AppBarConfiguration mAppBarConfiguration;
-//    Context context;
 
     // TODO implement SQLite database and pd table
-    // TODO Implement save activity
     // TODO suppliers table
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-//        context = getApplicationContext();
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
@@ -63,43 +60,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 || super.onSupportNavigateUp();
     }
 
-//    @Override
-//    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-//        switch (item.getItemId()) {
-//            case R.id.action_calculate:
-//                return false;
-//
-//            default:
-//                break;
-//        }
-//        return super.onOptionsItemSelected(item);
-//    }
-
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
 
-
         Snackbar snackbar = Snackbar
                 .make(item.getActionView(), "Navigation item id " + id, Snackbar.LENGTH_INDEFINITE);
         snackbar.show();
-
-//        if (id == R.id.nav_pricerunner) {
-//            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.pricerunner.dk/results?q=toiletpapir"));
-//
-//            if (browserIntent.resolveActivity(getPackageManager()) != null) {
-//                startActivity(browserIntent);
-//            }
-//
-//            return true;
-//        } else if (id == R.id.nav_supplier) {
-//            // TODO Read URI from supplier table
-//            snackbar = Snackbar
-//                    .make(item.getActionView(), "Her skal butikken kaldes", Snackbar.LENGTH_INDEFINITE);
-//            snackbar.show();
-//
-//            return true;
-//        }
 
         return false;
     }
