@@ -16,9 +16,12 @@ public class ProductDbAdapter {
     final ProductHelper myhelper;
     final String[] columns = {ProductHelper.UID, ProductHelper.LAYERS, ProductHelper.PACKAGE_ROLLS,
             ProductHelper.ROLL_SHEETS, ProductHelper.SHEET_WIDTH, ProductHelper.SHEET_LENGTH,
-            ProductHelper.SHEET_LENGTH_C, ProductHelper.PACKAGE_PRICE, ProductHelper.PACKAGE_PRICE_C,
+            ProductHelper.SHEET_LENGTH_C,
+//            ProductHelper.PACKAGE_PRICE,
+//            ProductHelper.PACKAGE_PRICE_C,
             ProductHelper.ROLL_LENGTH, ProductHelper.ROLL_LENGTH_C,
-            ProductHelper.PACKAGE_PRICE, ProductHelper.PACKAGE_PRICE_C,
+            ProductHelper.PACKAGE_PRICE,
+//            ProductHelper.PACKAGE_PRICE_C,
             ProductHelper.ROLL_PRICE, ProductHelper.ROLL_PRICE_C, ProductHelper.PAPER_WEIGHT,
             ProductHelper.PAPER_WEIGHT_C, ProductHelper.KILO_PRICE, ProductHelper.KILO_PRICE_C,
             ProductHelper.METER_PRICE, ProductHelper.METER_PRICE_C, ProductHelper.SHEET_PRICE,
@@ -112,7 +115,7 @@ public class ProductDbAdapter {
         contentValues.put(ProductHelper.ROLL_LENGTH, ProductData.getRollLength());
         contentValues.put(ProductHelper.ROLL_LENGTH_C, ProductData.getRollLength_c());
         contentValues.put(ProductHelper.PACKAGE_PRICE, ProductData.getPackagePrice());
-        contentValues.put(ProductHelper.PACKAGE_PRICE_C, ProductData.getPackagePrice_c());
+//        contentValues.put(ProductHelper.PACKAGE_PRICE_C, ProductData.getPackagePrice_c());
         contentValues.put(ProductHelper.ROLL_PRICE, ProductData.getRollPrice());
         contentValues.put(ProductHelper.ROLL_PRICE_C, ProductData.getRollPrice_c());
         contentValues.put(ProductHelper.PAPER_WEIGHT, ProductData.getPaperWeight());
@@ -143,7 +146,7 @@ public class ProductDbAdapter {
         ProductData.setRollLength(cursor.getInt(cursor.getColumnIndex(ProductHelper.ROLL_LENGTH)));
         ProductData.setRollLength_c(cursor.getInt(cursor.getColumnIndex(ProductHelper.SHEET_LENGTH_C)));
         ProductData.setPackagePrice(cursor.getFloat(cursor.getColumnIndex(ProductHelper.PACKAGE_PRICE)));
-        ProductData.setPackagePrice_c(cursor.getInt(cursor.getColumnIndex(ProductHelper.PACKAGE_PRICE_C)));
+//        ProductData.setPackagePrice_c(cursor.getInt(cursor.getColumnIndex(ProductHelper.PACKAGE_PRICE_C)));
         ProductData.setRollPrice(cursor.getFloat(cursor.getColumnIndex(ProductHelper.ROLL_PRICE)));
         ProductData.setRollPrice_c(cursor.getInt(cursor.getColumnIndex(ProductHelper.ROLL_PRICE_C)));
         ProductData.setPaperWeight(cursor.getFloat(cursor.getColumnIndex(ProductHelper.PAPER_WEIGHT)));
@@ -187,7 +190,7 @@ public class ProductDbAdapter {
         private static final String ROLL_LENGTH = "ROLL_LENGTH";
         private static final String ROLL_LENGTH_C = "ROLL_LENGTH_C";
         private static final String PACKAGE_PRICE = "PACKAGE_PRICE";
-        private static final String PACKAGE_PRICE_C = "PACKAGE_PRICE_C";
+        //        private static final String PACKAGE_PRICE_C = "PACKAGE_PRICE_C";
         private static final String ROLL_PRICE = "ROLL_PRICE";
         private static final String ROLL_PRICE_C = "ROLL_PRICE_C";
         private static final String PAPER_WEIGHT = "PAPER_WEIGHT";
@@ -216,7 +219,7 @@ public class ProductDbAdapter {
                 ROLL_LENGTH + " NUMERIC, " +
                 ROLL_LENGTH_C + " INTEGER, " +
                 PACKAGE_PRICE + " NUMERIC, " +
-                PACKAGE_PRICE_C + " INTEGER, " +
+//                PACKAGE_PRICE_C + " INTEGER, " +
                 ROLL_PRICE + " NUMERIC, " +
                 ROLL_PRICE_C + " INTEGER, " +
                 PAPER_WEIGHT + " NUMERIC, " +

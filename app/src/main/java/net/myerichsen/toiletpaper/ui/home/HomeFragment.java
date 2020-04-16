@@ -46,7 +46,7 @@ public class HomeFragment extends Fragment {
     private EditText rollSheetsEditText;
     private CheckBox rollLengthCheckBox;
     private CheckBox rollPriceCheckBox;
-    private CheckBox packagePriceCheckBox;
+    //    private CheckBox packagePriceCheckBox;
     private CheckBox paperWeightCheckBox;
     private CheckBox kiloPriceCheckBox;
     private CheckBox meterPriceCheckBox;
@@ -171,21 +171,21 @@ public class HomeFragment extends Fragment {
 
         // Package price
         EditText packagePriceEditText = root.findViewById(R.id.packagePriceEditText);
-        packagePriceCheckBox = root.findViewById(R.id.packagePriceCheckBox);
-        packagePriceEditText.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                packagePriceCheckBox.setChecked(false);
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-            }
-        });
+//        packagePriceCheckBox = root.findViewById(R.id.packagePriceCheckBox);
+//        packagePriceEditText.addTextChangedListener(new TextWatcher() {
+//            @Override
+//            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+//            }
+//
+//            @Override
+//            public void onTextChanged(CharSequence s, int start, int before, int count) {
+//                packagePriceCheckBox.setChecked(false);
+//            }
+//
+//            @Override
+//            public void afterTextChanged(Editable s) {
+//            }
+//        });
 
         // Roll price
         EditText rollPriceEditText = root.findViewById(R.id.rollPriceEditText);
@@ -322,10 +322,17 @@ public class HomeFragment extends Fragment {
 
     // TODO Add more calculations
     private boolean calculate() {
-        return multiply(sheetLengthEditText, sheetLengthCheckBox, rollSheetsEditText, null, rollLengthEditText, rollLengthCheckBox, 100);
+        boolean fSheetLength = multiply(sheetLengthEditText, sheetLengthCheckBox, rollSheetsEditText, null, rollLengthEditText, rollLengthCheckBox, 100);
+        boolean fRollLength = multiply(sheetLengthEditText, sheetLengthCheckBox, rollSheetsEditText, null, rollLengthEditText, rollLengthCheckBox, 100);
+        boolean fPackagePrice = multiply(sheetLengthEditText, sheetLengthCheckBox, rollSheetsEditText, null, rollLengthEditText, rollLengthCheckBox, 100);
+        boolean fRollPrice = multiply(sheetLengthEditText, sheetLengthCheckBox, rollSheetsEditText, null, rollLengthEditText, rollLengthCheckBox, 100);
+        boolean fPaperWeight = multiply(sheetLengthEditText, sheetLengthCheckBox, rollSheetsEditText, null, rollLengthEditText, rollLengthCheckBox, 100);
+        boolean fKiloPrice = multiply(sheetLengthEditText, sheetLengthCheckBox, rollSheetsEditText, null, rollLengthEditText, rollLengthCheckBox, 100);
+        boolean fmeterPrice = multiply(sheetLengthEditText, sheetLengthCheckBox, rollSheetsEditText, null, rollLengthEditText, rollLengthCheckBox, 100);
+        boolean fSheetPrice = multiply(sheetLengthEditText, sheetLengthCheckBox, rollSheetsEditText, null, rollLengthEditText, rollLengthCheckBox, 100);
+        return fKiloPrice | fmeterPrice | fPackagePrice | fPaperWeight | fRollLength | fRollPrice | fSheetLength | fSheetPrice;
     }
 
-    //    private int multiply(EditText dividend, EditText divisor, EditText quotient) {
     private boolean multiply(EditText multiplicand, CheckBox cb1, EditText multiplier, CheckBox cb2, EditText product, CheckBox cb3, int precision) {
         String s1, s2 = "";
         String s3;
@@ -360,6 +367,44 @@ public class HomeFragment extends Fragment {
         // Now do the calculation
         float i3 = Float.parseFloat(s1) * Float.parseFloat(s2) / precision;
         product.setText(String.valueOf(i3));
+        cb3.setChecked(true);
+        return true;
+    }
+
+    private boolean divide(EditText dividend, CheckBox cb1, EditText divisor, CheckBox cb2, EditText quotient, CheckBox cb3, int precision) {
+        String s1, s2 = "";
+        String s3;
+
+        // First test if calculated
+        if ((cb1 != null) && (cb1.isSelected())) {
+            return false;
+        }
+        if ((cb2 != null) && (cb2.isSelected())) {
+            return false;
+        }
+
+
+        if ((cb3 != null) && !(cb3.isSelected())) {
+            s3 = quotient.getText().toString();
+
+            if ((!s3.isEmpty()) && (Integer.getInteger(s3) > 0)) {
+                return false;
+            }
+        }
+
+        // Then test for zero values
+        s1 = dividend.getText().toString();
+        if ((s1.isEmpty()) || (s1.equals("0"))) {
+            return false;
+        }
+        s2 = divisor.getText().toString();
+        if ((s2.isEmpty()) || (s2.equals("0"))) {
+            return false;
+        }
+
+        // Now do the calculation
+        float i3 = Float.parseFloat(s1) * Float.parseFloat(s2) / precision;
+        quotient.setText(String.valueOf(i3));
         cb3.setChecked(true);
         return true;
     }
