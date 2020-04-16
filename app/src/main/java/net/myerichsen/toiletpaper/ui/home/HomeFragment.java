@@ -54,6 +54,15 @@ public class HomeFragment extends Fragment {
         helper = new ProductDbAdapter(context);
         ProductData productData = new ProductData();
 
+        AppCompatImageButton calculateBtn = root.findViewById(R.id.calculateBtn);
+        calculateBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                calculate();
+            }
+        });
+
+
         itemNoEditText = root.findViewById(R.id.itemNoEditText);
 
         AppCompatImageButton scanBtn = root.findViewById(R.id.scanBtn);
@@ -154,7 +163,7 @@ public class HomeFragment extends Fragment {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_calculate:
-                calculate(item);
+                calculate();
                 return true;
 
             default:
@@ -164,7 +173,7 @@ public class HomeFragment extends Fragment {
     }
 
     // TODO Add more calculations
-    private boolean calculate(MenuItem item) {
+    private boolean calculate() {
             return multiply(sheetLengthEditText, sheetLengthCheckBox, rollSheetsEditText, null, rollLengthEditText, rollLengthCheckBox, 100);
     }
 
