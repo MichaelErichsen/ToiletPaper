@@ -1,7 +1,5 @@
 package net.myerichsen.toiletpaper;
 
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -41,7 +39,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home, R.id.nav_about, R.id.nav_products, R.id.nav_suppliers, R.id.nav_pricerunner)
+                R.id.nav_home, R.id.nav_about, R.id.nav_products)
+//                R.id.nav_home, R.id.nav_about, R.id.nav_products, R.id.nav_suppliers, R.id.nav_pricerunner)
                 .setDrawerLayout(drawer)
                 .build();
         NavController navController = findNavController(this, R.id.nav_host_fragment);
@@ -85,22 +84,22 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 .make(item.getActionView(), "Navigation item id " + id, Snackbar.LENGTH_INDEFINITE);
         snackbar.show();
 
-        if (id == R.id.nav_pricerunner) {
-            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.pricerunner.dk/results?q=toiletpapir"));
-
-            if (browserIntent.resolveActivity(getPackageManager()) != null) {
-                startActivity(browserIntent);
-            }
-
-            return true;
-        } else if (id == R.id.nav_supplier) {
-            // TODO Read URI from supplier table
-            snackbar = Snackbar
-                    .make(item.getActionView(), "Her skal butikken kaldes", Snackbar.LENGTH_INDEFINITE);
-            snackbar.show();
-
-            return true;
-        }
+//        if (id == R.id.nav_pricerunner) {
+//            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.pricerunner.dk/results?q=toiletpapir"));
+//
+//            if (browserIntent.resolveActivity(getPackageManager()) != null) {
+//                startActivity(browserIntent);
+//            }
+//
+//            return true;
+//        } else if (id == R.id.nav_supplier) {
+//            // TODO Read URI from supplier table
+//            snackbar = Snackbar
+//                    .make(item.getActionView(), "Her skal butikken kaldes", Snackbar.LENGTH_INDEFINITE);
+//            snackbar.show();
+//
+//            return true;
+//        }
 
         return false;
     }

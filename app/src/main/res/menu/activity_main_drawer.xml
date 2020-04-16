@@ -14,20 +14,20 @@
             android:icon="@drawable/baseline_help_black_48dp"
             android:title="@string/action_about" />
 
-        <item
-            android:id="@+id/action_save"
-            android:icon="@drawable/baseline_save_black_48dp"
-            android:title="@string/action_save" />
+        <!--        <item-->
+        <!--            android:id="@+id/action_save"-->
+        <!--            android:icon="@drawable/baseline_save_black_48dp"-->
+        <!--            android:title="@string/action_save" />-->
 
-        <item
-            android:id="@+id/nav_supplier"
-            android:icon="@drawable/baseline_storefront_black_48dp"
-            android:title="@string/action_suppliers" />
+        <!--        <item-->
+        <!--            android:id="@+id/nav_supplier"-->
+        <!--            android:icon="@drawable/baseline_storefront_black_48dp"-->
+        <!--            android:title="@string/action_suppliers" />-->
 
-        <item
-            android:id="@+id/nav_pricerunner"
-            android:icon="@drawable/baseline_rate_review_black_48dp"
-            android:title="@string/action_pricerunner" />
+        <!--        <item-->
+        <!--            android:id="@+id/nav_pricerunner"-->
+        <!--            android:icon="@drawable/baseline_rate_review_black_48dp"-->
+        <!--            android:title="@string/action_pricerunner" />-->
 
         <item
             android:id="@+id/nav_products"
