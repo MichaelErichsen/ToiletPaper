@@ -50,4 +50,5 @@
     <string name="menu_products">Produkter</string>
     <string name="menu_suppliers">Butikker</string>
     <string name="uri">URI</string>
+    <string name="scan_prompt">Scan en stregkode eller QR-kode. Telefonen vil bippe, og koden vil blive vist nedenfor.</string>
 </resources>
