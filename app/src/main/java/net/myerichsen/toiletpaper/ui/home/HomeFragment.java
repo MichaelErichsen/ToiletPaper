@@ -52,7 +52,7 @@ public class HomeFragment extends Fragment {
         root = inflater.inflate(R.layout.fragment_home, container, false);
         Context context = getContext();
         helper = new ProductDbAdapter(context);
-        ProductData productData = new ProductData();
+        final ProductData productData = new ProductData();
 
         AppCompatImageButton calculateBtn = root.findViewById(R.id.calculateBtn);
         calculateBtn.setOnClickListener(new View.OnClickListener() {
@@ -61,6 +61,18 @@ public class HomeFragment extends Fragment {
                 calculate();
             }
         });
+
+        // TODO Implement save
+        AppCompatImageButton saveBtn = root.findViewById(R.id.saveBtn);
+        saveBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                helper.insertData(productData);
+            }
+        });
+
+        // TODO Implement supplier web site lookup
+        AppCompatImageButton supplierBtn = root.findViewById(R.id.supplierBtn);
 
         AppCompatImageButton pricerunnerBtn = root.findViewById(R.id.pricerunnerBtn);
         pricerunnerBtn.setOnClickListener(new View.OnClickListener() {

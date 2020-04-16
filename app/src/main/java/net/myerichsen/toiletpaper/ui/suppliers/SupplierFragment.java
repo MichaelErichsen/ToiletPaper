@@ -27,6 +27,7 @@ public class SupplierFragment extends Fragment {
     final TableRow.LayoutParams llp = new TableRow.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
     private View root;
 
+    // TODO Crashes when called
     public static SupplierFragment newInstance() {
         return new SupplierFragment();
     }

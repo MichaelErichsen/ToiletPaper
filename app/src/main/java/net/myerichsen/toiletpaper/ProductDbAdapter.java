@@ -54,6 +54,7 @@ public class ProductDbAdapter {
      * Insert a row
      */
     public long insertData(ProductData pd) {
+        // TODO Does not insert data into row
         SQLiteDatabase dbb = myhelper.getWritableDatabase();
         ContentValues contentValues = extractProductData(pd);
         return dbb.insert(ProductHelper.TABLE_NAME, null, contentValues);
@@ -98,7 +99,6 @@ public class ProductDbAdapter {
         }
         return lpd;
     }
-
 
     private ContentValues extractProductData(ProductData pd) {
         ContentValues contentValues = new ContentValues();
