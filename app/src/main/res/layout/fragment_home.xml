@@ -248,7 +248,7 @@
                     android:layout_weight="1"
                     android:ems="10"
                     android:hint="@string/m"
-                    android:inputType="number" />
+                    android:inputType="numberDecimal" />
 
                 <CheckBox
                     android:id="@+id/rollLengthCheckBox"
@@ -280,7 +280,7 @@
                     android:layout_weight="1"
                     android:ems="10"
                     android:hint="@string/kr"
-                    android:inputType="number" />
+                    android:inputType="numberDecimal" />
 
             </LinearLayout>
 
@@ -294,7 +294,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="@string/package_price" />
+                    android:text="@string/roll_price" />
 
                 <EditText
                     android:id="@+id/rollPriceEditText"
@@ -303,7 +303,7 @@
                     android:layout_weight="1"
                     android:ems="10"
                     android:hint="@string/kr"
-                    android:inputType="number" />
+                    android:inputType="numberDecimal" />
 
                 <CheckBox
                     android:id="@+id/rollPriceCheckBox"
@@ -336,7 +336,7 @@
                     android:layout_weight="1"
                     android:ems="10"
                     android:hint="@string/gm2"
-                    android:inputType="number" />
+                    android:inputType="numberDecimal" />
 
                 <CheckBox
                     android:id="@+id/paperWeightCheckBox"
@@ -368,7 +368,7 @@
                     android:layout_weight="1"
                     android:ems="10"
                     android:hint="@string/kr"
-                    android:inputType="number" />
+                    android:inputType="numberDecimal" />
 
                 <CheckBox
                     android:id="@+id/kiloPriceCheckBox"
@@ -400,7 +400,7 @@
                     android:layout_weight="1"
                     android:ems="10"
                     android:hint="@string/kr"
-                    android:inputType="number" />
+                    android:inputType="numberDecimal" />
 
                 <CheckBox
                     android:id="@+id/meterPriceCheckBox"
@@ -432,7 +432,7 @@
                     android:layout_weight="1"
                     android:ems="10"
                     android:hint="@string/kr"
-                    android:inputType="number" />
+                    android:inputType="numberDecimal" />
 
                 <CheckBox
                     android:id="@+id/sheetPriceCheckBox"
@@ -454,7 +454,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="@string/suppliers"
+                    android:text="@string/supplier"
                     android:textSize="14sp" />
 
                 <Spinner

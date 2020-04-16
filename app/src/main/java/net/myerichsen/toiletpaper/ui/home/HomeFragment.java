@@ -39,6 +39,8 @@ public class HomeFragment extends Fragment {
 
     private ProductDbAdapter helper;
     private View root;
+    private Context context;
+
     private AppCompatImageButton calculateBtn;
     private AppCompatImageButton saveBtn;
     private AppCompatImageButton supplierBtn;
@@ -75,7 +77,7 @@ public class HomeFragment extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
         HomeViewModel homeViewModel = new ViewModelProvider(this).get(HomeViewModel.class);
         root = inflater.inflate(R.layout.fragment_home, container, false);
-        Context context = getContext();
+        context = getContext();
         helper = new ProductDbAdapter(context);
         final ProductData productData = new ProductData();
 
@@ -286,10 +288,10 @@ public class HomeFragment extends Fragment {
         ArrayList<String> supplierArrayList = new ArrayList<>();
         // TODO Move to SQLite table
         supplierArrayList.add("Aldi");
-        supplierArrayList.add("Bilka");
-        supplierArrayList.add("Coop");
+        supplierArrayList.add("Coop (Kvickly/Brugsen/Fakta/Irma)");
         supplierArrayList.add("Lidl");
         supplierArrayList.add("REMA 1000");
+        supplierArrayList.add("Salling (Bilka/Føtex/Netto)");
         supplierArrayList.add("Spar");
         ArrayAdapter<String> supplierArrayAdapter = new ArrayAdapter<>(context, android.R.layout.simple_spinner_item, supplierArrayList);
         supplierArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -330,14 +332,31 @@ public class HomeFragment extends Fragment {
      * @return boolean true if one or more calculations have been done
      */
     private boolean calculate() {
-        boolean fSheetLength = divide(rollLengthEditText, rollLengthCheckBox, rollSheetsEditText, null, sheetLengthEditText, sheetLengthCheckBox, 100);
+        // FIXME Calculate crashes
+        boolean fSheetLength = divide(rollLengthEditText, rollLengthCheckBox, rollSheetsEditText, null, sheetLengthEditText, sheetLengthCheckBox);
+
         boolean fRollLength = multiply(sheetLengthEditText, sheetLengthCheckBox, rollSheetsEditText, null, rollLengthEditText, rollLengthCheckBox, 100);
-        boolean fRollPrice = divide(packagePriceEditText, null, rollSheetsEditText, null, rollLengthEditText, rollLengthCheckBox, 100);
-        boolean fPaperWeight = multiply(sheetLengthEditText, sheetLengthCheckBox, rollSheetsEditText, null, rollLengthEditText, rollLengthCheckBox, 100);
+
+        boolean fRollPrice = divide(packagePriceEditText, null, rollSheetsEditText, null, rollPriceEditText, rollPriceCheckBox);
+
+        // TODO Paper weight g/m2 not calculable?
+        // boolean fPaperWeight = multiply(sheetLengthEditText, sheetLengthCheckBox, rollSheetsEditText, null, rollLengthEditText, rollLengthCheckBox, 100);
+
+        // Kilo price
         boolean fKiloPrice = multiply(sheetLengthEditText, sheetLengthCheckBox, rollSheetsEditText, null, rollLengthEditText, rollLengthCheckBox, 100);
-        boolean fmeterPrice = multiply(sheetLengthEditText, sheetLengthCheckBox, rollSheetsEditText, null, rollLengthEditText, rollLengthCheckBox, 100);
-        boolean fSheetPrice = multiply(sheetLengthEditText, sheetLengthCheckBox, rollSheetsEditText, null, rollLengthEditText, rollLengthCheckBox, 100);
-        return fKiloPrice | fmeterPrice | fPaperWeight | fRollLength | fRollPrice | fSheetLength | fSheetPrice;
+
+        // Meter price: package price / sheet length
+        boolean fMeterPrice = divide(packagePriceEditText, null, sheetLengthEditText, sheetLengthCheckBox, meterPriceEditText, meterPriceCheckBox);
+
+        // Sheet price: package price / rolls pr package / sheets per roll
+        EditText dummy = new EditText(context);
+        CheckBox dummyC = new CheckBox(context);
+        dummyC.setChecked(false);
+        boolean fSheetPrice1 = divide(packagePriceEditText, null, packageRollsEditText, null, dummy, dummyC);
+        boolean fSheetPrice = divide(dummy, dummyC, rollSheetsEditText, null, rollLengthEditText, rollLengthCheckBox);
+
+        return fKiloPrice | fMeterPrice | fRollLength | fRollPrice | fSheetLength | fSheetPrice;
+//        return fKiloPrice | fMeterPrice | fPaperWeight | fRollLength | fRollPrice | fSheetLength | fSheetPrice;
     }
 
     private boolean multiply(EditText multiplicand, CheckBox cb1, EditText multiplier, CheckBox cb2, EditText product, CheckBox cb3, int precision) {
@@ -378,7 +397,7 @@ public class HomeFragment extends Fragment {
         return true;
     }
 
-    private boolean divide(EditText dividend, CheckBox cb1, EditText divisor, CheckBox cb2, EditText quotient, CheckBox cb3, int precision) {
+    private boolean divide(EditText dividend, CheckBox cb1, EditText divisor, CheckBox cb2, EditText quotient, CheckBox cb3) {
         String s1, s2 = "";
         String s3;
 
@@ -410,7 +429,7 @@ public class HomeFragment extends Fragment {
         }
 
         // Now do the calculation
-        float i3 = Float.parseFloat(s1) * Float.parseFloat(s2) / precision;
+        float i3 = Float.parseFloat(s1) / Float.parseFloat(s2);
         quotient.setText(String.valueOf(i3));
         cb3.setChecked(true);
         return true;
