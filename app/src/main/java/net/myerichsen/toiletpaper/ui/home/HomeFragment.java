@@ -95,6 +95,7 @@ public class HomeFragment extends Fragment {
         saveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // TODO Populate Productdata from layout
                 helper.insertData(productData);
             }
         });
@@ -333,9 +334,7 @@ public class HomeFragment extends Fragment {
      * @return boolean true if one or more calculations have been done
      */
     private boolean calculate() {
-        // FIXME Calculate crashes
-
-        // Make Toast or Snackbar work in a fragment
+        // TODO Make Toast or Snackbar work in a fragment
         try {
             boolean fSheetLength = divide(rollLengthEditText, rollLengthCheckBox, rollSheetsEditText, null, sheetLengthEditText, sheetLengthCheckBox);
 
@@ -479,7 +478,7 @@ public class HomeFragment extends Fragment {
         EditText itemNoEditText = root.findViewById(R.id.itemNoEditText);
         ProductData pd = helper.getDataByItemNo(itemNoEditText.getText().toString());
         Snackbar snackbar = Snackbar
-                .make(view, "Found item no. " + ProductData.getItemNo(), Snackbar.LENGTH_LONG);
+                .make(getActivity().findViewById(android.R.id.content), "Found item no. " + ProductData.getItemNo(), Snackbar.LENGTH_LONG);
         snackbar.show();
         // TODO move data to activity fields
     }
@@ -489,7 +488,7 @@ public class HomeFragment extends Fragment {
         EditText brandEditText = root.findViewById(R.id.brandEditText);
         ProductData pd = helper.getDataByBrand(brandEditText.getText().toString());
         Snackbar snackbar = Snackbar
-                .make(view, "Found brand. " + ProductData.getItemNo(), Snackbar.LENGTH_LONG);
+                .make(getActivity().findViewById(android.R.id.content), "Found brand. " + ProductData.getItemNo(), Snackbar.LENGTH_LONG);
         snackbar.show();
         // TODO move data to activity fields
     }

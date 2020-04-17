@@ -17,6 +17,8 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.google.android.material.snackbar.Snackbar;
+
 import net.myerichsen.toiletpaper.R;
 import net.myerichsen.toiletpaper.database.SupplierDbAdapter;
 
@@ -35,7 +37,14 @@ public class SupplierFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.supplier_fragment, container, false);
+        try {
+            root = inflater.inflate(R.layout.supplier_fragment, container, false);
+        } catch (Exception e) {
+            e.printStackTrace();
+            Snackbar snackbar = Snackbar.make(getActivity().findViewById(android.R.id.content), e.getMessage(), Snackbar.LENGTH_LONG);
+            snackbar.show();
+        }
+        return root;
     }
 
     @Override

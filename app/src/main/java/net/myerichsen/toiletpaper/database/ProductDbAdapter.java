@@ -115,7 +115,7 @@ public class ProductDbAdapter {
         contentValues.put(ProductHelper.ROLL_LENGTH, ProductData.getRollLength());
         contentValues.put(ProductHelper.ROLL_LENGTH_C, ProductData.getRollLength_c());
         contentValues.put(ProductHelper.PACKAGE_PRICE, ProductData.getPackagePrice());
-//        contentValues.put(ProductHelper.PACKAGE_PRICE_C, ProductData.getPackagePrice_c());
+//        contentValues.put(ProductHelper.PACKAGE_PRICE_C, pd.getPackagePrice_c());
         contentValues.put(ProductHelper.ROLL_PRICE, ProductData.getRollPrice());
         contentValues.put(ProductHelper.ROLL_PRICE_C, ProductData.getRollPrice_c());
         contentValues.put(ProductHelper.PAPER_WEIGHT, ProductData.getPaperWeight());
@@ -146,7 +146,7 @@ public class ProductDbAdapter {
         ProductData.setRollLength(cursor.getInt(cursor.getColumnIndex(ProductHelper.ROLL_LENGTH)));
         ProductData.setRollLength_c(cursor.getInt(cursor.getColumnIndex(ProductHelper.SHEET_LENGTH_C)));
         ProductData.setPackagePrice(cursor.getFloat(cursor.getColumnIndex(ProductHelper.PACKAGE_PRICE)));
-//        ProductData.setPackagePrice_c(cursor.getInt(cursor.getColumnIndex(ProductHelper.PACKAGE_PRICE_C)));
+//        pd.setPackagePrice_c(cursor.getInt(cursor.getColumnIndex(ProductHelper.PACKAGE_PRICE_C)));
         ProductData.setRollPrice(cursor.getFloat(cursor.getColumnIndex(ProductHelper.ROLL_PRICE)));
         ProductData.setRollPrice_c(cursor.getInt(cursor.getColumnIndex(ProductHelper.ROLL_PRICE_C)));
         ProductData.setPaperWeight(cursor.getFloat(cursor.getColumnIndex(ProductHelper.PAPER_WEIGHT)));
