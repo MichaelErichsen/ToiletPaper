@@ -22,9 +22,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     // TODO implement SQLite database and pd table
     // TODO suppliers table
-    // TODO Product details, update, delete
-    // TODO Test data loader
-    // TODO Compare activity. Select columnn, display table
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

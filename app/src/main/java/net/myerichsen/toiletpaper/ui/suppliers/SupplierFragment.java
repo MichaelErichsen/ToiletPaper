@@ -70,7 +70,6 @@ public class SupplierFragment extends Fragment {
         tableRow.addView(addCell("URI"));
         tableLayout.addView(tableRow);
 
-        // FIXME Crashes here
         List<SupplierData> lsd = helper.getAllData(context);
         SupplierData sd;
 
