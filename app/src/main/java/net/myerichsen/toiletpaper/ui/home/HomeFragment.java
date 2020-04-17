@@ -34,6 +34,7 @@ import java.util.ArrayList;
 
 import static android.app.Activity.RESULT_OK;
 
+// TODO Understand relation between Fragment and ViewModel
 public class HomeFragment extends Fragment {
     private final static int REQUEST_CODE_1 = 1;
 
@@ -333,29 +334,36 @@ public class HomeFragment extends Fragment {
      */
     private boolean calculate() {
         // FIXME Calculate crashes
-        boolean fSheetLength = divide(rollLengthEditText, rollLengthCheckBox, rollSheetsEditText, null, sheetLengthEditText, sheetLengthCheckBox);
 
-        boolean fRollLength = multiply(sheetLengthEditText, sheetLengthCheckBox, rollSheetsEditText, null, rollLengthEditText, rollLengthCheckBox, 100);
+        // Make Toast or Snackbar work in a fragment
+        try {
+            boolean fSheetLength = divide(rollLengthEditText, rollLengthCheckBox, rollSheetsEditText, null, sheetLengthEditText, sheetLengthCheckBox);
 
-        boolean fRollPrice = divide(packagePriceEditText, null, rollSheetsEditText, null, rollPriceEditText, rollPriceCheckBox);
+            boolean fRollLength = multiply(sheetLengthEditText, sheetLengthCheckBox, rollSheetsEditText, null, rollLengthEditText, rollLengthCheckBox, 100);
 
-        // TODO Paper weight g/m2 not calculable?
-        // boolean fPaperWeight = multiply(sheetLengthEditText, sheetLengthCheckBox, rollSheetsEditText, null, rollLengthEditText, rollLengthCheckBox, 100);
+            boolean fRollPrice = divide(packagePriceEditText, null, rollSheetsEditText, null, rollPriceEditText, rollPriceCheckBox);
 
-        // Kilo price
-        boolean fKiloPrice = multiply(sheetLengthEditText, sheetLengthCheckBox, rollSheetsEditText, null, rollLengthEditText, rollLengthCheckBox, 100);
+            // TODO Paper weight g/m2 not calculable?
+            // boolean fPaperWeight = multiply(sheetLengthEditText, sheetLengthCheckBox, rollSheetsEditText, null, rollLengthEditText, rollLengthCheckBox, 100);
 
-        // Meter price: package price / sheet length
-        boolean fMeterPrice = divide(packagePriceEditText, null, sheetLengthEditText, sheetLengthCheckBox, meterPriceEditText, meterPriceCheckBox);
+            // Kilo price
+            boolean fKiloPrice = multiply(sheetLengthEditText, sheetLengthCheckBox, rollSheetsEditText, null, rollLengthEditText, rollLengthCheckBox, 100);
 
-        // Sheet price: package price / rolls pr package / sheets per roll
-        EditText dummy = new EditText(context);
-        CheckBox dummyC = new CheckBox(context);
-        dummyC.setChecked(false);
-        boolean fSheetPrice1 = divide(packagePriceEditText, null, packageRollsEditText, null, dummy, dummyC);
-        boolean fSheetPrice = divide(dummy, dummyC, rollSheetsEditText, null, rollLengthEditText, rollLengthCheckBox);
+            // Meter price: package price / sheet length
+            boolean fMeterPrice = divide(packagePriceEditText, null, sheetLengthEditText, sheetLengthCheckBox, meterPriceEditText, meterPriceCheckBox);
 
-        return fKiloPrice | fMeterPrice | fRollLength | fRollPrice | fSheetLength | fSheetPrice;
+            // Sheet price: package price / rolls pr package / sheets per roll
+//            EditText dummy = new EditText(context);
+//            CheckBox dummyC = new CheckBox(context);
+//            dummyC.setChecked(false);
+//            boolean fSheetPrice1 = divide(packagePriceEditText, null, packageRollsEditText, null, dummy, dummyC);
+//            boolean fSheetPrice = divide(dummy, dummyC, rollSheetsEditText, null, rollLengthEditText, rollLengthCheckBox);
+
+            return fKiloPrice | fMeterPrice | fRollLength | fRollPrice | fSheetLength;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
 //        return fKiloPrice | fMeterPrice | fPaperWeight | fRollLength | fRollPrice | fSheetLength | fSheetPrice;
     }
 
