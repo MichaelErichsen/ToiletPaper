@@ -73,6 +73,7 @@ public class HomeFragment extends Fragment {
     private Spinner suppliersSpinner;
     private EditText commentEditText;
     private TextView messageTextView;
+    private ProductData pd;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -80,7 +81,7 @@ public class HomeFragment extends Fragment {
         root = inflater.inflate(R.layout.fragment_home, container, false);
         context = getContext();
         helper = new ProductDbAdapter(context);
-        final ProductData productData = new ProductData();
+        pd = new ProductData();
 
         // Buttons
         calculateBtn = root.findViewById(R.id.calculateBtn);
@@ -95,8 +96,8 @@ public class HomeFragment extends Fragment {
         saveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO Populate Productdata from layout
-                helper.insertData(productData);
+                pd = populateProductDataFromLayout();
+                helper.insertData(pd);
             }
         });
 
@@ -127,6 +128,7 @@ public class HomeFragment extends Fragment {
         itemNoEditText = root.findViewById(R.id.itemNoEditText);
 
         // Brand
+        brandEditText = root.findViewById(R.id.brandEditText);
 
         // Layers
         layersSpinner = root.findViewById(R.id.layersSpinner);
@@ -150,11 +152,13 @@ public class HomeFragment extends Fragment {
         });
 
         // Package rolls
+        packageRollsEditText = root.findViewById(R.id.packageRollsEditText);
 
         // Roll sheets
         rollSheetsEditText = root.findViewById(R.id.rollSheetsEditText);
 
         // Sheet width
+        sheetWidthEditText = root.findViewById(R.id.sheetWidthEditText);
 
         // Sheet length
         sheetLengthEditText = root.findViewById(R.id.sheetLengthEditText);
@@ -310,12 +314,58 @@ public class HomeFragment extends Fragment {
         });
 
         // Comments
-
-        // Time stamp
-
+        commentEditText = root.findViewById(R.id.commentEditText);
 
         return root;
     }
+
+    private ProductData populateProductDataFromLayout() {
+
+        //            // TODO Populate Productdata from layout
+
+        ProductData pd = new ProductData();
+
+        try {
+
+
+            // pd.setUid(cursor.getInt(cursor.getColumnIndex(ProductDbAdapter.ProductHelper.UID)));
+
+            String s = (String) layersSpinner.getSelectedItem();
+
+
+//        pd.setLayers(cursor.getInt(cursor.getColumnIndex(ProductDbAdapter.ProductHelper.LAYERS)));
+//        pd.setPackageRolls(cursor.getInt(cursor.getColumnIndex(ProductDbAdapter.ProductHelper.PACKAGE_ROLLS)));
+//        pd.setRollSheets(cursor.getInt(cursor.getColumnIndex(ProductDbAdapter.ProductHelper.ROLL_SHEETS)));
+//        pd.setSheetWidth(cursor.getInt(cursor.getColumnIndex(ProductDbAdapter.ProductHelper.SHEET_WIDTH)));
+//        pd.setSheetLength(cursor.getInt(cursor.getColumnIndex(ProductDbAdapter.ProductHelper.SHEET_LENGTH)));
+//        pd.setSheetLength_c(cursor.getInt(cursor.getColumnIndex(ProductDbAdapter.ProductHelper.ROLL_LENGTH_C)));
+//        pd.setRollLength(cursor.getInt(cursor.getColumnIndex(ProductDbAdapter.ProductHelper.ROLL_LENGTH)));
+//        pd.setRollLength_c(cursor.getInt(cursor.getColumnIndex(ProductDbAdapter.ProductHelper.SHEET_LENGTH_C)));
+//        pd.setPackagePrice(cursor.getFloat(cursor.getColumnIndex(ProductDbAdapter.ProductHelper.PACKAGE_PRICE)));
+//        pd.setRollPrice(cursor.getFloat(cursor.getColumnIndex(ProductDbAdapter.ProductHelper.ROLL_PRICE)));
+//        pd.setRollPrice_c(cursor.getInt(cursor.getColumnIndex(ProductDbAdapter.ProductHelper.ROLL_PRICE_C)));
+//        pd.setPaperWeight(cursor.getFloat(cursor.getColumnIndex(ProductDbAdapter.ProductHelper.PAPER_WEIGHT)));
+//        pd.setPaperWeight_c(cursor.getInt(cursor.getColumnIndex(ProductDbAdapter.ProductHelper.PAPER_WEIGHT_C)));
+//        pd.setKiloPrice(cursor.getFloat(cursor.getColumnIndex(ProductDbAdapter.ProductHelper.KILO_PRICE)));
+//        pd.setKiloPrice_c(cursor.getInt(cursor.getColumnIndex(ProductDbAdapter.ProductHelper.KILO_PRICE_C)));
+//        pd.setMeterPrice(cursor.getFloat(cursor.getColumnIndex(ProductDbAdapter.ProductHelper.METER_PRICE)));
+//        pd.setMeterPrice_c(cursor.getInt(cursor.getColumnIndex(ProductDbAdapter.ProductHelper.METER_PRICE_C)));
+//        pd.setSheetPrice(cursor.getFloat(cursor.getColumnIndex(ProductDbAdapter.ProductHelper.SHEET_PRICE)));
+//        pd.setSheetPrice_c(cursor.getInt(cursor.getColumnIndex(ProductDbAdapter.ProductHelper.SHEET_PRICE_C)));
+//        pd.setSupplier(cursor.getString(cursor.getColumnIndex(ProductDbAdapter.ProductHelper.SUPPLIER)));
+//        pd.setComments(cursor.getString(cursor.getColumnIndex(ProductDbAdapter.ProductHelper.COMMENTS)));
+//        pd.setItemNo(cursor.getString(cursor.getColumnIndex(ProductDbAdapter.ProductHelper.ITEM_NO)));
+//        pd.setBrand(cursor.getString(cursor.getColumnIndex(ProductDbAdapter.ProductHelper.BRAND)));
+//        pd.setTimestamp(cursor.getString(cursor.getColumnIndex(ProductDbAdapter.ProductHelper.TIME_STAMP)));
+        } catch (Exception e) {
+            Snackbar snackbar = Snackbar
+                    .make(getActivity().findViewById(android.R.id.content), e.getMessage(), Snackbar.LENGTH_LONG);
+            snackbar.show();
+        }
+
+        return pd;
+    }
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -334,7 +384,6 @@ public class HomeFragment extends Fragment {
      * @return boolean true if one or more calculations have been done
      */
     private boolean calculate() {
-        // TODO Make Toast or Snackbar work in a fragment
         try {
             boolean fSheetLength = divide(rollLengthEditText, rollLengthCheckBox, rollSheetsEditText, null, sheetLengthEditText, sheetLengthCheckBox);
 
@@ -360,7 +409,9 @@ public class HomeFragment extends Fragment {
 
             return fKiloPrice | fMeterPrice | fRollLength | fRollPrice | fSheetLength;
         } catch (Exception e) {
-            e.printStackTrace();
+            Snackbar snackbar = Snackbar
+                    .make(getActivity().findViewById(android.R.id.content), e.getMessage(), Snackbar.LENGTH_LONG);
+            snackbar.show();
             return false;
         }
 //        return fKiloPrice | fMeterPrice | fPaperWeight | fRollLength | fRollPrice | fSheetLength | fSheetPrice;
