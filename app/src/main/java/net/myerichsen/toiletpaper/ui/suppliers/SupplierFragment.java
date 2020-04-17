@@ -80,9 +80,9 @@ public class SupplierFragment extends Fragment {
             tableRow.setBackgroundColor(Color.BLACK);
             tableRow.setPadding(2, 2, 2, 2); //Border between rows
 
-            tableRow.addView(addCell(Integer.toString(SupplierData.getUid())));
-            tableRow.addView(addCell(SupplierData.getSupplier()));
-            tableRow.addView(addCell(SupplierData.getUri()));
+            tableRow.addView(addCell(Integer.toString(sd.getUid())));
+            tableRow.addView(addCell(sd.getSupplier()));
+            tableRow.addView(addCell(sd.getUri()));
             tableLayout.addView(tableRow);
         }
 

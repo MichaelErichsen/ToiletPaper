@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ProductDbAdapter {
-    final ProductHelper myhelper;
+    final ProductHelper productHelper;
     final String[] columns = {ProductHelper.UID, ProductHelper.LAYERS, ProductHelper.PACKAGE_ROLLS,
             ProductHelper.ROLL_SHEETS, ProductHelper.SHEET_WIDTH, ProductHelper.SHEET_LENGTH,
             ProductHelper.SHEET_LENGTH_C, ProductHelper.ROLL_LENGTH, ProductHelper.ROLL_LENGTH_C,
@@ -25,7 +25,7 @@ public class ProductDbAdapter {
             ProductHelper.TIME_STAMP};
 
     public ProductDbAdapter(Context context) {
-        myhelper = new ProductHelper(context);
+        productHelper = new ProductHelper(context);
     }
 
     /**
@@ -36,7 +36,7 @@ public class ProductDbAdapter {
     public ProductData getDataByBrand(String brand) {
         ProductData pd = null;
 
-        SQLiteDatabase db = myhelper.getWritableDatabase();
+        SQLiteDatabase db = productHelper.getWritableDatabase();
 
         String[] args = {brand};
         Cursor cursor = db.query(ProductHelper.TABLE_NAME, columns, "BRAND=?", args, null, null, null);
@@ -54,7 +54,7 @@ public class ProductDbAdapter {
      */
     public long insertData(ProductData pd) {
         // TODO Does not insert data into row
-        SQLiteDatabase dbb = myhelper.getWritableDatabase();
+        SQLiteDatabase dbb = productHelper.getWritableDatabase();
         ContentValues contentValues = extractProductData(pd);
         return dbb.insert(ProductHelper.TABLE_NAME, null, contentValues);
     }
@@ -68,7 +68,7 @@ public class ProductDbAdapter {
     public ProductData getDataByItemNo(String itemNo) {
         ProductData pd = null;
 
-        SQLiteDatabase db = myhelper.getWritableDatabase();
+        SQLiteDatabase db = productHelper.getWritableDatabase();
 
         String[] args = {itemNo};
         Cursor cursor = db.query(ProductHelper.TABLE_NAME, columns, "ITEM_NO=?", args, null, null, null);
@@ -88,7 +88,7 @@ public class ProductDbAdapter {
     public List<ProductData> getAllProductData(Context context) {
         List<ProductData> lpd = new ArrayList<>();
 
-        SQLiteDatabase db = myhelper.getWritableDatabase();
+        SQLiteDatabase db = productHelper.getWritableDatabase();
 
         Cursor cursor = db.query(ProductHelper.TABLE_NAME, columns, null, null, null, null, null);
 
@@ -101,67 +101,66 @@ public class ProductDbAdapter {
 
     private ContentValues extractProductData(ProductData pd) {
         ContentValues contentValues = new ContentValues();
-        contentValues.put(ProductHelper.LAYERS, ProductData.getLayers());
-        contentValues.put(ProductHelper.PACKAGE_ROLLS, ProductData.getPackageRolls());
-        contentValues.put(ProductHelper.ROLL_SHEETS, ProductData.getRollSheets());
-        contentValues.put(ProductHelper.SHEET_WIDTH, ProductData.getSheetWidth());
-        contentValues.put(ProductHelper.SHEET_LENGTH, ProductData.getSheetLength());
-        contentValues.put(ProductHelper.SHEET_LENGTH_C, ProductData.getSheetLength_c());
-        contentValues.put(ProductHelper.ROLL_LENGTH, ProductData.getRollLength());
-        contentValues.put(ProductHelper.ROLL_LENGTH_C, ProductData.getRollLength_c());
-        contentValues.put(ProductHelper.PACKAGE_PRICE, ProductData.getPackagePrice());
-        contentValues.put(ProductHelper.ROLL_PRICE, ProductData.getRollPrice());
-        contentValues.put(ProductHelper.ROLL_PRICE_C, ProductData.getRollPrice_c());
-        contentValues.put(ProductHelper.PAPER_WEIGHT, ProductData.getPaperWeight());
-        contentValues.put(ProductHelper.PAPER_WEIGHT_C, ProductData.getPaperWeight_c());
-        contentValues.put(ProductHelper.KILO_PRICE, ProductData.getKiloPrice());
-        contentValues.put(ProductHelper.KILO_PRICE_C, ProductData.getKiloPrice_c());
-        contentValues.put(ProductHelper.METER_PRICE, ProductData.getMeterPrice());
-        contentValues.put(ProductHelper.METER_PRICE_C, ProductData.getMeterPrice_c());
-        contentValues.put(ProductHelper.SHEET_PRICE, ProductData.getSheetPrice());
-        contentValues.put(ProductHelper.SHEET_PRICE_C, ProductData.getSheetPrice_c());
-        contentValues.put(ProductHelper.SUPPLIER, ProductData.getSupplier());
-        contentValues.put(ProductHelper.COMMENTS, ProductData.getComments());
-        contentValues.put(ProductHelper.ITEM_NO, ProductData.getItemNo());
-        contentValues.put(ProductHelper.BRAND, ProductData.getBrand());
-        contentValues.put(ProductHelper.TIME_STAMP, ProductData.getTimestamp());
+        contentValues.put(ProductHelper.LAYERS, pd.getLayers());
+        contentValues.put(ProductHelper.PACKAGE_ROLLS, pd.getPackageRolls());
+        contentValues.put(ProductHelper.ROLL_SHEETS, pd.getRollSheets());
+        contentValues.put(ProductHelper.SHEET_WIDTH, pd.getSheetWidth());
+        contentValues.put(ProductHelper.SHEET_LENGTH, pd.getSheetLength());
+        contentValues.put(ProductHelper.SHEET_LENGTH_C, pd.getSheetLength_c());
+        contentValues.put(ProductHelper.ROLL_LENGTH, pd.getRollLength());
+        contentValues.put(ProductHelper.ROLL_LENGTH_C, pd.getRollLength_c());
+        contentValues.put(ProductHelper.PACKAGE_PRICE, pd.getPackagePrice());
+        contentValues.put(ProductHelper.ROLL_PRICE, pd.getRollPrice());
+        contentValues.put(ProductHelper.ROLL_PRICE_C, pd.getRollPrice_c());
+        contentValues.put(ProductHelper.PAPER_WEIGHT, pd.getPaperWeight());
+        contentValues.put(ProductHelper.PAPER_WEIGHT_C, pd.getPaperWeight_c());
+        contentValues.put(ProductHelper.KILO_PRICE, pd.getKiloPrice());
+        contentValues.put(ProductHelper.KILO_PRICE_C, pd.getKiloPrice_c());
+        contentValues.put(ProductHelper.METER_PRICE, pd.getMeterPrice());
+        contentValues.put(ProductHelper.METER_PRICE_C, pd.getMeterPrice_c());
+        contentValues.put(ProductHelper.SHEET_PRICE, pd.getSheetPrice());
+        contentValues.put(ProductHelper.SHEET_PRICE_C, pd.getSheetPrice_c());
+        contentValues.put(ProductHelper.SUPPLIER, pd.getSupplier());
+        contentValues.put(ProductHelper.COMMENTS, pd.getComments());
+        contentValues.put(ProductHelper.ITEM_NO, pd.getItemNo());
+        contentValues.put(ProductHelper.BRAND, pd.getBrand());
+        contentValues.put(ProductHelper.TIME_STAMP, pd.getTimestamp());
         return contentValues;
     }
 
     private ProductData populateProductData(Cursor cursor) {
         ProductData pd = new ProductData();
-        ProductData.setUid(cursor.getInt(cursor.getColumnIndex(ProductHelper.UID)));
-        ProductData.setLayers(cursor.getInt(cursor.getColumnIndex(ProductHelper.LAYERS)));
-        ProductData.setPackageRolls(cursor.getInt(cursor.getColumnIndex(ProductHelper.PACKAGE_ROLLS)));
-        ProductData.setRollSheets(cursor.getInt(cursor.getColumnIndex(ProductHelper.ROLL_SHEETS)));
-        ProductData.setSheetWidth(cursor.getInt(cursor.getColumnIndex(ProductHelper.SHEET_WIDTH)));
-        ProductData.setSheetLength(cursor.getInt(cursor.getColumnIndex(ProductHelper.SHEET_LENGTH)));
-        ProductData.setSheetLength_c(cursor.getInt(cursor.getColumnIndex(ProductHelper.ROLL_LENGTH_C)));
-        ProductData.setRollLength(cursor.getInt(cursor.getColumnIndex(ProductHelper.ROLL_LENGTH)));
-        ProductData.setRollLength_c(cursor.getInt(cursor.getColumnIndex(ProductHelper.SHEET_LENGTH_C)));
-        ProductData.setPackagePrice(cursor.getFloat(cursor.getColumnIndex(ProductHelper.PACKAGE_PRICE)));
-//        pd.setPackagePrice_c(cursor.getInt(cursor.getColumnIndex(ProductHelper.PACKAGE_PRICE_C)));
-        ProductData.setRollPrice(cursor.getFloat(cursor.getColumnIndex(ProductHelper.ROLL_PRICE)));
-        ProductData.setRollPrice_c(cursor.getInt(cursor.getColumnIndex(ProductHelper.ROLL_PRICE_C)));
-        ProductData.setPaperWeight(cursor.getFloat(cursor.getColumnIndex(ProductHelper.PAPER_WEIGHT)));
-        ProductData.setPaperWeight_c(cursor.getInt(cursor.getColumnIndex(ProductHelper.PAPER_WEIGHT_C)));
-        ProductData.setKiloPrice(cursor.getFloat(cursor.getColumnIndex(ProductHelper.KILO_PRICE)));
-        ProductData.setKiloPrice_c(cursor.getInt(cursor.getColumnIndex(ProductHelper.KILO_PRICE_C)));
-        ProductData.setMeterPrice(cursor.getFloat(cursor.getColumnIndex(ProductHelper.METER_PRICE)));
-        ProductData.setMeterPrice_c(cursor.getInt(cursor.getColumnIndex(ProductHelper.METER_PRICE_C)));
-        ProductData.setSheetPrice(cursor.getFloat(cursor.getColumnIndex(ProductHelper.SHEET_PRICE)));
-        ProductData.setSheetPrice_c(cursor.getInt(cursor.getColumnIndex(ProductHelper.SHEET_PRICE_C)));
-        ProductData.setSupplier(cursor.getString(cursor.getColumnIndex(ProductHelper.SUPPLIER)));
-        ProductData.setComments(cursor.getString(cursor.getColumnIndex(ProductHelper.COMMENTS)));
-        ProductData.setItemNo(cursor.getString(cursor.getColumnIndex(ProductHelper.ITEM_NO)));
-        ProductData.setBrand(cursor.getString(cursor.getColumnIndex(ProductHelper.BRAND)));
-        ProductData.setTimestamp(cursor.getString(cursor.getColumnIndex(ProductHelper.TIME_STAMP)));
+        pd.setUid(cursor.getInt(cursor.getColumnIndex(ProductHelper.UID)));
+        pd.setLayers(cursor.getInt(cursor.getColumnIndex(ProductHelper.LAYERS)));
+        pd.setPackageRolls(cursor.getInt(cursor.getColumnIndex(ProductHelper.PACKAGE_ROLLS)));
+        pd.setRollSheets(cursor.getInt(cursor.getColumnIndex(ProductHelper.ROLL_SHEETS)));
+        pd.setSheetWidth(cursor.getInt(cursor.getColumnIndex(ProductHelper.SHEET_WIDTH)));
+        pd.setSheetLength(cursor.getInt(cursor.getColumnIndex(ProductHelper.SHEET_LENGTH)));
+        pd.setSheetLength_c(cursor.getInt(cursor.getColumnIndex(ProductHelper.ROLL_LENGTH_C)));
+        pd.setRollLength(cursor.getInt(cursor.getColumnIndex(ProductHelper.ROLL_LENGTH)));
+        pd.setRollLength_c(cursor.getInt(cursor.getColumnIndex(ProductHelper.SHEET_LENGTH_C)));
+        pd.setPackagePrice(cursor.getFloat(cursor.getColumnIndex(ProductHelper.PACKAGE_PRICE)));
+        pd.setRollPrice(cursor.getFloat(cursor.getColumnIndex(ProductHelper.ROLL_PRICE)));
+        pd.setRollPrice_c(cursor.getInt(cursor.getColumnIndex(ProductHelper.ROLL_PRICE_C)));
+        pd.setPaperWeight(cursor.getFloat(cursor.getColumnIndex(ProductHelper.PAPER_WEIGHT)));
+        pd.setPaperWeight_c(cursor.getInt(cursor.getColumnIndex(ProductHelper.PAPER_WEIGHT_C)));
+        pd.setKiloPrice(cursor.getFloat(cursor.getColumnIndex(ProductHelper.KILO_PRICE)));
+        pd.setKiloPrice_c(cursor.getInt(cursor.getColumnIndex(ProductHelper.KILO_PRICE_C)));
+        pd.setMeterPrice(cursor.getFloat(cursor.getColumnIndex(ProductHelper.METER_PRICE)));
+        pd.setMeterPrice_c(cursor.getInt(cursor.getColumnIndex(ProductHelper.METER_PRICE_C)));
+        pd.setSheetPrice(cursor.getFloat(cursor.getColumnIndex(ProductHelper.SHEET_PRICE)));
+        pd.setSheetPrice_c(cursor.getInt(cursor.getColumnIndex(ProductHelper.SHEET_PRICE_C)));
+        pd.setSupplier(cursor.getString(cursor.getColumnIndex(ProductHelper.SUPPLIER)));
+        pd.setComments(cursor.getString(cursor.getColumnIndex(ProductHelper.COMMENTS)));
+        pd.setItemNo(cursor.getString(cursor.getColumnIndex(ProductHelper.ITEM_NO)));
+        pd.setBrand(cursor.getString(cursor.getColumnIndex(ProductHelper.BRAND)));
+        pd.setTimestamp(cursor.getString(cursor.getColumnIndex(ProductHelper.TIME_STAMP)));
         return pd;
     }
 
     // TODO Update
     public int delete(String ITEM_NO) {
-        SQLiteDatabase db = myhelper.getWritableDatabase();
+        SQLiteDatabase db = productHelper.getWritableDatabase();
         String[] whereArgs = {ITEM_NO};
 
         return db.delete(ProductHelper.TABLE_NAME, ProductHelper.ITEM_NO + " = ?", whereArgs);
@@ -213,7 +212,6 @@ public class ProductDbAdapter {
                 ROLL_LENGTH + " NUMERIC, " +
                 ROLL_LENGTH_C + " INTEGER, " +
                 PACKAGE_PRICE + " NUMERIC, " +
-//                PACKAGE_PRICE_C + " INTEGER, " +
                 ROLL_PRICE + " NUMERIC, " +
                 ROLL_PRICE_C + " INTEGER, " +
                 PAPER_WEIGHT + " NUMERIC, " +

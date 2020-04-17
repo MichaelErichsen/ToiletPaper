@@ -72,9 +72,9 @@ public class ProductFragment extends Fragment {
             tableRow.setBackgroundColor(Color.BLACK);
             tableRow.setPadding(2, 2, 2, 2); //Border between rows
 
-            tableRow.addView(addCell(Integer.toString(ProductData.getUid())));
-            tableRow.addView(addCell(ProductData.getItemNo()));
-            tableRow.addView(addCell(ProductData.getBrand()));
+            tableRow.addView(addCell(Integer.toString(pd.getUid())));
+            tableRow.addView(addCell(pd.getItemNo()));
+            tableRow.addView(addCell(pd.getBrand()));
             tableLayout.addView(tableRow);
         }
 

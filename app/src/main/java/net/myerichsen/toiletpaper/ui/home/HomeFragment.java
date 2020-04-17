@@ -360,8 +360,8 @@ public class HomeFragment extends Fragment {
         ProductData pd = new ProductData();
 
         try {
-            ProductData.setLayers(getIntFromLayout(layersSpinner));
-            ProductData.setPackageRolls(getIntFromLayout(packageRollsEditText));
+            pd.setLayers(getIntFromLayout(layersSpinner));
+            pd.setPackageRolls(getIntFromLayout(packageRollsEditText));
 
 
 //        pd.setRollSheets(cursor.getInt(cursor.getColumnIndex(ProductDbAdapter.ProductHelper.ROLL_SHEETS)));
@@ -383,8 +383,8 @@ public class HomeFragment extends Fragment {
 //        pd.setSheetPrice_c(cursor.getInt(cursor.getColumnIndex(ProductDbAdapter.ProductHelper.SHEET_PRICE_C)));
 //        pd.setSupplier(cursor.getString(cursor.getColumnIndex(ProductDbAdapter.ProductHelper.SUPPLIER)));
 //        pd.setComments(cursor.getString(cursor.getColumnIndex(ProductDbAdapter.ProductHelper.COMMENTS)));
-            ProductData.setItemNo(getStringFromLayout(itemNoEditText));
-            ProductData.setBrand(getStringFromLayout(brandEditText));
+            pd.setItemNo(getStringFromLayout(itemNoEditText));
+            pd.setBrand(getStringFromLayout(brandEditText));
         } catch (Exception e) {
             Snackbar snackbar = Snackbar
                     .make(getActivity().findViewById(android.R.id.content), e.getMessage(), Snackbar.LENGTH_LONG);
@@ -536,7 +536,7 @@ public class HomeFragment extends Fragment {
                 if (resultCode == RESULT_OK) {
                     String messageReturn = dataIntent.getStringExtra("item_no");
                     itemNoEditText.setText(messageReturn);
-                    ProductData.setItemNo(itemNoEditText.getText().toString());
+                    pd.setItemNo(itemNoEditText.getText().toString());
                 }
         }
     }
@@ -548,7 +548,7 @@ public class HomeFragment extends Fragment {
         if (itemNo.isEmpty()) {
             itemNo = "";
         }
-        ProductData.setItemNo(itemNo);
+        pd.setItemNo(itemNo);
         helper.insertData(pd);
     }
 
@@ -557,7 +557,7 @@ public class HomeFragment extends Fragment {
         EditText itemNoEditText = root.findViewById(R.id.itemNoEditText);
         ProductData pd = helper.getDataByItemNo(itemNoEditText.getText().toString());
         Snackbar snackbar = Snackbar
-                .make(getActivity().findViewById(android.R.id.content), "Found item no. " + ProductData.getItemNo(), Snackbar.LENGTH_LONG);
+                .make(getActivity().findViewById(android.R.id.content), "Found item no. " + pd.getItemNo(), Snackbar.LENGTH_LONG);
         snackbar.show();
         // TODO move data to activity fields
     }
@@ -567,7 +567,7 @@ public class HomeFragment extends Fragment {
         EditText brandEditText = root.findViewById(R.id.brandEditText);
         ProductData pd = helper.getDataByBrand(brandEditText.getText().toString());
         Snackbar snackbar = Snackbar
-                .make(getActivity().findViewById(android.R.id.content), "Found brand. " + ProductData.getItemNo(), Snackbar.LENGTH_LONG);
+                .make(getActivity().findViewById(android.R.id.content), "Found brand. " + pd.getItemNo(), Snackbar.LENGTH_LONG);
         snackbar.show();
         // TODO move data to activity fields
     }

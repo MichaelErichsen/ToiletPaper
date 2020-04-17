@@ -1,43 +1,52 @@
 package net.myerichsen.toiletpaper.ui.suppliers;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  * Class to encapsulate all toilet paper supplier data.
  */
 public class SupplierData {
-    private static int uid = 0;
-    private static String supplier = "";
-    private static String uri = "";
-    private static String timestamp;
+    private int uid;
+    private String supplier = "";
+    private String uri = "";
+    private String timestamp;
 
-    public static int getUid() {
+    public SupplierData() {
+        Long tsLong = System.currentTimeMillis();
+        SimpleDateFormat s = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss");
+        timestamp = s.format(new Date());
+    }
+
+    public int getUid() {
         return uid;
     }
 
-    public static void setUid(int uid) {
-        SupplierData.uid = uid;
+    public void setUid(int uid) {
+        this.uid = uid;
     }
 
-    public static String getSupplier() {
+    public String getSupplier() {
         return supplier;
     }
 
-    public static void setSupplier(String supplier) {
-        SupplierData.supplier = supplier;
+    public void setSupplier(String supplier) {
+        this.supplier = supplier;
     }
 
-    public static String getUri() {
+    public String getUri() {
         return uri;
     }
 
-    public static void setUri(String uri) {
-        SupplierData.uri = uri;
+    public void setUri(String uri) {
+        this.uri = uri;
     }
 
-    public static String getTimestamp() {
+    public String getTimestamp() {
         return timestamp;
     }
 
-    public static void setTimestamp(String timestamp) {
-        SupplierData.timestamp = timestamp;
+    public void setTimestamp(String timestamp) {
+        this.timestamp = timestamp;
     }
 }

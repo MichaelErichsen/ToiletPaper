@@ -50,22 +50,21 @@ public class SupplierDbAdapter {
 
     }
 
-    private ContentValues extractSupplierData(SupplierData pd) {
+    private ContentValues extractSupplierData(SupplierData sd) {
         ContentValues contentValues = new ContentValues();
-        contentValues.put(SupplierHelper.UID, SupplierData.getUid());
-        contentValues.put(SupplierHelper.SUPPLIER, SupplierData.getSupplier());
-        contentValues.put(SupplierHelper.URI, SupplierData.getUri());
-        contentValues.put(SupplierHelper.TIME_STAMP, SupplierData.getTimestamp());
+        contentValues.put(SupplierHelper.SUPPLIER, sd.getSupplier());
+        contentValues.put(SupplierHelper.URI, sd.getUri());
+        contentValues.put(SupplierHelper.TIME_STAMP, sd.getTimestamp());
         return contentValues;
     }
 
     private SupplierData populateSupplierData(Cursor cursor) {
         SupplierData sd = new SupplierData();
-        SupplierData.setUid(cursor.getInt(cursor.getColumnIndex(SupplierHelper.UID)));
-        SupplierData.setSupplier(cursor.getString(cursor.getColumnIndex(SupplierHelper.SUPPLIER)));
-        SupplierData.setUri(cursor.getString(cursor.getColumnIndex(SupplierHelper.URI)));
-        SupplierData.setUri(cursor.getString(cursor.getColumnIndex(SupplierHelper.URI)));
-        SupplierData.setTimestamp(cursor.getString(cursor.getColumnIndex(SupplierHelper.TIME_STAMP)));
+        sd.setUid(cursor.getInt(cursor.getColumnIndex(SupplierHelper.UID)));
+        sd.setSupplier(cursor.getString(cursor.getColumnIndex(SupplierHelper.SUPPLIER)));
+        sd.setUri(cursor.getString(cursor.getColumnIndex(SupplierHelper.URI)));
+        sd.setUri(cursor.getString(cursor.getColumnIndex(SupplierHelper.URI)));
+        sd.setTimestamp(cursor.getString(cursor.getColumnIndex(SupplierHelper.TIME_STAMP)));
         return sd;
     }
 

@@ -17,9 +17,6 @@
         <action
             android:id="@+id/action_nav_home_to_nav_products"
             app:destination="@id/nav_products">
-            <action
-                android:id="@+id/action_action_nav_home_to_nav_products_to_nav_suppliers"
-                app:destination="@id/nav_suppliers" />
         </action>
     </fragment>
 

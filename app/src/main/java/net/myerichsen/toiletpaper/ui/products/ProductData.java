@@ -12,37 +12,32 @@ import java.util.Date;
  * Boolean values are stored as integers 0 (false) and 1 (true).
  */
 public class ProductData {
-    private static int uid;
-    private static int layers = 0;
-    private static int packageRolls = 0;
-    private static int rollSheets = 0;
-    private static int sheetWidth = 0;
-    private static int sheetLength = 0;
-    private static int sheetLength_c = 0;
-    private static float rollLength = 0;
-    private static int rollLength_c = 0;
-    private static float packagePrice = 0;
-    private static int packagePrice_c = 0;
-    private static float rollPrice = 0;
-    private static int rollPrice_c = 0;
-    private static float paperWeight = 0;
-    private static int paperWeight_c = 0;
-    private static float kiloPrice = 0;
-    private static int kiloPrice_c = 0;
-    private static float meterPrice = 0;
-    private static int meterPrice_c = 0;
-    private static float sheetPrice = 0;
-    private static int sheetPrice_c = 0;
-    private static String supplier = "";
-    private static String comments = "";
-    private static String itemNo = "";
-    private static String brand = "";
-    private static String timestamp;
-
-
-    public static float getRollLength() {
-        return rollLength;
-    }
+    private int uid;
+    private int layers = 0;
+    private int packageRolls = 0;
+    private int rollSheets = 0;
+    private int sheetWidth = 0;
+    private int sheetLength = 0;
+    private int sheetLength_c = 0;
+    private float rollLength = 0;
+    private int rollLength_c = 0;
+    private float packagePrice = 0;
+    private int packagePrice_c = 0;
+    private float rollPrice = 0;
+    private int rollPrice_c = 0;
+    private float paperWeight = 0;
+    private int paperWeight_c = 0;
+    private float kiloPrice = 0;
+    private int kiloPrice_c = 0;
+    private float meterPrice = 0;
+    private int meterPrice_c = 0;
+    private float sheetPrice = 0;
+    private int sheetPrice_c = 0;
+    private String supplier = "";
+    private String comments = "";
+    private String itemNo = "";
+    private String brand = "";
+    private String timestamp;
 
     public ProductData() {
         Long tsLong = System.currentTimeMillis();
@@ -50,207 +45,211 @@ public class ProductData {
         timestamp = s.format(new Date());
     }
 
-    public static void setRollLength(float rollLength) {
-        ProductData.rollLength = rollLength;
-    }
-
-    public static int getRollLength_c() {
-        return rollLength_c;
-    }
-
-    public static void setRollLength_c(int rollLength_c) {
-        ProductData.rollLength_c = rollLength_c;
-    }
-
-    public static int getLayers() {
-        return layers;
-    }
-
-    public static void setLayers(int layers) {
-        ProductData.layers = layers;
-    }
-
-    public static int getPackageRolls() {
-        return packageRolls;
-    }
-
-    public static void setPackageRolls(int packageRolls) {
-        ProductData.packageRolls = packageRolls;
-    }
-
-    public static int getRollSheets() {
-        return rollSheets;
-    }
-
-    public static void setRollSheets(int rollSheets) {
-        ProductData.rollSheets = rollSheets;
-    }
-
-    public static int getSheetWidth() {
-        return sheetWidth;
-    }
-
-    public static void setSheetWidth(int sheetWidth) {
-        ProductData.sheetWidth = sheetWidth;
-    }
-
-    public static int getSheetLength() {
-        return sheetLength;
-    }
-
-    public static void setSheetLength(int sheetLength) {
-        ProductData.sheetLength = sheetLength;
-    }
-
-    public static int getSheetLength_c() {
-        return sheetLength_c;
-    }
-
-    public static void setSheetLength_c(int sheetLength_c) {
-        ProductData.sheetLength_c = sheetLength_c;
-    }
-
-    public static float getPackagePrice() {
-        return packagePrice;
-    }
-
-    public static void setPackagePrice(float packagePrice) {
-        ProductData.packagePrice = packagePrice;
-    }
-
-    public static int getPackagePrice_c() {
-        return packagePrice_c;
-    }
-
-    public static void setPackagePrice_c(int packagePrice_c) {
-        ProductData.packagePrice_c = packagePrice_c;
-    }
-
-    public static float getRollPrice() {
-        return rollPrice;
-    }
-
-    public static void setRollPrice(float rollPrice) {
-        ProductData.rollPrice = rollPrice;
-    }
-
-    public static int getRollPrice_c() {
-        return rollPrice_c;
-    }
-
-    public static void setRollPrice_c(int rollPrice_c) {
-        ProductData.rollPrice_c = rollPrice_c;
-    }
-
-    public static float getPaperWeight() {
-        return paperWeight;
-    }
-
-    public static void setPaperWeight(float paperWeight) {
-        ProductData.paperWeight = paperWeight;
-    }
-
-    public static int getPaperWeight_c() {
-        return paperWeight_c;
-    }
-
-    public static void setPaperWeight_c(int paperWeight_c) {
-        ProductData.paperWeight_c = paperWeight_c;
-    }
-
-    public static float getKiloPrice() {
-        return kiloPrice;
-    }
-
-    public static void setKiloPrice(float kiloPrice) {
-        ProductData.kiloPrice = kiloPrice;
-    }
-
-    public static int getKiloPrice_c() {
-        return kiloPrice_c;
-    }
-
-    public static void setKiloPrice_c(int kiloPrice_c) {
-        ProductData.kiloPrice_c = kiloPrice_c;
-    }
-
-    public static float getMeterPrice() {
-        return meterPrice;
-    }
-
-    public static void setMeterPrice(float meterPrice) {
-        ProductData.meterPrice = meterPrice;
-    }
-
-    public static int getMeterPrice_c() {
-        return meterPrice_c;
-    }
-
-    public static void setMeterPrice_c(int meterPrice_c) {
-        ProductData.meterPrice_c = meterPrice_c;
-    }
-
-    public static float getSheetPrice() {
-        return sheetPrice;
-    }
-
-    public static void setSheetPrice(float sheetPrice) {
-        ProductData.sheetPrice = sheetPrice;
-    }
-
-    public static int getSheetPrice_c() {
-        return sheetPrice_c;
-    }
-
-    public static void setSheetPrice_c(int sheetPrice_c) {
-        ProductData.sheetPrice_c = sheetPrice_c;
-    }
-
-    public static String getSupplier() {
-        return supplier;
-    }
-
-    public static void setSupplier(String supplier) {
-        ProductData.supplier = supplier;
-    }
-
-    public static String getComments() {
-        return comments;
-    }
-
-    public static void setComments(String comments) {
-        ProductData.comments = comments;
-    }
-
-    public static String getItemNo() {
-        return itemNo;
-    }
-
-    public static void setItemNo(String itemNo) {
-        ProductData.itemNo = itemNo;
-    }
-
-    public static String getBrand() {
-        return brand;
-    }
-
-    public static void setBrand(String brand) {
-        ProductData.brand = brand;
-    }
-
-    public static String getTimestamp() {
-        return timestamp;
-    }
-
-    public static void setTimestamp(String timestamp) {
-        ProductData.timestamp = timestamp;
-    }
-
-    public static int getUid() {
+    public int getUid() {
         return uid;
     }
 
-    public static void setUid(int uid) {
-        ProductData.uid = uid;
+    public void setUid(int uid) {
+        this.uid = uid;
+    }
+
+    public int getLayers() {
+        return layers;
+    }
+
+    public void setLayers(int layers) {
+        this.layers = layers;
+    }
+
+    public int getPackageRolls() {
+        return packageRolls;
+    }
+
+    public void setPackageRolls(int packageRolls) {
+        this.packageRolls = packageRolls;
+    }
+
+    public int getRollSheets() {
+        return rollSheets;
+    }
+
+    public void setRollSheets(int rollSheets) {
+        this.rollSheets = rollSheets;
+    }
+
+    public int getSheetWidth() {
+        return sheetWidth;
+    }
+
+    public void setSheetWidth(int sheetWidth) {
+        this.sheetWidth = sheetWidth;
+    }
+
+    public int getSheetLength() {
+        return sheetLength;
+    }
+
+    public void setSheetLength(int sheetLength) {
+        this.sheetLength = sheetLength;
+    }
+
+    public int getSheetLength_c() {
+        return sheetLength_c;
+    }
+
+    public void setSheetLength_c(int sheetLength_c) {
+        this.sheetLength_c = sheetLength_c;
+    }
+
+    public float getRollLength() {
+        return rollLength;
+    }
+
+    public void setRollLength(float rollLength) {
+        this.rollLength = rollLength;
+    }
+
+    public int getRollLength_c() {
+        return rollLength_c;
+    }
+
+    public void setRollLength_c(int rollLength_c) {
+        this.rollLength_c = rollLength_c;
+    }
+
+    public float getPackagePrice() {
+        return packagePrice;
+    }
+
+    public void setPackagePrice(float packagePrice) {
+        this.packagePrice = packagePrice;
+    }
+
+    public int getPackagePrice_c() {
+        return packagePrice_c;
+    }
+
+    public void setPackagePrice_c(int packagePrice_c) {
+        this.packagePrice_c = packagePrice_c;
+    }
+
+    public float getRollPrice() {
+        return rollPrice;
+    }
+
+    public void setRollPrice(float rollPrice) {
+        this.rollPrice = rollPrice;
+    }
+
+    public int getRollPrice_c() {
+        return rollPrice_c;
+    }
+
+    public void setRollPrice_c(int rollPrice_c) {
+        this.rollPrice_c = rollPrice_c;
+    }
+
+    public float getPaperWeight() {
+        return paperWeight;
+    }
+
+    public void setPaperWeight(float paperWeight) {
+        this.paperWeight = paperWeight;
+    }
+
+    public int getPaperWeight_c() {
+        return paperWeight_c;
+    }
+
+    public void setPaperWeight_c(int paperWeight_c) {
+        this.paperWeight_c = paperWeight_c;
+    }
+
+    public float getKiloPrice() {
+        return kiloPrice;
+    }
+
+    public void setKiloPrice(float kiloPrice) {
+        this.kiloPrice = kiloPrice;
+    }
+
+    public int getKiloPrice_c() {
+        return kiloPrice_c;
+    }
+
+    public void setKiloPrice_c(int kiloPrice_c) {
+        this.kiloPrice_c = kiloPrice_c;
+    }
+
+    public float getMeterPrice() {
+        return meterPrice;
+    }
+
+    public void setMeterPrice(float meterPrice) {
+        this.meterPrice = meterPrice;
+    }
+
+    public int getMeterPrice_c() {
+        return meterPrice_c;
+    }
+
+    public void setMeterPrice_c(int meterPrice_c) {
+        this.meterPrice_c = meterPrice_c;
+    }
+
+    public float getSheetPrice() {
+        return sheetPrice;
+    }
+
+    public void setSheetPrice(float sheetPrice) {
+        this.sheetPrice = sheetPrice;
+    }
+
+    public int getSheetPrice_c() {
+        return sheetPrice_c;
+    }
+
+    public void setSheetPrice_c(int sheetPrice_c) {
+        this.sheetPrice_c = sheetPrice_c;
+    }
+
+    public String getSupplier() {
+        return supplier;
+    }
+
+    public void setSupplier(String supplier) {
+        this.supplier = supplier;
+    }
+
+    public String getComments() {
+        return comments;
+    }
+
+    public void setComments(String comments) {
+        this.comments = comments;
+    }
+
+    public String getItemNo() {
+        return itemNo;
+    }
+
+    public void setItemNo(String itemNo) {
+        this.itemNo = itemNo;
+    }
+
+    public String getBrand() {
+        return brand;
+    }
+
+    public void setBrand(String brand) {
+        this.brand = brand;
+    }
+
+    public String getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(String timestamp) {
+        this.timestamp = timestamp;
     }
 }
