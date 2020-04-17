@@ -36,10 +36,12 @@ public class SupplierDbAdapter {
     }
 
 
+
     public List<SupplierData> getAllData(Context context) {
         List<SupplierData> lsd = new ArrayList<>();
         SQLiteDatabase db = supplierHelper.getWritableDatabase();
 
+        // FIXME Crashes here
         Cursor cursor = db.query(SupplierHelper.TABLE_NAME, columns, null, null, null, null, null);
 
         SupplierData sd;
