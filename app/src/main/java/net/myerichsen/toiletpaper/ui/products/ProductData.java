@@ -1,11 +1,18 @@
+/*
+ * Copyright (c) 2020. Michael Erichsen.
+ */
+
 package net.myerichsen.toiletpaper.ui.products;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * Class to encapsulate all toilet paper product data.
  * Boolean values are stored as integers 0 (false) and 1 (true).
  */
 public class ProductData {
-    private static int uid = 0;
+    private static int uid;
     private static int layers = 0;
     private static int packageRolls = 0;
     private static int rollSheets = 0;
@@ -32,8 +39,15 @@ public class ProductData {
     private static String brand = "";
     private static String timestamp;
 
+
     public static float getRollLength() {
         return rollLength;
+    }
+
+    public ProductData() {
+        Long tsLong = System.currentTimeMillis();
+        SimpleDateFormat s = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss");
+        timestamp = s.format(new Date());
     }
 
     public static void setRollLength(float rollLength) {

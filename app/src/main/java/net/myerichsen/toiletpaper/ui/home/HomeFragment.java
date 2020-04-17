@@ -34,6 +34,8 @@ import java.util.ArrayList;
 
 import static android.app.Activity.RESULT_OK;
 
+// FIXME Back button has disappeared from navigation
+// FIXME Same UID for each new row
 // TODO Understand relation between Fragment and ViewModel
 public class HomeFragment extends Fragment {
     private final static int REQUEST_CODE_1 = 1;
@@ -96,8 +98,18 @@ public class HomeFragment extends Fragment {
         saveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                pd = populateProductDataFromLayout();
-                helper.insertData(pd);
+                String message = "";
+
+                try {
+                    pd = populateProductDataFromLayout();
+                    helper.insertData(pd);
+                    message = getString(R.string.home_fragment_save_message);
+                } catch (Exception e) {
+                    message = e.getMessage();
+                }
+                Snackbar snackbar = Snackbar
+                        .make(getActivity().findViewById(android.R.id.content), message, Snackbar.LENGTH_LONG);
+                snackbar.show();
             }
         });
 
@@ -319,6 +331,16 @@ public class HomeFragment extends Fragment {
         return root;
     }
 
+    private int getIntFromLayout(EditText et) {
+        String s = et.getText().toString();
+
+        if (s.equals("")) {
+            return 0;
+        } else {
+            return Integer.parseInt(s);
+        }
+    }
+
     private ProductData populateProductDataFromLayout() {
 
         //            // TODO Populate Productdata from layout
@@ -326,14 +348,9 @@ public class HomeFragment extends Fragment {
         ProductData pd = new ProductData();
 
         try {
+            ProductData.setLayers(Integer.parseInt((String) layersSpinner.getSelectedItem()));
+            ProductData.setPackageRolls(getIntFromLayout(packageRollsEditText));
 
-
-            // pd.setUid(cursor.getInt(cursor.getColumnIndex(ProductDbAdapter.ProductHelper.UID)));
-
-            String s = (String) layersSpinner.getSelectedItem();
-
-
-//        pd.setLayers(cursor.getInt(cursor.getColumnIndex(ProductDbAdapter.ProductHelper.LAYERS)));
 //        pd.setPackageRolls(cursor.getInt(cursor.getColumnIndex(ProductDbAdapter.ProductHelper.PACKAGE_ROLLS)));
 //        pd.setRollSheets(cursor.getInt(cursor.getColumnIndex(ProductDbAdapter.ProductHelper.ROLL_SHEETS)));
 //        pd.setSheetWidth(cursor.getInt(cursor.getColumnIndex(ProductDbAdapter.ProductHelper.SHEET_WIDTH)));

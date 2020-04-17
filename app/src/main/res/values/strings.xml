@@ -53,4 +53,5 @@
     <string name="scan_prompt">Scan en stregkode eller QR-kode. Telefonen vil bippe, og koden vil blive vist nedenfor.</string>
     <string name="supplier">Butik</string>
     <string name="roll_price">Pris pr. rulle</string>
+    <string name="home_fragment_save_message">Produktet er gemt på telefonen</string>
 </resources>

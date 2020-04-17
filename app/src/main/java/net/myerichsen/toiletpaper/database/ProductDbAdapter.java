@@ -16,17 +16,13 @@ public class ProductDbAdapter {
     final ProductHelper myhelper;
     final String[] columns = {ProductHelper.UID, ProductHelper.LAYERS, ProductHelper.PACKAGE_ROLLS,
             ProductHelper.ROLL_SHEETS, ProductHelper.SHEET_WIDTH, ProductHelper.SHEET_LENGTH,
-            ProductHelper.SHEET_LENGTH_C,
-//            ProductHelper.PACKAGE_PRICE,
-//            ProductHelper.PACKAGE_PRICE_C,
-            ProductHelper.ROLL_LENGTH, ProductHelper.ROLL_LENGTH_C,
-            ProductHelper.PACKAGE_PRICE,
-//            ProductHelper.PACKAGE_PRICE_C,
-            ProductHelper.ROLL_PRICE, ProductHelper.ROLL_PRICE_C, ProductHelper.PAPER_WEIGHT,
-            ProductHelper.PAPER_WEIGHT_C, ProductHelper.KILO_PRICE, ProductHelper.KILO_PRICE_C,
-            ProductHelper.METER_PRICE, ProductHelper.METER_PRICE_C, ProductHelper.SHEET_PRICE,
-            ProductHelper.SHEET_PRICE_C, ProductHelper.SUPPLIER, ProductHelper.COMMENTS,
-            ProductHelper.ITEM_NO, ProductHelper.BRAND, ProductHelper.TIME_STAMP};
+            ProductHelper.SHEET_LENGTH_C, ProductHelper.ROLL_LENGTH, ProductHelper.ROLL_LENGTH_C,
+            ProductHelper.PACKAGE_PRICE, ProductHelper.ROLL_PRICE, ProductHelper.ROLL_PRICE_C,
+            ProductHelper.PAPER_WEIGHT, ProductHelper.PAPER_WEIGHT_C, ProductHelper.KILO_PRICE,
+            ProductHelper.KILO_PRICE_C, ProductHelper.METER_PRICE, ProductHelper.METER_PRICE_C,
+            ProductHelper.SHEET_PRICE, ProductHelper.SHEET_PRICE_C, ProductHelper.SUPPLIER,
+            ProductHelper.COMMENTS, ProductHelper.ITEM_NO, ProductHelper.BRAND,
+            ProductHelper.TIME_STAMP};
 
     public ProductDbAdapter(Context context) {
         myhelper = new ProductHelper(context);
@@ -105,7 +101,6 @@ public class ProductDbAdapter {
 
     private ContentValues extractProductData(ProductData pd) {
         ContentValues contentValues = new ContentValues();
-        contentValues.put(ProductHelper.UID, ProductData.getUid());
         contentValues.put(ProductHelper.LAYERS, ProductData.getLayers());
         contentValues.put(ProductHelper.PACKAGE_ROLLS, ProductData.getPackageRolls());
         contentValues.put(ProductHelper.ROLL_SHEETS, ProductData.getRollSheets());
@@ -115,7 +110,6 @@ public class ProductDbAdapter {
         contentValues.put(ProductHelper.ROLL_LENGTH, ProductData.getRollLength());
         contentValues.put(ProductHelper.ROLL_LENGTH_C, ProductData.getRollLength_c());
         contentValues.put(ProductHelper.PACKAGE_PRICE, ProductData.getPackagePrice());
-//        contentValues.put(ProductHelper.PACKAGE_PRICE_C, pd.getPackagePrice_c());
         contentValues.put(ProductHelper.ROLL_PRICE, ProductData.getRollPrice());
         contentValues.put(ProductHelper.ROLL_PRICE_C, ProductData.getRollPrice_c());
         contentValues.put(ProductHelper.PAPER_WEIGHT, ProductData.getPaperWeight());
