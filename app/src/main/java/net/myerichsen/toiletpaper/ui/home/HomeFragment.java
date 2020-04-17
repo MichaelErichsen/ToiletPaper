@@ -341,17 +341,29 @@ public class HomeFragment extends Fragment {
         }
     }
 
+    private int getIntFromLayout(Spinner spinner) {
+        return Integer.parseInt((String) spinner.getSelectedItem());
+    }
+
+    private String getStringFromLayout(EditText et) {
+        return et.getText().toString();
+    }
+
+    private String getStringFromLayout(Spinner spinner) {
+        return (String) spinner.getSelectedItem();
+    }
+
     private ProductData populateProductDataFromLayout() {
 
-        //            // TODO Populate Productdata from layout
+        // TODO Populate Productdata from layout
 
         ProductData pd = new ProductData();
 
         try {
-            ProductData.setLayers(Integer.parseInt((String) layersSpinner.getSelectedItem()));
+            ProductData.setLayers(getIntFromLayout(layersSpinner));
             ProductData.setPackageRolls(getIntFromLayout(packageRollsEditText));
 
-//        pd.setPackageRolls(cursor.getInt(cursor.getColumnIndex(ProductDbAdapter.ProductHelper.PACKAGE_ROLLS)));
+
 //        pd.setRollSheets(cursor.getInt(cursor.getColumnIndex(ProductDbAdapter.ProductHelper.ROLL_SHEETS)));
 //        pd.setSheetWidth(cursor.getInt(cursor.getColumnIndex(ProductDbAdapter.ProductHelper.SHEET_WIDTH)));
 //        pd.setSheetLength(cursor.getInt(cursor.getColumnIndex(ProductDbAdapter.ProductHelper.SHEET_LENGTH)));
@@ -371,9 +383,8 @@ public class HomeFragment extends Fragment {
 //        pd.setSheetPrice_c(cursor.getInt(cursor.getColumnIndex(ProductDbAdapter.ProductHelper.SHEET_PRICE_C)));
 //        pd.setSupplier(cursor.getString(cursor.getColumnIndex(ProductDbAdapter.ProductHelper.SUPPLIER)));
 //        pd.setComments(cursor.getString(cursor.getColumnIndex(ProductDbAdapter.ProductHelper.COMMENTS)));
-//        pd.setItemNo(cursor.getString(cursor.getColumnIndex(ProductDbAdapter.ProductHelper.ITEM_NO)));
-//        pd.setBrand(cursor.getString(cursor.getColumnIndex(ProductDbAdapter.ProductHelper.BRAND)));
-//        pd.setTimestamp(cursor.getString(cursor.getColumnIndex(ProductDbAdapter.ProductHelper.TIME_STAMP)));
+            ProductData.setItemNo(getStringFromLayout(itemNoEditText));
+            ProductData.setBrand(getStringFromLayout(brandEditText));
         } catch (Exception e) {
             Snackbar snackbar = Snackbar
                     .make(getActivity().findViewById(android.R.id.content), e.getMessage(), Snackbar.LENGTH_LONG);

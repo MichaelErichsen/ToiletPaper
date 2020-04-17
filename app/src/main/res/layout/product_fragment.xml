@@ -5,6 +5,26 @@
     android:layout_height="match_parent"
     tools:context=".ui.products.ProductFragment">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/detailsBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:src="@android:drawable/ic_menu_info_details" />
+
+        <ImageButton
+            android:id="@+id/deleteBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:src="@android:drawable/ic_menu_delete" />
+    </LinearLayout>
+
     <TableLayout
         android:id="@+id/productTableLayout"
         android:layout_width="match_parent"

@@ -22,6 +22,7 @@ import net.myerichsen.toiletpaper.database.ProductDbAdapter;
 
 import java.util.List;
 
+// TODO Add delete button
 public class ProductFragment extends Fragment {
     ProductDbAdapter helper;
     final TableRow.LayoutParams llp = new TableRow.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
