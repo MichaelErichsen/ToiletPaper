@@ -36,7 +36,6 @@
             app:destination="@id/nav_home" />
     </fragment>
 
-
     <fragment
         android:id="@+id/nav_products"
         android:name="net.myerichsen.toiletpaper.ui.products.ProductFragment"
@@ -49,6 +48,19 @@
                 android:id="@+id/action_action_nav_products_to_nav_home_to_nav_compare"
                 app:destination="@id/nav_compare" />
         </action>
+        <action
+            android:id="@+id/action_nav_products_to_nav_product_detailss"
+            app:destination="@id/nav_product_details" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_product_details"
+        android:name="net.myerichsen.toiletpaper.ui.products.ProductDetailsFragment"
+        android:label="@string/menu_product_details"
+        tools:layout="@layout/product_details_fragment">
+        <action
+            android:id="@+id/action_nav_product_detailss_to_nav_products"
+            app:destination="@id/nav_products" />
     </fragment>
 
     <fragment

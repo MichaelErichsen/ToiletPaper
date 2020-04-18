@@ -56,4 +56,5 @@
     <string name="home_fragment_save_message">Produktet er gemt på telefonen</string>
     <string name="compare">Sammenligning</string>
     <string name="menu_compare">Sammenlign</string>
+    <string name="menu_product_details">Detaljer</string>
 </resources>
