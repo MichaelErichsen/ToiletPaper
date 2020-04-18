@@ -348,7 +348,7 @@ public class HomeFragment extends Fragment {
         String s = et.getText().toString();
 
         if (s.equals("")) {
-            return new Float(0);
+            return Float.valueOf(0);
         } else {
             return Float.parseFloat(s);
         }

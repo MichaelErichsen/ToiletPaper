@@ -58,9 +58,6 @@
         <action
             android:id="@+id/action_nav_products_to_nav_home"
             app:destination="@id/nav_home">
-            <action
-                android:id="@+id/action_action_nav_products_to_nav_home_to_nav_compare"
-                app:destination="@id/nav_compare" />
         </action>
         <action
             android:id="@+id/action_nav_products_to_nav_product_detailss"
@@ -81,7 +78,7 @@
         android:id="@+id/nav_suppliers"
         android:name="net.myerichsen.toiletpaper.ui.suppliers.SupplierFragment"
         android:label="@string/menu_suppliers"
-        tools:layout="@layout/supplier_fragment">>
+        tools:layout="@layout/supplier_fragment">
         <action
             android:id="@+id/action_nav_suppliers_to_nav_home"
             app:destination="@id/nav_home" />
