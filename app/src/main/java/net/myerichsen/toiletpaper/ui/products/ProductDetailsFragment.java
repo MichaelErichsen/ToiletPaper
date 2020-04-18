@@ -12,14 +12,11 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
 
 import net.myerichsen.toiletpaper.R;
 
 // TODO Add delete button and fields for each column
 public class ProductDetailsFragment extends Fragment {
-
-    private ProductDetailsViewModel mViewModel;
 
     public static ProductDetailsFragment newInstance() {
         return new ProductDetailsFragment();
@@ -34,8 +31,7 @@ public class ProductDetailsFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mViewModel = new ViewModelProvider(this).get(ProductDetailsViewModel.class);
-        // TODO: Use the ViewModel
+
     }
 
 }

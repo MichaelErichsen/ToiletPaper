@@ -27,6 +27,7 @@ public class SupplierFragment extends Fragment {
     SupplierDbAdapter helper;
     final TableRow.LayoutParams llp = new TableRow.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
     private View root;
+    private Context context;
 
     public static SupplierFragment newInstance() {
         return new SupplierFragment();
@@ -35,38 +36,42 @@ public class SupplierFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        try {
+//        try {
             root = inflater.inflate(R.layout.supplier_fragment, container, false);
-        } catch (Exception e) {
-            e.printStackTrace();
-            Snackbar snackbar = Snackbar.make(getActivity().findViewById(android.R.id.content), e.getMessage(), Snackbar.LENGTH_LONG);
-            snackbar.show();
-        }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            Snackbar snackbar = Snackbar.make(getActivity().findViewById(android.R.id.content), e.getMessage(), Snackbar.LENGTH_LONG);
+//            snackbar.show();
+//        }
+        context = getContext();
         return root;
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
-        Context context = getContext();
         helper = new SupplierDbAdapter(context);
 
-        LinearLayout tableListLayout = root.findViewById(R.id.supplierTableLayout);
-
-        LinearLayout cell;
-
-        TableLayout tableLayout = new TableLayout(context);
+        TableLayout tableLayout = root.findViewById(R.id.supplierTableLayout);
 
         TableRow tableRow = new TableRow(context);
         tableRow.setBackgroundColor(Color.BLACK);
-        tableRow.setPadding(2, 2, 2, 2); //Border between rows
+        tableRow.setPadding(2, 2, 2, 2);
         tableRow.addView(addCell("UID"));
         tableRow.addView(addCell("Butik"));
         tableRow.addView(addCell("URI"));
         tableLayout.addView(tableRow);
 
-        List<SupplierData> lsd = helper.getAllData(context);
+        List<SupplierData> lsd;
+        try {
+            lsd = helper.getAllData(context);
+        } catch (Exception e) {
+            Snackbar snackbar = Snackbar
+                    .make(getActivity().findViewById(android.R.id.content), e.getMessage(), Snackbar.LENGTH_LONG);
+            snackbar.show();
+            return;
+        }
+
         SupplierData sd;
 
         for (int i = 0; i < lsd.size(); i++) {
@@ -81,20 +86,15 @@ public class SupplierFragment extends Fragment {
             tableRow.addView(addCell(sd.getUri()));
             tableLayout.addView(tableRow);
         }
-
-        tableListLayout.addView(tableLayout);
-
-
     }
 
     private LinearLayout addCell(String cellData) {
-        llp.setMargins(2, 2, 2, 2);//2px right-margin
-        Context context = getContext();
+        llp.setMargins(2, 2, 2, 2);
 
         LinearLayout cell;//New Cell
         cell = new LinearLayout(context);
         cell.setBackgroundColor(Color.WHITE);
-        cell.setLayoutParams(llp);//2px border on the right for the cell
+        cell.setLayoutParams(llp);
 
         TextView tv = new TextView(context);
         tv.setText(cellData);

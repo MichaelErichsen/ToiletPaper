@@ -91,7 +91,7 @@ public class ProductDbAdapter {
 
         Cursor cursor = db.query(ProductHelper.TABLE_NAME, columns, null, null, null, null, null);
 
-        ProductData pd;
+//        ProductData pd;
         while (cursor.moveToNext()) {
             lpd.add(populateProductData(cursor));
         }

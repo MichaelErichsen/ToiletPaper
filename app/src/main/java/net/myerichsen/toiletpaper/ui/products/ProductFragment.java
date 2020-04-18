@@ -15,18 +15,20 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
+
+import com.google.android.material.snackbar.Snackbar;
 
 import net.myerichsen.toiletpaper.R;
 import net.myerichsen.toiletpaper.database.ProductDbAdapter;
 
 import java.util.List;
 
-// TODO Add delete button
+// TODO Double tapping opens the details fragment
 public class ProductFragment extends Fragment {
     ProductDbAdapter helper;
     final TableRow.LayoutParams llp = new TableRow.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
     private View root;
+    private Context context;
 
     public static ProductFragment newInstance() {
         return new ProductFragment();
@@ -37,32 +39,35 @@ public class ProductFragment extends Fragment {
                              @Nullable Bundle savedInstanceState) {
 
         root = inflater.inflate(R.layout.product_fragment, container, false);
+        context = getContext();
         return root;
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        ProductViewModel mViewModel = new ViewModelProvider(this).get(ProductViewModel.class);
-        // TODO: Use the ViewModel
-        Context context = getContext();
         helper = new ProductDbAdapter(context);
 
-        LinearLayout tableListLayout = root.findViewById(R.id.productTableLayout);
-
-        LinearLayout cell;
-
-        TableLayout tableLayout = new TableLayout(context);
+        TableLayout tableLayout = root.findViewById(R.id.productTableLayout);
 
         TableRow tableRow = new TableRow(context);
         tableRow.setBackgroundColor(Color.BLACK);
-        tableRow.setPadding(2, 2, 2, 2); //Border between rows
+        tableRow.setPadding(2, 2, 2, 2);
         tableRow.addView(addCell("UID"));
         tableRow.addView(addCell("Varenummer"));
         tableRow.addView(addCell("Varemærke"));
         tableLayout.addView(tableRow);
 
-        List<ProductData> lpd = helper.getAllProductData(context);
+        List<ProductData> lpd = null;
+        try {
+            lpd = helper.getAllProductData(context);
+        } catch (Exception e) {
+            Snackbar snackbar = Snackbar
+                    .make(getActivity().findViewById(android.R.id.content), e.getMessage(), Snackbar.LENGTH_LONG);
+            snackbar.show();
+            return;
+        }
+
         ProductData pd;
 
         for (int i = 0; i < lpd.size(); i++) {
@@ -78,16 +83,15 @@ public class ProductFragment extends Fragment {
             tableLayout.addView(tableRow);
         }
 
-        tableListLayout.addView(tableLayout);
+//        tableListLayout.addView(tableLayout);
 
 
     }
 
     private LinearLayout addCell(String cellData) {
-        llp.setMargins(2, 2, 2, 2);//2px right-margin
-        Context context = getContext();
+        llp.setMargins(2, 2, 2, 2);
 
-        LinearLayout cell;//New Cell
+        LinearLayout cell;
         cell = new LinearLayout(context);
         cell.setBackgroundColor(Color.WHITE);
         cell.setLayoutParams(llp);//2px border on the right for the cell
