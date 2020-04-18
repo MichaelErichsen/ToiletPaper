@@ -35,7 +35,6 @@ import java.util.ArrayList;
 import static android.app.Activity.RESULT_OK;
 
 // FIXME Back button has disappeared from navigation
-// FIXME Same UID for each new row
 // TODO Understand relation between Fragment and ViewModel
 public class HomeFragment extends Fragment {
     private final static int REQUEST_CODE_1 = 1;
@@ -341,6 +340,20 @@ public class HomeFragment extends Fragment {
         }
     }
 
+    private int getIntFromLayout(CheckBox cb) {
+        return (cb.isChecked() ? 1 : 0);
+    }
+
+    private Float getFloatFromLayout(EditText et) {
+        String s = et.getText().toString();
+
+        if (s.equals("")) {
+            return new Float(0);
+        } else {
+            return Float.parseFloat(s);
+        }
+    }
+
     private int getIntFromLayout(Spinner spinner) {
         return Integer.parseInt((String) spinner.getSelectedItem());
     }
@@ -355,36 +368,32 @@ public class HomeFragment extends Fragment {
 
     private ProductData populateProductDataFromLayout() {
 
-        // TODO Populate Productdata from layout
-
         ProductData pd = new ProductData();
 
         try {
-            pd.setLayers(getIntFromLayout(layersSpinner));
-            pd.setPackageRolls(getIntFromLayout(packageRollsEditText));
-
-
-//        pd.setRollSheets(cursor.getInt(cursor.getColumnIndex(ProductDbAdapter.ProductHelper.ROLL_SHEETS)));
-//        pd.setSheetWidth(cursor.getInt(cursor.getColumnIndex(ProductDbAdapter.ProductHelper.SHEET_WIDTH)));
-//        pd.setSheetLength(cursor.getInt(cursor.getColumnIndex(ProductDbAdapter.ProductHelper.SHEET_LENGTH)));
-//        pd.setSheetLength_c(cursor.getInt(cursor.getColumnIndex(ProductDbAdapter.ProductHelper.ROLL_LENGTH_C)));
-//        pd.setRollLength(cursor.getInt(cursor.getColumnIndex(ProductDbAdapter.ProductHelper.ROLL_LENGTH)));
-//        pd.setRollLength_c(cursor.getInt(cursor.getColumnIndex(ProductDbAdapter.ProductHelper.SHEET_LENGTH_C)));
-//        pd.setPackagePrice(cursor.getFloat(cursor.getColumnIndex(ProductDbAdapter.ProductHelper.PACKAGE_PRICE)));
-//        pd.setRollPrice(cursor.getFloat(cursor.getColumnIndex(ProductDbAdapter.ProductHelper.ROLL_PRICE)));
-//        pd.setRollPrice_c(cursor.getInt(cursor.getColumnIndex(ProductDbAdapter.ProductHelper.ROLL_PRICE_C)));
-//        pd.setPaperWeight(cursor.getFloat(cursor.getColumnIndex(ProductDbAdapter.ProductHelper.PAPER_WEIGHT)));
-//        pd.setPaperWeight_c(cursor.getInt(cursor.getColumnIndex(ProductDbAdapter.ProductHelper.PAPER_WEIGHT_C)));
-//        pd.setKiloPrice(cursor.getFloat(cursor.getColumnIndex(ProductDbAdapter.ProductHelper.KILO_PRICE)));
-//        pd.setKiloPrice_c(cursor.getInt(cursor.getColumnIndex(ProductDbAdapter.ProductHelper.KILO_PRICE_C)));
-//        pd.setMeterPrice(cursor.getFloat(cursor.getColumnIndex(ProductDbAdapter.ProductHelper.METER_PRICE)));
-//        pd.setMeterPrice_c(cursor.getInt(cursor.getColumnIndex(ProductDbAdapter.ProductHelper.METER_PRICE_C)));
-//        pd.setSheetPrice(cursor.getFloat(cursor.getColumnIndex(ProductDbAdapter.ProductHelper.SHEET_PRICE)));
-//        pd.setSheetPrice_c(cursor.getInt(cursor.getColumnIndex(ProductDbAdapter.ProductHelper.SHEET_PRICE_C)));
-//        pd.setSupplier(cursor.getString(cursor.getColumnIndex(ProductDbAdapter.ProductHelper.SUPPLIER)));
-//        pd.setComments(cursor.getString(cursor.getColumnIndex(ProductDbAdapter.ProductHelper.COMMENTS)));
             pd.setItemNo(getStringFromLayout(itemNoEditText));
             pd.setBrand(getStringFromLayout(brandEditText));
+            pd.setLayers(getIntFromLayout(layersSpinner));
+            pd.setPackageRolls(getIntFromLayout(packageRollsEditText));
+            pd.setRollSheets(getIntFromLayout(rollSheetsEditText));
+            pd.setSheetWidth(getIntFromLayout(sheetWidthEditText));
+            pd.setSheetLength(getIntFromLayout(sheetLengthEditText));
+            pd.setSheetLength_c(getIntFromLayout(sheetLengthCheckBox));
+            pd.setRollLength(getIntFromLayout(rollLengthEditText));
+            pd.setRollLength_c(getIntFromLayout(rollLengthCheckBox));
+            pd.setPackagePrice(getFloatFromLayout(packagePriceEditText));
+            pd.setRollPrice(getFloatFromLayout(rollPriceEditText));
+            pd.setRollPrice_c(getIntFromLayout(rollPriceCheckBox));
+            pd.setPaperWeight(getFloatFromLayout(paperWeightEditText));
+            pd.setPaperWeight_c(getIntFromLayout(paperWeightCheckBox));
+            pd.setKiloPrice(getFloatFromLayout(kiloPriceEditText));
+            pd.setKiloPrice_c(getIntFromLayout(kiloPriceCheckBox));
+            pd.setMeterPrice(getFloatFromLayout(meterPriceEditText));
+            pd.setMeterPrice_c(getIntFromLayout(meterPriceCheckBox));
+            pd.setSheetPrice(getFloatFromLayout(sheetPriceEditText));
+            pd.setSheetPrice_c(getIntFromLayout(sheetPriceCheckBox));
+            pd.setSupplier(getStringFromLayout(suppliersSpinner));
+            pd.setComments(getStringFromLayout(commentEditText));
         } catch (Exception e) {
             Snackbar snackbar = Snackbar
                     .make(getActivity().findViewById(android.R.id.content), e.getMessage(), Snackbar.LENGTH_LONG);

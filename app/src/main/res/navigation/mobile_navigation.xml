@@ -18,17 +18,24 @@
             android:id="@+id/action_nav_home_to_nav_products"
             app:destination="@id/nav_products">
         </action>
+        <action
+            android:id="@+id/action_nav_home_to_nav_compare"
+            app:destination="@id/nav_compare" />
+        <action
+            android:id="@+id/action_nav_home_to_nav_suppliers"
+            app:destination="@id/nav_suppliers" />
     </fragment>
 
     <fragment
-        android:id="@+id/nav_about"
-        android:name="net.myerichsen.toiletpaper.ui.about.AboutFragment"
-        android:label="@string/menu_about"
-        tools:layout="@layout/fragment_about">
+        android:id="@+id/nav_compare"
+        android:name="net.myerichsen.toiletpaper.ui.compare.CompareFragment"
+        android:label="@string/menu_compare"
+        tools:layout="@layout/compare_fragment">
         <action
-            android:id="@+id/action_nav_about_to_nav_home"
+            android:id="@+id/action_nav_compare_to_nav_home"
             app:destination="@id/nav_home" />
     </fragment>
+
 
     <fragment
         android:id="@+id/nav_products"
@@ -37,7 +44,11 @@
         tools:layout="@layout/product_fragment">
         <action
             android:id="@+id/action_nav_products_to_nav_home"
-            app:destination="@id/nav_home" />
+            app:destination="@id/nav_home">
+            <action
+                android:id="@+id/action_action_nav_products_to_nav_home_to_nav_compare"
+                app:destination="@id/nav_compare" />
+        </action>
     </fragment>
 
     <fragment
@@ -47,6 +58,16 @@
         tools:layout="@layout/supplier_fragment">>
         <action
             android:id="@+id/action_nav_suppliers_to_nav_home"
+            app:destination="@id/nav_home" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_about"
+        android:name="net.myerichsen.toiletpaper.ui.about.AboutFragment"
+        android:label="@string/menu_about"
+        tools:layout="@layout/fragment_about">
+        <action
+            android:id="@+id/action_nav_about_to_nav_home"
             app:destination="@id/nav_home" />
     </fragment>
 

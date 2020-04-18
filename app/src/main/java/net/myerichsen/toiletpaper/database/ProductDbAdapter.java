@@ -53,7 +53,6 @@ public class ProductDbAdapter {
      * Insert a row
      */
     public long insertData(ProductData pd) {
-        // TODO Does not insert data into row
         SQLiteDatabase dbb = productHelper.getWritableDatabase();
         ContentValues contentValues = extractProductData(pd);
         return dbb.insert(ProductHelper.TABLE_NAME, null, contentValues);
@@ -183,7 +182,6 @@ public class ProductDbAdapter {
         private static final String ROLL_LENGTH = "ROLL_LENGTH";
         private static final String ROLL_LENGTH_C = "ROLL_LENGTH_C";
         private static final String PACKAGE_PRICE = "PACKAGE_PRICE";
-        //        private static final String PACKAGE_PRICE_C = "PACKAGE_PRICE_C";
         private static final String ROLL_PRICE = "ROLL_PRICE";
         private static final String ROLL_PRICE_C = "ROLL_PRICE_C";
         private static final String PAPER_WEIGHT = "PAPER_WEIGHT";
