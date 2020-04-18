@@ -34,6 +34,7 @@
 
         <activity android:name=".ScanActivity" />
         <activity android:name=".CompareActivity" />
+        <activity android:name=".ProductActivity" />
     </application>
 
 </manifest>

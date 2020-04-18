@@ -24,24 +24,15 @@ import net.myerichsen.toiletpaper.R;
 import java.util.ArrayList;
 
 public class CompareFragment extends Fragment {
-    private View root;
-    private Spinner filterSpinner;
     private Context context;
-    private View compareBtn;
-
-    // TODO Radio button for sort column
-    // TODO Filter spinner for supplier and "All"
-    public static CompareFragment newInstance() {
-        return new CompareFragment();
-    }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        root = inflater.inflate(R.layout.compare_fragment, container, false);
+        View root = inflater.inflate(R.layout.compare_fragment, container, false);
         context = getContext();
 
-        filterSpinner = root.findViewById(R.id.filterSpinner);
+        Spinner filterSpinner = root.findViewById(R.id.filterSpinner);
         ArrayList<String> layerArrayList = new ArrayList<>();
         // TODO Get from table
         layerArrayList.add("ALL");
@@ -62,7 +53,7 @@ public class CompareFragment extends Fragment {
             }
         });
 
-        compareBtn = root.findViewById(R.id.compareBtn);
+        View compareBtn = root.findViewById(R.id.compareBtn);
         compareBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

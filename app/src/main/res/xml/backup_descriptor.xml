@@ -3,7 +3,6 @@
   -->
 
 <full-backup-content>
-    <!-- TODO Remove the following "exclude" elements to make them a part of the auto backup -->
     <exclude
         domain="database"
         path="TOILET_PAPER_DATABASE" />

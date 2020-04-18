@@ -28,7 +28,6 @@ public class SupplierFragment extends Fragment {
     SupplierDbAdapter helper;
     private View root;
     private Context context;
-    private SupplierData sd;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -71,7 +70,7 @@ public class SupplierFragment extends Fragment {
         }
 
         for (int i = 0; i < lsd.size(); i++) {
-            sd = lsd.get(i);
+            SupplierData sd = lsd.get(i);
 
             tableRow = new TableRow(context);
             tableRow.setBackgroundColor(Color.BLACK);

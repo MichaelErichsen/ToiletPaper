@@ -26,7 +26,6 @@ import net.myerichsen.toiletpaper.ui.suppliers.SupplierData;
  * Also includes an inital load function
  */
 public class AboutFragment extends Fragment {
-    private View root;
 
     /**
      * Required empty public constructor
@@ -38,7 +37,7 @@ public class AboutFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        root = inflater.inflate(R.layout.fragment_about, container, false);
+        View root = inflater.inflate(R.layout.fragment_about, container, false);
 
         AppCompatImageButton testBtn = root.findViewById(R.id.testBtn);
         testBtn.setOnClickListener(new View.OnClickListener() {

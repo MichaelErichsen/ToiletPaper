@@ -40,14 +40,8 @@ public class HomeFragment extends Fragment {
 
     private ProductDbAdapter helper;
     private View root;
-    private Context context;
 
-    private AppCompatImageButton calculateBtn;
-    private AppCompatImageButton saveBtn;
-    private AppCompatImageButton supplierBtn;
-    private AppCompatImageButton pricerunnerBtn;
     private EditText itemNoEditText;
-    private AppCompatImageButton scanBtn;
     private AppCompatImageButton searchItemNoBtn;
     private EditText brandEditText;
     private AppCompatImageButton searchBrandBtn;
@@ -78,7 +72,7 @@ public class HomeFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         root = inflater.inflate(R.layout.fragment_home, container, false);
-        context = getContext();
+        Context context = getContext();
         helper = new ProductDbAdapter(context);
         pd = new ProductData();
 
@@ -275,7 +269,7 @@ public class HomeFragment extends Fragment {
         commentEditText = root.findViewById(R.id.commentEditText);
 
         // Buttons
-        calculateBtn = root.findViewById(R.id.calculateBtn);
+        AppCompatImageButton calculateBtn = root.findViewById(R.id.calculateBtn);
         calculateBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -283,7 +277,7 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        saveBtn = root.findViewById(R.id.saveBtn);
+        AppCompatImageButton saveBtn = root.findViewById(R.id.saveBtn);
         saveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -303,9 +297,9 @@ public class HomeFragment extends Fragment {
         });
 
         // TODO Implement supplier web site lookup
-        supplierBtn = root.findViewById(R.id.supplierBtn);
+        AppCompatImageButton supplierBtn = root.findViewById(R.id.supplierBtn);
 
-        pricerunnerBtn = root.findViewById(R.id.pricerunnerBtn);
+        AppCompatImageButton pricerunnerBtn = root.findViewById(R.id.pricerunnerBtn);
         pricerunnerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -314,7 +308,7 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        scanBtn = root.findViewById(R.id.scanBtn);
+        AppCompatImageButton scanBtn = root.findViewById(R.id.scanBtn);
         scanBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -415,10 +409,8 @@ public class HomeFragment extends Fragment {
 
     /**
      * Calculate all calculable fields
-     *
-     * @return boolean true if one or more calculations have been done
      */
-    private boolean calculate() {
+    private void calculate() {
         try {
             boolean fSheetLength = divide(rollLengthEditText, rollLengthCheckBox, rollSheetsEditText, null, sheetLengthEditText, sheetLengthCheckBox);
 
@@ -442,12 +434,10 @@ public class HomeFragment extends Fragment {
 //            boolean fSheetPrice1 = divide(packagePriceEditText, null, packageRollsEditText, null, dummy, dummyC);
 //            boolean fSheetPrice = divide(dummy, dummyC, rollSheetsEditText, null, rollLengthEditText, rollLengthCheckBox);
 
-            return fKiloPrice | fMeterPrice | fRollLength | fRollPrice | fSheetLength;
         } catch (Exception e) {
             Snackbar snackbar = Snackbar
                     .make(getActivity().findViewById(android.R.id.content), e.getMessage(), Snackbar.LENGTH_LONG);
             snackbar.show();
-            return false;
         }
 //        return fKiloPrice | fMeterPrice | fPaperWeight | fRollLength | fRollPrice | fSheetLength | fSheetPrice;
     }

@@ -29,25 +29,30 @@ public class SupplierDbAdapter {
     /**
      * Insert a row
      */
-    public long insertData(SupplierData sd) {
+    public void insertData(SupplierData sd) {
         SQLiteDatabase dbb = supplierHelper.getWritableDatabase();
         ContentValues contentValues = extractSupplierData(sd);
-        return dbb.insert(SupplierHelper.TABLE_NAME, null, contentValues);
+        dbb.insert(SupplierHelper.TABLE_NAME, null, contentValues);
     }
 
 
     public List<SupplierData> getAllData(Context context) {
         List<SupplierData> lsd = new ArrayList<>();
-        SQLiteDatabase db = supplierHelper.getWritableDatabase();
+        try {
+            SQLiteDatabase db = supplierHelper.getWritableDatabase();
 
-        Cursor cursor = db.query(SupplierHelper.TABLE_NAME, columns, null, null, null, null, null);
+            // TODO Exception here: No such table TABLE_SUPPLIER
+            Cursor cursor = db.query(SupplierHelper.TABLE_NAME, columns, null, null, null, null, null);
 
-        SupplierData sd;
-        while (cursor.moveToNext()) {
-            lsd.add(populateSupplierData(cursor));
+            SupplierData sd;
+            while (cursor.moveToNext()) {
+                lsd.add(populateSupplierData(cursor));
+            }
+
+        } catch (Exception e) {
+            Toast.makeText(context, e.getMessage(), Toast.LENGTH_LONG).show();
         }
         return lsd;
-
     }
 
     private ContentValues extractSupplierData(SupplierData sd) {

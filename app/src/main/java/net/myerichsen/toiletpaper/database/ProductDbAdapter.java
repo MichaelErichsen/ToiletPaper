@@ -52,10 +52,10 @@ public class ProductDbAdapter {
     /**
      * Insert a row
      */
-    public long insertData(ProductData pd) {
+    public void insertData(ProductData pd) {
         SQLiteDatabase dbb = productHelper.getWritableDatabase();
         ContentValues contentValues = extractProductData(pd);
-        return dbb.insert(ProductHelper.TABLE_NAME, null, contentValues);
+        dbb.insert(ProductHelper.TABLE_NAME, null, contentValues);
     }
 
 

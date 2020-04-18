@@ -5,6 +5,7 @@
 package net.myerichsen.toiletpaper.ui.products;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.TypedValue;
@@ -22,6 +23,7 @@ import androidx.fragment.app.Fragment;
 
 import com.google.android.material.snackbar.Snackbar;
 
+import net.myerichsen.toiletpaper.ProductActivity;
 import net.myerichsen.toiletpaper.R;
 import net.myerichsen.toiletpaper.database.ProductDbAdapter;
 
@@ -34,10 +36,8 @@ import java.util.List;
  */
 public class ProductFragment extends Fragment {
     private final TableRow.LayoutParams llp = new TableRow.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-    private ProductDbAdapter helper;
     private View root;
     private Context context;
-    private ProductData pd;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -51,11 +51,9 @@ public class ProductFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        helper = new ProductDbAdapter(context);
+        ProductDbAdapter helper = new ProductDbAdapter(context);
 
         final TableLayout tableLayout = root.findViewById(R.id.productTableLayout);
-        tableLayout.setOnClickListener(tableLayoutOnClickListener());
-
         TableRow tableRow = new TableRow(context);
         tableRow.setBackgroundColor(Color.BLACK);
         tableRow.setPadding(2, 2, 2, 2);
@@ -82,7 +80,7 @@ public class ProductFragment extends Fragment {
         }
 
         for (int i = 0; i < lpd.size(); i++) {
-            pd = lpd.get(i);
+            ProductData pd = lpd.get(i);
 
             tableRow = new TableRow(context);
             tableRow.setBackgroundColor(Color.BLACK);
@@ -91,22 +89,28 @@ public class ProductFragment extends Fragment {
             tableRow.addView(addCell(Integer.toString(pd.getUid())));
             tableRow.addView(addCell(pd.getItemNo()));
             tableRow.addView(addCell(pd.getBrand()));
+            tableRow.setClickable(true);
+            tableRow.setOnClickListener(tableRowOnclickListener());
             tableLayout.addView(tableRow);
         }
     }
 
-    private View.OnClickListener tableLayoutOnClickListener() {
+    private View.OnClickListener tableRowOnclickListener() {
         return new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
+            public void onClick(View v) {
                 try {
-                    TableRow selectedRow = (TableRow) view;
-                    TextView tv = (TextView) selectedRow.getChildAt(0);
+                    TableRow selectedRow = (TableRow) v;
+                    LinearLayout ll = (LinearLayout) selectedRow.getChildAt(0);
+                    TextView tv = (TextView) ll.getChildAt(0);
                     int uid = Integer.parseInt(tv.getText().toString());
                     Snackbar snackbar = Snackbar
-                            .make(getActivity().findViewById(android.R.id.content), uid + "was clicked", Snackbar.LENGTH_LONG);
+                            .make(getActivity().findViewById(android.R.id.content), uid + " was clicked", Snackbar.LENGTH_LONG);
                     snackbar.show();
+
+                    Intent productIntent = new Intent(context, ProductActivity.class);
+                    // TODO Pass filter and sort key
+                    //              startIntent.putExtra("net.myrichsen.mysecondapplication.SOMETHING", "HELLO, WORLD");
+                    startActivity(productIntent);
                 } catch (NumberFormatException e) {
                     Snackbar snackbar = Snackbar
                             .make(getActivity().findViewById(android.R.id.content), e.getMessage(), Snackbar.LENGTH_LONG);
