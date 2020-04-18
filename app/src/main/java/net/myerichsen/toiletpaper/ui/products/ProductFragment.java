@@ -82,10 +82,6 @@ public class ProductFragment extends Fragment {
             tableRow.addView(addCell(pd.getBrand()));
             tableLayout.addView(tableRow);
         }
-
-//        tableListLayout.addView(tableLayout);
-
-
     }
 
     private LinearLayout addCell(String cellData) {
@@ -103,5 +99,4 @@ public class ProductFragment extends Fragment {
         cell.addView(tv);
         return cell;
     }
-
 }
