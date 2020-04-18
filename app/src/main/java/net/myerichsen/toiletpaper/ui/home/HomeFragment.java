@@ -34,7 +34,7 @@ import java.util.ArrayList;
 import static android.app.Activity.RESULT_OK;
 
 // FIXME Back button has disappeared from navigation
-// TODO Understand relation between Fragment and ViewModel
+
 public class HomeFragment extends Fragment {
     private final static int REQUEST_CODE_1 = 1;
 

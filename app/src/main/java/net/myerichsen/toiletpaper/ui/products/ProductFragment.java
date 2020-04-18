@@ -29,6 +29,7 @@ public class ProductFragment extends Fragment {
     ProductDbAdapter helper;
     private View root;
     private Context context;
+    private ProductData pd;
 
     public static ProductFragment newInstance() {
         return new ProductFragment();
@@ -48,7 +49,19 @@ public class ProductFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         helper = new ProductDbAdapter(context);
 
-        TableLayout tableLayout = root.findViewById(R.id.productTableLayout);
+        final TableLayout tableLayout = root.findViewById(R.id.productTableLayout);
+        tableLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                TableRow selectedRow = (TableRow) view;
+                TextView tv = (TextView) selectedRow.getChildAt(0);
+                int uid = Integer.parseInt(tv.getText().toString());
+                Snackbar snackbar = Snackbar
+                        .make(getActivity().findViewById(android.R.id.content), uid + "was clicked", Snackbar.LENGTH_LONG);
+                snackbar.show();
+            }
+        });
 
         TableRow tableRow = new TableRow(context);
         tableRow.setBackgroundColor(Color.BLACK);
@@ -68,7 +81,6 @@ public class ProductFragment extends Fragment {
             return;
         }
 
-        ProductData pd;
 
         for (int i = 0; i < lpd.size(); i++) {
             pd = lpd.get(i);
