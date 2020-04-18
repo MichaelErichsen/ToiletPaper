@@ -39,10 +39,6 @@ public class ProductFragment extends Fragment {
     private Context context;
     private ProductData pd;
 
-//    public static ProductFragment newInstance() {
-//        return new ProductFragment();
-//    }
-
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
@@ -58,24 +54,7 @@ public class ProductFragment extends Fragment {
         helper = new ProductDbAdapter(context);
 
         final TableLayout tableLayout = root.findViewById(R.id.productTableLayout);
-        tableLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                try {
-                    TableRow selectedRow = (TableRow) view;
-                    TextView tv = (TextView) selectedRow.getChildAt(0);
-                    int uid = Integer.parseInt(tv.getText().toString());
-                    Snackbar snackbar = Snackbar
-                            .make(getActivity().findViewById(android.R.id.content), uid + "was clicked", Snackbar.LENGTH_LONG);
-                    snackbar.show();
-                } catch (NumberFormatException e) {
-                    Snackbar snackbar = Snackbar
-                            .make(getActivity().findViewById(android.R.id.content), e.getMessage(), Snackbar.LENGTH_LONG);
-                    snackbar.show();
-                }
-            }
-        });
+        tableLayout.setOnClickListener(tableLayoutOnClickListener());
 
         TableRow tableRow = new TableRow(context);
         tableRow.setBackgroundColor(Color.BLACK);
@@ -95,6 +74,12 @@ public class ProductFragment extends Fragment {
             return;
         }
 
+        if (lpd.size() == 0) {
+            Snackbar snackbar = Snackbar
+                    .make(getActivity().findViewById(android.R.id.content), "No data in table", Snackbar.LENGTH_LONG);
+            snackbar.show();
+            return;
+        }
 
         for (int i = 0; i < lpd.size(); i++) {
             pd = lpd.get(i);
@@ -108,6 +93,27 @@ public class ProductFragment extends Fragment {
             tableRow.addView(addCell(pd.getBrand()));
             tableLayout.addView(tableRow);
         }
+    }
+
+    private View.OnClickListener tableLayoutOnClickListener() {
+        return new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                try {
+                    TableRow selectedRow = (TableRow) view;
+                    TextView tv = (TextView) selectedRow.getChildAt(0);
+                    int uid = Integer.parseInt(tv.getText().toString());
+                    Snackbar snackbar = Snackbar
+                            .make(getActivity().findViewById(android.R.id.content), uid + "was clicked", Snackbar.LENGTH_LONG);
+                    snackbar.show();
+                } catch (NumberFormatException e) {
+                    Snackbar snackbar = Snackbar
+                            .make(getActivity().findViewById(android.R.id.content), e.getMessage(), Snackbar.LENGTH_LONG);
+                    snackbar.show();
+                }
+            }
+        };
     }
 
     private LinearLayout addCell(String cellData) {

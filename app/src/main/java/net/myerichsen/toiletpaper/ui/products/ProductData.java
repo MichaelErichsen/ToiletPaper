@@ -39,10 +39,76 @@ public class ProductData {
     private String brand = "";
     private String timestamp;
 
+    /**
+     * No arg constructor
+     */
     public ProductData() {
         Long tsLong = System.currentTimeMillis();
         SimpleDateFormat s = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss");
         timestamp = s.format(new Date());
+    }
+
+    /**
+     * Constructor
+     *
+     * @param itemNo
+     * @param brand
+     * @param layers
+     * @param packageRolls
+     * @param rollSheets
+     * @param sheetWidth
+     * @param sheetLength
+     * @param sheetLength_c
+     * @param rollLength
+     * @param rollLength_c
+     * @param packagePrice
+     * @param packagePrice_c
+     * @param rollPrice
+     * @param rollPrice_c
+     * @param paperWeight
+     * @param paperWeight_c
+     * @param kiloPrice
+     * @param kiloPrice_c
+     * @param meterPrice
+     * @param meterPrice_c
+     * @param sheetPrice
+     * @param sheetPrice_c
+     * @param supplier
+     * @param comments
+     */
+    public ProductData(String itemNo, String brand, int layers, int packageRolls, int rollSheets, int sheetWidth,
+                       int sheetLength, int sheetLength_c, float rollLength, int rollLength_c,
+                       float packagePrice, int packagePrice_c, float rollPrice, int rollPrice_c,
+                       float paperWeight, int paperWeight_c, float kiloPrice, int kiloPrice_c,
+                       float meterPrice, int meterPrice_c, float sheetPrice, int sheetPrice_c,
+                       String supplier, String comments) {
+        this.layers = layers;
+        this.packageRolls = packageRolls;
+        this.rollSheets = rollSheets;
+        this.sheetWidth = sheetWidth;
+        this.sheetLength = sheetLength;
+        this.sheetLength_c = sheetLength_c;
+        this.rollLength = rollLength;
+        this.rollLength_c = rollLength_c;
+        this.packagePrice = packagePrice;
+        this.packagePrice_c = packagePrice_c;
+        this.rollPrice = rollPrice;
+        this.rollPrice_c = rollPrice_c;
+        this.paperWeight = paperWeight;
+        this.paperWeight_c = paperWeight_c;
+        this.kiloPrice = kiloPrice;
+        this.kiloPrice_c = kiloPrice_c;
+        this.meterPrice = meterPrice;
+        this.meterPrice_c = meterPrice_c;
+        this.sheetPrice = sheetPrice;
+        this.sheetPrice_c = sheetPrice_c;
+        this.supplier = supplier;
+        this.comments = comments;
+        this.itemNo = itemNo;
+        this.brand = brand;
+        Long tsLong = System.currentTimeMillis();
+        SimpleDateFormat s = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss");
+        this.timestamp = s.format(new Date());
     }
 
     public int getUid() {

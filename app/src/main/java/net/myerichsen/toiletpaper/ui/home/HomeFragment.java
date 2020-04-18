@@ -82,57 +82,6 @@ public class HomeFragment extends Fragment {
         helper = new ProductDbAdapter(context);
         pd = new ProductData();
 
-        // Buttons
-        calculateBtn = root.findViewById(R.id.calculateBtn);
-        calculateBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                calculate();
-            }
-        });
-
-        saveBtn = root.findViewById(R.id.saveBtn);
-        saveBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String message = "";
-
-                try {
-                    pd = populateProductDataFromLayout();
-                    helper.insertData(pd);
-                    message = getString(R.string.home_fragment_save_message);
-                } catch (Exception e) {
-                    message = e.getMessage();
-                }
-                Snackbar snackbar = Snackbar
-                        .make(getActivity().findViewById(android.R.id.content), message, Snackbar.LENGTH_LONG);
-                snackbar.show();
-            }
-        });
-
-        // TODO Implement supplier web site lookup
-        supplierBtn = root.findViewById(R.id.supplierBtn);
-
-        pricerunnerBtn = root.findViewById(R.id.pricerunnerBtn);
-        pricerunnerBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.pricerunner.dk/results?q=toiletpapir"));
-                startActivity(browserIntent);
-            }
-        });
-
-        scanBtn = root.findViewById(R.id.scanBtn);
-        scanBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int requestCode = RESULT_OK;
-                Intent openScanIntent = new Intent(getContext(), ScanActivity.class);
-                openScanIntent.putExtra("item_no", "");
-                startActivityForResult(openScanIntent, REQUEST_CODE_1);
-            }
-        });
-
         // Item no
         itemNoEditText = root.findViewById(R.id.itemNoEditText);
 
@@ -324,6 +273,57 @@ public class HomeFragment extends Fragment {
 
         // Comments
         commentEditText = root.findViewById(R.id.commentEditText);
+
+        // Buttons
+        calculateBtn = root.findViewById(R.id.calculateBtn);
+        calculateBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                calculate();
+            }
+        });
+
+        saveBtn = root.findViewById(R.id.saveBtn);
+        saveBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String message = "";
+
+                try {
+                    pd = populateProductDataFromLayout();
+                    helper.insertData(pd);
+                    message = getString(R.string.home_fragment_save_message);
+                } catch (Exception e) {
+                    message = e.getMessage();
+                }
+                Snackbar snackbar = Snackbar
+                        .make(getActivity().findViewById(android.R.id.content), message, Snackbar.LENGTH_LONG);
+                snackbar.show();
+            }
+        });
+
+        // TODO Implement supplier web site lookup
+        supplierBtn = root.findViewById(R.id.supplierBtn);
+
+        pricerunnerBtn = root.findViewById(R.id.pricerunnerBtn);
+        pricerunnerBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.pricerunner.dk/results?q=toiletpapir"));
+                startActivity(browserIntent);
+            }
+        });
+
+        scanBtn = root.findViewById(R.id.scanBtn);
+        scanBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int requestCode = RESULT_OK;
+                Intent openScanIntent = new Intent(getContext(), ScanActivity.class);
+                openScanIntent.putExtra("item_no", "");
+                startActivityForResult(openScanIntent, REQUEST_CODE_1);
+            }
+        });
 
         return root;
     }
