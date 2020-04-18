@@ -17,7 +17,9 @@ import com.google.android.material.snackbar.Snackbar;
 
 import net.myerichsen.toiletpaper.R;
 import net.myerichsen.toiletpaper.database.ProductDbAdapter;
+import net.myerichsen.toiletpaper.database.SupplierDbAdapter;
 import net.myerichsen.toiletpaper.ui.products.ProductData;
+import net.myerichsen.toiletpaper.ui.suppliers.SupplierData;
 
 /**
  * About fragment.
@@ -52,17 +54,10 @@ public class AboutFragment extends Fragment {
      * Load initial data into tables
      */
     private void loadInitialData() {
+        Snackbar snackbar;
         Context context = getContext();
-        ProductDbAdapter helper = new ProductDbAdapter(context);
 
-        /**
-         *     String itemNo, String brand), int layers, int packageRolls, int rollSheets, int sheetWidth,
-         *                        int sheetLength, int sheetLength_c, float rollLength, int rollLength_c,
-         *                        float packagePrice, int packagePrice_c, float rollPrice, int rollPrice_c,
-         *                        float paperWeight, int paperWeight_c, float kiloPrice, int kiloPrice_c,
-         *                        float meterPrice, int meterPrice_c, float sheetPrice, int sheetPrice_c,
-         *                        String supplier, String comments,
-         */
+
         float rl = (float) 29.1;
         float rp = (float) 5.125;
         float kp = (float) 31.64;
@@ -75,15 +70,36 @@ public class AboutFragment extends Fragment {
                 "Coop (Kvickly/Brugsen/Fakta/Irma)", "Sælges hos Irma og Brugsen");
 
         try {
-            helper.insertData(pd);
+            ProductDbAdapter pHelper = new ProductDbAdapter(context);
+            pHelper.insertData(pd);
         } catch (Exception e) {
-            Snackbar snackbar = Snackbar
+            snackbar = Snackbar
                     .make(getActivity().findViewById(android.R.id.content), e.getMessage(), Snackbar.LENGTH_LONG);
             snackbar.show();
         }
 
-        // TODO Load initial data into both tables
-        Snackbar snackbar = Snackbar
+        SupplierData sd;
+        try {
+            SupplierDbAdapter sHelper = new SupplierDbAdapter(context);
+
+            sd = new SupplierData("Aldi", "www.aldi.dk");
+            sHelper.insertData(sd);
+            sd = new SupplierData("Coop (Kvickly/Brugsen/Fakta/Irma)", "www.coop.dk");
+            sHelper.insertData(sd);
+            sd = new SupplierData("Dagrofa (Meny/Min Købmand/Let-Køb/Spar", "www.dagrofa.dk");
+            sHelper.insertData(sd);
+            sd = new SupplierData("Lidl", "www.lidl.dk");
+            sHelper.insertData(sd);
+            sd = new SupplierData("REMA 1000", "www.rema1000.dk");
+            sHelper.insertData(sd);
+            sd = new SupplierData("Salling (Bilka/Føtex/Netto)", "www.sallinggroup.com");
+            sHelper.insertData(sd);
+        } catch (Exception e) {
+            snackbar = Snackbar
+                    .make(getActivity().findViewById(android.R.id.content), e.getMessage(), Snackbar.LENGTH_LONG);
+            snackbar.show();
+        }
+        snackbar = Snackbar
                 .make(getActivity().findViewById(android.R.id.content), "Initielle data er loadet", Snackbar.LENGTH_LONG);
         snackbar.show();
 

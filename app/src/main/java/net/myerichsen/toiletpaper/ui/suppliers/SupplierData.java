@@ -12,7 +12,24 @@ public class SupplierData {
     private String uri = "";
     private String timestamp;
 
+    /**
+     * no-arg constructor
+     */
     public SupplierData() {
+        Long tsLong = System.currentTimeMillis();
+        SimpleDateFormat s = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss");
+        timestamp = s.format(new Date());
+    }
+
+    /**
+     * Constructor
+     *
+     * @param supplier
+     * @param uri
+     */
+    public SupplierData(String supplier, String uri) {
+        this.supplier = supplier;
+        this.uri = uri;
         Long tsLong = System.currentTimeMillis();
         SimpleDateFormat s = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss");
         timestamp = s.format(new Date());
