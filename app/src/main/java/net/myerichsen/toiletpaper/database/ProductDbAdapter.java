@@ -84,7 +84,7 @@ public class ProductDbAdapter {
      *
      * @return List of columns in record
      */
-    public List<ProductData> getAllProductData(Context context) {
+    public List<ProductData> getAllData(Context context) {
         List<ProductData> lpd = new ArrayList<>();
 
         SQLiteDatabase db = productHelper.getWritableDatabase();

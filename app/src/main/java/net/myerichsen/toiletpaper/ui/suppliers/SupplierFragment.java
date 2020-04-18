@@ -28,21 +28,12 @@ public class SupplierFragment extends Fragment {
     SupplierDbAdapter helper;
     private View root;
     private Context context;
-
-    public static SupplierFragment newInstance() {
-        return new SupplierFragment();
-    }
+    private SupplierData sd;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-//        try {
         root = inflater.inflate(R.layout.supplier_fragment, container, false);
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//            Snackbar snackbar = Snackbar.make(getActivity().findViewById(android.R.id.content), e.getMessage(), Snackbar.LENGTH_LONG);
-//            snackbar.show();
-//        }
         context = getContext();
         return root;
     }
@@ -52,7 +43,7 @@ public class SupplierFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         helper = new SupplierDbAdapter(context);
 
-        TableLayout tableLayout = root.findViewById(R.id.supplierTableLayout);
+        final TableLayout tableLayout = root.findViewById(R.id.supplierTableLayout);
 
         TableRow tableRow = new TableRow(context);
         tableRow.setBackgroundColor(Color.BLACK);
@@ -72,7 +63,12 @@ public class SupplierFragment extends Fragment {
             return;
         }
 
-        SupplierData sd;
+        if (lsd.size() == 0) {
+            Snackbar snackbar = Snackbar
+                    .make(getActivity().findViewById(android.R.id.content), "No data in table", Snackbar.LENGTH_LONG);
+            snackbar.show();
+            return;
+        }
 
         for (int i = 0; i < lsd.size(); i++) {
             sd = lsd.get(i);
