@@ -58,4 +58,6 @@
     <string name="menu_compare">Sammenlign</string>
     <string name="menu_product_details">Detaljer</string>
     <string name="menu_compare_details">Detaljer</string>
+    <string name="compare_filter">Filtrer butikker</string>
+    <string name="compare_key">Vælg sorteringsnøgle</string>
 </resources>
