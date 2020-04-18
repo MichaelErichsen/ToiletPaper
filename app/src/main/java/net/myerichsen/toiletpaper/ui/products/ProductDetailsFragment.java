@@ -16,6 +16,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import net.myerichsen.toiletpaper.R;
 
+// TODO Add delete button and fields for each column
 public class ProductDetailsFragment extends Fragment {
 
     private ProductDetailsViewModel mViewModel;

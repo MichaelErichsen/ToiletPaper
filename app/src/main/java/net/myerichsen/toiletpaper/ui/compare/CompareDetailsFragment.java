@@ -16,26 +16,25 @@ import androidx.lifecycle.ViewModelProvider;
 
 import net.myerichsen.toiletpaper.R;
 
-public class CompareFragment extends Fragment {
+// TODO Table with product data sorted according to sort and filter
+public class CompareDetailsFragment extends Fragment {
 
-    // TODO Radio button for sort column
-    // TODO Filter spinner for supplier and "All"
-    private CompareViewModel mViewModel;
+    private CompareDetailsViewModel mViewModel;
 
-    public static CompareFragment newInstance() {
-        return new CompareFragment();
+    public static CompareDetailsFragment newInstance() {
+        return new CompareDetailsFragment();
     }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.compare_fragment, container, false);
+        return inflater.inflate(R.layout.compare_details_fragment, container, false);
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mViewModel = new ViewModelProvider(this).get(CompareViewModel.class);
+        mViewModel = new ViewModelProvider(this).get(CompareDetailsViewModel.class);
         // TODO: Use the ViewModel
     }
 
