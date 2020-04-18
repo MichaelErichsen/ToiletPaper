@@ -16,8 +16,7 @@
             app:destination="@id/nav_about" />
         <action
             android:id="@+id/action_nav_home_to_nav_products"
-            app:destination="@id/nav_products">
-        </action>
+            app:destination="@id/nav_products" />
         <action
             android:id="@+id/action_nav_home_to_nav_compare"
             app:destination="@id/nav_compare" />
@@ -34,19 +33,6 @@
         <action
             android:id="@+id/action_nav_compare_to_nav_home"
             app:destination="@id/nav_home" />
-        <action
-            android:id="@+id/action_nav_compare_to_nav_compare_details"
-            app:destination="@id/nav_compare_details" />
-    </fragment>
-
-    <fragment
-        android:id="@+id/nav_compare_details"
-        android:name="net.myerichsen.toiletpaper.ui.compare.CompareDetailsFragment"
-        android:label="@string/menu_compare_details"
-        tools:layout="@layout/compare_details_fragment">
-        <action
-            android:id="@+id/action_nav_compare_details_to_nav_compare"
-            app:destination="@id/nav_compare" />
     </fragment>
 
 
@@ -57,8 +43,7 @@
         tools:layout="@layout/product_fragment">
         <action
             android:id="@+id/action_nav_products_to_nav_home"
-            app:destination="@id/nav_home">
-        </action>
+            app:destination="@id/nav_home" />
         <action
             android:id="@+id/action_nav_products_to_nav_product_detailss"
             app:destination="@id/nav_product_details" />

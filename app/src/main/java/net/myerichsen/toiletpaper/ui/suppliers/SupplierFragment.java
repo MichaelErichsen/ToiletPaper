@@ -24,8 +24,8 @@ import net.myerichsen.toiletpaper.database.SupplierDbAdapter;
 import java.util.List;
 
 public class SupplierFragment extends Fragment {
-    SupplierDbAdapter helper;
     final TableRow.LayoutParams llp = new TableRow.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+    SupplierDbAdapter helper;
     private View root;
     private Context context;
 
@@ -37,7 +37,7 @@ public class SupplierFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
 //        try {
-            root = inflater.inflate(R.layout.supplier_fragment, container, false);
+        root = inflater.inflate(R.layout.supplier_fragment, container, false);
 //        } catch (Exception e) {
 //            e.printStackTrace();
 //            Snackbar snackbar = Snackbar.make(getActivity().findViewById(android.R.id.content), e.getMessage(), Snackbar.LENGTH_LONG);

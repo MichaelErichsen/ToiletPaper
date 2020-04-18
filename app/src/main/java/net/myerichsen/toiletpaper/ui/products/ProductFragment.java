@@ -25,8 +25,8 @@ import java.util.List;
 
 // TODO Double tapping opens the details fragment
 public class ProductFragment extends Fragment {
-    ProductDbAdapter helper;
     final TableRow.LayoutParams llp = new TableRow.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+    ProductDbAdapter helper;
     private View root;
     private Context context;
 
