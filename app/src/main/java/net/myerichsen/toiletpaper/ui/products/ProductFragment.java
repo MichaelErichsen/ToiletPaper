@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2020. Michael Erichsen.
+ */
+
 package net.myerichsen.toiletpaper.ui.products;
 
 import android.content.Context;
@@ -24,16 +28,20 @@ import net.myerichsen.toiletpaper.database.ProductDbAdapter;
 import java.util.List;
 
 // TODO Double tapping opens the details fragment
+
+/**
+ * Product list fragment
+ */
 public class ProductFragment extends Fragment {
-    final TableRow.LayoutParams llp = new TableRow.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-    ProductDbAdapter helper;
+    private final TableRow.LayoutParams llp = new TableRow.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+    private ProductDbAdapter helper;
     private View root;
     private Context context;
     private ProductData pd;
 
-    public static ProductFragment newInstance() {
-        return new ProductFragment();
-    }
+//    public static ProductFragment newInstance() {
+//        return new ProductFragment();
+//    }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -54,12 +62,18 @@ public class ProductFragment extends Fragment {
             @Override
             public void onClick(View view) {
 
-                TableRow selectedRow = (TableRow) view;
-                TextView tv = (TextView) selectedRow.getChildAt(0);
-                int uid = Integer.parseInt(tv.getText().toString());
-                Snackbar snackbar = Snackbar
-                        .make(getActivity().findViewById(android.R.id.content), uid + "was clicked", Snackbar.LENGTH_LONG);
-                snackbar.show();
+                try {
+                    TableRow selectedRow = (TableRow) view;
+                    TextView tv = (TextView) selectedRow.getChildAt(0);
+                    int uid = Integer.parseInt(tv.getText().toString());
+                    Snackbar snackbar = Snackbar
+                            .make(getActivity().findViewById(android.R.id.content), uid + "was clicked", Snackbar.LENGTH_LONG);
+                    snackbar.show();
+                } catch (NumberFormatException e) {
+                    Snackbar snackbar = Snackbar
+                            .make(getActivity().findViewById(android.R.id.content), e.getMessage(), Snackbar.LENGTH_LONG);
+                    snackbar.show();
+                }
             }
         });
 
