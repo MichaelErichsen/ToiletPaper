@@ -15,7 +15,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
 
 import com.google.android.material.snackbar.Snackbar;
 
@@ -29,7 +28,6 @@ public class SupplierFragment extends Fragment {
     final TableRow.LayoutParams llp = new TableRow.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
     private View root;
 
-    // TODO Crashes when called
     public static SupplierFragment newInstance() {
         return new SupplierFragment();
     }
@@ -50,8 +48,6 @@ public class SupplierFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        SupplierViewModel mViewModel = new ViewModelProvider(this).get(SupplierViewModel.class);
-        // TODO: Use the ViewModel
 
         Context context = getContext();
         helper = new SupplierDbAdapter(context);
