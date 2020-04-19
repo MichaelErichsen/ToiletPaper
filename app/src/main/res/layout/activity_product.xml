@@ -15,17 +15,34 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
+        <TextView
+            android:id="@+id/textView15"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Klik for at slette"
+            android:textSize="24sp" />
+
         <ImageButton
             android:id="@+id/imageButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:srcCompat="@android:drawable/ic_delete" />
+
     </LinearLayout>
 
-    <TableLayout
-        android:id="@+id/productDetailTableLayout"
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1" />
+        android:layout_weight="1">
+
+
+        <TableLayout
+            android:id="@+id/productDetailTableLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+        >
+    </ScrollView>
 
 </LinearLayout>

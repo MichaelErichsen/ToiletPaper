@@ -26,6 +26,7 @@ public class ProductActivity extends AppCompatActivity {
     private View root;
     private Context context;
 
+    // TODO Handle delete button
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,43 +53,53 @@ public class ProductActivity extends AppCompatActivity {
 
         ProductData pd = helper.getProductDataByUid(uid);
 
-        /**
-         *         pd.setUid(UID)));
-         *         pd.setLayers(LAYERS)));
-         *         pd.setPackageRolls(PACKAGE_ROLLS)));
-         *         pd.setRollSheets(ROLL_SHEETS)));
-         *         pd.setSheetWidth(SHEET_WIDTH)));
-         *         pd.setSheetLength(SHEET_LENGTH)));
-         *         pd.setSheetLength_c(ROLL_LENGTH_C)));
-         *         pd.setRollLength(ROLL_LENGTH)));
-         *         pd.setRollLength_c(SHEET_LENGTH_C)));
-         *         pd.setPackagePrice(PACKAGE_PRICE)));
-         *         pd.setRollPrice(ROLL_PRICE)));
-         *         pd.setRollPrice_c(TpDbHelper.ROLL_PRICE_C)));
-         *         pd.setPaperWeight(PAPER_WEIGHT)));
-         *         pd.setPaperWeight_c(TpDbHelper.PAPER_WEIGHT_C)));
-         *         pd.setKiloPrice(KILO_PRICE)));
-         *         pd.setKiloPrice_c(TpDbHelper.KILO_PRICE_C)));
-         *         pd.setMeterPrice(METER_PRICE)));
-         *         pd.setMeterPrice_c(TpDbHelper.METER_PRICE_C)));
-         *         pd.setSheetPrice(SHEET_PRICE)));
-         *         pd.setSheetPrice_c(TpDbHelper.SHEET_PRICE_C)));
-         *         pd.setSupplier(SUPPLIER)));
-         *         pd.setComments(COMMENTS)));
-         *         pd.setItemNo(ITEM_NO)));
-         *         pd.setBrand(BRAND)));
-         *         pd.setTimestamp(TIME_STAMP)));
-         */
-        // Add a row for each value
+        addTableRow(tableLayout, "Uid", pd.getUid());
+        addTableRow(tableLayout, "Item no", pd.getItemNo());
+        addTableRow(tableLayout, "Brand", pd.getBrand());
+        addTableRow(tableLayout, "Layers", pd.getLayers());
+        addTableRow(tableLayout, "Package rolls", pd.getPackageRolls());
+        addTableRow(tableLayout, "Roll sheets", pd.getRollSheets());
+        addTableRow(tableLayout, "Sheet width", pd.getSheetWidth());
+        addTableRow(tableLayout, "Sheet length", pd.getSheetLength());
+        addTableRow(tableLayout, "Roll Length", pd.getRollLength());
+        addTableRow(tableLayout, "Package price", pd.getPackagePrice());
+        addTableRow(tableLayout, "Roll price", pd.getRollPrice());
+        addTableRow(tableLayout, "Paper weight", pd.getPaperWeight());
+        addTableRow(tableLayout, "Kilo price", pd.getKiloPrice());
+        addTableRow(tableLayout, "Meter price", pd.getMeterPrice());
+        addTableRow(tableLayout, "Sheet price", pd.getSheetPrice());
+        addTableRow(tableLayout, "Supplier", pd.getSupplier());
+        addTableRow(tableLayout, "Comments", pd.getComments());
+        addTableRow(tableLayout, "Timestamp", pd.getTimestamp());
+    }
 
+    private void addTableRow(TableLayout tableLayout, String uid2, String uid3) {
+        TableRow tableRow;
         tableRow = new TableRow(context);
         tableRow.setBackgroundColor(Color.BLACK);
         tableRow.setPadding(2, 2, 2, 2); //Border between rows
+        tableRow.addView(addCell(uid2));
+        tableRow.addView(addCell(uid3));
+        tableLayout.addView(tableRow);
+    }
 
+    private void addTableRow(TableLayout tableLayout, String uid2, float uid3) {
+        TableRow tableRow;
+        tableRow = new TableRow(context);
+        tableRow.setBackgroundColor(Color.BLACK);
+        tableRow.setPadding(2, 2, 2, 2); //Border between rows
+        tableRow.addView(addCell(uid2));
+        tableRow.addView(addCell(uid3));
+        tableLayout.addView(tableRow);
+    }
 
-        tableRow.addView(addCell("UID"));
-        tableRow.addView(addCell(pd.getUid()));
-
+    private void addTableRow(TableLayout tableLayout, String uid2, int uid3) {
+        TableRow tableRow;
+        tableRow = new TableRow(context);
+        tableRow.setBackgroundColor(Color.BLACK);
+        tableRow.setPadding(2, 2, 2, 2); //Border between rows
+        tableRow.addView(addCell(uid2));
+        tableRow.addView(addCell(uid3));
         tableLayout.addView(tableRow);
     }
 
@@ -103,7 +114,7 @@ public class ProductActivity extends AppCompatActivity {
         TextView tv = new TextView(context);
         tv.setText(cellData);
         tv.setPadding(0, 0, 4, 3);
-        tv.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
+        tv.setTextSize(TypedValue.COMPLEX_UNIT_SP, 24);
         cell.addView(tv);
         return cell;
     }

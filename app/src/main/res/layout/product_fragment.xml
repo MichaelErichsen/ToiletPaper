@@ -19,10 +19,18 @@
             android:textSize="24sp" />
     </LinearLayout>
 
-    <TableLayout
-        android:id="@+id/productTableLayout"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_weight="1">
+
+        <TableLayout
+            android:id="@+id/productTableLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+    </ScrollView>
 
 
 </LinearLayout>
