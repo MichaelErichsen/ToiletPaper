@@ -2,9 +2,7 @@ package net.myerichsen.toiletpaper;
 
 import android.os.Bundle;
 import android.view.Menu;
-import android.view.MenuItem;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -13,11 +11,10 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.google.android.material.navigation.NavigationView;
-import com.google.android.material.snackbar.Snackbar;
 
 import static androidx.navigation.Navigation.findNavController;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AppCompatActivity {
     private AppBarConfiguration mAppBarConfiguration;
 
     @Override
@@ -28,7 +25,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setSupportActionBar(toolbar);
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
+//        navigationView.setNavigationItemSelectedListener(this);
 
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
@@ -56,14 +53,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 || super.onSupportNavigateUp();
     }
 
-    @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        int id = item.getItemId();
-
-        Snackbar snackbar = Snackbar
-                .make(item.getActionView(), "Navigation item id " + id, Snackbar.LENGTH_INDEFINITE);
-        snackbar.show();
-
-        return false;
-    }
+//    @Override
+//    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+//        int id = item.getItemId();
+//
+//        Snackbar snackbar = Snackbar
+//                .make(item.getActionView(), "Navigation item id " + id, Snackbar.LENGTH_INDEFINITE);
+//        snackbar.show();
+//
+//        return false;
+//    }
 }
