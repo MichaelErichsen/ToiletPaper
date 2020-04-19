@@ -16,14 +16,14 @@ import java.util.List;
  * Database helper for supplier table
  */
 public class SupplierDbAdapter {
-    final SupplierHelper supplierHelper;
-    final String[] columns = {SupplierHelper.UID, SupplierHelper.SUPPLIER, SupplierHelper.URI,
-            SupplierHelper.TIME_STAMP};
+    private final SupplierHelper supplierHelper;
+    private final String[] columns = {SupplierHelper.UID, SupplierHelper.SUPPLIER,
+            SupplierHelper.URI, SupplierHelper.TIME_STAMP};
 
     /**
      * Constructor
      *
-     * @param context
+     * @param context Application context
      */
     public SupplierDbAdapter(Context context) {
         supplierHelper = new SupplierHelper(context);
@@ -32,7 +32,7 @@ public class SupplierDbAdapter {
     /**
      * Insert a row
      */
-    public void insertData(SupplierData sd) {
+    private void insertData(SupplierData sd) {
         SQLiteDatabase dbb = supplierHelper.getWritableDatabase();
         ContentValues contentValues = extractSupplierData(sd);
         dbb.insert(SupplierHelper.TABLE_NAME, null, contentValues);
@@ -41,8 +41,9 @@ public class SupplierDbAdapter {
 
     /**
      * Get all data from table
-     * @param context
-     * @return
+     *
+     * @param context Application context
+     * @return List of supplier data
      */
     public List<SupplierData> getAllData(Context context) {
         List<SupplierData> lsd = new ArrayList<>();
@@ -52,7 +53,6 @@ public class SupplierDbAdapter {
             // TODO Exception here: No such table TABLE_SUPPLIER
             Cursor cursor = db.query(SupplierHelper.TABLE_NAME, columns, null, null, null, null, null);
 
-            SupplierData sd;
             while (cursor.moveToNext()) {
                 lsd.add(populateSupplierData(cursor));
             }
@@ -65,8 +65,9 @@ public class SupplierDbAdapter {
 
     /**
      * Extract supplier data into content value object
-     * @param sd
-     * @return
+     *
+     * @param sd Supplier data
+     * @return ContentValues
      */
     private ContentValues extractSupplierData(SupplierData sd) {
         ContentValues contentValues = new ContentValues();
@@ -77,9 +78,10 @@ public class SupplierDbAdapter {
     }
 
     /**
-     * Populate supplier data from table
-     * @param cursor
-     * @return
+     * Populate supplier data from database table
+     *
+     * @param cursor Database cursor
+     * @return Supplier data
      */
     private SupplierData populateSupplierData(Cursor cursor) {
         SupplierData sd = new SupplierData();
@@ -92,6 +94,7 @@ public class SupplierDbAdapter {
 
     /**
      * Delete row from table
+     *
      * @param ITEM_NO
      * @return
      */
@@ -108,6 +111,10 @@ public class SupplierDbAdapter {
      */
     static class SupplierHelper extends SQLiteOpenHelper {
 
+        // Database TOILET_PAPER_DATABASE is located at
+        // "C:/Users/michael/Documents/AndroidStudio/DeviceExplorer/Pixel_2_API_R [emulator-5554]/data/data/net.myerichsen.toiletpaper/databases/TOILET_PAPER_DATABASE"
+
+        // TODO Drop URI and add chain instead
         private static final String DATABASE_NAME = "TOILET_PAPER_DATABASE";
         private static final String TABLE_NAME = "TABLE_SUPPLIER";
         private static final String UID = "UID";
@@ -115,7 +122,7 @@ public class SupplierDbAdapter {
         private static final String URI = "URI";
         private static final String TIME_STAMP = "TIME_STAMP";
 
-        private static final int DATABASE_Version = 1;    // Database Version
+        private static final int DATABASE_Version = 2;    // Database Version
         private static final String CREATE_TABLE = "CREATE TABLE " + TABLE_NAME +
                 " (" + UID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 SUPPLIER + " TEXT, " +
@@ -127,21 +134,42 @@ public class SupplierDbAdapter {
 
         /**
          * Constructor
+         *
          * @param context
          */
-        public SupplierHelper(Context context) {
+        SupplierHelper(Context context) {
             super(context, DATABASE_NAME, null, DATABASE_Version);
             this.context = context;
         }
 
         /**
-         * On create table
+         * Called when database is created
+         *
          * @param db
          */
         public void onCreate(SQLiteDatabase db) {
             try {
+                Toast.makeText(context, CREATE_TABLE, Toast.LENGTH_LONG).show();
                 db.execSQL(CREATE_TABLE);
                 loadInitialData();
+            } catch (Exception e) {
+                Toast.makeText(context, e.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        }
+
+        /**
+         * Called when the database needs to be upgraded
+         *
+         * @param db
+         * @param oldVersion
+         * @param newVersion
+         */
+        @Override
+        public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+            try {
+                Toast.makeText(context, "OnUpgrade", Toast.LENGTH_LONG).show();
+                db.execSQL(DROP_TABLE);
+                onCreate(db);
             } catch (Exception e) {
                 Toast.makeText(context, e.getMessage(), Toast.LENGTH_LONG).show();
             }
@@ -172,21 +200,5 @@ public class SupplierDbAdapter {
             }
         }
 
-        /**
-         * On upgrade table
-         * @param db
-         * @param oldVersion
-         * @param newVersion
-         */
-        @Override
-        public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-            try {
-                Toast.makeText(context, "OnUpgrade", Toast.LENGTH_LONG).show();
-                db.execSQL(DROP_TABLE);
-                onCreate(db);
-            } catch (Exception e) {
-                Toast.makeText(context, e.getMessage(), Toast.LENGTH_LONG).show();
-            }
-        }
     }
 }

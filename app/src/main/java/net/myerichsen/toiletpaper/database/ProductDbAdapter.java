@@ -16,8 +16,8 @@ import java.util.List;
  * Database helper for product table
  */
 public class ProductDbAdapter {
-    final ProductHelper productHelper;
-    final String[] columns = {ProductHelper.UID, ProductHelper.LAYERS, ProductHelper.PACKAGE_ROLLS,
+    private final ProductHelper productHelper;
+    private final String[] columns = {ProductHelper.UID, ProductHelper.LAYERS, ProductHelper.PACKAGE_ROLLS,
             ProductHelper.ROLL_SHEETS, ProductHelper.SHEET_WIDTH, ProductHelper.SHEET_LENGTH,
             ProductHelper.SHEET_LENGTH_C, ProductHelper.ROLL_LENGTH, ProductHelper.ROLL_LENGTH_C,
             ProductHelper.PACKAGE_PRICE, ProductHelper.ROLL_PRICE, ProductHelper.ROLL_PRICE_C,
@@ -88,8 +88,9 @@ public class ProductDbAdapter {
     }
 
     /**
-     * Get all data
+     * Get all data from table
      *
+     * @param context Application context
      * @return List of columns in record
      */
     public List<ProductData> getAllData(Context context) {
@@ -99,7 +100,6 @@ public class ProductDbAdapter {
 
         Cursor cursor = db.query(ProductHelper.TABLE_NAME, columns, null, null, null, null, null);
 
-//        ProductData pd;
         while (cursor.moveToNext()) {
             lpd.add(populateProductData(cursor));
         }
@@ -109,8 +109,8 @@ public class ProductDbAdapter {
     /**
      * Extract product data into Content Value object
      *
-     * @param pd
-     * @return
+     * @param pd Product data
+     * @return ContentValues
      */
     private ContentValues extractProductData(ProductData pd) {
         ContentValues contentValues = new ContentValues();
@@ -143,8 +143,9 @@ public class ProductDbAdapter {
 
     /**
      * Populate product data from database table
-     * @param cursor
-     * @return
+     *
+     * @param cursor Database cursor
+     * @return product data
      */
     private ProductData populateProductData(Cursor cursor) {
         ProductData pd = new ProductData();
@@ -180,6 +181,7 @@ public class ProductDbAdapter {
 
     /**
      * Delete row from table
+     *
      * @param ITEM_NO
      * @return
      */
@@ -196,7 +198,7 @@ public class ProductDbAdapter {
     static class ProductHelper extends SQLiteOpenHelper {
 
         private static final String DATABASE_NAME = "TOILET_PAPER_DATABASE";
-        private static final String TABLE_NAME = "TABLE_PACKAGE";
+        private static final String TABLE_NAME = "TABLE_PRODUCT";
         private static final String UID = "UID";
         private static final String LAYERS = "LAYERS";
         private static final String PACKAGE_ROLLS = "PACKAGE_ROLLS";
@@ -223,7 +225,7 @@ public class ProductDbAdapter {
         private static final String BRAND = "BRAND";
         private static final String TIME_STAMP = "TIME_STAMP";
 
-        private static final int DATABASE_Version = 1;    // Database Version
+        private static final int DATABASE_Version = 2;    // Database Version
         private static final String CREATE_TABLE = "CREATE TABLE " + TABLE_NAME +
                 " (" + UID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 LAYERS + " INTEGER, " +
@@ -256,15 +258,17 @@ public class ProductDbAdapter {
 
         /**
          * Constructor
+         *
          * @param context
          */
-        public ProductHelper(Context context) {
+        ProductHelper(Context context) {
             super(context, DATABASE_NAME, null, DATABASE_Version);
             this.context = context;
         }
 
         /**
          * On create table
+         *
          * @param db
          */
         public void onCreate(SQLiteDatabase db) {
@@ -278,6 +282,7 @@ public class ProductDbAdapter {
 
         /**
          * On upgrade table
+         *
          * @param db
          * @param oldVersion
          * @param newVersion
@@ -297,19 +302,19 @@ public class ProductDbAdapter {
          * Initial data load
          */
         private void loadInitialData() {
-            float rl = (float) 29.1;
-            float rp = (float) 5.125;
-            float kp = (float) 31.64;
-            float mp = (float) 0.1761;
-            float sp = (float) 0.022;
-            ProductData pd = new ProductData("5700384289095", "Irma Tusindfryd Toiletpapir",
-                    3, 8, 233, 97, 125, 0, rl,
-                    0, 41, 0, rp, 1, 48,
-                    0, kp, 0, mp, 1, sp, 1,
-                    "Coop (Kvickly/Brugsen/Fakta/Irma)", "Sælges hos Irma og Brugsen");
-
             try {
                 ProductDbAdapter pHelper = new ProductDbAdapter(context);
+
+                float rl = (float) 29.1;
+                float rp = (float) 5.125;
+                float kp = (float) 31.64;
+                float mp = (float) 0.1761;
+                float sp = (float) 0.022;
+                ProductData pd = new ProductData("5700384289095", "Irma Tusindfryd Toiletpapir",
+                        3, 8, 233, 97, 125, 0, rl,
+                        0, 41, 0, rp, 1, 48,
+                        0, kp, 0, mp, 1, sp, 1,
+                        "Coop (Kvickly/Brugsen/Fakta/Irma)", "Sælges hos Irma og Brugsen");
                 pHelper.insertData(pd);
             } catch (Exception e) {
                 Toast.makeText(context, e.getMessage(), Toast.LENGTH_LONG).show();
@@ -317,6 +322,4 @@ public class ProductDbAdapter {
 
         }
     }
-
-
 }

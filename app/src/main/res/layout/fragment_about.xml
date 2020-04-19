@@ -28,7 +28,8 @@
                 android:layout_height="wrap_content"
                 android:autoLink="web"
                 android:text="https://www.dev2qa.com/passing-data-between-activities-android-tutorial/"
-                android:textSize="24sp" />
+                android:textSize="24sp"
+                tools:ignore="HardcodedText" />
 
             <TextView
                 android:id="@+id/textView3"
