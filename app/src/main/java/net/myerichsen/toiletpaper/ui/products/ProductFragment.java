@@ -109,7 +109,7 @@ public class ProductFragment extends Fragment {
                     snackbar.show();
 
                     Intent productIntent = new Intent(context, ProductActivity.class);
-                    //              startIntent.putExtra("net.myrichsen.mysecondapplication.SOMETHING", "HELLO, WORLD");
+                    productIntent.putExtra("net.myrichsen.toiletpaper.UID", String.valueOf(uid));
                     startActivity(productIntent);
                 } catch (NumberFormatException e) {
                     Snackbar snackbar = Snackbar

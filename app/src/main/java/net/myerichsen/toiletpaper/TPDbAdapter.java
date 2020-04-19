@@ -33,6 +33,7 @@ public class TPDbAdapter {
             TpDbHelper.TIME_STAMP};
     private final String[] sdColumns = {TpDbHelper.SUPPLIER,
             TpDbHelper.CHAIN, TpDbHelper.TIME_STAMP};
+    private Context context;
 
     /**
      * Constructor
@@ -41,6 +42,7 @@ public class TPDbAdapter {
      */
     public TPDbAdapter(Context context) {
         tpDbHelper = new TpDbHelper(context);
+        this.context = context;
     }
 
     /**
@@ -51,7 +53,7 @@ public class TPDbAdapter {
     public ProductData getProductDataByBrand(String brand) {
         ProductData pd = null;
 
-        SQLiteDatabase db = tpDbHelper.getWritableDatabase();
+        SQLiteDatabase db = tpDbHelper.getReadableDatabase();
 
         String[] args = {brand};
         Cursor cursor = db.query(TpDbHelper.TABLE_PRODUCT, pdColumns, "BRAND=?", args, null, null, null);
@@ -90,13 +92,38 @@ public class TPDbAdapter {
     public ProductData getProductDataByItemNo(String itemNo) {
         ProductData pd = null;
 
-        SQLiteDatabase db = tpDbHelper.getWritableDatabase();
-
+        SQLiteDatabase db = tpDbHelper.getReadableDatabase();
         String[] args = {itemNo};
         Cursor cursor = db.query(TpDbHelper.TABLE_PRODUCT, pdColumns, "ITEM_NO=?", args, null, null, null);
 
         if (cursor.getCount() > 0) {
             pd = populateProductData(cursor);
+        }
+
+        return pd;
+    }
+
+    /**
+     * Get data by unigue ID
+     *
+     * @return List of columns in record
+     */
+    public ProductData getProductDataByUid(String uid) {
+        ProductData pd = null;
+
+        try {
+            SQLiteDatabase db = tpDbHelper.getReadableDatabase();
+
+            String[] args = {uid};
+            Cursor cursor = db.query(TpDbHelper.TABLE_PRODUCT, pdColumns, "UID=?", args, null, null, null);
+
+            if (cursor.getCount() > 0) {
+                if (cursor.moveToNext()) {
+                    pd = populateProductData(cursor);
+                }
+            }
+        } catch (Exception e) {
+            Toast.makeText(context, e.getMessage(), Toast.LENGTH_LONG).show();
         }
 
         return pd;
@@ -111,7 +138,7 @@ public class TPDbAdapter {
     public List<ProductData> getAllProductData(Context context) {
         List<ProductData> lpd = new ArrayList<>();
 
-        SQLiteDatabase db = tpDbHelper.getWritableDatabase();
+        SQLiteDatabase db = tpDbHelper.getReadableDatabase();
 
         Cursor cursor = db.query(TpDbHelper.TABLE_PRODUCT, pdColumns, null, null, null, null, null);
 
@@ -136,7 +163,7 @@ public class TPDbAdapter {
     public List<SupplierData> getAllSupplierData(Context context) {
         List<SupplierData> lsd = new ArrayList<>();
         try {
-            SQLiteDatabase db = tpDbHelper.getWritableDatabase();
+            SQLiteDatabase db = tpDbHelper.getReadableDatabase();
 
             Cursor cursor = db.query(TpDbHelper.TABLE_SUPPLIER, sdColumns, null, null, null, null, null);
 
