@@ -131,7 +131,7 @@ public class ProductFragment extends Fragment {
         TextView tv = new TextView(context);
         tv.setText(cellData);
         tv.setPadding(0, 0, 4, 3);
-        tv.setTextSize(TypedValue.COMPLEX_UNIT_SP, 32);
+        tv.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
         cell.addView(tv);
         return cell;
     }
