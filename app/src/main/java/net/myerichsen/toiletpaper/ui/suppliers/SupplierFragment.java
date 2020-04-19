@@ -19,13 +19,13 @@ import androidx.fragment.app.Fragment;
 import com.google.android.material.snackbar.Snackbar;
 
 import net.myerichsen.toiletpaper.R;
-import net.myerichsen.toiletpaper.database.SupplierDbAdapter;
+import net.myerichsen.toiletpaper.TPDbAdapter;
 
 import java.util.List;
 
 public class SupplierFragment extends Fragment {
     final TableRow.LayoutParams llp = new TableRow.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-    SupplierDbAdapter helper;
+    TPDbAdapter helper;
     private View root;
     private Context context;
 
@@ -40,7 +40,7 @@ public class SupplierFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        helper = new SupplierDbAdapter(context);
+        helper = new TPDbAdapter(context);
 
         final TableLayout tableLayout = root.findViewById(R.id.supplierTableLayout);
 
@@ -65,6 +65,7 @@ public class SupplierFragment extends Fragment {
             Snackbar snackbar = Snackbar
                     .make(getActivity().findViewById(android.R.id.content), "No data in table", Snackbar.LENGTH_LONG);
             snackbar.show();
+            helper.doInitialLoad();
             return;
         }
 

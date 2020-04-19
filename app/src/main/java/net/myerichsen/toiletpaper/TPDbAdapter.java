@@ -1,4 +1,8 @@
-package net.myerichsen.toiletpaper.database;
+/*
+ * Copyright (c) 2020. Michael Erichsen.
+ */
+
+package net.myerichsen.toiletpaper;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -117,6 +121,12 @@ public class TPDbAdapter {
         return lpd;
     }
 
+    /**
+     * Do an inital load
+     */
+    public void doInitialLoad() {
+        tpDbHelper.loadInitialData();
+    }
     /**
      * Get all data from supplier table
      *
@@ -305,7 +315,7 @@ public class TPDbAdapter {
         private static final String TABLE_SUPPLIER = "TABLE_SUPPLIER";
         private static final String CHAIN = "CHAIN";
 
-        private static final int DATABASE_Version = 1;    // Database Version
+        private static final int DATABASE_Version = 3;    // Database Version
         private static final String CREATE_PRODUCT_TABLE = "CREATE TABLE " + TABLE_PRODUCT +
                 " (" + UID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 LAYERS + " INTEGER, " +

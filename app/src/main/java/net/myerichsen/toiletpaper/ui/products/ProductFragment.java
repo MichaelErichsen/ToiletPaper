@@ -25,7 +25,7 @@ import com.google.android.material.snackbar.Snackbar;
 
 import net.myerichsen.toiletpaper.ProductActivity;
 import net.myerichsen.toiletpaper.R;
-import net.myerichsen.toiletpaper.database.TPDbAdapter;
+import net.myerichsen.toiletpaper.TPDbAdapter;
 
 import java.util.List;
 
@@ -76,6 +76,7 @@ public class ProductFragment extends Fragment {
             Snackbar snackbar = Snackbar
                     .make(getActivity().findViewById(android.R.id.content), "No data in table", Snackbar.LENGTH_LONG);
             snackbar.show();
+            helper.doInitialLoad();
             return;
         }
 
@@ -108,7 +109,6 @@ public class ProductFragment extends Fragment {
                     snackbar.show();
 
                     Intent productIntent = new Intent(context, ProductActivity.class);
-                    // TODO Pass filter and sort key
                     //              startIntent.putExtra("net.myrichsen.mysecondapplication.SOMETHING", "HELLO, WORLD");
                     startActivity(productIntent);
                 } catch (NumberFormatException e) {

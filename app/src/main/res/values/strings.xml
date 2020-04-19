@@ -62,4 +62,8 @@
     <string name="compare_key">Vælg sorteringsnøgle</string>
     <string name="title_activity_compare">CompareActivity</string>
     <string name="product_fragment_prompt">Click row to see details\n\n</string>
+    <string name="paperWeightRb">Papirvægt (g pr. m2)</string>
+    <string name="kiloPriceRb">Kilopris</string>
+    <string name="meterPriceRb">Meterpris</string>
+    <string name="sheetPriceRb">Pris pr. ark</string>
 </resources>

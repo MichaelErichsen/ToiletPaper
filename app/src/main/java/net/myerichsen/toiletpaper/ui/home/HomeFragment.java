@@ -26,7 +26,7 @@ import com.google.android.material.snackbar.Snackbar;
 
 import net.myerichsen.toiletpaper.R;
 import net.myerichsen.toiletpaper.ScanActivity;
-import net.myerichsen.toiletpaper.database.TPDbAdapter;
+import net.myerichsen.toiletpaper.TPDbAdapter;
 import net.myerichsen.toiletpaper.ui.products.ProductData;
 
 import java.util.ArrayList;
