@@ -59,7 +59,9 @@ public class TPDbAdapter {
         Cursor cursor = db.query(TpDbHelper.TABLE_PRODUCT, pdColumns, "BRAND=?", args, null, null, null);
 
         if (cursor.getCount() > 0) {
-            pd = populateProductData(cursor);
+            if (cursor.moveToNext()) {
+                pd = populateProductData(cursor);
+            }
         }
 
         return pd;
@@ -97,7 +99,9 @@ public class TPDbAdapter {
         Cursor cursor = db.query(TpDbHelper.TABLE_PRODUCT, pdColumns, "ITEM_NO=?", args, null, null, null);
 
         if (cursor.getCount() > 0) {
-            pd = populateProductData(cursor);
+            if (cursor.moveToNext()) {
+                pd = populateProductData(cursor);
+            }
         }
 
         return pd;
@@ -154,6 +158,7 @@ public class TPDbAdapter {
     public void doInitialLoad() {
         tpDbHelper.loadInitialData();
     }
+
     /**
      * Get all data from supplier table
      *
@@ -304,6 +309,27 @@ public class TPDbAdapter {
         String[] whereArgs = {supplier};
 
         return db.delete(TpDbHelper.TABLE_SUPPLIER, TpDbHelper.SUPPLIER + " = ?", whereArgs);
+    }
+
+    public List<ProductData> getSortedProductData(String sortKey, String sortFilter) {
+        List<ProductData> lpd = new ArrayList<>();
+
+        try {
+            SQLiteDatabase db = tpDbHelper.getReadableDatabase();
+
+            // TODO Handle filter
+            String[] args = {sortKey};
+            Cursor cursor = db.query(TpDbHelper.TABLE_PRODUCT, pdColumns, null,
+                    null, null, null, sortKey + " DESC");
+
+            while (cursor.moveToNext()) {
+                lpd.add(populateProductData(cursor));
+            }
+        } catch (Exception e) {
+            Toast.makeText(context, e.getMessage(), Toast.LENGTH_LONG).show();
+        }
+
+        return lpd;
     }
 
     /**
@@ -458,7 +484,7 @@ public class TPDbAdapter {
                         3, 8, 233, 97, 125, 0, (float) 29.1,
                         0, 41, 0, (float) 5.125, 1, 48,
                         0, (float) 31.64, 0, (float) 0.1761, 1, (float) 0.022, 1,
-                        "Kvickly", "Produceret i Sverige");
+                        "Kvickly Helsinge", "Produceret i Sverige");
                 tpHelper.insertData(pd);
 
                 pd = new ProductData("7311041080306", "First Price Toiletpapir 2-lags",
@@ -468,7 +494,7 @@ public class TPDbAdapter {
                         "Spar Vejby Strand", "Produceret i Litauen");
                 tpHelper.insertData(pd);
 
-                pd = new ProductData("5705830002242", "REMA 100 Toiletpapir",
+                pd = new ProductData("5705830002242", "REMA 1000 Toiletpapir",
                         2, 8, 282, 97, 125, 0, (float) 35.25,
                         0, (float) 9.75, 0, (float) 1.21875, 1, (float) 32.6,
                         0, (float) 10.93, 0, (float) 0.0346, 1, (float) 0.004322, 1,

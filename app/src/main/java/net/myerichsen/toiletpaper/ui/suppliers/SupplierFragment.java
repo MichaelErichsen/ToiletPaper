@@ -93,7 +93,7 @@ public class SupplierFragment extends Fragment {
         TextView tv = new TextView(context);
         tv.setText(cellData);
         tv.setPadding(0, 0, 4, 3);
-        tv.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
+        tv.setTextSize(TypedValue.COMPLEX_UNIT_SP, 24);
         cell.addView(tv);
         return cell;
 

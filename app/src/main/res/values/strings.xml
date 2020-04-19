@@ -58,12 +58,14 @@
     <string name="menu_compare">Sammenlign</string>
     <string name="menu_product_details">Detaljer</string>
     <string name="menu_compare_details">Detaljer</string>
-    <string name="compare_filter">Filtrer butikker</string>
-    <string name="compare_key">Vælg sorteringsnøgle</string>
+    <string name="compare_filter">\n\nFiltrer butikker</string>
+    <string name="compare_key">\n\nVælg sorteringsnøgle</string>
     <string name="title_activity_compare">CompareActivity</string>
-    <string name="product_fragment_prompt">Click row to see details\n\n</string>
+    <string name="product_fragment_prompt">Klik på en række for at se detaljer\n\n</string>
     <string name="paperWeightRb">Papirvægt (g pr. m2)</string>
     <string name="kiloPriceRb">Kilopris</string>
     <string name="meterPriceRb">Meterpris</string>
     <string name="sheetPriceRb">Pris pr. ark</string>
+    <string name="sortListPrompt">\n\nKlik for at se sorteret liste</string>
+    <string name="clickToDelete">Klik her for at slette</string>
 </resources>

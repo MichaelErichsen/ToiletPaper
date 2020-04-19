@@ -4,19 +4,150 @@
 
 package net.myerichsen.toiletpaper;
 
+import android.content.Context;
+import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.util.TypedValue;
+import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.TableLayout;
+import android.widget.TableRow;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class CompareActivity extends AppCompatActivity {
+import com.google.android.material.snackbar.Snackbar;
 
-    // TODO Display a table and a delete button
+import net.myerichsen.toiletpaper.ui.products.ProductData;
+
+import java.util.List;
+
+public class CompareActivity extends AppCompatActivity {
+    private final TableRow.LayoutParams llp = new TableRow.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+    private View root;
+    private Context context;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_compare);
+        context = getApplicationContext();
+        TPDbAdapter helper = new TPDbAdapter(context);
 
+        String sortKey = getIntent().getExtras().getString("net.myerichsen.toiletpaper.SORT_KEY");
+        String sortFilter = getIntent().getExtras().getString("net.myerichsen.toiletpaper.SORT_FILTER");
+
+        final TableLayout tableLayout = findViewById(R.id.compareTableLayout);
+        TableRow tableRow = new TableRow(context);
+        tableRow.setBackgroundColor(Color.BLACK);
+        tableRow.setPadding(2, 2, 2, 2);
+        tableRow.addView(addCell(sortKey));
+        tableRow.addView(addCell("Varenummer"));
+        tableRow.addView(addCell("Varemærke"));
+        tableRow.addView(addCell("Uid"));
+        tableLayout.addView(tableRow);
+
+        List<ProductData> lpd = helper.getSortedProductData(sortKey, sortFilter);
+
+        try {
+            lpd = helper.getAllProductData(context);
+        } catch (Exception e) {
+            Snackbar snackbar = Snackbar
+                    .make(findViewById(android.R.id.content), e.getMessage(), Snackbar.LENGTH_LONG);
+            snackbar.show();
+            return;
+        }
+
+        if (lpd.size() == 0) {
+            Snackbar snackbar = Snackbar
+                    .make(findViewById(android.R.id.content), "No data in table", Snackbar.LENGTH_LONG);
+            snackbar.show();
+            helper.doInitialLoad();
+            return;
+        }
+
+        for (int i = 0; i < lpd.size(); i++) {
+            ProductData pd = lpd.get(i);
+
+            tableRow = new TableRow(context);
+            tableRow.setBackgroundColor(Color.BLACK);
+            tableRow.setPadding(2, 2, 2, 2); //Border between rows
+
+            switch (sortKey) {
+                case "PAPER_WEIGHT":
+                    tableRow.addView(addCell(Float.toString(pd.getPaperWeight())));
+                    break;
+                case "KILO_PRICE":
+                    tableRow.addView(addCell(Float.toString(pd.getKiloPrice())));
+                    break;
+                case "METER_PRICE":
+                    tableRow.addView(addCell(Float.toString(pd.getMeterPrice())));
+                    break;
+                case "SHEET_PRICE":
+                    tableRow.addView(addCell(Float.toString(pd.getSheetPrice())));
+                    break;
+                default:
+                    Snackbar snackbar = Snackbar
+                            .make(findViewById(android.R.id.content), "Invalid sort key: " + sortKey, Snackbar.LENGTH_LONG);
+                    snackbar.show();
+                    break;
+            }
+
+            tableRow.addView(addCell(pd.getItemNo()));
+            tableRow.addView(addCell(pd.getBrand()));
+            tableRow.addView(addCell(pd.getUid()));
+            tableRow.setClickable(true);
+            tableRow.setOnClickListener(tableRowOnclickListener());
+            tableLayout.addView(tableRow);
+        }
     }
 
+    private View.OnClickListener tableRowOnclickListener() {
+        return new View.OnClickListener() {
+            public void onClick(View v) {
+                try {
+                    TableRow selectedRow = (TableRow) v;
+                    LinearLayout ll = (LinearLayout) selectedRow.getChildAt(3);
+                    TextView tv = (TextView) ll.getChildAt(0);
+                    int uid = Integer.parseInt(tv.getText().toString());
+                    Snackbar snackbar = Snackbar
+                            .make(findViewById(android.R.id.content), uid + " was clicked", Snackbar.LENGTH_LONG);
+                    snackbar.show();
 
+                    Intent productIntent = new Intent(context, ProductActivity.class);
+                    productIntent.putExtra("net.myrichsen.toiletpaper.UID", String.valueOf(uid));
+                    startActivity(productIntent);
+                } catch (NumberFormatException e) {
+                    Snackbar snackbar = Snackbar
+                            .make(findViewById(android.R.id.content), e.getMessage(), Snackbar.LENGTH_LONG);
+                    snackbar.show();
+                }
+            }
+        };
+    }
+
+    private LinearLayout addCell(String cellData) {
+        llp.setMargins(2, 2, 2, 2);
+
+        LinearLayout cell;
+        cell = new LinearLayout(context);
+        cell.setBackgroundColor(Color.WHITE);
+        cell.setLayoutParams(llp);//2px border on the right for the cell
+
+        TextView tv = new TextView(context);
+        tv.setText(cellData);
+        tv.setPadding(0, 0, 4, 3);
+        tv.setTextSize(TypedValue.COMPLEX_UNIT_SP, 24);
+        cell.addView(tv);
+        return cell;
+    }
+
+    private LinearLayout addCell(int cellData) {
+        return addCell(String.valueOf(cellData));
+    }
+
+    private LinearLayout addCell(float cellData) {
+        return addCell(String.valueOf(cellData));
+    }
 }

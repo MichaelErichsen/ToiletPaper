@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.RadioGroup;
 import android.widget.Spinner;
 
 import androidx.annotation.NonNull;
@@ -25,10 +26,13 @@ import java.util.ArrayList;
 
 public class CompareFragment extends Fragment {
     private Context context;
+    private String sortKey;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
+
+
         View root = inflater.inflate(R.layout.compare_fragment, container, false);
         context = getContext();
 
@@ -36,9 +40,9 @@ public class CompareFragment extends Fragment {
         ArrayList<String> layerArrayList = new ArrayList<>();
         // TODO Get from table
         layerArrayList.add("ALL");
-        layerArrayList.add("Bilka");
-        layerArrayList.add("Føtex");
-        layerArrayList.add("Kvickly");
+        layerArrayList.add("Rema Vejby");
+        layerArrayList.add("Spar Vejby Strand");
+        layerArrayList.add("Kvickly Helsinge");
         ArrayAdapter<String> layerArrayAdapter = new ArrayAdapter<>(context, android.R.layout.simple_spinner_item, layerArrayList);
         layerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         filterSpinner.setAdapter(layerArrayAdapter);
@@ -53,13 +57,38 @@ public class CompareFragment extends Fragment {
             }
         });
 
+        sortKey = "PAPER_WEIGHT";
+
+        RadioGroup rg = root.findViewById(R.id.sortKeyRadioGroup);
+        rg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                switch (checkedId) {
+                    case R.id.radioButton1:
+                        sortKey = "PAPER_WEIGHT";
+                        break;
+                    case R.id.radioButton2:
+                        sortKey = "KILO_PRICE";
+                        break;
+                    case R.id.radioButton3:
+                        sortKey = "METER_PRICE";
+                        break;
+                    case R.id.radioButton4:
+                        sortKey = "SHEET_PRICE";
+                        break;
+                    default:
+                        throw new IllegalStateException("Unexpected value: " + checkedId);
+                }
+            }
+        });
+
         View compareBtn = root.findViewById(R.id.compareBtn);
         compareBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent compareIntent = new Intent(context, CompareActivity.class);
-                // TODO Pass filter and sort key
-                //              startIntent.putExtra("net.myrichsen.mysecondapplication.SOMETHING", "HELLO, WORLD");
+                // TODO Get filter from spinner
+                compareIntent.putExtra("net.myerichsen.toiletpaper.SORT_FILTER", "ALL");
+                compareIntent.putExtra("net.myerichsen.toiletpaper.SORT_KEY", sortKey);
                 startActivity(compareIntent);
             }
         });
