@@ -47,9 +47,8 @@ public class SupplierFragment extends Fragment {
         TableRow tableRow = new TableRow(context);
         tableRow.setBackgroundColor(Color.BLACK);
         tableRow.setPadding(2, 2, 2, 2);
-        tableRow.addView(addCell("UID"));
         tableRow.addView(addCell("Butik"));
-        tableRow.addView(addCell("URI"));
+        tableRow.addView(addCell("Kæde"));
         tableLayout.addView(tableRow);
 
         List<SupplierData> lsd;
@@ -76,9 +75,8 @@ public class SupplierFragment extends Fragment {
             tableRow.setBackgroundColor(Color.BLACK);
             tableRow.setPadding(2, 2, 2, 2); //Border between rows
 
-            tableRow.addView(addCell(Integer.toString(sd.getUid())));
             tableRow.addView(addCell(sd.getSupplier()));
-            tableRow.addView(addCell(sd.getUri()));
+            tableRow.addView(addCell(sd.getChain()));
             tableLayout.addView(tableRow);
         }
     }

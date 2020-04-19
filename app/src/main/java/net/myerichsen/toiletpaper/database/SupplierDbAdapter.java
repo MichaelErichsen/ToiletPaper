@@ -17,8 +17,8 @@ import java.util.List;
  */
 public class SupplierDbAdapter {
     private final SupplierHelper supplierHelper;
-    private final String[] columns = {SupplierHelper.UID, SupplierHelper.SUPPLIER,
-            SupplierHelper.URI, SupplierHelper.TIME_STAMP};
+    private final String[] columns = {SupplierHelper.SUPPLIER,
+            SupplierHelper.CHAIN, SupplierHelper.TIME_STAMP};
 
     /**
      * Constructor
@@ -72,7 +72,7 @@ public class SupplierDbAdapter {
     private ContentValues extractSupplierData(SupplierData sd) {
         ContentValues contentValues = new ContentValues();
         contentValues.put(SupplierHelper.SUPPLIER, sd.getSupplier());
-        contentValues.put(SupplierHelper.URI, sd.getUri());
+        contentValues.put(SupplierHelper.CHAIN, sd.getChain());
         contentValues.put(SupplierHelper.TIME_STAMP, sd.getTimestamp());
         return contentValues;
     }
@@ -85,9 +85,8 @@ public class SupplierDbAdapter {
      */
     private SupplierData populateSupplierData(Cursor cursor) {
         SupplierData sd = new SupplierData();
-        sd.setUid(cursor.getInt(cursor.getColumnIndex(SupplierHelper.UID)));
         sd.setSupplier(cursor.getString(cursor.getColumnIndex(SupplierHelper.SUPPLIER)));
-        sd.setUri(cursor.getString(cursor.getColumnIndex(SupplierHelper.URI)));
+        sd.setChain(cursor.getString(cursor.getColumnIndex(SupplierHelper.CHAIN)));
         sd.setTimestamp(cursor.getString(cursor.getColumnIndex(SupplierHelper.TIME_STAMP)));
         return sd;
     }
@@ -114,19 +113,16 @@ public class SupplierDbAdapter {
         // Database TOILET_PAPER_DATABASE is located at
         // "C:/Users/michael/Documents/AndroidStudio/DeviceExplorer/Pixel_2_API_R [emulator-5554]/data/data/net.myerichsen.toiletpaper/databases/TOILET_PAPER_DATABASE"
 
-        // TODO Drop URI and add chain instead
         private static final String DATABASE_NAME = "TOILET_PAPER_DATABASE";
         private static final String TABLE_NAME = "TABLE_SUPPLIER";
-        private static final String UID = "UID";
         private static final String SUPPLIER = "SUPPLIER";
-        private static final String URI = "URI";
+        private static final String CHAIN = "CHAIN";
         private static final String TIME_STAMP = "TIME_STAMP";
 
         private static final int DATABASE_Version = 2;    // Database Version
         private static final String CREATE_TABLE = "CREATE TABLE " + TABLE_NAME +
-                " (" + UID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                SUPPLIER + " TEXT, " +
-                URI + " TEXT, " +
+                " (" + SUPPLIER + " TEXT PRIMARY KEY, " +
+                CHAIN + " TEXT, " +
                 TIME_STAMP + " TEXT);";
 
         private static final String DROP_TABLE = "DROP TABLE IF EXISTS " + TABLE_NAME;

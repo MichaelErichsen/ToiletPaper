@@ -4,12 +4,11 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
- * Class to encapsulate all toilet paper supplier data.
+ * Class to encapsulate all toilet paper supplier data
  */
 public class SupplierData {
-    private int uid;
     private String supplier = "";
-    private String uri = "";
+    private String chain = "";
     private String timestamp;
 
     /**
@@ -29,18 +28,10 @@ public class SupplierData {
      */
     public SupplierData(String supplier, String uri) {
         this.supplier = supplier;
-        this.uri = uri;
+        this.chain = uri;
         Long tsLong = System.currentTimeMillis();
         SimpleDateFormat s = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss");
         timestamp = s.format(new Date());
-    }
-
-    public int getUid() {
-        return uid;
-    }
-
-    public void setUid(int uid) {
-        this.uid = uid;
     }
 
     public String getSupplier() {
@@ -51,12 +42,12 @@ public class SupplierData {
         this.supplier = supplier;
     }
 
-    public String getUri() {
-        return uri;
+    public String getChain() {
+        return chain;
     }
 
-    public void setUri(String uri) {
-        this.uri = uri;
+    public void setChain(String chain) {
+        this.chain = chain;
     }
 
     public String getTimestamp() {
