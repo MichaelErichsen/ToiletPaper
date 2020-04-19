@@ -26,7 +26,7 @@ import com.google.android.material.snackbar.Snackbar;
 
 import net.myerichsen.toiletpaper.R;
 import net.myerichsen.toiletpaper.ScanActivity;
-import net.myerichsen.toiletpaper.database.ProductDbAdapter;
+import net.myerichsen.toiletpaper.database.TPDbAdapter;
 import net.myerichsen.toiletpaper.ui.products.ProductData;
 
 import java.util.ArrayList;
@@ -38,7 +38,7 @@ import static android.app.Activity.RESULT_OK;
 public class HomeFragment extends Fragment {
     private final static int REQUEST_CODE_1 = 1;
 
-    private ProductDbAdapter helper;
+    private TPDbAdapter helper;
     private View root;
 
     private EditText itemNoEditText;
@@ -73,7 +73,7 @@ public class HomeFragment extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
         root = inflater.inflate(R.layout.fragment_home, container, false);
         Context context = getContext();
-        helper = new ProductDbAdapter(context);
+        helper = new TPDbAdapter(context);
         pd = new ProductData();
 
         // Item no
@@ -295,9 +295,6 @@ public class HomeFragment extends Fragment {
                 snackbar.show();
             }
         });
-
-        // TODO Implement supplier web site lookup
-        AppCompatImageButton supplierBtn = root.findViewById(R.id.supplierBtn);
 
         AppCompatImageButton pricerunnerBtn = root.findViewById(R.id.pricerunnerBtn);
         pricerunnerBtn.setOnClickListener(new View.OnClickListener() {
@@ -552,7 +549,7 @@ public class HomeFragment extends Fragment {
 
     public void getDataByItemNo(View view) {
         EditText itemNoEditText = root.findViewById(R.id.itemNoEditText);
-        ProductData pd = helper.getDataByItemNo(itemNoEditText.getText().toString());
+        ProductData pd = helper.getProductDataByItemNo(itemNoEditText.getText().toString());
         Snackbar snackbar = Snackbar
                 .make(getActivity().findViewById(android.R.id.content), "Found item no. " + pd.getItemNo(), Snackbar.LENGTH_LONG);
         snackbar.show();
@@ -562,7 +559,7 @@ public class HomeFragment extends Fragment {
 
     public void getDataByBrand(View view) {
         EditText brandEditText = root.findViewById(R.id.brandEditText);
-        ProductData pd = helper.getDataByBrand(brandEditText.getText().toString());
+        ProductData pd = helper.getProductDataByBrand(brandEditText.getText().toString());
         Snackbar snackbar = Snackbar
                 .make(getActivity().findViewById(android.R.id.content), "Found brand. " + pd.getItemNo(), Snackbar.LENGTH_LONG);
         snackbar.show();

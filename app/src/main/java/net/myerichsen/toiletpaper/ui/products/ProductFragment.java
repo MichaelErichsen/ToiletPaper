@@ -25,7 +25,7 @@ import com.google.android.material.snackbar.Snackbar;
 
 import net.myerichsen.toiletpaper.ProductActivity;
 import net.myerichsen.toiletpaper.R;
-import net.myerichsen.toiletpaper.database.ProductDbAdapter;
+import net.myerichsen.toiletpaper.database.TPDbAdapter;
 
 import java.util.List;
 
@@ -51,7 +51,7 @@ public class ProductFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        ProductDbAdapter helper = new ProductDbAdapter(context);
+        TPDbAdapter helper = new TPDbAdapter(context);
 
         final TableLayout tableLayout = root.findViewById(R.id.productTableLayout);
         TableRow tableRow = new TableRow(context);
@@ -64,7 +64,7 @@ public class ProductFragment extends Fragment {
 
         List<ProductData> lpd = null;
         try {
-            lpd = helper.getAllData(context);
+            lpd = helper.getAllProductData(context);
         } catch (Exception e) {
             Snackbar snackbar = Snackbar
                     .make(getActivity().findViewById(android.R.id.content), e.getMessage(), Snackbar.LENGTH_LONG);

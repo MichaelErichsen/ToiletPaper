@@ -17,7 +17,7 @@ import java.util.List;
  */
 public class SupplierDbAdapter {
     private final SupplierHelper supplierHelper;
-    private final String[] columns = {SupplierHelper.SUPPLIER,
+    private final String[] sdColumns = {SupplierHelper.SUPPLIER,
             SupplierHelper.CHAIN, SupplierHelper.TIME_STAMP};
 
     /**
@@ -35,23 +35,23 @@ public class SupplierDbAdapter {
     private void insertData(SupplierData sd) {
         SQLiteDatabase dbb = supplierHelper.getWritableDatabase();
         ContentValues contentValues = extractSupplierData(sd);
-        dbb.insert(SupplierHelper.TABLE_NAME, null, contentValues);
+        dbb.insert(SupplierHelper.SUPPLIER_TABLE_NAME, null, contentValues);
     }
 
 
     /**
-     * Get all data from table
+     * Get all data from supplier table
      *
      * @param context Application context
      * @return List of supplier data
      */
-    public List<SupplierData> getAllData(Context context) {
+    public List<SupplierData> getAllSupplierData(Context context) {
         List<SupplierData> lsd = new ArrayList<>();
         try {
             SQLiteDatabase db = supplierHelper.getWritableDatabase();
 
             // TODO Exception here: No such table TABLE_SUPPLIER
-            Cursor cursor = db.query(SupplierHelper.TABLE_NAME, columns, null, null, null, null, null);
+            Cursor cursor = db.query(SupplierHelper.SUPPLIER_TABLE_NAME, sdColumns, null, null, null, null, null);
 
             while (cursor.moveToNext()) {
                 lsd.add(populateSupplierData(cursor));
@@ -92,17 +92,17 @@ public class SupplierDbAdapter {
     }
 
     /**
-     * Delete row from table
+     * Delete row from suplier table
      *
-     * @param ITEM_NO
+     * @param supplier
      * @return
      */
     // TODO Update
-    public int delete(String ITEM_NO) {
+    public int deleteSupplier(String supplier) {
         SQLiteDatabase db = supplierHelper.getWritableDatabase();
-        String[] whereArgs = {ITEM_NO};
+        String[] whereArgs = {supplier};
 
-        return db.delete(SupplierHelper.TABLE_NAME, SupplierHelper.SUPPLIER + " = ?", whereArgs);
+        return db.delete(SupplierHelper.SUPPLIER_TABLE_NAME, SupplierHelper.SUPPLIER + " = ?", whereArgs);
     }
 
     /**
@@ -114,18 +114,18 @@ public class SupplierDbAdapter {
         // "C:/Users/michael/Documents/AndroidStudio/DeviceExplorer/Pixel_2_API_R [emulator-5554]/data/data/net.myerichsen.toiletpaper/databases/TOILET_PAPER_DATABASE"
 
         private static final String DATABASE_NAME = "TOILET_PAPER_DATABASE";
-        private static final String TABLE_NAME = "TABLE_SUPPLIER";
+        private static final String SUPPLIER_TABLE_NAME = "TABLE_SUPPLIER";
         private static final String SUPPLIER = "SUPPLIER";
         private static final String CHAIN = "CHAIN";
         private static final String TIME_STAMP = "TIME_STAMP";
 
         private static final int DATABASE_Version = 2;    // Database Version
-        private static final String CREATE_TABLE = "CREATE TABLE " + TABLE_NAME +
+        private static final String CREATE_SUPPLIER_TABLE = "CREATE TABLE " + SUPPLIER_TABLE_NAME +
                 " (" + SUPPLIER + " TEXT PRIMARY KEY, " +
                 CHAIN + " TEXT, " +
                 TIME_STAMP + " TEXT);";
 
-        private static final String DROP_TABLE = "DROP TABLE IF EXISTS " + TABLE_NAME;
+        private static final String DROP_SUPPLIER_TABLE = "DROP TABLE IF EXISTS " + SUPPLIER_TABLE_NAME;
         private final Context context;
 
         /**
@@ -145,8 +145,8 @@ public class SupplierDbAdapter {
          */
         public void onCreate(SQLiteDatabase db) {
             try {
-                Toast.makeText(context, CREATE_TABLE, Toast.LENGTH_LONG).show();
-                db.execSQL(CREATE_TABLE);
+                Toast.makeText(context, CREATE_SUPPLIER_TABLE, Toast.LENGTH_LONG).show();
+                db.execSQL(CREATE_SUPPLIER_TABLE);
                 loadInitialData();
             } catch (Exception e) {
                 Toast.makeText(context, e.getMessage(), Toast.LENGTH_LONG).show();
@@ -164,7 +164,7 @@ public class SupplierDbAdapter {
         public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
             try {
                 Toast.makeText(context, "OnUpgrade", Toast.LENGTH_LONG).show();
-                db.execSQL(DROP_TABLE);
+                db.execSQL(DROP_SUPPLIER_TABLE);
                 onCreate(db);
             } catch (Exception e) {
                 Toast.makeText(context, e.getMessage(), Toast.LENGTH_LONG).show();
@@ -179,17 +179,23 @@ public class SupplierDbAdapter {
             try {
                 SupplierDbAdapter sHelper = new SupplierDbAdapter(context);
 
-                sd = new SupplierData("Aldi", "www.aldi.dk");
+                sd = new SupplierData("Bilka Hillerød", "Salling");
                 sHelper.insertData(sd);
-                sd = new SupplierData("Coop (Kvickly/Brugsen/Fakta/Irma)", "www.coop.dk");
+                sd = new SupplierData("Føtex Hillerød", "Salling");
                 sHelper.insertData(sd);
-                sd = new SupplierData("Dagrofa (Meny/Min Købmand/Let-Køb/Spar", "www.dagrofa.dk");
+                sd = new SupplierData("Kvickly Helsinge", "Coop");
                 sHelper.insertData(sd);
-                sd = new SupplierData("Lidl", "www.lidl.dk");
+                sd = new SupplierData("Netto Vejby", "Salling");
                 sHelper.insertData(sd);
-                sd = new SupplierData("REMA 1000", "www.rema1000.dk");
+                sd = new SupplierData("Rema Vejby", "REMA 1000");
                 sHelper.insertData(sd);
-                sd = new SupplierData("Salling (Bilka/Føtex/Netto)", "www.sallinggroup.com");
+                sd = new SupplierData("Spar Karsemose", "Dagrofa");
+                sHelper.insertData(sd);
+                sd = new SupplierData("Spar Vejby Strand", "Dagrofa");
+                sHelper.insertData(sd);
+                sd = new SupplierData("SuperBest Allerød", "SuperBest");
+                sHelper.insertData(sd);
+                sd = new SupplierData("Superbrugsen Gilleleje", "Coop");
                 sHelper.insertData(sd);
             } catch (Exception e) {
                 Toast.makeText(context, e.getMessage(), Toast.LENGTH_LONG).show();

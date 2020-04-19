@@ -24,11 +24,11 @@ public class SupplierData {
      * Constructor
      *
      * @param supplier
-     * @param uri
+     * @param chain
      */
-    public SupplierData(String supplier, String uri) {
+    public SupplierData(String supplier, String chain) {
         this.supplier = supplier;
-        this.chain = uri;
+        this.chain = chain;
         Long tsLong = System.currentTimeMillis();
         SimpleDateFormat s = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss");
         timestamp = s.format(new Date());
