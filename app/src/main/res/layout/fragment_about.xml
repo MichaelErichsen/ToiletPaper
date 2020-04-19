@@ -69,19 +69,6 @@
                 android:autoLink="web"
                 android:text="https://stackoverflow.com/questions/3643395/how-to-get-android-crash-logs"
                 android:textSize="24sp" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
-
-                <ImageButton
-                    android:id="@+id/testBtn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:contentDescription="@string/test_button"
-                    android:src="@drawable/test_black_48dp" />
-            </LinearLayout>
         </LinearLayout>
     </ScrollView>
 

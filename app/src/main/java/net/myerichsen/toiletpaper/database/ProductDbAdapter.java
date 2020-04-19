@@ -12,6 +12,9 @@ import net.myerichsen.toiletpaper.ui.products.ProductData;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Database helper for product table
+ */
 public class ProductDbAdapter {
     final ProductHelper productHelper;
     final String[] columns = {ProductHelper.UID, ProductHelper.LAYERS, ProductHelper.PACKAGE_ROLLS,
@@ -24,6 +27,11 @@ public class ProductDbAdapter {
             ProductHelper.COMMENTS, ProductHelper.ITEM_NO, ProductHelper.BRAND,
             ProductHelper.TIME_STAMP};
 
+    /**
+     * Constructor
+     *
+     * @param context
+     */
     public ProductDbAdapter(Context context) {
         productHelper = new ProductHelper(context);
     }
@@ -80,7 +88,7 @@ public class ProductDbAdapter {
     }
 
     /**
-     * Get data by item number
+     * Get all data
      *
      * @return List of columns in record
      */
@@ -98,6 +106,12 @@ public class ProductDbAdapter {
         return lpd;
     }
 
+    /**
+     * Extract product data into Content Value object
+     *
+     * @param pd
+     * @return
+     */
     private ContentValues extractProductData(ProductData pd) {
         ContentValues contentValues = new ContentValues();
         contentValues.put(ProductHelper.LAYERS, pd.getLayers());
@@ -127,6 +141,11 @@ public class ProductDbAdapter {
         return contentValues;
     }
 
+    /**
+     * Populate product data from database table
+     * @param cursor
+     * @return
+     */
     private ProductData populateProductData(Cursor cursor) {
         ProductData pd = new ProductData();
         pd.setUid(cursor.getInt(cursor.getColumnIndex(ProductHelper.UID)));
@@ -158,6 +177,12 @@ public class ProductDbAdapter {
     }
 
     // TODO Update
+
+    /**
+     * Delete row from table
+     * @param ITEM_NO
+     * @return
+     */
     public int delete(String ITEM_NO) {
         SQLiteDatabase db = productHelper.getWritableDatabase();
         String[] whereArgs = {ITEM_NO};
@@ -229,19 +254,34 @@ public class ProductDbAdapter {
         private static final String DROP_TABLE = "DROP TABLE IF EXISTS " + TABLE_NAME;
         private final Context context;
 
+        /**
+         * Constructor
+         * @param context
+         */
         public ProductHelper(Context context) {
             super(context, DATABASE_NAME, null, DATABASE_Version);
             this.context = context;
         }
 
+        /**
+         * On create table
+         * @param db
+         */
         public void onCreate(SQLiteDatabase db) {
             try {
                 db.execSQL(CREATE_TABLE);
+                loadInitialData();
             } catch (Exception e) {
                 Toast.makeText(context, e.getMessage(), Toast.LENGTH_LONG).show();
             }
         }
 
+        /**
+         * On upgrade table
+         * @param db
+         * @param oldVersion
+         * @param newVersion
+         */
         @Override
         public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
             try {
@@ -251,6 +291,30 @@ public class ProductDbAdapter {
             } catch (Exception e) {
                 Toast.makeText(context, e.getMessage(), Toast.LENGTH_LONG).show();
             }
+        }
+
+        /**
+         * Initial data load
+         */
+        private void loadInitialData() {
+            float rl = (float) 29.1;
+            float rp = (float) 5.125;
+            float kp = (float) 31.64;
+            float mp = (float) 0.1761;
+            float sp = (float) 0.022;
+            ProductData pd = new ProductData("5700384289095", "Irma Tusindfryd Toiletpapir",
+                    3, 8, 233, 97, 125, 0, rl,
+                    0, 41, 0, rp, 1, 48,
+                    0, kp, 0, mp, 1, sp, 1,
+                    "Coop (Kvickly/Brugsen/Fakta/Irma)", "Sælges hos Irma og Brugsen");
+
+            try {
+                ProductDbAdapter pHelper = new ProductDbAdapter(context);
+                pHelper.insertData(pd);
+            } catch (Exception e) {
+                Toast.makeText(context, e.getMessage(), Toast.LENGTH_LONG).show();
+            }
+
         }
     }
 
