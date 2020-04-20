@@ -22,10 +22,10 @@ import com.google.android.material.snackbar.Snackbar;
 import net.myerichsen.toiletpaper.ui.products.ProductData;
 
 import java.util.List;
+import java.util.Objects;
 
 public class CompareActivity extends AppCompatActivity {
     private final TableRow.LayoutParams llp = new TableRow.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-    private View root;
     private Context context;
 
     @Override
@@ -35,7 +35,7 @@ public class CompareActivity extends AppCompatActivity {
         context = getApplicationContext();
         TPDbAdapter helper = new TPDbAdapter(context);
 
-        String sortKey = getIntent().getExtras().getString("net.myerichsen.toiletpaper.SORT_KEY");
+        String sortKey = Objects.requireNonNull(getIntent().getExtras()).getString("net.myerichsen.toiletpaper.SORT_KEY");
         String sortFilter = getIntent().getExtras().getString("net.myerichsen.toiletpaper.SORT_FILTER");
 
         final TableLayout tableLayout = findViewById(R.id.compareTableLayout);
@@ -54,11 +54,11 @@ public class CompareActivity extends AppCompatActivity {
             lpd = helper.getSortedProductData(sortKey, sortFilter);
         } catch (Exception e) {
             Snackbar snackbar = Snackbar
-                    .make(findViewById(android.R.id.content), e.getMessage(), Snackbar.LENGTH_LONG);
+                    .make(findViewById(android.R.id.content), Objects.requireNonNull(e.getMessage()), Snackbar.LENGTH_LONG);
             snackbar.show();
             return;
         }
-// FIXME Returns three identical rows
+
         if (lpd.size() == 0) {
             Snackbar snackbar = Snackbar
                     .make(findViewById(android.R.id.content), R.string.no_products_found, Snackbar.LENGTH_LONG);
@@ -74,7 +74,7 @@ public class CompareActivity extends AppCompatActivity {
             tableRow.setBackgroundColor(Color.BLACK);
             tableRow.setPadding(2, 2, 2, 2); //Border between rows
 
-            switch (sortKey) {
+            switch (Objects.requireNonNull(sortKey)) {
                 case "PAPER_WEIGHT":
                     tableRow.addView(addCell(Float.toString(pd.getPaperWeight())));
                     break;
@@ -121,7 +121,7 @@ public class CompareActivity extends AppCompatActivity {
                     startActivity(productIntent);
                 } catch (NumberFormatException e) {
                     Snackbar snackbar = Snackbar
-                            .make(findViewById(android.R.id.content), e.getMessage(), Snackbar.LENGTH_LONG);
+                            .make(findViewById(android.R.id.content), Objects.requireNonNull(e.getMessage()), Snackbar.LENGTH_LONG);
                     snackbar.show();
                 }
             }
@@ -148,7 +148,4 @@ public class CompareActivity extends AppCompatActivity {
         return addCell(String.valueOf(cellData));
     }
 
-    private LinearLayout addCell(float cellData) {
-        return addCell(String.valueOf(cellData));
-    }
 }

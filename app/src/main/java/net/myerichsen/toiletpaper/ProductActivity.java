@@ -8,7 +8,6 @@ import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.TypedValue;
-import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
@@ -18,12 +17,13 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import net.myerichsen.toiletpaper.ui.products.ProductData;
 
+import java.util.Objects;
+
 /**
  * Display product details
  */
 public class ProductActivity extends AppCompatActivity {
     private final TableRow.LayoutParams llp = new TableRow.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-    private View root;
     private Context context;
 
     // TODO Handle delete button
@@ -49,7 +49,7 @@ public class ProductActivity extends AppCompatActivity {
             return;
         }
 
-        String uid = getIntent().getExtras().getString("net.myrichsen.toiletpaper.UID");
+        String uid = Objects.requireNonNull(getIntent().getExtras()).getString("net.myrichsen.toiletpaper.UID");
 
         ProductData pd = helper.getProductDataByUid(uid);
 
