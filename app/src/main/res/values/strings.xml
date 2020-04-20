@@ -10,23 +10,17 @@
     <string name="intro">
         "Dette er en prototype til et supermarkedsprogram, der skal kunne sammenligne produkter."
         "\n\nI første omgang behandler det toiletpapir.\n\n"
-
         "Indtast de data, du kender, og lad programmet beregne resten.\n\n"
-
         "Du kan bruge telefonens kamera til at scanne QR- og stregkoder.\n\n"
-
         "Programmet kan gemme dine data på telefonen. Ingen data udveksles med servere, klude "
         "eller andre fremmede enheder.\n\n"
-
-        "Der er fem menupunkter:
-        * Toiletpapir
-        * Sammenligning
-        * Produktliste
-        * Butiksliste
-        * Om\n\n"
-
+        "Der er fem menupunkter:\n"
+        "* Toiletpapir\n"
+        "* Sammenligning\n"
+        "* Produktliste\n"
+        "* Butiksliste\n"
+        "* Om\n\n"
     </string>
-
 
     <string name="action_calculate">Beregn</string>
     <string name="action_save">Gem</string>
@@ -57,7 +51,7 @@
     <string name="suppliers">Butikker</string>
 
     <string name="menu_about">Om</string>
-    <string name="about_heading">Inspiration, kilder og kodestumper er planket fra\n\n</string>
+    <string name="about_heading">\nInspiration, kilder og kodestumper er planket fra\n\n</string>
     <string name="scan">Scan</string>
     <string name="search">Søg</string>
     <string name="uid">UID</string>

@@ -17,7 +17,6 @@ import net.myerichsen.toiletpaper.R;
  * About fragment.
  */
 public class AboutFragment extends Fragment {
-// FIXME Crashes
     /**
      * Required empty public constructor
      */
