@@ -11,7 +11,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.widget.Toast;
 
-import net.myerichsen.toiletpaper.ui.products.ProductData;
+import net.myerichsen.toiletpaper.ui.products.ProductModel;
 import net.myerichsen.toiletpaper.ui.suppliers.SupplierData;
 
 import java.util.ArrayList;
@@ -50,8 +50,8 @@ public class TPDbAdapter {
      *
      * @return List of columns in record
      */
-    public ProductData getProductDataByBrand(String brand) {
-        ProductData pd = null;
+    public ProductModel getProductDataByBrand(String brand) {
+        ProductModel pd = null;
 
         SQLiteDatabase db = tpDbHelper.getReadableDatabase();
 
@@ -71,7 +71,7 @@ public class TPDbAdapter {
     /**
      * Insert a product row
      */
-    public void insertData(ProductData pd) {
+    public void insertData(ProductModel pd) {
         SQLiteDatabase dbb = tpDbHelper.getWritableDatabase();
         ContentValues contentValues = extractData(pd);
         dbb.insert(TpDbHelper.TABLE_PRODUCT, null, contentValues);
@@ -91,8 +91,8 @@ public class TPDbAdapter {
      *
      * @return List of columns in record
      */
-    public ProductData getProductDataByItemNo(String itemNo) {
-        ProductData pd = null;
+    public ProductModel getProductDataByItemNo(String itemNo) {
+        ProductModel pd = null;
 
         SQLiteDatabase db = tpDbHelper.getReadableDatabase();
         String[] args = {itemNo};
@@ -112,8 +112,8 @@ public class TPDbAdapter {
      *
      * @return List of columns in record
      */
-    public ProductData getProductDataByUid(String uid) {
-        ProductData pd = null;
+    public ProductModel getProductDataByUid(String uid) {
+        ProductModel pd = null;
 
         try {
             SQLiteDatabase db = tpDbHelper.getReadableDatabase();
@@ -139,8 +139,8 @@ public class TPDbAdapter {
      * @param context Application context
      * @return List of columns in record
      */
-    public List<ProductData> getAllProductData(Context context) {
-        List<ProductData> lpd = new ArrayList<>();
+    public List<ProductModel> getAllProductData(Context context) {
+        List<ProductModel> lpd = new ArrayList<>();
 
         SQLiteDatabase db = tpDbHelper.getReadableDatabase();
 
@@ -202,7 +202,7 @@ public class TPDbAdapter {
      * @param pd Product data
      * @return ContentValues
      */
-    private ContentValues extractData(ProductData pd) {
+    private ContentValues extractData(ProductModel pd) {
         ContentValues contentValues = new ContentValues();
         contentValues.put(TpDbHelper.LAYERS, pd.getLayers());
         contentValues.put(TpDbHelper.PACKAGE_ROLLS, pd.getPackageRolls());
@@ -251,8 +251,8 @@ public class TPDbAdapter {
      * @param cursor Database cursor
      * @return product data
      */
-    private ProductData populateProductData(Cursor cursor) {
-        ProductData pd = new ProductData();
+    private ProductModel populateProductData(Cursor cursor) {
+        ProductModel pd = new ProductModel();
         pd.setUid(cursor.getInt(cursor.getColumnIndex(TpDbHelper.UID)));
         pd.setLayers(cursor.getInt(cursor.getColumnIndex(TpDbHelper.LAYERS)));
         pd.setPackageRolls(cursor.getInt(cursor.getColumnIndex(TpDbHelper.PACKAGE_ROLLS)));
@@ -311,9 +311,9 @@ public class TPDbAdapter {
         return db.delete(TpDbHelper.TABLE_SUPPLIER, TpDbHelper.SUPPLIER + " = ?", whereArgs);
     }
 
-    public List<ProductData> getSortedProductData(String sortKey, String sortFilter) {
+    public List<ProductModel> getSortedProductData(String sortKey, String sortFilter) {
         Cursor cursor;
-        List<ProductData> lpd = new ArrayList<>();
+        List<ProductModel> lpd = new ArrayList<>();
 
 
         try {
@@ -462,7 +462,7 @@ public class TPDbAdapter {
          * Initial data load
          */
         private void loadInitialData() {
-            ProductData pd;
+            ProductModel pd;
             SupplierData sd;
 
             try {
@@ -487,21 +487,21 @@ public class TPDbAdapter {
                 sd = new SupplierData("Superbrugsen Gilleleje", "Coop");
                 tpHelper.insertData(sd);
 
-                pd = new ProductData("5700384289095", "Irma Tusindfryd Toiletpapir",
+                pd = new ProductModel("5700384289095", "Irma Tusindfryd Toiletpapir",
                         3, 8, 233, 97, 125, 0, (float) 29.1,
                         0, 41, 0, (float) 5.125, 1, 48,
                         0, (float) 31.64, 0, (float) 0.1761, 1, (float) 0.022, 1,
                         "Kvickly Helsinge", "Produceret i Sverige");
                 tpHelper.insertData(pd);
 
-                pd = new ProductData("7311041080306", "First Price Toiletpapir 2-lags",
+                pd = new ProductModel("7311041080306", "First Price Toiletpapir 2-lags",
                         2, 8, 220, 96, 125, 1, (float) 27.5,
                         0, (float) 15.95, 0, (float) 1.99, 1, 36,
                         0, 0, 0, (float) 0.0725, 1, (float) 0.009, 1,
                         "Spar Vejby Strand", "Produceret i Litauen");
                 tpHelper.insertData(pd);
 
-                pd = new ProductData("5705830002242", "REMA 1000 Toiletpapir",
+                pd = new ProductModel("5705830002242", "REMA 1000 Toiletpapir",
                         2, 8, 282, 97, 125, 0, (float) 35.25,
                         0, (float) 9.75, 0, (float) 1.21875, 1, (float) 32.6,
                         0, (float) 10.93, 0, (float) 0.0346, 1, (float) 0.004322, 1,

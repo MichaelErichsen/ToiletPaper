@@ -15,7 +15,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import net.myerichsen.toiletpaper.ui.products.ProductData;
+import net.myerichsen.toiletpaper.ui.products.ProductModel;
 
 import java.util.Objects;
 
@@ -51,7 +51,7 @@ public class ProductActivity extends AppCompatActivity {
 
         String uid = Objects.requireNonNull(getIntent().getExtras()).getString("net.myrichsen.toiletpaper.UID");
 
-        ProductData pd = helper.getProductDataByUid(uid);
+        ProductModel pd = helper.getProductDataByUid(uid);
 
         addTableRow(tableLayout, "Uid", pd.getUid());
         addTableRow(tableLayout, "Item no", pd.getItemNo());

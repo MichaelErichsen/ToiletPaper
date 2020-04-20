@@ -62,7 +62,7 @@ public class ProductFragment extends Fragment {
         tableRow.addView(addCell("Varemærke"));
         tableLayout.addView(tableRow);
 
-        List<ProductData> lpd = null;
+        List<ProductModel> lpd = null;
         try {
             lpd = helper.getAllProductData(context);
         } catch (Exception e) {
@@ -81,7 +81,7 @@ public class ProductFragment extends Fragment {
         }
 
         for (int i = 0; i < lpd.size(); i++) {
-            ProductData pd = lpd.get(i);
+            ProductModel pd = lpd.get(i);
 
             tableRow = new TableRow(context);
             tableRow.setBackgroundColor(Color.BLACK);

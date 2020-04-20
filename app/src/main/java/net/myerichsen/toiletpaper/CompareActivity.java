@@ -19,7 +19,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.snackbar.Snackbar;
 
-import net.myerichsen.toiletpaper.ui.products.ProductData;
+import net.myerichsen.toiletpaper.ui.products.ProductModel;
 
 import java.util.List;
 import java.util.Objects;
@@ -48,7 +48,7 @@ public class CompareActivity extends AppCompatActivity {
         tableRow.addView(addCell("Uid"));
         tableLayout.addView(tableRow);
 
-        List<ProductData> lpd;
+        List<ProductModel> lpd;
 
         try {
             lpd = helper.getSortedProductData(sortKey, sortFilter);
@@ -68,7 +68,7 @@ public class CompareActivity extends AppCompatActivity {
         }
 
         for (int i = 0; i < lpd.size(); i++) {
-            ProductData pd = lpd.get(i);
+            ProductModel pd = lpd.get(i);
 
             tableRow = new TableRow(context);
             tableRow.setBackgroundColor(Color.BLACK);

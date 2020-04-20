@@ -24,8 +24,8 @@ import net.myerichsen.toiletpaper.TPDbAdapter;
 import java.util.List;
 
 public class SupplierFragment extends Fragment {
-    final TableRow.LayoutParams llp = new TableRow.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-    TPDbAdapter helper;
+    private final TableRow.LayoutParams llp = new TableRow.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+    private TPDbAdapter helper;
     private View root;
     private Context context;
 

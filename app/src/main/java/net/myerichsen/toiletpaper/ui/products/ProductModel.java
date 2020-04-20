@@ -11,7 +11,7 @@ import java.util.Date;
  * Class to encapsulate all toilet paper product data.
  * Boolean values are stored as integers 0 (false) and 1 (true).
  */
-public class ProductData {
+public class ProductModel {
     private int uid;
     private int layers = 0;
     private int packageRolls = 0;
@@ -42,7 +42,7 @@ public class ProductData {
     /**
      * No arg constructor
      */
-    public ProductData() {
+    public ProductModel() {
         Long tsLong = System.currentTimeMillis();
         SimpleDateFormat s = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss");
         timestamp = s.format(new Date());
@@ -76,12 +76,12 @@ public class ProductData {
      * @param supplier
      * @param comments
      */
-    public ProductData(String itemNo, String brand, int layers, int packageRolls, int rollSheets, int sheetWidth,
-                       int sheetLength, int sheetLength_c, float rollLength, int rollLength_c,
-                       float packagePrice, int packagePrice_c, float rollPrice, int rollPrice_c,
-                       float paperWeight, int paperWeight_c, float kiloPrice, int kiloPrice_c,
-                       float meterPrice, int meterPrice_c, float sheetPrice, int sheetPrice_c,
-                       String supplier, String comments) {
+    public ProductModel(String itemNo, String brand, int layers, int packageRolls, int rollSheets, int sheetWidth,
+                        int sheetLength, int sheetLength_c, float rollLength, int rollLength_c,
+                        float packagePrice, int packagePrice_c, float rollPrice, int rollPrice_c,
+                        float paperWeight, int paperWeight_c, float kiloPrice, int kiloPrice_c,
+                        float meterPrice, int meterPrice_c, float sheetPrice, int sheetPrice_c,
+                        String supplier, String comments) {
         this.layers = layers;
         this.packageRolls = packageRolls;
         this.rollSheets = rollSheets;

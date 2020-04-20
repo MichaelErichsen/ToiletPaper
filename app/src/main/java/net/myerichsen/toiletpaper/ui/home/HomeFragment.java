@@ -27,7 +27,7 @@ import com.google.android.material.snackbar.Snackbar;
 import net.myerichsen.toiletpaper.R;
 import net.myerichsen.toiletpaper.ScanActivity;
 import net.myerichsen.toiletpaper.TPDbAdapter;
-import net.myerichsen.toiletpaper.ui.products.ProductData;
+import net.myerichsen.toiletpaper.ui.products.ProductModel;
 
 import java.util.ArrayList;
 
@@ -67,14 +67,14 @@ public class HomeFragment extends Fragment {
     private Spinner suppliersSpinner;
     private EditText commentEditText;
     private TextView messageTextView;
-    private ProductData pd;
+    private ProductModel pd;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         root = inflater.inflate(R.layout.fragment_home, container, false);
         Context context = getContext();
         helper = new TPDbAdapter(context);
-        pd = new ProductData();
+        pd = new ProductModel();
 
         // Item no
         itemNoEditText = root.findViewById(R.id.itemNoEditText);
@@ -355,9 +355,9 @@ public class HomeFragment extends Fragment {
         return (String) spinner.getSelectedItem();
     }
 
-    private ProductData populateProductDataFromLayout() {
+    private ProductModel populateProductDataFromLayout() {
 
-        ProductData pd = new ProductData();
+        ProductModel pd = new ProductModel();
 
         try {
             pd.setItemNo(getStringFromLayout(itemNoEditText));
@@ -536,7 +536,7 @@ public class HomeFragment extends Fragment {
     }
 
     public void addProduct(View view) {
-        ProductData pd = new ProductData();
+        ProductModel pd = new ProductModel();
 
         String itemNo = ((EditText) root.findViewById(R.id.itemNoEditText)).getText().toString();
         if (itemNo.isEmpty()) {
@@ -549,7 +549,7 @@ public class HomeFragment extends Fragment {
 
     public void getDataByItemNo(View view) {
         EditText itemNoEditText = root.findViewById(R.id.itemNoEditText);
-        ProductData pd = helper.getProductDataByItemNo(itemNoEditText.getText().toString());
+        ProductModel pd = helper.getProductDataByItemNo(itemNoEditText.getText().toString());
         Snackbar snackbar = Snackbar
                 .make(getActivity().findViewById(android.R.id.content), "Found item no. " + pd.getItemNo(), Snackbar.LENGTH_LONG);
         snackbar.show();
@@ -559,7 +559,7 @@ public class HomeFragment extends Fragment {
 
     public void getDataByBrand(View view) {
         EditText brandEditText = root.findViewById(R.id.brandEditText);
-        ProductData pd = helper.getProductDataByBrand(brandEditText.getText().toString());
+        ProductModel pd = helper.getProductDataByBrand(brandEditText.getText().toString());
         Snackbar snackbar = Snackbar
                 .make(getActivity().findViewById(android.R.id.content), "Found brand. " + pd.getItemNo(), Snackbar.LENGTH_LONG);
         snackbar.show();
