@@ -51,14 +51,14 @@ public class CompareActivity extends AppCompatActivity {
         List<ProductData> lpd = helper.getSortedProductData(sortKey, sortFilter);
 
         try {
-            lpd = helper.getAllProductData(context);
+            lpd = helper.getSortedProductData(sortKey, sortFilter);
         } catch (Exception e) {
             Snackbar snackbar = Snackbar
                     .make(findViewById(android.R.id.content), e.getMessage(), Snackbar.LENGTH_LONG);
             snackbar.show();
             return;
         }
-
+// FIXME Returns two identical rows
         if (lpd.size() == 0) {
             Snackbar snackbar = Snackbar
                     .make(findViewById(android.R.id.content), "No data in table", Snackbar.LENGTH_LONG);

@@ -19,6 +19,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.google.android.material.snackbar.Snackbar;
+
 import net.myerichsen.toiletpaper.CompareActivity;
 import net.myerichsen.toiletpaper.R;
 
@@ -27,6 +29,7 @@ import java.util.ArrayList;
 public class CompareFragment extends Fragment {
     private Context context;
     private String sortKey;
+    private String sortFilter = "ALL";
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -50,6 +53,7 @@ public class CompareFragment extends Fragment {
 
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                sortFilter = parent.getSelectedItem().toString();
             }
 
             @Override
@@ -76,6 +80,9 @@ public class CompareFragment extends Fragment {
                         sortKey = "SHEET_PRICE";
                         break;
                     default:
+                        Snackbar snackbar = Snackbar
+                                .make(getActivity().findViewById(android.R.id.content), "Unexpected value: " + checkedId, Snackbar.LENGTH_LONG);
+                        snackbar.show();
                         throw new IllegalStateException("Unexpected value: " + checkedId);
                 }
             }
@@ -86,8 +93,7 @@ public class CompareFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent compareIntent = new Intent(context, CompareActivity.class);
-                // TODO Get filter from spinner
-                compareIntent.putExtra("net.myerichsen.toiletpaper.SORT_FILTER", "ALL");
+                compareIntent.putExtra("net.myerichsen.toiletpaper.SORT_FILTER", sortFilter);
                 compareIntent.putExtra("net.myerichsen.toiletpaper.SORT_KEY", sortKey);
                 startActivity(compareIntent);
             }

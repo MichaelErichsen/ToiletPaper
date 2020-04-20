@@ -1,16 +1,32 @@
 <resources>
     <string name="app_name">ToiletPaper</string>
-    <string name="navigation_drawer_open">Luk navigationsskuffen</string>
-    <string name="navigation_drawer_close">Åben navigationsskuffen</string>
     <string name="nav_header_title">Toiletpapir</string>
     <string name="nav_header_subtitle">info@myerichsen.net</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Indstillinger</string>
 
     <string name="menu_home">Toiletpapir</string>
-    <string name="menu_gallery">Gallery</string>
-    <string name="menu_slideshow">Slideshow</string>
-    <string name="home_second">Home Second</string>
+
+    <string name="intro">
+        "Dette er en prototype til et supermarkedsprogram, der skal kunne sammenligne produkter."
+        "\n\nI første omgang behandler det toiletpapir.\n\n"
+
+        "Indtast de data, du kender, og lad programmet beregne resten.\n\n"
+
+        "Du kan bruge telefonens kamera til at scanne QR- og stregkoder.\n\n"
+
+        "Programmet kan gemme dine data på telefonen. Ingen data udveksles med servere, klude "
+        "eller andre fremmede enheder.\n\n"
+
+        "Der er fem menupunkter:
+        * Toiletpapir
+        * Sammenligning
+        * Produktliste
+        * Butiksliste
+        * Om\n\n"
+
+    </string>
+
 
     <string name="action_calculate">Beregn</string>
     <string name="action_save">Gem</string>

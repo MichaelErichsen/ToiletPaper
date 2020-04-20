@@ -29,6 +29,8 @@ public class SupplierFragment extends Fragment {
     private View root;
     private Context context;
 
+    // TODO Details activity to add or delete suppliers
+
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {

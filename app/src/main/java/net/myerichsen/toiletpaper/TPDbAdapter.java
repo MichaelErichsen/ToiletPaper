@@ -312,15 +312,22 @@ public class TPDbAdapter {
     }
 
     public List<ProductData> getSortedProductData(String sortKey, String sortFilter) {
+        Cursor cursor;
         List<ProductData> lpd = new ArrayList<>();
+
 
         try {
             SQLiteDatabase db = tpDbHelper.getReadableDatabase();
 
-            // TODO Handle filter
-            String[] args = {sortKey};
-            Cursor cursor = db.query(TpDbHelper.TABLE_PRODUCT, pdColumns, null,
-                    null, null, null, sortKey + " DESC");
+            if (sortFilter.equals("ALL")) {
+                cursor = db.query(TpDbHelper.TABLE_PRODUCT, pdColumns, null,
+                        null, null, null, sortKey + " DESC");
+            } else {
+                String[] args = {sortFilter};
+                cursor = db.query(TpDbHelper.TABLE_PRODUCT, pdColumns, "SUPPLIER=?", args,
+                        null, null, sortKey + " DESC");
+            }
+
 
             while (cursor.moveToNext()) {
                 lpd.add(populateProductData(cursor));
