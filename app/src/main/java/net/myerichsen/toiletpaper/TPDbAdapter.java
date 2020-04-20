@@ -12,7 +12,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.widget.Toast;
 
 import net.myerichsen.toiletpaper.ui.products.ProductModel;
-import net.myerichsen.toiletpaper.ui.suppliers.SupplierData;
+import net.myerichsen.toiletpaper.ui.suppliers.SupplierModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -80,7 +80,7 @@ public class TPDbAdapter {
     /**
      * Insert a supplier row
      */
-    private void insertData(SupplierData sd) {
+    private void insertData(SupplierModel sd) {
         SQLiteDatabase dbb = tpDbHelper.getWritableDatabase();
         ContentValues contentValues = extractData(sd);
         dbb.insert(TpDbHelper.TABLE_SUPPLIER, null, contentValues);
@@ -165,8 +165,8 @@ public class TPDbAdapter {
      * @param context Application context
      * @return List of supplier data
      */
-    public List<SupplierData> getAllSupplierData(Context context) {
-        List<SupplierData> lsd = new ArrayList<>();
+    public List<SupplierModel> getAllSupplierData(Context context) {
+        List<SupplierModel> lsd = new ArrayList<>();
         try {
             SQLiteDatabase db = tpDbHelper.getReadableDatabase();
 
@@ -188,7 +188,7 @@ public class TPDbAdapter {
      * @param sd Supplier data
      * @return ContentValues
      */
-    private ContentValues extractData(SupplierData sd) {
+    private ContentValues extractData(SupplierModel sd) {
         ContentValues contentValues = new ContentValues();
         contentValues.put(TpDbHelper.SUPPLIER, sd.getSupplier());
         contentValues.put(TpDbHelper.CHAIN, sd.getChain());
@@ -237,8 +237,8 @@ public class TPDbAdapter {
      * @param cursor Database cursor
      * @return Supplier data
      */
-    private SupplierData populateSupplierData(Cursor cursor) {
-        SupplierData sd = new SupplierData();
+    private SupplierModel populateSupplierData(Cursor cursor) {
+        SupplierModel sd = new SupplierModel();
         sd.setSupplier(cursor.getString(cursor.getColumnIndex(TpDbHelper.SUPPLIER)));
         sd.setChain(cursor.getString(cursor.getColumnIndex(TpDbHelper.CHAIN)));
         sd.setTimestamp(cursor.getString(cursor.getColumnIndex(TpDbHelper.TIME_STAMP)));
@@ -463,28 +463,28 @@ public class TPDbAdapter {
          */
         private void loadInitialData() {
             ProductModel pd;
-            SupplierData sd;
+            SupplierModel sd;
 
             try {
                 TPDbAdapter tpHelper = new TPDbAdapter(context);
 
-                sd = new SupplierData("Bilka Hillerød", "Salling");
+                sd = new SupplierModel("Bilka Hillerød", "Salling");
                 tpHelper.insertData(sd);
-                sd = new SupplierData("Føtex Hillerød", "Salling");
+                sd = new SupplierModel("Føtex Hillerød", "Salling");
                 tpHelper.insertData(sd);
-                sd = new SupplierData("Kvickly Helsinge", "Coop");
+                sd = new SupplierModel("Kvickly Helsinge", "Coop");
                 tpHelper.insertData(sd);
-                sd = new SupplierData("Netto Vejby", "Salling");
+                sd = new SupplierModel("Netto Vejby", "Salling");
                 tpHelper.insertData(sd);
-                sd = new SupplierData("Rema Vejby", "REMA 1000");
+                sd = new SupplierModel("Rema Vejby", "REMA 1000");
                 tpHelper.insertData(sd);
-                sd = new SupplierData("Spar Karsemose", "Dagrofa");
+                sd = new SupplierModel("Spar Karsemose", "Dagrofa");
                 tpHelper.insertData(sd);
-                sd = new SupplierData("Spar Vejby Strand", "Dagrofa");
+                sd = new SupplierModel("Spar Vejby Strand", "Dagrofa");
                 tpHelper.insertData(sd);
-                sd = new SupplierData("SuperBest Allerød", "SuperBest");
+                sd = new SupplierModel("SuperBest Allerød", "SuperBest");
                 tpHelper.insertData(sd);
-                sd = new SupplierData("Superbrugsen Gilleleje", "Coop");
+                sd = new SupplierModel("Superbrugsen Gilleleje", "Coop");
                 tpHelper.insertData(sd);
 
                 pd = new ProductModel("5700384289095", "Irma Tusindfryd Toiletpapir",

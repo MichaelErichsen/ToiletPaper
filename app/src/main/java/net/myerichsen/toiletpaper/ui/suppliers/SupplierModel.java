@@ -6,7 +6,7 @@ import java.util.Date;
 /**
  * Class to encapsulate all toilet paper supplier data
  */
-public class SupplierData {
+public class SupplierModel {
     private String supplier = "";
     private String chain = "";
     private String timestamp;
@@ -14,7 +14,7 @@ public class SupplierData {
     /**
      * no-arg constructor
      */
-    public SupplierData() {
+    public SupplierModel() {
         Long tsLong = System.currentTimeMillis();
         SimpleDateFormat s = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss");
         timestamp = s.format(new Date());
@@ -26,7 +26,7 @@ public class SupplierData {
      * @param supplier
      * @param chain
      */
-    public SupplierData(String supplier, String chain) {
+    public SupplierModel(String supplier, String chain) {
         this.supplier = supplier;
         this.chain = chain;
         Long tsLong = System.currentTimeMillis();

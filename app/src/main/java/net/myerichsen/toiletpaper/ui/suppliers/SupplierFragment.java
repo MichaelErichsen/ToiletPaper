@@ -53,7 +53,7 @@ public class SupplierFragment extends Fragment {
         tableRow.addView(addCell("Kæde"));
         tableLayout.addView(tableRow);
 
-        List<SupplierData> lsd;
+        List<SupplierModel> lsd;
         try {
             lsd = helper.getAllSupplierData(context);
         } catch (Exception e) {
@@ -72,7 +72,7 @@ public class SupplierFragment extends Fragment {
         }
 
         for (int i = 0; i < lsd.size(); i++) {
-            SupplierData sd = lsd.get(i);
+            SupplierModel sd = lsd.get(i);
 
             tableRow = new TableRow(context);
             tableRow.setBackgroundColor(Color.BLACK);

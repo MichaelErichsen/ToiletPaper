@@ -24,7 +24,7 @@ import com.google.android.material.snackbar.Snackbar;
 import net.myerichsen.toiletpaper.CompareActivity;
 import net.myerichsen.toiletpaper.R;
 import net.myerichsen.toiletpaper.TPDbAdapter;
-import net.myerichsen.toiletpaper.ui.suppliers.SupplierData;
+import net.myerichsen.toiletpaper.ui.suppliers.SupplierModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,7 +45,7 @@ public class CompareFragment extends Fragment {
 
         Spinner filterSpinner = root.findViewById(R.id.filterSpinner);
 
-        List<SupplierData> lsd = new ArrayList<>();
+        List<SupplierModel> lsd = new ArrayList<>();
         ArrayList<String> layerArrayList = new ArrayList<>();
         layerArrayList.add("ALL");
 
