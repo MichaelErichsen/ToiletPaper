@@ -28,6 +28,7 @@ import net.myerichsen.toiletpaper.R;
 import net.myerichsen.toiletpaper.TPDbAdapter;
 
 import java.util.List;
+import java.util.Objects;
 
 // TODO Double tapping opens the details fragment
 
@@ -62,19 +63,19 @@ public class ProductFragment extends Fragment {
         tableRow.addView(addCell("Varemærke"));
         tableLayout.addView(tableRow);
 
-        List<ProductModel> lpd = null;
+        List<ProductModel> lpd;
         try {
             lpd = helper.getAllProductData(context);
         } catch (Exception e) {
             Snackbar snackbar = Snackbar
-                    .make(getActivity().findViewById(android.R.id.content), e.getMessage(), Snackbar.LENGTH_LONG);
+                    .make(Objects.requireNonNull(getActivity()).findViewById(android.R.id.content), Objects.requireNonNull(e.getMessage()), Snackbar.LENGTH_LONG);
             snackbar.show();
             return;
         }
 
         if (lpd.size() == 0) {
             Snackbar snackbar = Snackbar
-                    .make(getActivity().findViewById(android.R.id.content), "No data in table", Snackbar.LENGTH_LONG);
+                    .make(Objects.requireNonNull(getActivity()).findViewById(android.R.id.content), "No data in table", Snackbar.LENGTH_LONG);
             snackbar.show();
             helper.doInitialLoad();
             return;
@@ -105,7 +106,7 @@ public class ProductFragment extends Fragment {
                     TextView tv = (TextView) ll.getChildAt(0);
                     int uid = Integer.parseInt(tv.getText().toString());
                     Snackbar snackbar = Snackbar
-                            .make(getActivity().findViewById(android.R.id.content), uid + " was clicked", Snackbar.LENGTH_LONG);
+                            .make(Objects.requireNonNull(getActivity()).findViewById(android.R.id.content), uid + " was clicked", Snackbar.LENGTH_LONG);
                     snackbar.show();
 
                     Intent productIntent = new Intent(context, ProductActivity.class);
@@ -113,7 +114,7 @@ public class ProductFragment extends Fragment {
                     startActivity(productIntent);
                 } catch (NumberFormatException e) {
                     Snackbar snackbar = Snackbar
-                            .make(getActivity().findViewById(android.R.id.content), e.getMessage(), Snackbar.LENGTH_LONG);
+                            .make(Objects.requireNonNull(getActivity()).findViewById(android.R.id.content), Objects.requireNonNull(e.getMessage()), Snackbar.LENGTH_LONG);
                     snackbar.show();
                 }
             }

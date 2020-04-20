@@ -28,6 +28,7 @@ import net.myerichsen.toiletpaper.ui.suppliers.SupplierModel;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class CompareFragment extends Fragment {
     private Context context;
@@ -46,8 +47,8 @@ public class CompareFragment extends Fragment {
         Spinner filterSpinner = root.findViewById(R.id.filterSpinner);
 
         List<SupplierModel> lsd = new ArrayList<>();
-        ArrayList<String> layerArrayList = new ArrayList<>();
-        layerArrayList.add("ALL");
+        ArrayList<String> supplierArrayList = new ArrayList<>();
+        supplierArrayList.add("ALL");
 
         boolean goOn = true;
 
@@ -55,7 +56,7 @@ public class CompareFragment extends Fragment {
             lsd = helper.getAllSupplierData(context);
         } catch (Exception e) {
             Snackbar snackbar = Snackbar
-                    .make(root.findViewById(android.R.id.content), e.getMessage(), Snackbar.LENGTH_LONG);
+                    .make(root.findViewById(android.R.id.content), Objects.requireNonNull(e.getMessage()), Snackbar.LENGTH_LONG);
             snackbar.show();
             goOn = false;
         }
@@ -70,13 +71,13 @@ public class CompareFragment extends Fragment {
 
         if (goOn) {
             for (int i = 0; i < lsd.size(); i++) {
-                layerArrayList.add(lsd.get(i).getSupplier());
+                supplierArrayList.add(lsd.get(i).getSupplier());
             }
         }
 
-        ArrayAdapter<String> layerArrayAdapter = new ArrayAdapter<>(context, android.R.layout.simple_spinner_item, layerArrayList);
-        layerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        filterSpinner.setAdapter(layerArrayAdapter);
+        ArrayAdapter<String> supplierArrayAdapter = new ArrayAdapter<>(context, android.R.layout.simple_spinner_item, supplierArrayList);
+        supplierArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        filterSpinner.setAdapter(supplierArrayAdapter);
         filterSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
             @Override
@@ -109,7 +110,7 @@ public class CompareFragment extends Fragment {
                         break;
                     default:
                         Snackbar snackbar = Snackbar
-                                .make(getActivity().findViewById(android.R.id.content), "Unexpected value: " + checkedId, Snackbar.LENGTH_LONG);
+                                .make(Objects.requireNonNull(getActivity()).findViewById(android.R.id.content), "Unexpected value: " + checkedId, Snackbar.LENGTH_LONG);
                         snackbar.show();
                         throw new IllegalStateException("Unexpected value: " + checkedId);
                 }

@@ -28,8 +28,11 @@ import net.myerichsen.toiletpaper.R;
 import net.myerichsen.toiletpaper.ScanActivity;
 import net.myerichsen.toiletpaper.TPDbAdapter;
 import net.myerichsen.toiletpaper.ui.products.ProductModel;
+import net.myerichsen.toiletpaper.ui.suppliers.SupplierModel;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -89,7 +92,7 @@ public class HomeFragment extends Fragment {
         layerArrayList.add("3");
         layerArrayList.add("4");
         layerArrayList.add("5");
-        ArrayAdapter<String> layerArrayAdapter = new ArrayAdapter<>(context, android.R.layout.simple_spinner_item, layerArrayList);
+        ArrayAdapter<String> layerArrayAdapter = new ArrayAdapter<>(Objects.requireNonNull(context), android.R.layout.simple_spinner_item, layerArrayList);
         layerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         layersSpinner.setAdapter(layerArrayAdapter);
         layersSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -243,14 +246,35 @@ public class HomeFragment extends Fragment {
 
         // Suppliers
         suppliersSpinner = root.findViewById(R.id.suppliersSpinner);
+
+        List<SupplierModel> lsd = new ArrayList<>();
         ArrayList<String> supplierArrayList = new ArrayList<>();
-        // TODO Move to SQLite table
-        supplierArrayList.add("Aldi");
-        supplierArrayList.add("Coop (Kvickly/Brugsen/Fakta/Irma)");
-        supplierArrayList.add("Lidl");
-        supplierArrayList.add("REMA 1000");
-        supplierArrayList.add("Salling (Bilka/Føtex/Netto)");
-        supplierArrayList.add("Spar");
+
+        boolean goOn = true;
+
+        try {
+            lsd = helper.getAllSupplierData(context);
+        } catch (Exception e) {
+            Snackbar snackbar = Snackbar
+                    .make(root.findViewById(android.R.id.content), Objects.requireNonNull(e.getMessage()), Snackbar.LENGTH_LONG);
+            snackbar.show();
+            goOn = false;
+        }
+
+        if ((goOn) && (lsd.size() == 0)) {
+            Snackbar snackbar = Snackbar
+                    .make(root.findViewById(android.R.id.content), "No data in table", Snackbar.LENGTH_LONG);
+            snackbar.show();
+            helper.doInitialLoad();
+            goOn = false;
+        }
+
+        if (goOn) {
+            for (int i = 0; i < lsd.size(); i++) {
+                supplierArrayList.add(lsd.get(i).getSupplier());
+            }
+        }
+
         ArrayAdapter<String> supplierArrayAdapter = new ArrayAdapter<>(context, android.R.layout.simple_spinner_item, supplierArrayList);
         supplierArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         suppliersSpinner.setAdapter(supplierArrayAdapter);
@@ -281,7 +305,7 @@ public class HomeFragment extends Fragment {
         saveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String message = "";
+                String message;
 
                 try {
                     pd = populateProductDataFromLayout();
@@ -291,7 +315,7 @@ public class HomeFragment extends Fragment {
                     message = e.getMessage();
                 }
                 Snackbar snackbar = Snackbar
-                        .make(getActivity().findViewById(android.R.id.content), message, Snackbar.LENGTH_LONG);
+                        .make(Objects.requireNonNull(getActivity()).findViewById(android.R.id.content), Objects.requireNonNull(message), Snackbar.LENGTH_LONG);
                 snackbar.show();
             }
         });
@@ -385,7 +409,7 @@ public class HomeFragment extends Fragment {
             pd.setComments(getStringFromLayout(commentEditText));
         } catch (Exception e) {
             Snackbar snackbar = Snackbar
-                    .make(getActivity().findViewById(android.R.id.content), e.getMessage(), Snackbar.LENGTH_LONG);
+                    .make(Objects.requireNonNull(getActivity()).findViewById(android.R.id.content), Objects.requireNonNull(e.getMessage()), Snackbar.LENGTH_LONG);
             snackbar.show();
         }
 
@@ -433,14 +457,14 @@ public class HomeFragment extends Fragment {
 
         } catch (Exception e) {
             Snackbar snackbar = Snackbar
-                    .make(getActivity().findViewById(android.R.id.content), e.getMessage(), Snackbar.LENGTH_LONG);
+                    .make(Objects.requireNonNull(getActivity()).findViewById(android.R.id.content), Objects.requireNonNull(e.getMessage()), Snackbar.LENGTH_LONG);
             snackbar.show();
         }
 //        return fKiloPrice | fMeterPrice | fPaperWeight | fRollLength | fRollPrice | fSheetLength | fSheetPrice;
     }
 
     private boolean multiply(EditText multiplicand, CheckBox cb1, EditText multiplier, CheckBox cb2, EditText product, CheckBox cb3, int precision) {
-        String s1, s2 = "";
+        String s1, s2;
         String s3;
 
         // First test if calculated
@@ -473,12 +497,12 @@ public class HomeFragment extends Fragment {
         // Now do the calculation
         float i3 = Float.parseFloat(s1) * Float.parseFloat(s2) / precision;
         product.setText(String.valueOf(i3));
-        cb3.setChecked(true);
+        Objects.requireNonNull(cb3).setChecked(true);
         return true;
     }
 
     private boolean divide(EditText dividend, CheckBox cb1, EditText divisor, CheckBox cb2, EditText quotient, CheckBox cb3) {
-        String s1, s2 = "";
+        String s1, s2;
         String s3;
 
         // First test if calculated
@@ -511,7 +535,7 @@ public class HomeFragment extends Fragment {
         // Now do the calculation
         float i3 = Float.parseFloat(s1) / Float.parseFloat(s2);
         quotient.setText(String.valueOf(i3));
-        cb3.setChecked(true);
+        Objects.requireNonNull(cb3).setChecked(true);
         return true;
     }
 
@@ -551,7 +575,7 @@ public class HomeFragment extends Fragment {
         EditText itemNoEditText = root.findViewById(R.id.itemNoEditText);
         ProductModel pd = helper.getProductDataByItemNo(itemNoEditText.getText().toString());
         Snackbar snackbar = Snackbar
-                .make(getActivity().findViewById(android.R.id.content), "Found item no. " + pd.getItemNo(), Snackbar.LENGTH_LONG);
+                .make(Objects.requireNonNull(getActivity()).findViewById(android.R.id.content), "Found item no. " + pd.getItemNo(), Snackbar.LENGTH_LONG);
         snackbar.show();
         // TODO move data to activity fields
     }
@@ -561,7 +585,7 @@ public class HomeFragment extends Fragment {
         EditText brandEditText = root.findViewById(R.id.brandEditText);
         ProductModel pd = helper.getProductDataByBrand(brandEditText.getText().toString());
         Snackbar snackbar = Snackbar
-                .make(getActivity().findViewById(android.R.id.content), "Found brand. " + pd.getItemNo(), Snackbar.LENGTH_LONG);
+                .make(Objects.requireNonNull(getActivity()).findViewById(android.R.id.content), "Found brand. " + pd.getItemNo(), Snackbar.LENGTH_LONG);
         snackbar.show();
         // TODO move data to activity fields
     }

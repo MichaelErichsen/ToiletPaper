@@ -20,6 +20,7 @@ import com.google.android.gms.vision.barcode.Barcode;
 import com.google.android.gms.vision.barcode.BarcodeDetector;
 
 import java.io.IOException;
+import java.util.Objects;
 
 public class ScanActivity extends AppCompatActivity {
     private static final int REQUEST_CAMERA_PERMISSION = 201;
@@ -110,14 +111,14 @@ public class ScanActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        getSupportActionBar().hide();
+        Objects.requireNonNull(getSupportActionBar()).hide();
         cameraSource.release();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        getSupportActionBar().hide();
+        Objects.requireNonNull(getSupportActionBar()).hide();
         initialiseDetectorsAndSources();
     }
 
