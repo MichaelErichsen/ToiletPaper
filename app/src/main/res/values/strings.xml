@@ -84,4 +84,6 @@
     <string name="sheetPriceRb">Pris pr. ark</string>
     <string name="sortListPrompt">\n\nKlik for at se sorteret liste</string>
     <string name="clickToDelete">Klik her for at slette</string>
+    <string name="no_products_found">Der er ikke fundet nogen produkter</string>
+    <string name="invalid_sort_key">\"Ugyldig sorteringsnøgle: \"</string>
 </resources>

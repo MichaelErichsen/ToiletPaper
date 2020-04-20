@@ -43,12 +43,12 @@ public class CompareActivity extends AppCompatActivity {
         tableRow.setBackgroundColor(Color.BLACK);
         tableRow.setPadding(2, 2, 2, 2);
         tableRow.addView(addCell(sortKey));
-        tableRow.addView(addCell("Varenummer"));
-        tableRow.addView(addCell("Varemærke"));
+        tableRow.addView(addCell(getString(R.string.item_no)));
+        tableRow.addView(addCell(getString(R.string.brand)));
         tableRow.addView(addCell("Uid"));
         tableLayout.addView(tableRow);
 
-        List<ProductData> lpd = helper.getSortedProductData(sortKey, sortFilter);
+        List<ProductData> lpd;
 
         try {
             lpd = helper.getSortedProductData(sortKey, sortFilter);
@@ -58,10 +58,10 @@ public class CompareActivity extends AppCompatActivity {
             snackbar.show();
             return;
         }
-// FIXME Returns two identical rows
+// FIXME Returns three identical rows
         if (lpd.size() == 0) {
             Snackbar snackbar = Snackbar
-                    .make(findViewById(android.R.id.content), "No data in table", Snackbar.LENGTH_LONG);
+                    .make(findViewById(android.R.id.content), R.string.no_products_found, Snackbar.LENGTH_LONG);
             snackbar.show();
             helper.doInitialLoad();
             return;
@@ -89,7 +89,8 @@ public class CompareActivity extends AppCompatActivity {
                     break;
                 default:
                     Snackbar snackbar = Snackbar
-                            .make(findViewById(android.R.id.content), "Invalid sort key: " + sortKey, Snackbar.LENGTH_LONG);
+                            .make(findViewById(android.R.id.content),
+                                    getString(R.string.invalid_sort_key) + sortKey, Snackbar.LENGTH_LONG);
                     snackbar.show();
                     break;
             }
@@ -111,9 +112,9 @@ public class CompareActivity extends AppCompatActivity {
                     LinearLayout ll = (LinearLayout) selectedRow.getChildAt(3);
                     TextView tv = (TextView) ll.getChildAt(0);
                     int uid = Integer.parseInt(tv.getText().toString());
-                    Snackbar snackbar = Snackbar
-                            .make(findViewById(android.R.id.content), uid + " was clicked", Snackbar.LENGTH_LONG);
-                    snackbar.show();
+//                    Snackbar snackbar = Snackbar
+//                            .make(findViewById(android.R.id.content), uid + " was clicked", Snackbar.LENGTH_LONG);
+//                    snackbar.show();
 
                     Intent productIntent = new Intent(context, ProductActivity.class);
                     productIntent.putExtra("net.myrichsen.toiletpaper.UID", String.valueOf(uid));

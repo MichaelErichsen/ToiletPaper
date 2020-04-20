@@ -23,8 +23,11 @@ import com.google.android.material.snackbar.Snackbar;
 
 import net.myerichsen.toiletpaper.CompareActivity;
 import net.myerichsen.toiletpaper.R;
+import net.myerichsen.toiletpaper.TPDbAdapter;
+import net.myerichsen.toiletpaper.ui.suppliers.SupplierData;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class CompareFragment extends Fragment {
     private Context context;
@@ -38,14 +41,39 @@ public class CompareFragment extends Fragment {
 
         View root = inflater.inflate(R.layout.compare_fragment, container, false);
         context = getContext();
+        TPDbAdapter helper = new TPDbAdapter(context);
 
         Spinner filterSpinner = root.findViewById(R.id.filterSpinner);
+
+        List<SupplierData> lsd = new ArrayList<>();
         ArrayList<String> layerArrayList = new ArrayList<>();
-        // TODO Get from table
         layerArrayList.add("ALL");
-        layerArrayList.add("Rema Vejby");
-        layerArrayList.add("Spar Vejby Strand");
-        layerArrayList.add("Kvickly Helsinge");
+
+        boolean goOn = true;
+
+        try {
+            lsd = helper.getAllSupplierData(context);
+        } catch (Exception e) {
+            Snackbar snackbar = Snackbar
+                    .make(root.findViewById(android.R.id.content), e.getMessage(), Snackbar.LENGTH_LONG);
+            snackbar.show();
+            goOn = false;
+        }
+
+        if ((goOn) && (lsd.size() == 0)) {
+            Snackbar snackbar = Snackbar
+                    .make(root.findViewById(android.R.id.content), "No data in table", Snackbar.LENGTH_LONG);
+            snackbar.show();
+            helper.doInitialLoad();
+            goOn = false;
+        }
+
+        if (goOn) {
+            for (int i = 0; i < lsd.size(); i++) {
+                layerArrayList.add(lsd.get(i).getSupplier());
+            }
+        }
+
         ArrayAdapter<String> layerArrayAdapter = new ArrayAdapter<>(context, android.R.layout.simple_spinner_item, layerArrayList);
         layerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         filterSpinner.setAdapter(layerArrayAdapter);
