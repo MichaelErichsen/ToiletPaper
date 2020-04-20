@@ -13,14 +13,18 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.material.snackbar.Snackbar;
+
 import net.myerichsen.toiletpaper.ui.suppliers.SupplierModel;
+
+import java.util.Objects;
 
 public class SupplierActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_compare);
+        setContentView(R.layout.activity_supplier);
         Context context = getApplicationContext();
         TPDbAdapter helper = new TPDbAdapter(context);
 
@@ -43,7 +47,13 @@ public class SupplierActivity extends AppCompatActivity {
         TextView supplierDetailTimestampTextView = findViewById(R.id.supplierDetailTimestampTextView);
 
         // Get supplier from Intent
-        String supplier = "x";
+        if (!getIntent().hasExtra("net.myrichsen.toiletpaper.SUPPLIER")) {
+            Snackbar snackbar = Snackbar
+                    .make(findViewById(android.R.id.content), "No intent extra data", Snackbar.LENGTH_LONG);
+            snackbar.show();
+            return;
+        }
+        String supplier = Objects.requireNonNull(getIntent().getExtras()).getString("net.myrichsen.toiletpaper.SUPPLIER");
 
         SupplierModel sm = helper.getSupplierDataBySupplier(supplier);
 

@@ -17,7 +17,7 @@
 
         <TextView
             android:id="@+id/textView19"
-            android:layout_width="wrap_content"
+            android:layout_width="261dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="@string/supplier_activity_prompt"
@@ -60,7 +60,6 @@
             android:layout_weight="1"
             android:ems="10"
             android:hint="@string/supplier"
-            android:importantForAutofill="no"
             android:inputType="text"
             android:textSize="24sp" />
 
@@ -86,7 +85,6 @@
             android:layout_weight="1"
             android:ems="10"
             android:hint="@string/chain"
-            android:importantForAutofill="no"
             android:inputType="text"
             android:textSize="24sp" />
 

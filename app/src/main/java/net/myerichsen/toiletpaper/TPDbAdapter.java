@@ -351,7 +351,7 @@ public class TPDbAdapter {
             SQLiteDatabase db = tpDbHelper.getReadableDatabase();
 
             String[] args = {supplier};
-            Cursor cursor = db.query(TpDbHelper.TABLE_SUPPLIER, pdColumns, "SUPPLIER=?", args, null, null, null);
+            Cursor cursor = db.query(TpDbHelper.TABLE_SUPPLIER, sdColumns, "SUPPLIER=?", args, null, null, null);
 
             if (cursor.getCount() > 0) {
                 if (cursor.moveToNext()) {
