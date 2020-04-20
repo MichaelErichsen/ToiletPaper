@@ -1,6 +1,7 @@
 package net.myerichsen.toiletpaper.ui.suppliers;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.TypedValue;
@@ -19,17 +20,16 @@ import androidx.fragment.app.Fragment;
 import com.google.android.material.snackbar.Snackbar;
 
 import net.myerichsen.toiletpaper.R;
+import net.myerichsen.toiletpaper.SupplierActivity;
 import net.myerichsen.toiletpaper.TPDbAdapter;
 
 import java.util.List;
+import java.util.Objects;
 
 public class SupplierFragment extends Fragment {
     private final TableRow.LayoutParams llp = new TableRow.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-    private TPDbAdapter helper;
     private View root;
     private Context context;
-
-    // TODO Details activity to add or delete suppliers
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -42,7 +42,7 @@ public class SupplierFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        helper = new TPDbAdapter(context);
+        TPDbAdapter helper = new TPDbAdapter(context);
 
         final TableLayout tableLayout = root.findViewById(R.id.supplierTableLayout);
 
@@ -58,14 +58,14 @@ public class SupplierFragment extends Fragment {
             lsd = helper.getAllSupplierData(context);
         } catch (Exception e) {
             Snackbar snackbar = Snackbar
-                    .make(getActivity().findViewById(android.R.id.content), e.getMessage(), Snackbar.LENGTH_LONG);
+                    .make(Objects.requireNonNull(getActivity()).findViewById(android.R.id.content), Objects.requireNonNull(e.getMessage()), Snackbar.LENGTH_LONG);
             snackbar.show();
             return;
         }
 
         if (lsd.size() == 0) {
             Snackbar snackbar = Snackbar
-                    .make(getActivity().findViewById(android.R.id.content), "No data in table", Snackbar.LENGTH_LONG);
+                    .make(Objects.requireNonNull(getActivity()).findViewById(android.R.id.content), "No data in table", Snackbar.LENGTH_LONG);
             snackbar.show();
             helper.doInitialLoad();
             return;
@@ -80,8 +80,33 @@ public class SupplierFragment extends Fragment {
 
             tableRow.addView(addCell(sd.getSupplier()));
             tableRow.addView(addCell(sd.getChain()));
+            tableRow.setOnClickListener(tableRowOnclickListener());
             tableLayout.addView(tableRow);
         }
+    }
+
+    private View.OnClickListener tableRowOnclickListener() {
+        return new View.OnClickListener() {
+            public void onClick(View v) {
+                try {
+                    TableRow selectedRow = (TableRow) v;
+                    LinearLayout ll = (LinearLayout) selectedRow.getChildAt(0);
+                    TextView tv = (TextView) ll.getChildAt(0);
+                    String supplier = tv.getText().toString();
+                    Snackbar snackbar = Snackbar
+                            .make(Objects.requireNonNull(getActivity()).findViewById(android.R.id.content), supplier + " was clicked", Snackbar.LENGTH_LONG);
+                    snackbar.show();
+
+                    Intent supplierIntent = new Intent(context, SupplierActivity.class);
+                    supplierIntent.putExtra("net.myrichsen.toiletpaper.SUPPLIER", supplier);
+                    startActivity(supplierIntent);
+                } catch (NumberFormatException e) {
+                    Snackbar snackbar = Snackbar
+                            .make(Objects.requireNonNull(getActivity()).findViewById(android.R.id.content), Objects.requireNonNull(e.getMessage()), Snackbar.LENGTH_LONG);
+                    snackbar.show();
+                }
+            }
+        };
     }
 
     private LinearLayout addCell(String cellData) {

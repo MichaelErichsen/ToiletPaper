@@ -80,4 +80,9 @@
     <string name="clickToDelete">Klik her for at slette</string>
     <string name="no_products_found">Der er ikke fundet nogen produkter</string>
     <string name="invalid_sort_key">\"Ugyldig sorteringsnøgle: \"</string>
+    <string name="supplier_activity_prompt">Klik for at oprette eller slette en butik</string>
+    <string name="timestamp">Timestamp</string>
+    <string name="chain">Kæde</string>
+    <string name="add">Tilføj</string>
+    <string name="delete">Slet</string>
 </resources>

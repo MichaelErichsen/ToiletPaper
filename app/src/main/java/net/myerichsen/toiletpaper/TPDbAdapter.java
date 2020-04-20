@@ -33,7 +33,7 @@ public class TPDbAdapter {
             TpDbHelper.TIME_STAMP};
     private final String[] sdColumns = {TpDbHelper.SUPPLIER,
             TpDbHelper.CHAIN, TpDbHelper.TIME_STAMP};
-    private Context context;
+    private final Context context;
 
     /**
      * Constructor
@@ -337,6 +337,31 @@ public class TPDbAdapter {
         }
 
         return lpd;
+    }
+
+    /**
+     * Get supplier date by supplier
+     *
+     * @param supplier
+     * @return
+     */
+    public SupplierModel getSupplierDataBySupplier(String supplier) {
+        SupplierModel sm = new SupplierModel();
+        try {
+            SQLiteDatabase db = tpDbHelper.getReadableDatabase();
+
+            String[] args = {supplier};
+            Cursor cursor = db.query(TpDbHelper.TABLE_SUPPLIER, pdColumns, "SUPPLIER=?", args, null, null, null);
+
+            if (cursor.getCount() > 0) {
+                if (cursor.moveToNext()) {
+                    sm = populateSupplierData(cursor);
+                }
+            }
+        } catch (Exception e) {
+            Toast.makeText(context, e.getMessage(), Toast.LENGTH_LONG).show();
+        }
+        return sm;
     }
 
     /**
