@@ -22,7 +22,7 @@
             android:textSize="24sp" />
 
         <ImageButton
-            android:id="@+id/imageButton2"
+            android:id="@+id/initLoadBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:srcCompat="@drawable/initialload_black_48dp" />
@@ -42,6 +42,7 @@
             android:textSize="24sp" />
 
         <RadioGroup
+            android:id="@+id/inputFormatRg"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1">
@@ -50,13 +51,14 @@
                 android:id="@+id/SimpleInputRb"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:checked="true"
+                android:checked="false"
                 android:text="@string/simple" />
 
             <RadioButton
                 android:id="@+id/AdvancedInputRb"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:checked="true"
                 android:text="@string/advanced" />
         </RadioGroup>
     </LinearLayout>

@@ -65,7 +65,6 @@ public class CompareFragment extends Fragment {
             Snackbar snackbar = Snackbar
                     .make(root.findViewById(android.R.id.content), "No data in table", Snackbar.LENGTH_LONG);
             snackbar.show();
-            helper.doInitialLoad();
             goOn = false;
         }
 

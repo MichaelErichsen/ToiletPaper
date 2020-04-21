@@ -33,6 +33,7 @@ public class TPDbAdapter {
             TpDbHelper.TIME_STAMP};
     private final String[] sdColumns = {TpDbHelper.SUPPLIER,
             TpDbHelper.CHAIN, TpDbHelper.TIME_STAMP};
+    private final String[] countColumn = {"COUNT(*)"};
     private final Context context;
 
     /**
@@ -430,12 +431,14 @@ public class TPDbAdapter {
 
         private static final String DROP_PRODUCT_TABLE = "DROP TABLE IF EXISTS " + TABLE_PRODUCT;
 
+
         private static final String CREATE_SUPPLIER_TABLE = "CREATE TABLE " + TABLE_SUPPLIER +
                 " (" + SUPPLIER + " TEXT PRIMARY KEY, " +
                 CHAIN + " TEXT, " +
                 TIME_STAMP + " TEXT);";
 
         private static final String DROP_SUPPLIER_TABLE = "DROP TABLE IF EXISTS " + TABLE_SUPPLIER;
+
 
         private final Context context;
 
@@ -487,11 +490,43 @@ public class TPDbAdapter {
          * Initial data load
          */
         private void loadInitialData() {
+            final String[] countColumn = {"COUNT(*)"};
             ProductModel pd;
             SupplierModel sd;
 
             try {
                 TPDbAdapter tpHelper = new TPDbAdapter(context);
+                SQLiteDatabase db = getReadableDatabase();
+
+                Cursor cursor = db.query(TABLE_PRODUCT, tpHelper.countColumn, null,
+                        null, null, null, null, null);
+
+
+                if (cursor.getCount() > 0) {
+                    if (cursor.moveToNext()) {
+                        int count = cursor.getColumnIndex("COUNT(*)");
+
+                        // FIXME Returns zero
+                        if (count > 0) {
+                            return;
+                        }
+                    }
+                }
+
+                cursor = db.query(TABLE_SUPPLIER, tpHelper.countColumn, null,
+                        null, null, null, null, null);
+
+                if (cursor.getCount() > 0) {
+                    if (cursor.moveToNext()) {
+                        int count = cursor.getColumnIndex("COUNT(*)");
+
+                        if (count > 0) {
+                            return;
+                        }
+                    }
+                }
+
+                db.close();
 
                 sd = new SupplierModel("Bilka Hillerød", "Salling");
                 tpHelper.insertData(sd);

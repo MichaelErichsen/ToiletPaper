@@ -77,7 +77,6 @@ public class ProductFragment extends Fragment {
             Snackbar snackbar = Snackbar
                     .make(Objects.requireNonNull(getActivity()).findViewById(android.R.id.content), "No data in table", Snackbar.LENGTH_LONG);
             snackbar.show();
-            helper.doInitialLoad();
             return;
         }
 

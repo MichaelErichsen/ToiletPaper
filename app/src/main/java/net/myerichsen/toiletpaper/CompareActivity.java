@@ -63,7 +63,6 @@ public class CompareActivity extends AppCompatActivity {
             Snackbar snackbar = Snackbar
                     .make(findViewById(android.R.id.content), R.string.no_products_found, Snackbar.LENGTH_LONG);
             snackbar.show();
-            helper.doInitialLoad();
             return;
         }
 
