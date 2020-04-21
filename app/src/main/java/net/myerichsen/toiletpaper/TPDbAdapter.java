@@ -61,7 +61,7 @@ public class TPDbAdapter {
 
         if (cursor.getCount() > 0) {
             if (cursor.moveToNext()) {
-                pd = populateProductData(cursor);
+                pd = populateProductModel(cursor);
             }
         }
 
@@ -76,7 +76,6 @@ public class TPDbAdapter {
         SQLiteDatabase dbb = tpDbHelper.getWritableDatabase();
         ContentValues contentValues = extractData(pd);
         dbb.insert(TpDbHelper.TABLE_PRODUCT, null, contentValues);
-        Toast.makeText(context, R.string.product_added, Toast.LENGTH_LONG).show();
     }
 
     /**
@@ -86,7 +85,6 @@ public class TPDbAdapter {
         SQLiteDatabase dbb = tpDbHelper.getWritableDatabase();
         ContentValues contentValues = extractData(sm);
         dbb.insert(TpDbHelper.TABLE_SUPPLIER, null, contentValues);
-        Toast.makeText(context, R.string.supplier_added, Toast.LENGTH_LONG).show();
     }
 
     /**
@@ -95,7 +93,7 @@ public class TPDbAdapter {
      * @return List of columns in record
      */
     public ProductModel getProductDataByItemNo(String itemNo) {
-        ProductModel pd = null;
+        ProductModel pm = null;
 
         SQLiteDatabase db = tpDbHelper.getReadableDatabase();
         String[] args = {itemNo};
@@ -103,11 +101,11 @@ public class TPDbAdapter {
 
         if (cursor.getCount() > 0) {
             if (cursor.moveToNext()) {
-                pd = populateProductData(cursor);
+                pm = populateProductModel(cursor);
             }
         }
 
-        return pd;
+        return pm;
     }
 
     /**
@@ -126,7 +124,7 @@ public class TPDbAdapter {
 
             if (cursor.getCount() > 0) {
                 if (cursor.moveToNext()) {
-                    pd = populateProductData(cursor);
+                    pd = populateProductModel(cursor);
                 }
             }
         } catch (Exception e) {
@@ -150,13 +148,13 @@ public class TPDbAdapter {
         Cursor cursor = db.query(TpDbHelper.TABLE_PRODUCT, pdColumns, null, null, null, null, null);
 
         while (cursor.moveToNext()) {
-            lpd.add(populateProductData(cursor));
+            lpd.add(populateProductModel(cursor));
         }
         return lpd;
     }
 
     /**
-     * Do an inital load
+     * Do an initial load
      */
     public void doInitialLoad() {
         tpDbHelper.loadInitialData();
@@ -188,49 +186,49 @@ public class TPDbAdapter {
     /**
      * Extract supplier data into content value object
      *
-     * @param sd Supplier data
+     * @param pm Supplier data
      * @return ContentValues
      */
-    private ContentValues extractData(SupplierModel sd) {
+    private ContentValues extractData(SupplierModel pm) {
         ContentValues contentValues = new ContentValues();
-        contentValues.put(TpDbHelper.SUPPLIER, sd.getSupplier());
-        contentValues.put(TpDbHelper.CHAIN, sd.getChain());
-        contentValues.put(TpDbHelper.TIME_STAMP, sd.getTimestamp());
+        contentValues.put(TpDbHelper.SUPPLIER, pm.getSupplier());
+        contentValues.put(TpDbHelper.CHAIN, pm.getChain());
+        contentValues.put(TpDbHelper.TIME_STAMP, pm.getTimestamp());
         return contentValues;
     }
 
     /**
      * Extract product data into Content Value object
      *
-     * @param pd Product data
+     * @param pm Product data
      * @return ContentValues
      */
-    private ContentValues extractData(ProductModel pd) {
+    private ContentValues extractData(ProductModel pm) {
         ContentValues contentValues = new ContentValues();
-        contentValues.put(TpDbHelper.LAYERS, pd.getLayers());
-        contentValues.put(TpDbHelper.PACKAGE_ROLLS, pd.getPackageRolls());
-        contentValues.put(TpDbHelper.ROLL_SHEETS, pd.getRollSheets());
-        contentValues.put(TpDbHelper.SHEET_WIDTH, pd.getSheetWidth());
-        contentValues.put(TpDbHelper.SHEET_LENGTH, pd.getSheetLength());
-        contentValues.put(TpDbHelper.SHEET_LENGTH_C, pd.getSheetLength_c());
-        contentValues.put(TpDbHelper.ROLL_LENGTH, pd.getRollLength());
-        contentValues.put(TpDbHelper.ROLL_LENGTH_C, pd.getRollLength_c());
-        contentValues.put(TpDbHelper.PACKAGE_PRICE, pd.getPackagePrice());
-        contentValues.put(TpDbHelper.ROLL_PRICE, pd.getRollPrice());
-        contentValues.put(TpDbHelper.ROLL_PRICE_C, pd.getRollPrice_c());
-        contentValues.put(TpDbHelper.PAPER_WEIGHT, pd.getPaperWeight());
-        contentValues.put(TpDbHelper.PAPER_WEIGHT_C, pd.getPaperWeight_c());
-        contentValues.put(TpDbHelper.KILO_PRICE, pd.getKiloPrice());
-        contentValues.put(TpDbHelper.KILO_PRICE_C, pd.getKiloPrice_c());
-        contentValues.put(TpDbHelper.METER_PRICE, pd.getMeterPrice());
-        contentValues.put(TpDbHelper.METER_PRICE_C, pd.getMeterPrice_c());
-        contentValues.put(TpDbHelper.SHEET_PRICE, pd.getSheetPrice());
-        contentValues.put(TpDbHelper.SHEET_PRICE_C, pd.getSheetPrice_c());
-        contentValues.put(TpDbHelper.SUPPLIER, pd.getSupplier());
-        contentValues.put(TpDbHelper.COMMENTS, pd.getComments());
-        contentValues.put(TpDbHelper.ITEM_NO, pd.getItemNo());
-        contentValues.put(TpDbHelper.BRAND, pd.getBrand());
-        contentValues.put(TpDbHelper.TIME_STAMP, pd.getTimestamp());
+        contentValues.put(TpDbHelper.LAYERS, pm.getLayers());
+        contentValues.put(TpDbHelper.PACKAGE_ROLLS, pm.getPackageRolls());
+        contentValues.put(TpDbHelper.ROLL_SHEETS, pm.getRollSheets());
+        contentValues.put(TpDbHelper.SHEET_WIDTH, pm.getSheetWidth());
+        contentValues.put(TpDbHelper.SHEET_LENGTH, pm.getSheetLength());
+        contentValues.put(TpDbHelper.SHEET_LENGTH_C, pm.getSheetLength_c());
+        contentValues.put(TpDbHelper.ROLL_LENGTH, pm.getRollLength());
+        contentValues.put(TpDbHelper.ROLL_LENGTH_C, pm.getRollLength_c());
+        contentValues.put(TpDbHelper.PACKAGE_PRICE, pm.getPackagePrice());
+        contentValues.put(TpDbHelper.ROLL_PRICE, pm.getRollPrice());
+        contentValues.put(TpDbHelper.ROLL_PRICE_C, pm.getRollPrice_c());
+        contentValues.put(TpDbHelper.PAPER_WEIGHT, pm.getPaperWeight());
+        contentValues.put(TpDbHelper.PAPER_WEIGHT_C, pm.getPaperWeight_c());
+        contentValues.put(TpDbHelper.KILO_PRICE, pm.getKiloPrice());
+        contentValues.put(TpDbHelper.KILO_PRICE_C, pm.getKiloPrice_c());
+        contentValues.put(TpDbHelper.METER_PRICE, pm.getMeterPrice());
+        contentValues.put(TpDbHelper.METER_PRICE_C, pm.getMeterPrice_c());
+        contentValues.put(TpDbHelper.SHEET_PRICE, pm.getSheetPrice());
+        contentValues.put(TpDbHelper.SHEET_PRICE_C, pm.getSheetPrice_c());
+        contentValues.put(TpDbHelper.SUPPLIER, pm.getSupplier());
+        contentValues.put(TpDbHelper.COMMENTS, pm.getComments());
+        contentValues.put(TpDbHelper.ITEM_NO, pm.getItemNo());
+        contentValues.put(TpDbHelper.BRAND, pm.getBrand());
+        contentValues.put(TpDbHelper.TIME_STAMP, pm.getTimestamp());
         return contentValues;
     }
 
@@ -241,11 +239,11 @@ public class TPDbAdapter {
      * @return Supplier data
      */
     private SupplierModel populateSupplierData(Cursor cursor) {
-        SupplierModel sd = new SupplierModel();
-        sd.setSupplier(cursor.getString(cursor.getColumnIndex(TpDbHelper.SUPPLIER)));
-        sd.setChain(cursor.getString(cursor.getColumnIndex(TpDbHelper.CHAIN)));
-        sd.setTimestamp(cursor.getString(cursor.getColumnIndex(TpDbHelper.TIME_STAMP)));
-        return sd;
+        SupplierModel sm = new SupplierModel();
+        sm.setSupplier(cursor.getString(cursor.getColumnIndex(TpDbHelper.SUPPLIER)));
+        sm.setChain(cursor.getString(cursor.getColumnIndex(TpDbHelper.CHAIN)));
+        sm.setTimestamp(cursor.getString(cursor.getColumnIndex(TpDbHelper.TIME_STAMP)));
+        return sm;
     }
 
     /**
@@ -254,34 +252,34 @@ public class TPDbAdapter {
      * @param cursor Database cursor
      * @return product data
      */
-    private ProductModel populateProductData(Cursor cursor) {
-        ProductModel pd = new ProductModel();
-        pd.setUid(cursor.getInt(cursor.getColumnIndex(TpDbHelper.UID)));
-        pd.setLayers(cursor.getInt(cursor.getColumnIndex(TpDbHelper.LAYERS)));
-        pd.setPackageRolls(cursor.getInt(cursor.getColumnIndex(TpDbHelper.PACKAGE_ROLLS)));
-        pd.setRollSheets(cursor.getInt(cursor.getColumnIndex(TpDbHelper.ROLL_SHEETS)));
-        pd.setSheetWidth(cursor.getInt(cursor.getColumnIndex(TpDbHelper.SHEET_WIDTH)));
-        pd.setSheetLength(cursor.getInt(cursor.getColumnIndex(TpDbHelper.SHEET_LENGTH)));
-        pd.setSheetLength_c(cursor.getInt(cursor.getColumnIndex(TpDbHelper.ROLL_LENGTH_C)));
-        pd.setRollLength(cursor.getInt(cursor.getColumnIndex(TpDbHelper.ROLL_LENGTH)));
-        pd.setRollLength_c(cursor.getInt(cursor.getColumnIndex(TpDbHelper.SHEET_LENGTH_C)));
-        pd.setPackagePrice(cursor.getFloat(cursor.getColumnIndex(TpDbHelper.PACKAGE_PRICE)));
-        pd.setRollPrice(cursor.getFloat(cursor.getColumnIndex(TpDbHelper.ROLL_PRICE)));
-        pd.setRollPrice_c(cursor.getInt(cursor.getColumnIndex(TpDbHelper.ROLL_PRICE_C)));
-        pd.setPaperWeight(cursor.getFloat(cursor.getColumnIndex(TpDbHelper.PAPER_WEIGHT)));
-        pd.setPaperWeight_c(cursor.getInt(cursor.getColumnIndex(TpDbHelper.PAPER_WEIGHT_C)));
-        pd.setKiloPrice(cursor.getFloat(cursor.getColumnIndex(TpDbHelper.KILO_PRICE)));
-        pd.setKiloPrice_c(cursor.getInt(cursor.getColumnIndex(TpDbHelper.KILO_PRICE_C)));
-        pd.setMeterPrice(cursor.getFloat(cursor.getColumnIndex(TpDbHelper.METER_PRICE)));
-        pd.setMeterPrice_c(cursor.getInt(cursor.getColumnIndex(TpDbHelper.METER_PRICE_C)));
-        pd.setSheetPrice(cursor.getFloat(cursor.getColumnIndex(TpDbHelper.SHEET_PRICE)));
-        pd.setSheetPrice_c(cursor.getInt(cursor.getColumnIndex(TpDbHelper.SHEET_PRICE_C)));
-        pd.setSupplier(cursor.getString(cursor.getColumnIndex(TpDbHelper.SUPPLIER)));
-        pd.setComments(cursor.getString(cursor.getColumnIndex(TpDbHelper.COMMENTS)));
-        pd.setItemNo(cursor.getString(cursor.getColumnIndex(TpDbHelper.ITEM_NO)));
-        pd.setBrand(cursor.getString(cursor.getColumnIndex(TpDbHelper.BRAND)));
-        pd.setTimestamp(cursor.getString(cursor.getColumnIndex(TpDbHelper.TIME_STAMP)));
-        return pd;
+    private ProductModel populateProductModel(Cursor cursor) {
+        ProductModel pm = new ProductModel();
+        pm.setUid(cursor.getInt(cursor.getColumnIndex(TpDbHelper.UID)));
+        pm.setLayers(cursor.getInt(cursor.getColumnIndex(TpDbHelper.LAYERS)));
+        pm.setPackageRolls(cursor.getInt(cursor.getColumnIndex(TpDbHelper.PACKAGE_ROLLS)));
+        pm.setRollSheets(cursor.getInt(cursor.getColumnIndex(TpDbHelper.ROLL_SHEETS)));
+        pm.setSheetWidth(cursor.getInt(cursor.getColumnIndex(TpDbHelper.SHEET_WIDTH)));
+        pm.setSheetLength(cursor.getInt(cursor.getColumnIndex(TpDbHelper.SHEET_LENGTH)));
+        pm.setSheetLength_c(cursor.getInt(cursor.getColumnIndex(TpDbHelper.ROLL_LENGTH_C)));
+        pm.setRollLength(cursor.getInt(cursor.getColumnIndex(TpDbHelper.ROLL_LENGTH)));
+        pm.setRollLength_c(cursor.getInt(cursor.getColumnIndex(TpDbHelper.SHEET_LENGTH_C)));
+        pm.setPackagePrice(cursor.getFloat(cursor.getColumnIndex(TpDbHelper.PACKAGE_PRICE)));
+        pm.setRollPrice(cursor.getFloat(cursor.getColumnIndex(TpDbHelper.ROLL_PRICE)));
+        pm.setRollPrice_c(cursor.getInt(cursor.getColumnIndex(TpDbHelper.ROLL_PRICE_C)));
+        pm.setPaperWeight(cursor.getFloat(cursor.getColumnIndex(TpDbHelper.PAPER_WEIGHT)));
+        pm.setPaperWeight_c(cursor.getInt(cursor.getColumnIndex(TpDbHelper.PAPER_WEIGHT_C)));
+        pm.setKiloPrice(cursor.getFloat(cursor.getColumnIndex(TpDbHelper.KILO_PRICE)));
+        pm.setKiloPrice_c(cursor.getInt(cursor.getColumnIndex(TpDbHelper.KILO_PRICE_C)));
+        pm.setMeterPrice(cursor.getFloat(cursor.getColumnIndex(TpDbHelper.METER_PRICE)));
+        pm.setMeterPrice_c(cursor.getInt(cursor.getColumnIndex(TpDbHelper.METER_PRICE_C)));
+        pm.setSheetPrice(cursor.getFloat(cursor.getColumnIndex(TpDbHelper.SHEET_PRICE)));
+        pm.setSheetPrice_c(cursor.getInt(cursor.getColumnIndex(TpDbHelper.SHEET_PRICE_C)));
+        pm.setSupplier(cursor.getString(cursor.getColumnIndex(TpDbHelper.SUPPLIER)));
+        pm.setComments(cursor.getString(cursor.getColumnIndex(TpDbHelper.COMMENTS)));
+        pm.setItemNo(cursor.getString(cursor.getColumnIndex(TpDbHelper.ITEM_NO)));
+        pm.setBrand(cursor.getString(cursor.getColumnIndex(TpDbHelper.BRAND)));
+        pm.setTimestamp(cursor.getString(cursor.getColumnIndex(TpDbHelper.TIME_STAMP)));
+        return pm;
     }
 
     /**
@@ -315,7 +313,6 @@ public class TPDbAdapter {
         Cursor cursor;
         List<ProductModel> lpd = new ArrayList<>();
 
-
         try {
             SQLiteDatabase db = tpDbHelper.getReadableDatabase();
 
@@ -328,9 +325,8 @@ public class TPDbAdapter {
                         null, null, sortKey + " DESC");
             }
 
-
             while (cursor.moveToNext()) {
-                lpd.add(populateProductData(cursor));
+                lpd.add(populateProductModel(cursor));
             }
         } catch (Exception e) {
             Toast.makeText(context, e.getMessage(), Toast.LENGTH_LONG).show();
@@ -345,7 +341,7 @@ public class TPDbAdapter {
      * @param supplier
      * @return
      */
-    public SupplierModel getSupplierDataBySupplier(String supplier) {
+    public SupplierModel getSupplierModelBySupplier(String supplier) {
         SupplierModel sm = new SupplierModel();
         try {
             SQLiteDatabase db = tpDbHelper.getReadableDatabase();
@@ -438,7 +434,6 @@ public class TPDbAdapter {
 
         private static final String DROP_SUPPLIER_TABLE = "DROP TABLE IF EXISTS " + TABLE_SUPPLIER;
 
-
         private final Context context;
 
         /**
@@ -488,11 +483,9 @@ public class TPDbAdapter {
         /**
          * Initial data load
          */
-        // FIXME Repeats supplier created
-        // FIXME Database already closed
         private void loadInitialData() {
             final String[] countColumn = {"COUNT(*)"};
-            SupplierModel sd;
+            SupplierModel sm;
             ProductModel pd;
 
 
@@ -509,7 +502,7 @@ public class TPDbAdapter {
                         int count = cursor.getInt(cursor.getColumnIndex("COUNT(*)"));
 
                         if (count == 0) {
-                            db.close();
+//                            db.close();
                             loadSuppliers(tpHelper);
                         } else {
                             Toast.makeText(context, "Supplier table not empty. Contains " + count + " suppliers",
@@ -525,7 +518,7 @@ public class TPDbAdapter {
                         int count = cursor.getInt(cursor.getColumnIndex("COUNT(*)"));
 
                         if (count == 0) {
-                            db.close();
+//                            db.close();
                             loadProducts(tpHelper);
                         } else {
                             Toast.makeText(context, "Product table not empty. Contains " + count + " products",
@@ -539,49 +532,56 @@ public class TPDbAdapter {
         }
 
         private void loadProducts(TPDbAdapter tpHelper) {
-            ProductModel pd;
-            pd = new ProductModel("5700384289095", "Irma Tusindfryd Toiletpapir",
+            ProductModel pm;
+            pm = new ProductModel("5700384289095", "Irma Tusindfryd Toiletpapir",
                     3, 8, 233, 97, 125, 0, (float) 29.1,
                     0, 41, 0, (float) 5.125, 1, 48,
                     0, (float) 31.64, 0, (float) 0.1761, 1, (float) 0.022, 1,
                     "Kvickly Helsinge", "Produceret i Sverige");
-            tpHelper.insertData(pd);
+            tpHelper.insertData(pm);
 
-            pd = new ProductModel("7311041080306", "First Price Toiletpapir 2-lags",
+            pm = new ProductModel("7311041080306", "First Price Toiletpapir 2-lags",
                     2, 8, 220, 96, 125, 1, (float) 27.5,
                     0, (float) 15.95, 0, (float) 1.99, 1, 36,
                     0, 0, 0, (float) 0.0725, 1, (float) 0.009, 1,
                     "Spar Vejby Strand", "Produceret i Litauen");
-            tpHelper.insertData(pd);
+            tpHelper.insertData(pm);
 
-            pd = new ProductModel("5705830002242", "REMA 1000 Toiletpapir",
+            pm = new ProductModel("5705830002242", "REMA 1000 Toiletpapir",
                     2, 8, 282, 97, 125, 0, (float) 35.25,
                     0, (float) 9.75, 0, (float) 1.21875, 1, (float) 32.6,
                     0, (float) 10.93, 0, (float) 0.0346, 1, (float) 0.004322, 1,
                     "Rema Vejby", "Produceret i Sverige");
-            tpHelper.insertData(pd);
+            tpHelper.insertData(pm);
+
+            pm = new ProductModel("170190", "Lambi Classic Toilet Paper",
+                    3, 9, 255, 0, 125, 1, (float) 31.9,
+                    0, (float) 34.95, 0, (float) 3.88, 1, (float) 0,
+                    0, (float) 41.26, 0, (float) 0.1217, 1, (float) 0.01523, 1,
+                    "Rema Vejby", "Produceret i Sverige");
+            tpHelper.insertData(pm);
         }
 
         private void loadSuppliers(TPDbAdapter tpHelper) {
-            SupplierModel sd;
-            sd = new SupplierModel("Bilka Hillerød", "Salling");
-            tpHelper.insertData(sd);
-            sd = new SupplierModel("Føtex Hillerød", "Salling");
-            tpHelper.insertData(sd);
-            sd = new SupplierModel("Kvickly Helsinge", "Coop");
-            tpHelper.insertData(sd);
-            sd = new SupplierModel("Netto Vejby", "Salling");
-            tpHelper.insertData(sd);
-            sd = new SupplierModel("Rema Vejby", "REMA 1000");
-            tpHelper.insertData(sd);
-            sd = new SupplierModel("Spar Karsemose", "Dagrofa");
-            tpHelper.insertData(sd);
-            sd = new SupplierModel("Spar Vejby Strand", "Dagrofa");
-            tpHelper.insertData(sd);
-            sd = new SupplierModel("SuperBest Allerød", "SuperBest");
-            tpHelper.insertData(sd);
-            sd = new SupplierModel("Superbrugsen Gilleleje", "Coop");
-            tpHelper.insertData(sd);
+            SupplierModel sm;
+            sm = new SupplierModel("Bilka Hillerød", "Salling");
+            tpHelper.insertData(sm);
+            sm = new SupplierModel("Føtex Hillerød", "Salling");
+            tpHelper.insertData(sm);
+            sm = new SupplierModel("Kvickly Helsinge", "Coop");
+            tpHelper.insertData(sm);
+            sm = new SupplierModel("Netto Vejby", "Salling");
+            tpHelper.insertData(sm);
+            sm = new SupplierModel("Rema Vejby", "REMA 1000");
+            tpHelper.insertData(sm);
+            sm = new SupplierModel("Spar Karsemose", "Dagrofa");
+            tpHelper.insertData(sm);
+            sm = new SupplierModel("Spar Vejby Strand", "Dagrofa");
+            tpHelper.insertData(sm);
+            sm = new SupplierModel("SuperBest Allerød", "SuperBest");
+            tpHelper.insertData(sm);
+            sm = new SupplierModel("Superbrugsen Gilleleje", "Coop");
+            tpHelper.insertData(sm);
         }
     }
 }

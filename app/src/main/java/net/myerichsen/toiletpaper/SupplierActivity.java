@@ -39,6 +39,9 @@ public class SupplierActivity extends AppCompatActivity {
                 sm.setSupplier(supplierDetailSupplierEditText.getText().toString());
                 sm.setChain(supplierDetailChainEditText.getText().toString());
                 helper.insertData(sm);
+                Snackbar snackbar = Snackbar
+                        .make(findViewById(android.R.id.content), R.string.supplier_added, Snackbar.LENGTH_LONG);
+                snackbar.show();
             }
         });
         ImageButton supplierDetailDeleteBtn = findViewById(R.id.supplierDetailDeleteBtn);
@@ -59,7 +62,7 @@ public class SupplierActivity extends AppCompatActivity {
         }
         String supplier = Objects.requireNonNull(getIntent().getExtras()).getString("net.myrichsen.toiletpaper.SUPPLIER");
 
-        SupplierModel sm = helper.getSupplierDataBySupplier(supplier);
+        SupplierModel sm = helper.getSupplierModelBySupplier(supplier);
 
         supplierDetailSupplierEditText.setText(sm.getSupplier());
         supplierDetailChainEditText.setText(sm.getChain());

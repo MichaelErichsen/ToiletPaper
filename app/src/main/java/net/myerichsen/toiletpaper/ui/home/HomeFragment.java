@@ -307,7 +307,7 @@ public class HomeFragment extends Fragment {
                 String message;
 
                 try {
-                    pd = populateProductDataFromLayout();
+                    pd = populateProductModelFromLayout();
                     helper.insertData(pd);
                     message = getString(R.string.home_fragment_save_message);
                 } catch (Exception e) {
@@ -339,7 +339,81 @@ public class HomeFragment extends Fragment {
             }
         });
 
+        AppCompatImageButton searchItemNoBtn = root.findViewById(R.id.searchItemNoBtn);
+        searchItemNoBtn.setOnClickListener(searchItemNoBtnOnclickListener());
+
+        AppCompatImageButton searchBrandBtn = root.findViewById(R.id.searchBrandBtn);
+        searchBrandBtn.setOnClickListener(searchBrandBtnOnclickListener());
+
         return root;
+    }
+
+    private View.OnClickListener searchItemNoBtnOnclickListener() {
+        return new View.OnClickListener() {
+            public void onClick(View v) {
+                ProductModel pm = helper.getProductDataByItemNo(itemNoEditText.getText().toString());
+                populateLayoutFromProductModel(pm);
+                // FIXME Crashes afterwards
+            }
+        };
+    }
+
+    private View.OnClickListener searchBrandBtnOnclickListener() {
+        return new View.OnClickListener() {
+            public void onClick(View v) {
+                ProductModel pm = helper.getProductDataByBrand(brandEditText.getText().toString());
+                populateLayoutFromProductModel(pm);
+            }
+        };
+    }
+
+    private void populateLayoutFromProductModel(ProductModel pm) {
+        try {
+            layersSpinner.setSelection(getIndex(layersSpinner, String.valueOf(pm.getLayers())));
+            packageRollsEditText.setText(String.valueOf(pm.getPackageRolls()));
+            rollSheetsEditText.setText(String.valueOf(pm.getRollSheets()));
+            sheetWidthEditText.setText(String.valueOf(pm.getSheetWidth()));
+            sheetLengthEditText.setText(String.valueOf(pm.getSheetLength()));
+            sheetLengthCheckBox.setChecked(pm.getSheetLength_c() != 0);
+            rollLengthEditText.setText(String.valueOf(pm.getRollLength()));
+            rollLengthCheckBox.setChecked(pm.getRollLength_c() != 0);
+            packagePriceEditText.setText(String.valueOf(pm.getPackagePrice()));
+            rollPriceEditText.setText(String.valueOf(pm.getRollPrice()));
+            rollPriceCheckBox.setChecked(pm.getRollPrice_c() != 0);
+            paperWeightEditText.setText(String.valueOf(pm.getPaperWeight()));
+            paperWeightCheckBox.setChecked(pm.getPaperWeight_c() != 0);
+            kiloPriceEditText.setText(String.valueOf(pm.getKiloPrice()));
+            kiloPriceCheckBox.setChecked(pm.getKiloPrice_c() != 0);
+            meterPriceEditText.setText(String.valueOf(pm.getMeterPrice()));
+            meterPriceCheckBox.setChecked(pm.getMeterPrice_c() != 0);
+            sheetPriceEditText.setText(String.valueOf(pm.getSheetPrice()));
+            sheetPriceCheckBox.setChecked(pm.getSheetPrice_c() != 0);
+            suppliersSpinner.setSelection(getIndex(suppliersSpinner, String.valueOf(pm.getSupplier())));
+            commentEditText.setText(pm.getComments());
+            itemNoEditText.setText(pm.getItemNo());
+            brandEditText.setText(pm.getBrand());
+        } catch (Exception e) {
+            Snackbar snackbar = Snackbar
+                    .make(Objects.requireNonNull(getActivity()).findViewById(android.R.id.content), Objects.requireNonNull(e.getMessage()), Snackbar.LENGTH_LONG);
+            snackbar.show();
+        }
+    }
+
+    /**
+     * Spinner utility function
+     *
+     * @param spinner
+     * @param myString
+     * @return
+     */
+    private int getIndex(Spinner spinner, String myString) {
+        for (int i = 0; i < spinner.getCount(); i++) {
+            if (spinner.getItemAtPosition(i).toString().equalsIgnoreCase(myString)) {
+                return i;
+            }
+        }
+
+        return 0;
     }
 
     private int getIntFromLayout(EditText et) {
@@ -378,41 +452,40 @@ public class HomeFragment extends Fragment {
         return (String) spinner.getSelectedItem();
     }
 
-    private ProductModel populateProductDataFromLayout() {
-
-        ProductModel pd = new ProductModel();
+    private ProductModel populateProductModelFromLayout() {
+        ProductModel pm = new ProductModel();
 
         try {
-            pd.setItemNo(getStringFromLayout(itemNoEditText));
-            pd.setBrand(getStringFromLayout(brandEditText));
-            pd.setLayers(getIntFromLayout(layersSpinner));
-            pd.setPackageRolls(getIntFromLayout(packageRollsEditText));
-            pd.setRollSheets(getIntFromLayout(rollSheetsEditText));
-            pd.setSheetWidth(getIntFromLayout(sheetWidthEditText));
-            pd.setSheetLength(getIntFromLayout(sheetLengthEditText));
-            pd.setSheetLength_c(getIntFromLayout(sheetLengthCheckBox));
-            pd.setRollLength(getIntFromLayout(rollLengthEditText));
-            pd.setRollLength_c(getIntFromLayout(rollLengthCheckBox));
-            pd.setPackagePrice(getFloatFromLayout(packagePriceEditText));
-            pd.setRollPrice(getFloatFromLayout(rollPriceEditText));
-            pd.setRollPrice_c(getIntFromLayout(rollPriceCheckBox));
-            pd.setPaperWeight(getFloatFromLayout(paperWeightEditText));
-            pd.setPaperWeight_c(getIntFromLayout(paperWeightCheckBox));
-            pd.setKiloPrice(getFloatFromLayout(kiloPriceEditText));
-            pd.setKiloPrice_c(getIntFromLayout(kiloPriceCheckBox));
-            pd.setMeterPrice(getFloatFromLayout(meterPriceEditText));
-            pd.setMeterPrice_c(getIntFromLayout(meterPriceCheckBox));
-            pd.setSheetPrice(getFloatFromLayout(sheetPriceEditText));
-            pd.setSheetPrice_c(getIntFromLayout(sheetPriceCheckBox));
-            pd.setSupplier(getStringFromLayout(suppliersSpinner));
-            pd.setComments(getStringFromLayout(commentEditText));
+            pm.setItemNo(getStringFromLayout(itemNoEditText));
+            pm.setBrand(getStringFromLayout(brandEditText));
+            pm.setLayers(getIntFromLayout(layersSpinner));
+            pm.setPackageRolls(getIntFromLayout(packageRollsEditText));
+            pm.setRollSheets(getIntFromLayout(rollSheetsEditText));
+            pm.setSheetWidth(getIntFromLayout(sheetWidthEditText));
+            pm.setSheetLength(getIntFromLayout(sheetLengthEditText));
+            pm.setSheetLength_c(getIntFromLayout(sheetLengthCheckBox));
+            pm.setRollLength(getIntFromLayout(rollLengthEditText));
+            pm.setRollLength_c(getIntFromLayout(rollLengthCheckBox));
+            pm.setPackagePrice(getFloatFromLayout(packagePriceEditText));
+            pm.setRollPrice(getFloatFromLayout(rollPriceEditText));
+            pm.setRollPrice_c(getIntFromLayout(rollPriceCheckBox));
+            pm.setPaperWeight(getFloatFromLayout(paperWeightEditText));
+            pm.setPaperWeight_c(getIntFromLayout(paperWeightCheckBox));
+            pm.setKiloPrice(getFloatFromLayout(kiloPriceEditText));
+            pm.setKiloPrice_c(getIntFromLayout(kiloPriceCheckBox));
+            pm.setMeterPrice(getFloatFromLayout(meterPriceEditText));
+            pm.setMeterPrice_c(getIntFromLayout(meterPriceCheckBox));
+            pm.setSheetPrice(getFloatFromLayout(sheetPriceEditText));
+            pm.setSheetPrice_c(getIntFromLayout(sheetPriceCheckBox));
+            pm.setSupplier(getStringFromLayout(suppliersSpinner));
+            pm.setComments(getStringFromLayout(commentEditText));
         } catch (Exception e) {
             Snackbar snackbar = Snackbar
                     .make(Objects.requireNonNull(getActivity()).findViewById(android.R.id.content), Objects.requireNonNull(e.getMessage()), Snackbar.LENGTH_LONG);
             snackbar.show();
         }
 
-        return pd;
+        return pm;
     }
 
 
@@ -437,9 +510,6 @@ public class HomeFragment extends Fragment {
             boolean fRollLength = multiply(sheetLengthEditText, sheetLengthCheckBox, rollSheetsEditText, null, rollLengthEditText, rollLengthCheckBox, 100);
 
             boolean fRollPrice = divide(packagePriceEditText, null, rollSheetsEditText, null, rollPriceEditText, rollPriceCheckBox);
-
-            // TODO Paper weight g/m2 not calculable?
-            // boolean fPaperWeight = multiply(sheetLengthEditText, sheetLengthCheckBox, rollSheetsEditText, null, rollLengthEditText, rollLengthCheckBox, 100);
 
             // Kilo price
             boolean fKiloPrice = multiply(sheetLengthEditText, sheetLengthCheckBox, rollSheetsEditText, null, rollLengthEditText, rollLengthCheckBox, 100);
@@ -567,6 +637,9 @@ public class HomeFragment extends Fragment {
         }
         pd.setItemNo(itemNo);
         helper.insertData(pd);
+        Snackbar snackbar = Snackbar
+                .make(Objects.requireNonNull(getActivity()).findViewById(android.R.id.content), R.string.product_added, Snackbar.LENGTH_LONG);
+        snackbar.show();
     }
 
 
@@ -576,7 +649,6 @@ public class HomeFragment extends Fragment {
         Snackbar snackbar = Snackbar
                 .make(Objects.requireNonNull(getActivity()).findViewById(android.R.id.content), "Found item no. " + pd.getItemNo(), Snackbar.LENGTH_LONG);
         snackbar.show();
-        // TODO move data to activity fields
     }
 
 
@@ -586,6 +658,5 @@ public class HomeFragment extends Fragment {
         Snackbar snackbar = Snackbar
                 .make(Objects.requireNonNull(getActivity()).findViewById(android.R.id.content), "Found brand. " + pd.getItemNo(), Snackbar.LENGTH_LONG);
         snackbar.show();
-        // TODO move data to activity fields
     }
 }
