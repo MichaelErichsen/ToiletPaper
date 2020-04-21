@@ -70,14 +70,14 @@ public class HomeFragment extends Fragment {
     private Spinner suppliersSpinner;
     private EditText commentEditText;
     private TextView messageTextView;
-    private ProductModel pd;
+    private ProductModel pm;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         root = inflater.inflate(R.layout.fragment_home, container, false);
         Context context = getContext();
         helper = new TPDbAdapter(context);
-        pd = new ProductModel();
+        pm = new ProductModel();
 
         // Item no
         itemNoEditText = root.findViewById(R.id.itemNoEditText);
@@ -307,8 +307,8 @@ public class HomeFragment extends Fragment {
                 String message;
 
                 try {
-                    pd = populateProductModelFromLayout();
-                    helper.insertData(pd);
+                    pm = populateProductModelFromLayout();
+                    helper.insertData(pm);
                     message = getString(R.string.home_fragment_save_message);
                 } catch (Exception e) {
                     message = e.getMessage();
@@ -353,7 +353,6 @@ public class HomeFragment extends Fragment {
             public void onClick(View v) {
                 ProductModel pm = helper.getProductDataByItemNo(itemNoEditText.getText().toString());
                 populateLayoutFromProductModel(pm);
-                // FIXME Crashes afterwards
             }
         };
     }
@@ -623,20 +622,20 @@ public class HomeFragment extends Fragment {
                 if (resultCode == RESULT_OK) {
                     String messageReturn = dataIntent.getStringExtra("item_no");
                     itemNoEditText.setText(messageReturn);
-                    pd.setItemNo(itemNoEditText.getText().toString());
+                    pm.setItemNo(itemNoEditText.getText().toString());
                 }
         }
     }
 
     public void addProduct(View view) {
-        ProductModel pd = new ProductModel();
+        ProductModel pm = new ProductModel();
 
-        String itemNo = ((EditText) root.findViewById(R.id.itemNoEditText)).getText().toString();
-        if (itemNo.isEmpty()) {
-            itemNo = "";
-        }
-        pd.setItemNo(itemNo);
-        helper.insertData(pd);
+//        String itemNo = ((EditText) root.findViewById(R.id.itemNoEditText)).getText().toString();
+//        if (itemNo.isEmpty()) {
+//            itemNo = "";
+//        }
+//        pm.setItemNo(itemNo);
+        helper.insertData(pm);
         Snackbar snackbar = Snackbar
                 .make(Objects.requireNonNull(getActivity()).findViewById(android.R.id.content), R.string.product_added, Snackbar.LENGTH_LONG);
         snackbar.show();
@@ -645,18 +644,18 @@ public class HomeFragment extends Fragment {
 
     public void getDataByItemNo(View view) {
         EditText itemNoEditText = root.findViewById(R.id.itemNoEditText);
-        ProductModel pd = helper.getProductDataByItemNo(itemNoEditText.getText().toString());
+        ProductModel pm = helper.getProductDataByItemNo(itemNoEditText.getText().toString());
         Snackbar snackbar = Snackbar
-                .make(Objects.requireNonNull(getActivity()).findViewById(android.R.id.content), "Found item no. " + pd.getItemNo(), Snackbar.LENGTH_LONG);
+                .make(Objects.requireNonNull(getActivity()).findViewById(android.R.id.content), "Found item no. " + pm.getItemNo(), Snackbar.LENGTH_LONG);
         snackbar.show();
     }
 
 
     public void getDataByBrand(View view) {
         EditText brandEditText = root.findViewById(R.id.brandEditText);
-        ProductModel pd = helper.getProductDataByBrand(brandEditText.getText().toString());
+        ProductModel pm = helper.getProductDataByBrand(brandEditText.getText().toString());
         Snackbar snackbar = Snackbar
-                .make(Objects.requireNonNull(getActivity()).findViewById(android.R.id.content), "Found brand. " + pd.getItemNo(), Snackbar.LENGTH_LONG);
+                .make(Objects.requireNonNull(getActivity()).findViewById(android.R.id.content), "Found brand. " + pm.getItemNo(), Snackbar.LENGTH_LONG);
         snackbar.show();
     }
 }
