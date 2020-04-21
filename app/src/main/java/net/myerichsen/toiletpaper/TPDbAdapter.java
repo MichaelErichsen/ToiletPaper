@@ -294,7 +294,7 @@ public class TPDbAdapter {
         SQLiteDatabase db = tpDbHelper.getWritableDatabase();
         String s = uid + "";
         String[] whereArgs = {s};
-        Toast.makeText(context, "Deletng product", Toast.LENGTH_LONG).show();
+        Toast.makeText(context, "Deleting product", Toast.LENGTH_LONG).show();
         return db.delete(TpDbHelper.TABLE_PRODUCT, TpDbHelper.UID + " = ?", whereArgs);
     }
 

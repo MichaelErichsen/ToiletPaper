@@ -8,12 +8,16 @@ import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.TypedValue;
+import android.view.View;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.android.material.snackbar.Snackbar;
 
 import net.myerichsen.toiletpaper.ui.products.ProductModel;
 
@@ -25,16 +29,14 @@ import java.util.Objects;
 public class ProductActivity extends AppCompatActivity {
     private final TableRow.LayoutParams llp = new TableRow.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
     private Context context;
+    private String uid;
 
-    // TODO Handle delete button
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product);
-
         context = getApplicationContext();
-
-        TPDbAdapter helper = new TPDbAdapter(context);
+        final TPDbAdapter helper = new TPDbAdapter(context);
 
         final TableLayout tableLayout = findViewById(R.id.productDetailTableLayout);
         TableRow tableRow = new TableRow(context);
@@ -49,9 +51,15 @@ public class ProductActivity extends AppCompatActivity {
             return;
         }
 
-        String uid = Objects.requireNonNull(getIntent().getExtras()).getString("net.myrichsen.toiletpaper.UID");
-
+        uid = Objects.requireNonNull(getIntent().getExtras()).getString("net.myrichsen.toiletpaper.UID");
         ProductModel pd = helper.getProductDataByUid(uid);
+
+        if (pd == null) {
+            Snackbar snackbar = Snackbar
+                    .make(findViewById(android.R.id.content), "Produkt nr. " + uid + " findes ikke", Snackbar.LENGTH_LONG);
+            snackbar.show();
+            return;
+        }
 
         addTableRow(tableLayout, "Uid", pd.getUid());
         addTableRow(tableLayout, "Item no", pd.getItemNo());
@@ -71,6 +79,15 @@ public class ProductActivity extends AppCompatActivity {
         addTableRow(tableLayout, "Supplier", pd.getSupplier());
         addTableRow(tableLayout, "Comments", pd.getComments());
         addTableRow(tableLayout, "Timestamp", pd.getTimestamp());
+
+        ImageButton productDeleteBtn = findViewById(R.id.productDeleteBtn);
+        productDeleteBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                helper.deleteProduct(Integer.parseInt((uid)));
+            }
+        });
+
     }
 
     private void addTableRow(TableLayout tableLayout, String uid2, String uid3) {
