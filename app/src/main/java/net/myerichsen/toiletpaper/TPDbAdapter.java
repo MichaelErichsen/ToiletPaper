@@ -488,6 +488,8 @@ public class TPDbAdapter {
         /**
          * Initial data load
          */
+        // FIXME Repeats supplier created
+        // FIXME Database already closed
         private void loadInitialData() {
             final String[] countColumn = {"COUNT(*)"};
             SupplierModel sd;

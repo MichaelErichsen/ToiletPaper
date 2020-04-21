@@ -30,8 +30,6 @@ import net.myerichsen.toiletpaper.TPDbAdapter;
 import java.util.List;
 import java.util.Objects;
 
-// TODO Double tapping opens the details fragment
-
 /**
  * Product list fragment
  */
