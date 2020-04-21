@@ -26,25 +26,29 @@ public class SupplierActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_supplier);
         Context context = getApplicationContext();
-        TPDbAdapter helper = new TPDbAdapter(context);
+        final TPDbAdapter helper = new TPDbAdapter(context);
 
+        final EditText supplierDetailSupplierEditText = findViewById(R.id.supplierDetailSupplierEditText);
+        final EditText supplierDetailChainEditText = findViewById(R.id.supplierDetailChainEditText);
+        final TextView supplierDetailTimestampTextView = findViewById(R.id.supplierDetailTimestampTextView);
         ImageButton supplierDetailAddBtn = findViewById(R.id.supplierDetailAddBtn);
         supplierDetailAddBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO Insert
+                SupplierModel sm = new SupplierModel();
+                sm.setSupplier(supplierDetailSupplierEditText.getText().toString());
+                sm.setChain(supplierDetailChainEditText.getText().toString());
+                helper.insertData(sm);
             }
         });
         ImageButton supplierDetailDeleteBtn = findViewById(R.id.supplierDetailDeleteBtn);
         supplierDetailDeleteBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TDDO Delete
+                helper.deleteSupplier(supplierDetailSupplierEditText.getText().toString());
             }
         });
-        EditText supplierDetailSupplierEditText = findViewById(R.id.supplierDetailSupplierEditText);
-        EditText supplierDetailChainEditText = findViewById(R.id.supplierDetailChainEditText);
-        TextView supplierDetailTimestampTextView = findViewById(R.id.supplierDetailTimestampTextView);
+
 
         // Get supplier from Intent
         if (!getIntent().hasExtra("net.myrichsen.toiletpaper.SUPPLIER")) {

@@ -105,4 +105,6 @@
     <string name="input_screen_format">Format for inddataskærmen</string>
     <string name="simple">Enkel</string>
     <string name="advanced">Avanceret</string>
+    <string name="product_added">Produkt tilføjet</string>
+    <string name="supplier_added">Butik tilføjet</string>
 </resources>

@@ -76,15 +76,17 @@ public class TPDbAdapter {
         SQLiteDatabase dbb = tpDbHelper.getWritableDatabase();
         ContentValues contentValues = extractData(pd);
         dbb.insert(TpDbHelper.TABLE_PRODUCT, null, contentValues);
+        Toast.makeText(context, R.string.product_added, Toast.LENGTH_LONG).show();
     }
 
     /**
      * Insert a supplier row
      */
-    private void insertData(SupplierModel sd) {
+    public void insertData(SupplierModel sm) {
         SQLiteDatabase dbb = tpDbHelper.getWritableDatabase();
-        ContentValues contentValues = extractData(sd);
+        ContentValues contentValues = extractData(sm);
         dbb.insert(TpDbHelper.TABLE_SUPPLIER, null, contentValues);
+        Toast.makeText(context, R.string.supplier_added, Toast.LENGTH_LONG).show();
     }
 
     /**
@@ -282,8 +284,6 @@ public class TPDbAdapter {
         return pd;
     }
 
-    // TODO Update
-
     /**
      * Delete row from product table
      *
@@ -294,7 +294,7 @@ public class TPDbAdapter {
         SQLiteDatabase db = tpDbHelper.getWritableDatabase();
         String s = uid + "";
         String[] whereArgs = {s};
-
+        Toast.makeText(context, "Deletng product", Toast.LENGTH_LONG).show();
         return db.delete(TpDbHelper.TABLE_PRODUCT, TpDbHelper.UID + " = ?", whereArgs);
     }
 
@@ -304,11 +304,10 @@ public class TPDbAdapter {
      * @param supplier
      * @return
      */
-    // TODO Update
     public int deleteSupplier(String supplier) {
         SQLiteDatabase db = tpDbHelper.getWritableDatabase();
         String[] whereArgs = {supplier};
-
+        Toast.makeText(context, "Deletng supplier", Toast.LENGTH_LONG).show();
         return db.delete(TpDbHelper.TABLE_SUPPLIER, TpDbHelper.SUPPLIER + " = ?", whereArgs);
     }
 
