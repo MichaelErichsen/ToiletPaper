@@ -43,19 +43,18 @@
 
         <RadioGroup
             android:id="@+id/inputFormatRg"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_weight="1">
 
             <RadioButton
-                android:id="@+id/SimpleInputRb"
+                android:id="@+id/simpleInputRb"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:checked="false"
                 android:text="@string/simple" />
 
             <RadioButton
-                android:id="@+id/AdvancedInputRb"
+                android:id="@+id/advancedInputRb"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:checked="true"

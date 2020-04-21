@@ -8,12 +8,16 @@ import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.RadioGroup;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.material.snackbar.Snackbar;
+
 public class SettingsActivity extends AppCompatActivity {
 
+    // FIXME Back arrow displayed, but ignored
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,7 +42,31 @@ public class SettingsActivity extends AppCompatActivity {
         });
 
         // TODO Implement preferences
-//        RadioGroup inputFormatRg = findViewById(R.id.inputFormatRg);
+        RadioGroup inputFormatRg = findViewById(R.id.inputFormatRg);
+        inputFormatRg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                Snackbar snackbar;
+
+                switch (checkedId) {
+                    case R.id.simpleInputRb:
+                        snackbar = Snackbar
+                                .make(findViewById(android.R.id.content), "Not implemented", Snackbar.LENGTH_LONG);
+                        snackbar.show();
+                        break;
+                    case R.id.advancedInputRb:
+                        snackbar = Snackbar
+                                .make(findViewById(android.R.id.content), "Only option implemented", Snackbar.LENGTH_LONG);
+                        snackbar.show();
+                        break;
+                    default:
+                        snackbar = Snackbar
+                                .make(findViewById(android.R.id.content), "Invalid button: " + checkedId, Snackbar.LENGTH_LONG);
+                        snackbar.show();
+                        break;
+                }
+            }
+        });
     }
 
 //    public static class SettingsFragment extends PreferenceFragmentCompat {

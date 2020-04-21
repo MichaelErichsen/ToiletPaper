@@ -491,87 +491,96 @@ public class TPDbAdapter {
          */
         private void loadInitialData() {
             final String[] countColumn = {"COUNT(*)"};
-            ProductModel pd;
             SupplierModel sd;
+            ProductModel pd;
+
 
             try {
                 TPDbAdapter tpHelper = new TPDbAdapter(context);
                 SQLiteDatabase db = getReadableDatabase();
 
-                Cursor cursor = db.query(TABLE_PRODUCT, tpHelper.countColumn, null,
-                        null, null, null, null, null);
 
-
-                if (cursor.getCount() > 0) {
-                    if (cursor.moveToNext()) {
-                        int count = cursor.getColumnIndex("COUNT(*)");
-
-                        // FIXME Returns zero
-                        if (count > 0) {
-                            return;
-                        }
-                    }
-                }
-
-                cursor = db.query(TABLE_SUPPLIER, tpHelper.countColumn, null,
+                Cursor cursor = db.query(TABLE_SUPPLIER, tpHelper.countColumn, null,
                         null, null, null, null, null);
 
                 if (cursor.getCount() > 0) {
                     if (cursor.moveToNext()) {
-                        int count = cursor.getColumnIndex("COUNT(*)");
+                        int count = cursor.getInt(cursor.getColumnIndex("COUNT(*)"));
 
-                        if (count > 0) {
-                            return;
+                        if (count == 0) {
+                            db.close();
+                            loadSuppliers(tpHelper);
+                        } else {
+                            Toast.makeText(context, "Supplier table not empty. Contains " + count + " suppliers",
+                                    Toast.LENGTH_LONG).show();
                         }
                     }
                 }
 
-                db.close();
+                cursor = db.query(TABLE_PRODUCT, tpHelper.countColumn, null,
+                        null, null, null, null, null);
+                if (cursor.getCount() > 0) {
+                    if (cursor.moveToNext()) {
+                        int count = cursor.getInt(cursor.getColumnIndex("COUNT(*)"));
 
-                sd = new SupplierModel("Bilka Hillerød", "Salling");
-                tpHelper.insertData(sd);
-                sd = new SupplierModel("Føtex Hillerød", "Salling");
-                tpHelper.insertData(sd);
-                sd = new SupplierModel("Kvickly Helsinge", "Coop");
-                tpHelper.insertData(sd);
-                sd = new SupplierModel("Netto Vejby", "Salling");
-                tpHelper.insertData(sd);
-                sd = new SupplierModel("Rema Vejby", "REMA 1000");
-                tpHelper.insertData(sd);
-                sd = new SupplierModel("Spar Karsemose", "Dagrofa");
-                tpHelper.insertData(sd);
-                sd = new SupplierModel("Spar Vejby Strand", "Dagrofa");
-                tpHelper.insertData(sd);
-                sd = new SupplierModel("SuperBest Allerød", "SuperBest");
-                tpHelper.insertData(sd);
-                sd = new SupplierModel("Superbrugsen Gilleleje", "Coop");
-                tpHelper.insertData(sd);
-
-                pd = new ProductModel("5700384289095", "Irma Tusindfryd Toiletpapir",
-                        3, 8, 233, 97, 125, 0, (float) 29.1,
-                        0, 41, 0, (float) 5.125, 1, 48,
-                        0, (float) 31.64, 0, (float) 0.1761, 1, (float) 0.022, 1,
-                        "Kvickly Helsinge", "Produceret i Sverige");
-                tpHelper.insertData(pd);
-
-                pd = new ProductModel("7311041080306", "First Price Toiletpapir 2-lags",
-                        2, 8, 220, 96, 125, 1, (float) 27.5,
-                        0, (float) 15.95, 0, (float) 1.99, 1, 36,
-                        0, 0, 0, (float) 0.0725, 1, (float) 0.009, 1,
-                        "Spar Vejby Strand", "Produceret i Litauen");
-                tpHelper.insertData(pd);
-
-                pd = new ProductModel("5705830002242", "REMA 1000 Toiletpapir",
-                        2, 8, 282, 97, 125, 0, (float) 35.25,
-                        0, (float) 9.75, 0, (float) 1.21875, 1, (float) 32.6,
-                        0, (float) 10.93, 0, (float) 0.0346, 1, (float) 0.004322, 1,
-                        "Rema Vejby", "Produceret i Sverige");
-                tpHelper.insertData(pd);
-
+                        if (count == 0) {
+                            db.close();
+                            loadProducts(tpHelper);
+                        } else {
+                            Toast.makeText(context, "Product table not empty. Contains " + count + " products",
+                                    Toast.LENGTH_LONG).show();
+                        }
+                    }
+                }
             } catch (Exception e) {
                 Toast.makeText(context, e.getMessage(), Toast.LENGTH_LONG).show();
             }
+        }
 
+        private void loadProducts(TPDbAdapter tpHelper) {
+            ProductModel pd;
+            pd = new ProductModel("5700384289095", "Irma Tusindfryd Toiletpapir",
+                    3, 8, 233, 97, 125, 0, (float) 29.1,
+                    0, 41, 0, (float) 5.125, 1, 48,
+                    0, (float) 31.64, 0, (float) 0.1761, 1, (float) 0.022, 1,
+                    "Kvickly Helsinge", "Produceret i Sverige");
+            tpHelper.insertData(pd);
+
+            pd = new ProductModel("7311041080306", "First Price Toiletpapir 2-lags",
+                    2, 8, 220, 96, 125, 1, (float) 27.5,
+                    0, (float) 15.95, 0, (float) 1.99, 1, 36,
+                    0, 0, 0, (float) 0.0725, 1, (float) 0.009, 1,
+                    "Spar Vejby Strand", "Produceret i Litauen");
+            tpHelper.insertData(pd);
+
+            pd = new ProductModel("5705830002242", "REMA 1000 Toiletpapir",
+                    2, 8, 282, 97, 125, 0, (float) 35.25,
+                    0, (float) 9.75, 0, (float) 1.21875, 1, (float) 32.6,
+                    0, (float) 10.93, 0, (float) 0.0346, 1, (float) 0.004322, 1,
+                    "Rema Vejby", "Produceret i Sverige");
+            tpHelper.insertData(pd);
+        }
+
+        private void loadSuppliers(TPDbAdapter tpHelper) {
+            SupplierModel sd;
+            sd = new SupplierModel("Bilka Hillerød", "Salling");
+            tpHelper.insertData(sd);
+            sd = new SupplierModel("Føtex Hillerød", "Salling");
+            tpHelper.insertData(sd);
+            sd = new SupplierModel("Kvickly Helsinge", "Coop");
+            tpHelper.insertData(sd);
+            sd = new SupplierModel("Netto Vejby", "Salling");
+            tpHelper.insertData(sd);
+            sd = new SupplierModel("Rema Vejby", "REMA 1000");
+            tpHelper.insertData(sd);
+            sd = new SupplierModel("Spar Karsemose", "Dagrofa");
+            tpHelper.insertData(sd);
+            sd = new SupplierModel("Spar Vejby Strand", "Dagrofa");
+            tpHelper.insertData(sd);
+            sd = new SupplierModel("SuperBest Allerød", "SuperBest");
+            tpHelper.insertData(sd);
+            sd = new SupplierModel("Superbrugsen Gilleleje", "Coop");
+            tpHelper.insertData(sd);
         }
     }
 }
