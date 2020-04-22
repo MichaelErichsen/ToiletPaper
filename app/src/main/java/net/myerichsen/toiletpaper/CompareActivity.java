@@ -43,8 +43,8 @@ public class CompareActivity extends AppCompatActivity {
         tableRow.setBackgroundColor(Color.BLACK);
         tableRow.setPadding(2, 2, 2, 2);
         tableRow.addView(addCell(sortKey));
-        tableRow.addView(addCell(getString(R.string.item_no)));
         tableRow.addView(addCell(getString(R.string.brand)));
+        tableRow.addView(addCell(getString(R.string.item_no)));
         tableRow.addView(addCell("Uid"));
         tableLayout.addView(tableRow);
 
@@ -94,8 +94,8 @@ public class CompareActivity extends AppCompatActivity {
                     break;
             }
 
-            tableRow.addView(addCell(pd.getItemNo()));
             tableRow.addView(addCell(pd.getBrand()));
+            tableRow.addView(addCell(pd.getItemNo()));
             tableRow.addView(addCell(pd.getUid()));
             tableRow.setClickable(true);
             tableRow.setOnClickListener(tableRowOnclickListener());
