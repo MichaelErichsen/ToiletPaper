@@ -25,7 +25,7 @@ public class SettingsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.settings_activity);
         Context context = getApplicationContext();
-        final TPDbAdapter helper = new TPDbAdapter(context);
+        final TPDbAdapter adapter = new TPDbAdapter(context);
 //        getSupportFragmentManager()
 //                .beginTransaction()
 //                .replace(R.id.settings, new SettingsFragment())
@@ -35,12 +35,20 @@ public class SettingsActivity extends AppCompatActivity {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
 
-        ImageButton initLoadBrn = findViewById(R.id.initLoadBtn);
-        initLoadBrn.setOnClickListener(new View.OnClickListener() {
+        ImageButton initLoadBtn = findViewById(R.id.initLoadBtn);
+        initLoadBtn.setOnClickListener(initLoadOnClickListener(adapter));
+
+        // TODO Implement preferences
+        RadioGroup inputFormatRg = findViewById(R.id.inputFormatRg);
+        inputFormatRg.setOnCheckedChangeListener(inputFormatOnCheckedListener());
+    }
+
+    private View.OnClickListener initLoadOnClickListener(final TPDbAdapter adapter) {
+        return new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 try {
-                    helper.doInitialLoad();
+                    adapter.doInitialLoad();
                     Snackbar snackbar = Snackbar
                             .make(findViewById(android.R.id.content), R.string.initial_load_done, Snackbar.LENGTH_LONG);
                     snackbar.show();
@@ -50,11 +58,11 @@ public class SettingsActivity extends AppCompatActivity {
                     snackbar.show();
                 }
             }
-        });
+        };
+    }
 
-        // TODO Implement preferences
-        RadioGroup inputFormatRg = findViewById(R.id.inputFormatRg);
-        inputFormatRg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+    private RadioGroup.OnCheckedChangeListener inputFormatOnCheckedListener() {
+        return new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 Snackbar snackbar;
@@ -77,7 +85,7 @@ public class SettingsActivity extends AppCompatActivity {
                         break;
                 }
             }
-        });
+        };
     }
 
 //    public static class SettingsFragment extends PreferenceFragmentCompat {

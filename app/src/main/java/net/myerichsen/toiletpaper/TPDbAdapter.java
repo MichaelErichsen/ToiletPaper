@@ -419,7 +419,7 @@ public class TPDbAdapter {
         private static final String CHAIN = "CHAIN";
 
         private static final int DATABASE_Version = 3;    // Database Version
-        private static final String CREATE_PRODUCT_TABLE = "CREATE TABLE " + TABLE_PRODUCT +
+        private static final String CREATE_PRODUCT_TABLE = "CREATE TABLE IF NOT EXISTS " + TABLE_PRODUCT +
                 " (" + UID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 LAYERS + " INTEGER, " +
                 PACKAGE_ROLLS + " INTEGER, " +
@@ -449,7 +449,7 @@ public class TPDbAdapter {
         private static final String DROP_PRODUCT_TABLE = "DROP TABLE IF EXISTS " + TABLE_PRODUCT;
 
 
-        private static final String CREATE_SUPPLIER_TABLE = "CREATE TABLE " + TABLE_SUPPLIER +
+        private static final String CREATE_SUPPLIER_TABLE = "CREATE TABLE IF NOT EXISTS " + TABLE_SUPPLIER +
                 " (" + SUPPLIER + " TEXT PRIMARY KEY, " +
                 CHAIN + " TEXT, " +
                 TIME_STAMP + " TEXT);";
@@ -506,15 +506,11 @@ public class TPDbAdapter {
          * Initial data load
          */
         private void loadInitialData() throws Exception {
-//            final String[] countColumn = {"COUNT(*)"};
-//            SupplierModel sm;
-//            ProductModel pm;
-
-
             try {
                 TPDbAdapter tpHelper = new TPDbAdapter(context);
-                SQLiteDatabase db = getReadableDatabase();
+                SQLiteDatabase db = getWritableDatabase();
 
+                onCreate(db);
 
                 Cursor cursor = db.query(TABLE_SUPPLIER, tpHelper.countColumn, null,
                         null, null, null, null, null);
