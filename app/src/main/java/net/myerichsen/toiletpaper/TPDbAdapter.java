@@ -584,6 +584,27 @@ public class TPDbAdapter {
                     0, (float) 41.26, 0, (float) 0.1217, 1, (float) 0.01523, 1,
                     "Rema Vejby", "Produceret i Sverige");
             tpHelper.insertData(pm);
+
+            pm = new ProductModel("WW-166808", "Staples 29 m",
+                    2, 8, 250, 96, 115, 0, (float) 28.75,
+                    0, (float) 24.94, 0, (float) 3.12, 1,
+                    (float) 16.50, 0, (float) 188.94, 0, (float) 0.10843, 1, (float) 0.1247, 1,
+                    "Staples", "Online");
+            tpHelper.insertData(pm);
+
+            pm = new ProductModel("WW-114649", "Tork Advanced Extra Soft T4",
+                    3, 42, 248, 94, 140, 1, (float) 34.70, 0,
+                    (float) 386.85, 0, (float) 9.21, 1,
+                    0, 0, 0, 0, (float) 0.26544, 1, (float) 0.03714, 1,
+                    "Staples", "Online");
+            tpHelper.insertData(pm);
+
+            pm = new ProductModel("WW-101012", "Scott® Performance 350",
+                    3, 36, 350, 95, 125, 0, (float) 43.75, 0,
+                    (float) 386.85, 0, (float) 9.21, 1,
+                    0, 0, 0, 0, (float) 0.46746, 1, (float) 0.48433, 1,
+                    "Staples", "Online");
+            tpHelper.insertData(pm);
         }
 
         private void loadSuppliers(TPDbAdapter tpHelper) {
@@ -597,6 +618,8 @@ public class TPDbAdapter {
             sm = new SupplierModel("Netto Vejby", "Salling");
             tpHelper.insertData(sm);
             sm = new SupplierModel("Rema Vejby", "REMA 1000");
+            tpHelper.insertData(sm);
+            sm = new SupplierModel("Staples", "Staples");
             tpHelper.insertData(sm);
             sm = new SupplierModel("Spar Karsemose", "Dagrofa");
             tpHelper.insertData(sm);
