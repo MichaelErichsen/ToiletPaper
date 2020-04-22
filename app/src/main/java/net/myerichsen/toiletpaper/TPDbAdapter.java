@@ -477,7 +477,6 @@ public class TPDbAdapter {
             try {
                 db.execSQL(CREATE_SUPPLIER_TABLE);
                 db.execSQL(CREATE_PRODUCT_TABLE);
-                db.endTransaction();
             } catch (Exception e) {
                 Toast.makeText(context, e.getMessage(), Toast.LENGTH_LONG).show();
             }
