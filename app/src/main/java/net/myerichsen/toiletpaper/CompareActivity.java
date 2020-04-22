@@ -9,12 +9,15 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.TypedValue;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.snackbar.Snackbar;
@@ -32,6 +35,8 @@ public class CompareActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_compare);
+
+
         context = getApplicationContext();
         TPDbAdapter helper = new TPDbAdapter(context);
 
@@ -65,6 +70,12 @@ public class CompareActivity extends AppCompatActivity {
             snackbar.show();
             return;
         }
+
+        ActionBar ab = getSupportActionBar();
+
+        // Enable the Up button
+        assert ab != null;
+        ab.setDisplayHomeAsUpEnabled(true);
 
         for (int i = 0; i < lpd.size(); i++) {
             ProductModel pd = lpd.get(i);
@@ -101,6 +112,11 @@ public class CompareActivity extends AppCompatActivity {
             tableRow.setOnClickListener(tableRowOnclickListener());
             tableLayout.addView(tableRow);
         }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        return super.onOptionsItemSelected(item);
     }
 
     private View.OnClickListener tableRowOnclickListener() {

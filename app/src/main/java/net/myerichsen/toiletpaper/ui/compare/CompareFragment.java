@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -17,6 +18,8 @@ import android.widget.Spinner;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.material.snackbar.Snackbar;
@@ -43,6 +46,11 @@ public class CompareFragment extends Fragment {
         View root = inflater.inflate(R.layout.compare_fragment, container, false);
         context = getContext();
         TPDbAdapter helper = new TPDbAdapter(context);
+
+        ActionBar ab = ((AppCompatActivity) getActivity()).getSupportActionBar();
+        if (ab != null) {
+            ab.setDisplayHomeAsUpEnabled(true);
+        }
 
         Spinner filterSpinner = root.findViewById(R.id.filterSpinner);
 
@@ -109,7 +117,7 @@ public class CompareFragment extends Fragment {
                         break;
                     default:
                         Snackbar snackbar = Snackbar
-                                .make(Objects.requireNonNull(getActivity()).findViewById(android.R.id.content), "Unexpected value: " + checkedId, Snackbar.LENGTH_LONG);
+                                .make(requireActivity().findViewById(android.R.id.content), "Unexpected value: " + checkedId, Snackbar.LENGTH_LONG);
                         snackbar.show();
                         throw new IllegalStateException("Unexpected value: " + checkedId);
                 }
@@ -134,4 +142,8 @@ public class CompareFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
     }
 
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        return super.onOptionsItemSelected(item);
+    }
 }

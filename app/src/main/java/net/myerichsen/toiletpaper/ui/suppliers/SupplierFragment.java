@@ -58,14 +58,14 @@ public class SupplierFragment extends Fragment {
             lsd = helper.getAllSupplierData();
         } catch (Exception e) {
             Snackbar snackbar = Snackbar
-                    .make(Objects.requireNonNull(getActivity()).findViewById(android.R.id.content), Objects.requireNonNull(e.getMessage()), Snackbar.LENGTH_LONG);
+                    .make(requireActivity().findViewById(android.R.id.content), Objects.requireNonNull(e.getMessage()), Snackbar.LENGTH_LONG);
             snackbar.show();
             return;
         }
 
         if (lsd.size() == 0) {
             Snackbar snackbar = Snackbar
-                    .make(Objects.requireNonNull(getActivity()).findViewById(android.R.id.content), "No data in table", Snackbar.LENGTH_LONG);
+                    .make(requireActivity().findViewById(android.R.id.content), "No data in table", Snackbar.LENGTH_LONG);
             snackbar.show();
             return;
         }
@@ -93,7 +93,7 @@ public class SupplierFragment extends Fragment {
                     TextView tv = (TextView) ll.getChildAt(0);
                     String supplier = tv.getText().toString();
                     Snackbar snackbar = Snackbar
-                            .make(Objects.requireNonNull(getActivity()).findViewById(android.R.id.content), supplier + " was clicked", Snackbar.LENGTH_LONG);
+                            .make(requireActivity().findViewById(android.R.id.content), supplier + " was clicked", Snackbar.LENGTH_LONG);
                     snackbar.show();
 
                     Intent supplierIntent = new Intent(context, SupplierActivity.class);
@@ -101,7 +101,7 @@ public class SupplierFragment extends Fragment {
                     startActivity(supplierIntent);
                 } catch (NumberFormatException e) {
                     Snackbar snackbar = Snackbar
-                            .make(Objects.requireNonNull(getActivity()).findViewById(android.R.id.content), Objects.requireNonNull(e.getMessage()), Snackbar.LENGTH_LONG);
+                            .make(requireActivity().findViewById(android.R.id.content), Objects.requireNonNull(e.getMessage()), Snackbar.LENGTH_LONG);
                     snackbar.show();
                 }
             }

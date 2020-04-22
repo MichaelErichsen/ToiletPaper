@@ -23,6 +23,14 @@
         <action
             android:id="@+id/action_nav_home_to_nav_suppliers"
             app:destination="@id/nav_suppliers" />
+        <action
+            android:id="@+id/action_nav_home_to_settingsActivity"
+            app:destination="@id/settingsActivity" />
+        <action
+            android:id="@+id/action_nav_home_to_scanActivity"
+            app:destination="@id/scanActivity"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim" />
     </fragment>
 
     <fragment
@@ -31,8 +39,8 @@
         android:label="@string/menu_compare"
         tools:layout="@layout/compare_fragment">
         <action
-            android:id="@+id/action_nav_compare_to_nav_home"
-            app:destination="@id/nav_home" />
+            android:id="@+id/action_nav_compare_to_compareActivity"
+            app:destination="@id/compareActivity" />
     </fragment>
 
 
@@ -42,8 +50,8 @@
         android:label="@string/menu_products"
         tools:layout="@layout/product_fragment">
         <action
-            android:id="@+id/action_nav_products_to_nav_home"
-            app:destination="@id/nav_home" />
+            android:id="@+id/action_nav_products_to_productActivity"
+            app:destination="@id/productActivity" />
     </fragment>
 
     <fragment
@@ -52,18 +60,38 @@
         android:label="@string/menu_suppliers"
         tools:layout="@layout/supplier_fragment">
         <action
-            android:id="@+id/action_nav_suppliers_to_nav_home"
-            app:destination="@id/nav_home" />
+            android:id="@+id/action_nav_suppliers_to_supplierActivity"
+            app:destination="@id/supplierActivity" />
     </fragment>
 
     <fragment
         android:id="@+id/nav_about"
         android:name="net.myerichsen.toiletpaper.ui.about.AboutFragment"
         android:label="@string/menu_about"
-        tools:layout="@layout/fragment_about">
-        <action
-            android:id="@+id/action_nav_about_to_nav_home"
-            app:destination="@id/nav_home" />
-    </fragment>
+        tools:layout="@layout/fragment_about" />
+    <activity
+        android:id="@+id/settingsActivity"
+        android:name="net.myerichsen.toiletpaper.SettingsActivity"
+        android:label="SettingsActivity" />
+    <activity
+        android:id="@+id/compareActivity"
+        android:name="net.myerichsen.toiletpaper.CompareActivity"
+        android:label="activity_compare"
+        tools:layout="@layout/activity_compare" />
+    <activity
+        android:id="@+id/productActivity"
+        android:name="net.myerichsen.toiletpaper.ProductActivity"
+        android:label="activity_product"
+        tools:layout="@layout/activity_product" />
+    <activity
+        android:id="@+id/scanActivity"
+        android:name="net.myerichsen.toiletpaper.ScanActivity"
+        android:label="activity_scan"
+        tools:layout="@layout/activity_scan" />
+    <activity
+        android:id="@+id/supplierActivity"
+        android:name="net.myerichsen.toiletpaper.SupplierActivity"
+        android:label="activity_supplier"
+        tools:layout="@layout/activity_supplier" />
 
 </navigation>

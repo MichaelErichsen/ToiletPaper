@@ -36,8 +36,6 @@ import java.util.Objects;
 
 import static android.app.Activity.RESULT_OK;
 
-// FIXME Back button has disappeared from navigation
-
 public class HomeFragment extends Fragment {
     private final static int REQUEST_CODE_1 = 1;
 
@@ -314,7 +312,7 @@ public class HomeFragment extends Fragment {
                     message = e.getMessage();
                 }
                 Snackbar snackbar = Snackbar
-                        .make(Objects.requireNonNull(getActivity()).findViewById(android.R.id.content), Objects.requireNonNull(message), Snackbar.LENGTH_LONG);
+                        .make(requireActivity().findViewById(android.R.id.content), Objects.requireNonNull(message), Snackbar.LENGTH_LONG);
                 snackbar.show();
             }
         });
@@ -393,7 +391,7 @@ public class HomeFragment extends Fragment {
             brandEditText.setText(pm.getBrand());
         } catch (Exception e) {
             Snackbar snackbar = Snackbar
-                    .make(Objects.requireNonNull(getActivity()).findViewById(android.R.id.content), Objects.requireNonNull(e.getMessage()), Snackbar.LENGTH_LONG);
+                    .make(requireActivity().findViewById(android.R.id.content), Objects.requireNonNull(e.getMessage()), Snackbar.LENGTH_LONG);
             snackbar.show();
         }
     }
@@ -480,7 +478,7 @@ public class HomeFragment extends Fragment {
             pm.setComments(getStringFromLayout(commentEditText));
         } catch (Exception e) {
             Snackbar snackbar = Snackbar
-                    .make(Objects.requireNonNull(getActivity()).findViewById(android.R.id.content), Objects.requireNonNull(e.getMessage()), Snackbar.LENGTH_LONG);
+                    .make(requireActivity().findViewById(android.R.id.content), Objects.requireNonNull(e.getMessage()), Snackbar.LENGTH_LONG);
             snackbar.show();
         }
 
@@ -525,7 +523,7 @@ public class HomeFragment extends Fragment {
 
         } catch (Exception e) {
             Snackbar snackbar = Snackbar
-                    .make(Objects.requireNonNull(getActivity()).findViewById(android.R.id.content), Objects.requireNonNull(e.getMessage()), Snackbar.LENGTH_LONG);
+                    .make(requireActivity().findViewById(android.R.id.content), Objects.requireNonNull(e.getMessage()), Snackbar.LENGTH_LONG);
             snackbar.show();
         }
 //        return fKiloPrice | fMeterPrice | fPaperWeight | fRollLength | fRollPrice | fSheetLength | fSheetPrice;
@@ -637,7 +635,7 @@ public class HomeFragment extends Fragment {
 //        pm.setItemNo(itemNo);
         helper.insertData(pm);
         Snackbar snackbar = Snackbar
-                .make(Objects.requireNonNull(getActivity()).findViewById(android.R.id.content), R.string.product_added, Snackbar.LENGTH_LONG);
+                .make(requireActivity().findViewById(android.R.id.content), R.string.product_added, Snackbar.LENGTH_LONG);
         snackbar.show();
     }
 
@@ -646,7 +644,7 @@ public class HomeFragment extends Fragment {
         EditText itemNoEditText = root.findViewById(R.id.itemNoEditText);
         ProductModel pm = helper.getProductDataByItemNo(itemNoEditText.getText().toString());
         Snackbar snackbar = Snackbar
-                .make(Objects.requireNonNull(getActivity()).findViewById(android.R.id.content), "Found item no. " + pm.getItemNo(), Snackbar.LENGTH_LONG);
+                .make(requireActivity().findViewById(android.R.id.content), "Found item no. " + pm.getItemNo(), Snackbar.LENGTH_LONG);
         snackbar.show();
     }
 
@@ -655,7 +653,7 @@ public class HomeFragment extends Fragment {
         EditText brandEditText = root.findViewById(R.id.brandEditText);
         ProductModel pm = helper.getProductDataByBrand(brandEditText.getText().toString());
         Snackbar snackbar = Snackbar
-                .make(Objects.requireNonNull(getActivity()).findViewById(android.R.id.content), "Found brand. " + pm.getItemNo(), Snackbar.LENGTH_LONG);
+                .make(requireActivity().findViewById(android.R.id.content), "Found brand. " + pm.getItemNo(), Snackbar.LENGTH_LONG);
         snackbar.show();
     }
 }

@@ -6,10 +6,12 @@ package net.myerichsen.toiletpaper;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.RadioGroup;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -19,17 +21,14 @@ import java.util.Objects;
 
 public class SettingsActivity extends AppCompatActivity {
 
-    // FIXME Back arrow displayed, but ignored
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.settings_activity);
         Context context = getApplicationContext();
         final TPDbAdapter adapter = new TPDbAdapter(context);
-//        getSupportFragmentManager()
-//                .beginTransaction()
-//                .replace(R.id.settings, new SettingsFragment())
-//                .commit();
+
+
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
@@ -88,10 +87,9 @@ public class SettingsActivity extends AppCompatActivity {
         };
     }
 
-//    public static class SettingsFragment extends PreferenceFragmentCompat {
-//        @Override
-//        public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
-//            setPreferencesFromResource(R.xml.root_preferences, rootKey);
-//        }
-//    }
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        return super.onOptionsItemSelected(item);
+    }
+
 }
