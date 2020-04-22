@@ -48,7 +48,13 @@ public class SupplierActivity extends AppCompatActivity {
         supplierDetailDeleteBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                helper.deleteSupplier(supplierDetailSupplierEditText.getText().toString());
+                try {
+                    helper.deleteSupplier(supplierDetailSupplierEditText.getText().toString());
+                } catch (Exception e) {
+                    Snackbar snackbar = Snackbar
+                            .make(findViewById(android.R.id.content), Objects.requireNonNull(e.getMessage()), Snackbar.LENGTH_LONG);
+                    snackbar.show();
+                }
             }
         });
 
@@ -60,12 +66,17 @@ public class SupplierActivity extends AppCompatActivity {
             snackbar.show();
             return;
         }
-        String supplier = Objects.requireNonNull(getIntent().getExtras()).getString("net.myrichsen.toiletpaper.SUPPLIER");
 
-        SupplierModel sm = helper.getSupplierModelBySupplier(supplier);
-
-        supplierDetailSupplierEditText.setText(sm.getSupplier());
-        supplierDetailChainEditText.setText(sm.getChain());
-        supplierDetailTimestampTextView.setText(sm.getTimestamp());
+        try {
+            String supplier = Objects.requireNonNull(getIntent().getExtras()).getString("net.myrichsen.toiletpaper.SUPPLIER");
+            SupplierModel sm = helper.getSupplierModelBySupplier(supplier);
+            supplierDetailSupplierEditText.setText(sm.getSupplier());
+            supplierDetailChainEditText.setText(sm.getChain());
+            supplierDetailTimestampTextView.setText(sm.getTimestamp());
+        } catch (Exception e) {
+            Snackbar snackbar = Snackbar
+                    .make(findViewById(android.R.id.content), Objects.requireNonNull(e.getMessage()), Snackbar.LENGTH_LONG);
+            snackbar.show();
+        }
     }
 }

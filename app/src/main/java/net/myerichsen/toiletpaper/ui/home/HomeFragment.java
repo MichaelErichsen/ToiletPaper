@@ -247,30 +247,30 @@ public class HomeFragment extends Fragment {
         // Suppliers
         suppliersSpinner = root.findViewById(R.id.suppliersSpinner);
 
-        List<SupplierModel> lsd = new ArrayList<>();
+        List<SupplierModel> lsm = new ArrayList<>();
         ArrayList<String> supplierArrayList = new ArrayList<>();
 
         boolean goOn = true;
 
         try {
-            lsd = helper.getAllSupplierData(context);
+            lsm = helper.getAllSupplierData();
         } catch (Exception e) {
-            Snackbar snackbar = Snackbar
-                    .make(root.findViewById(android.R.id.content), Objects.requireNonNull(e.getMessage()), Snackbar.LENGTH_LONG);
-            snackbar.show();
+//            Snackbar snackbar = Snackbar
+//                    .make(root.findViewById(android.R.id.content), Objects.requireNonNull(e.getMessage()), Snackbar.LENGTH_LONG);
+//            snackbar.show();
             goOn = false;
         }
 
-        if ((goOn) && (lsd.size() == 0)) {
-            Snackbar snackbar = Snackbar
-                    .make(root.findViewById(android.R.id.content), "No data in table", Snackbar.LENGTH_LONG);
-            snackbar.show();
+        if ((goOn) && (lsm.size() == 0)) {
+//            Snackbar snackbar = Snackbar
+//                    .make(root.findViewById(android.R.id.content), "No data in table", Snackbar.LENGTH_LONG);
+//            snackbar.show();
             goOn = false;
         }
 
         if (goOn) {
-            for (int i = 0; i < lsd.size(); i++) {
-                supplierArrayList.add(lsd.get(i).getSupplier());
+            for (int i = 0; i < lsm.size(); i++) {
+                supplierArrayList.add(lsm.get(i).getSupplier());
             }
         }
 

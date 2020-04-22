@@ -15,6 +15,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.snackbar.Snackbar;
 
+import java.util.Objects;
+
 public class SettingsActivity extends AppCompatActivity {
 
     // FIXME Back arrow displayed, but ignored
@@ -37,7 +39,16 @@ public class SettingsActivity extends AppCompatActivity {
         initLoadBrn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                helper.doInitialLoad();
+                try {
+                    helper.doInitialLoad();
+                    Snackbar snackbar = Snackbar
+                            .make(findViewById(android.R.id.content), R.string.initial_load_done, Snackbar.LENGTH_LONG);
+                    snackbar.show();
+                } catch (Exception e) {
+                    Snackbar snackbar = Snackbar
+                            .make(findViewById(android.R.id.content), Objects.requireNonNull(e.getMessage()), Snackbar.LENGTH_LONG);
+                    snackbar.show();
+                }
             }
         });
 

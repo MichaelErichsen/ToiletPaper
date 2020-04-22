@@ -52,7 +52,7 @@ public class TPDbAdapter {
      * @return List of columns in record
      */
     public ProductModel getProductDataByBrand(String brand) {
-        ProductModel pd = null;
+        ProductModel pm = null;
 
         SQLiteDatabase db = tpDbHelper.getReadableDatabase();
 
@@ -61,30 +61,31 @@ public class TPDbAdapter {
 
         if (cursor.getCount() > 0) {
             if (cursor.moveToNext()) {
-                pd = populateProductModel(cursor);
+                pm = populateProductModel(cursor);
             }
         }
+        cursor.close();
 
-        return pd;
+        return pm;
     }
 
 
     /**
      * Insert a product row
      */
-    public void insertData(ProductModel pd) {
-        SQLiteDatabase dbb = tpDbHelper.getWritableDatabase();
-        ContentValues contentValues = extractData(pd);
-        dbb.insert(TpDbHelper.TABLE_PRODUCT, null, contentValues);
+    public void insertData(ProductModel pm) {
+        SQLiteDatabase db = tpDbHelper.getWritableDatabase();
+        ContentValues contentValues = extractData(pm);
+        db.insert(TpDbHelper.TABLE_PRODUCT, null, contentValues);
     }
 
     /**
      * Insert a supplier row
      */
     public void insertData(SupplierModel sm) {
-        SQLiteDatabase dbb = tpDbHelper.getWritableDatabase();
+        SQLiteDatabase db = tpDbHelper.getWritableDatabase();
         ContentValues contentValues = extractData(sm);
-        dbb.insert(TpDbHelper.TABLE_SUPPLIER, null, contentValues);
+        db.insert(TpDbHelper.TABLE_SUPPLIER, null, contentValues);
     }
 
     /**
@@ -105,15 +106,16 @@ public class TPDbAdapter {
             }
         }
 
+        cursor.close();
         return pm;
     }
 
     /**
-     * Get data by unigue ID
+     * Get data by unique ID
      *
      * @return List of columns in record
      */
-    public ProductModel getProductDataByUid(String uid) {
+    public ProductModel getProductDataByUid(String uid) throws Exception {
         ProductModel pd = null;
 
         try {
@@ -127,8 +129,9 @@ public class TPDbAdapter {
                     pd = populateProductModel(cursor);
                 }
             }
+            cursor.close();
         } catch (Exception e) {
-            Toast.makeText(context, e.getMessage(), Toast.LENGTH_LONG).show();
+            throw e;
         }
 
         return pd;
@@ -137,10 +140,9 @@ public class TPDbAdapter {
     /**
      * Get all data from product table
      *
-     * @param context Application context
      * @return List of columns in record
      */
-    public List<ProductModel> getAllProductData(Context context) {
+    public List<ProductModel> getAllProductData() {
         List<ProductModel> lpd = new ArrayList<>();
 
         SQLiteDatabase db = tpDbHelper.getReadableDatabase();
@@ -150,50 +152,53 @@ public class TPDbAdapter {
         while (cursor.moveToNext()) {
             lpd.add(populateProductModel(cursor));
         }
+        cursor.close();
         return lpd;
     }
 
     /**
      * Do an initial load
      */
-    public void doInitialLoad() {
+    public void doInitialLoad() throws Exception {
         tpDbHelper.loadInitialData();
     }
 
     /**
      * Get all data from supplier table
      *
-     * @param context Application context
      * @return List of supplier data
      */
-    public List<SupplierModel> getAllSupplierData(Context context) {
-        List<SupplierModel> lsd = new ArrayList<>();
+    public List<SupplierModel> getAllSupplierData() throws Exception {
+        List<SupplierModel> lsm = new ArrayList<>();
+
         try {
             SQLiteDatabase db = tpDbHelper.getReadableDatabase();
 
             Cursor cursor = db.query(TpDbHelper.TABLE_SUPPLIER, sdColumns, null, null, null, null, null);
 
             while (cursor.moveToNext()) {
-                lsd.add(populateSupplierData(cursor));
+                lsm.add(populateSupplierData(cursor));
             }
 
+            cursor.close();
         } catch (Exception e) {
-            Toast.makeText(context, e.getMessage(), Toast.LENGTH_LONG).show();
+            throw e;
         }
-        return lsd;
+
+        return lsm;
     }
 
     /**
      * Extract supplier data into content value object
      *
-     * @param pm Supplier data
+     * @param sm Supplier model
      * @return ContentValues
      */
-    private ContentValues extractData(SupplierModel pm) {
+    private ContentValues extractData(SupplierModel sm) {
         ContentValues contentValues = new ContentValues();
-        contentValues.put(TpDbHelper.SUPPLIER, pm.getSupplier());
-        contentValues.put(TpDbHelper.CHAIN, pm.getChain());
-        contentValues.put(TpDbHelper.TIME_STAMP, pm.getTimestamp());
+        contentValues.put(TpDbHelper.SUPPLIER, sm.getSupplier());
+        contentValues.put(TpDbHelper.CHAIN, sm.getChain());
+        contentValues.put(TpDbHelper.TIME_STAMP, sm.getTimestamp());
         return contentValues;
     }
 
@@ -287,29 +292,43 @@ public class TPDbAdapter {
      *
      * @param uid Unique identifier
      * @return
+     * @throws Exception
      */
-    public int deleteProduct(int uid) {
-        SQLiteDatabase db = tpDbHelper.getWritableDatabase();
-        String s = uid + "";
-        String[] whereArgs = {s};
-        Toast.makeText(context, "Deleting product", Toast.LENGTH_LONG).show();
-        return db.delete(TpDbHelper.TABLE_PRODUCT, TpDbHelper.UID + " = ?", whereArgs);
+    public int deleteProduct(int uid) throws Exception {
+        int rc;
+        try {
+            SQLiteDatabase db = tpDbHelper.getWritableDatabase();
+            String s = uid + "";
+            String[] whereArgs = {s};
+            Toast.makeText(context, "Deleting product", Toast.LENGTH_LONG).show();
+
+            rc = db.delete(TpDbHelper.TABLE_PRODUCT, TpDbHelper.UID + " = ?", whereArgs);
+        } catch (Exception e) {
+            throw e;
+        }
+        return rc;
     }
 
     /**
-     * Delete row from suplier table
+     * Delete row from supplier table
      *
      * @param supplier
      * @return
      */
-    public int deleteSupplier(String supplier) {
-        SQLiteDatabase db = tpDbHelper.getWritableDatabase();
-        String[] whereArgs = {supplier};
-        Toast.makeText(context, "Deletng supplier", Toast.LENGTH_LONG).show();
-        return db.delete(TpDbHelper.TABLE_SUPPLIER, TpDbHelper.SUPPLIER + " = ?", whereArgs);
+    public int deleteSupplier(String supplier) throws Exception {
+        int rc;
+        try {
+            SQLiteDatabase db = tpDbHelper.getWritableDatabase();
+            String[] whereArgs = {supplier};
+            Toast.makeText(context, "Deletng supplier", Toast.LENGTH_LONG).show();
+            rc = db.delete(TpDbHelper.TABLE_SUPPLIER, TpDbHelper.SUPPLIER + " = ?", whereArgs);
+        } catch (Exception e) {
+            throw e;
+        }
+        return rc;
     }
 
-    public List<ProductModel> getSortedProductData(String sortKey, String sortFilter) {
+    public List<ProductModel> getSortedProductData(String sortKey, String sortFilter) throws Exception {
         Cursor cursor;
         List<ProductModel> lpd = new ArrayList<>();
 
@@ -328,10 +347,11 @@ public class TPDbAdapter {
             while (cursor.moveToNext()) {
                 lpd.add(populateProductModel(cursor));
             }
-        } catch (Exception e) {
-            Toast.makeText(context, e.getMessage(), Toast.LENGTH_LONG).show();
-        }
 
+            cursor.close();
+        } catch (Exception e) {
+            throw e;
+        }
         return lpd;
     }
 
@@ -341,8 +361,9 @@ public class TPDbAdapter {
      * @param supplier
      * @return
      */
-    public SupplierModel getSupplierModelBySupplier(String supplier) {
+    public SupplierModel getSupplierModelBySupplier(String supplier) throws Exception {
         SupplierModel sm = new SupplierModel();
+
         try {
             SQLiteDatabase db = tpDbHelper.getReadableDatabase();
 
@@ -354,8 +375,9 @@ public class TPDbAdapter {
                     sm = populateSupplierData(cursor);
                 }
             }
+            cursor.close();
         } catch (Exception e) {
-            Toast.makeText(context, e.getMessage(), Toast.LENGTH_LONG).show();
+            throw e;
         }
         return sm;
     }
@@ -455,7 +477,7 @@ public class TPDbAdapter {
             try {
                 db.execSQL(CREATE_SUPPLIER_TABLE);
                 db.execSQL(CREATE_PRODUCT_TABLE);
-                loadInitialData();
+                db.endTransaction();
             } catch (Exception e) {
                 Toast.makeText(context, e.getMessage(), Toast.LENGTH_LONG).show();
             }
@@ -483,10 +505,10 @@ public class TPDbAdapter {
         /**
          * Initial data load
          */
-        private void loadInitialData() {
-            final String[] countColumn = {"COUNT(*)"};
-            SupplierModel sm;
-            ProductModel pd;
+        private void loadInitialData() throws Exception {
+//            final String[] countColumn = {"COUNT(*)"};
+//            SupplierModel sm;
+//            ProductModel pm;
 
 
             try {
@@ -502,7 +524,6 @@ public class TPDbAdapter {
                         int count = cursor.getInt(cursor.getColumnIndex("COUNT(*)"));
 
                         if (count == 0) {
-//                            db.close();
                             loadSuppliers(tpHelper);
                         } else {
                             Toast.makeText(context, "Supplier table not empty. Contains " + count + " suppliers",
@@ -510,6 +531,8 @@ public class TPDbAdapter {
                         }
                     }
                 }
+                cursor.close();
+
 
                 cursor = db.query(TABLE_PRODUCT, tpHelper.countColumn, null,
                         null, null, null, null, null);
@@ -518,7 +541,6 @@ public class TPDbAdapter {
                         int count = cursor.getInt(cursor.getColumnIndex("COUNT(*)"));
 
                         if (count == 0) {
-//                            db.close();
                             loadProducts(tpHelper);
                         } else {
                             Toast.makeText(context, "Product table not empty. Contains " + count + " products",
@@ -526,9 +548,11 @@ public class TPDbAdapter {
                         }
                     }
                 }
+                cursor.close();
             } catch (Exception e) {
-                Toast.makeText(context, e.getMessage(), Toast.LENGTH_LONG).show();
+                throw e;
             }
+
         }
 
         private void loadProducts(TPDbAdapter tpHelper) {

@@ -107,4 +107,5 @@
     <string name="advanced">Avanceret</string>
     <string name="product_added">Produkt tilføjet</string>
     <string name="supplier_added">Butik tilføjet</string>
+    <string name="initial_load_done">Grunddata indsat</string>
 </resources>

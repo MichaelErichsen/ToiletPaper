@@ -55,7 +55,7 @@ public class SupplierFragment extends Fragment {
 
         List<SupplierModel> lsd;
         try {
-            lsd = helper.getAllSupplierData(context);
+            lsd = helper.getAllSupplierData();
         } catch (Exception e) {
             Snackbar snackbar = Snackbar
                     .make(Objects.requireNonNull(getActivity()).findViewById(android.R.id.content), Objects.requireNonNull(e.getMessage()), Snackbar.LENGTH_LONG);

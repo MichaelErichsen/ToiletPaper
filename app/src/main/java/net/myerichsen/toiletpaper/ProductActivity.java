@@ -52,7 +52,14 @@ public class ProductActivity extends AppCompatActivity {
         }
 
         uid = Objects.requireNonNull(getIntent().getExtras()).getString("net.myrichsen.toiletpaper.UID");
-        ProductModel pd = helper.getProductDataByUid(uid);
+        ProductModel pd = null;
+        try {
+            pd = helper.getProductDataByUid(uid);
+        } catch (Exception e) {
+            Snackbar snackbar = Snackbar
+                    .make(findViewById(android.R.id.content), Objects.requireNonNull(e.getMessage()), Snackbar.LENGTH_LONG);
+            snackbar.show();
+        }
 
         if (pd == null) {
             Snackbar snackbar = Snackbar
@@ -84,7 +91,13 @@ public class ProductActivity extends AppCompatActivity {
         productDeleteBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                helper.deleteProduct(Integer.parseInt((uid)));
+                try {
+                    helper.deleteProduct(Integer.parseInt((uid)));
+                } catch (Exception e) {
+                    Snackbar snackbar = Snackbar
+                            .make(findViewById(android.R.id.content), Objects.requireNonNull(e.getMessage()), Snackbar.LENGTH_LONG);
+                    snackbar.show();
+                }
             }
         });
 
