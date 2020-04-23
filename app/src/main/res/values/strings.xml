@@ -79,7 +79,7 @@
     <string name="sortListPrompt">\n\nKlik for at se sorteret liste</string>
     <string name="clickToDelete">Klik her for at slette</string>
     <string name="no_products_found">Der er ikke fundet nogen produkter</string>
-    <string name="invalid_sort_key">\"Ugyldig sorteringsnøgle: \"</string>
+    <string name="invalid_sort_key">Ugyldig sorteringsnøgle: </string>
     <string name="supplier_activity_prompt">Klik for at oprette eller slette en butik</string>
     <string name="timestamp">Timestamp</string>
     <string name="chain">Kæde</string>
@@ -94,6 +94,6 @@
     <string name="supplier_added">Butik tilføjet</string>
     <string name="initial_load_done">Grunddata indsat</string>
     <string name="found_brands">Fundne varemærker</string>
-    <string name="brand_activity_prompt">Klik på et navn for at vælge det</string>
+    <string name="brand_activity_prompt">Klik på et varemærke for at vælge det\n\n</string>
     <string name="enter_brand_prompt">Indtast et varemærke eller begyndelsen af det</string>
 </resources>

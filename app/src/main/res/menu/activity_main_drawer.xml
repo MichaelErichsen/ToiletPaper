@@ -22,10 +22,10 @@
             android:id="@+id/nav_suppliers"
             android:icon="@drawable/baseline_store_mall_directory_black_48dp"
             android:title="@string/action_supplier_list" />
-        <!--        <item-->
-        <!--            android:id="@+id/nav_about"-->
-        <!--            android:icon="@drawable/baseline_help_black_48dp"-->
-        <!--            android:title="@string/action_about" />-->
+        <item
+            android:id="@+id/nav_about"
+            android:icon="@drawable/baseline_help_black_48dp"
+            android:title="@string/action_about" />
 
     </group>
 </menu>

@@ -34,6 +34,7 @@ public class BrandActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_brand);
         context = getApplicationContext();
+
         final TPDbAdapter adapter = new TPDbAdapter(context);
 
         if (!getIntent().hasExtra("net.myerichsen.toiletpaper.BRAND")) {
@@ -84,7 +85,7 @@ public class BrandActivity extends AppCompatActivity {
 
         for (int i = 0; i < lpm.size(); i++) {
 //            try {
-                addTableRow(brandTableLayout, lpm.get(i).getBrand());
+            addTableRow(brandTableLayout, lpm.get(i).getBrand());
 //            } catch (Exception e) {
 //                e.printStackTrace();
 //            }
@@ -110,9 +111,14 @@ public class BrandActivity extends AppCompatActivity {
                     LinearLayout ll = (LinearLayout) selectedRow.getChildAt(0);
                     TextView tv = (TextView) ll.getChildAt(0);
                     brand = tv.getText().toString();
-                    Snackbar snackbar = Snackbar
-                            .make(findViewById(android.R.id.content), brand + " was clicked", Snackbar.LENGTH_LONG);
-                    snackbar.show();
+//                    Snackbar snackbar = Snackbar
+//                            .make(findViewById(android.R.id.content), brand + " was clicked", Snackbar.LENGTH_LONG);
+//                    snackbar.show();
+
+                    Intent intent = new Intent();
+                    intent.putExtra("net.myerichsen.toiletpaper.BRAND", brand);
+                    setResult(RESULT_OK, intent);
+                    finish();
                 } catch (NumberFormatException e) {
                     Snackbar snackbar = Snackbar
                             .make(findViewById(android.R.id.content), Objects.requireNonNull(e.getMessage()), Snackbar.LENGTH_LONG);

@@ -16,7 +16,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 
 import com.google.android.gms.vision.CameraSource;
@@ -40,7 +39,7 @@ public class ScanActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scan);
 
-        Toolbar myChildToolbar = findViewById(R.id.scan_toolbar);
+//        Toolbar myChildToolbar = findViewById(R.id.scan_toolbar);
 
         ActionBar ab = getSupportActionBar();
         if (ab != null) {

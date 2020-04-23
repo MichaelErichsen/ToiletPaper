@@ -127,10 +127,6 @@ public class CompareActivity extends AppCompatActivity {
                     LinearLayout ll = (LinearLayout) selectedRow.getChildAt(3);
                     TextView tv = (TextView) ll.getChildAt(0);
                     int uid = Integer.parseInt(tv.getText().toString());
-//                    Snackbar snackbar = Snackbar
-//                            .make(findViewById(android.R.id.content), uid + " was clicked", Snackbar.LENGTH_LONG);
-//                    snackbar.show();
-
                     Intent productIntent = new Intent(context, ProductActivity.class);
                     productIntent.putExtra("net.myrichsen.toiletpaper.UID", String.valueOf(uid));
                     startActivity(productIntent);
