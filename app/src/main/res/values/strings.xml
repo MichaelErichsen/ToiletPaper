@@ -93,4 +93,8 @@
     <string name="product_added">Produkt tilføjet</string>
     <string name="supplier_added">Butik tilføjet</string>
     <string name="initial_load_done">Grunddata indsat</string>
+
+    <string name="title_activity_brand">BrandActivity</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
 </resources>

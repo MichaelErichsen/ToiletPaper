@@ -24,6 +24,7 @@ import androidx.fragment.app.Fragment;
 
 import com.google.android.material.snackbar.Snackbar;
 
+import net.myerichsen.toiletpaper.BrandActivity;
 import net.myerichsen.toiletpaper.R;
 import net.myerichsen.toiletpaper.ScanActivity;
 import net.myerichsen.toiletpaper.TPDbAdapter;
@@ -327,15 +328,7 @@ public class HomeFragment extends Fragment {
         });
 
         AppCompatImageButton scanBtn = root.findViewById(R.id.scanBtn);
-        scanBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int requestCode = RESULT_OK;
-                Intent openScanIntent = new Intent(getContext(), ScanActivity.class);
-                openScanIntent.putExtra("item_no", "");
-                startActivityForResult(openScanIntent, REQUEST_CODE_1);
-            }
-        });
+        scanBtn.setOnClickListener(scanBtnOnClickListener());
 
         AppCompatImageButton searchItemNoBtn = root.findViewById(R.id.searchItemNoBtn);
         searchItemNoBtn.setOnClickListener(searchItemNoBtnOnclickListener());
@@ -344,6 +337,18 @@ public class HomeFragment extends Fragment {
         searchBrandBtn.setOnClickListener(searchBrandBtnOnclickListener());
 
         return root;
+    }
+
+    private View.OnClickListener scanBtnOnClickListener() {
+        return new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int requestCode = RESULT_OK;
+                Intent scanIntent = new Intent(getContext(), ScanActivity.class);
+                scanIntent.putExtra("item_no", "");
+                startActivityForResult(scanIntent, REQUEST_CODE_1);
+            }
+        };
     }
 
     private View.OnClickListener searchItemNoBtnOnclickListener() {
@@ -355,11 +360,22 @@ public class HomeFragment extends Fragment {
         };
     }
 
+    /**
+     * TODO Click brand search  button
+     * Call brand activity
+     * Get brand name from intent
+     * Insert product model in layout
+     *
+     * @return
+     */
     private View.OnClickListener searchBrandBtnOnclickListener() {
         return new View.OnClickListener() {
             public void onClick(View v) {
-                ProductModel pm = helper.getProductDataByBrand(brandEditText.getText().toString());
-                populateLayoutFromProductModel(pm);
+                Intent brandIntent = new Intent(getContext(), BrandActivity.class);
+//               brandIntent.putExtra("item_no", "");
+                startActivityForResult(brandIntent, REQUEST_CODE_1);
+//                ProductModel pm = helper.getProductDataByBrand(brandEditText.getText().toString());
+//                populateLayoutFromProductModel(pm);
             }
         };
     }

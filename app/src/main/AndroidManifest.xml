@@ -17,8 +17,30 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".BrandActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/title_activity_brand"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/FullscreenTheme" />
+        <activity
             android:name=".SettingsActivity"
             android:label="@string/title_activity_settings"
+            android:parentActivityName=".MainActivity" />
+        <meta-data
+            android:name="com.google.android.gms.vision.DEPENDENCIES"
+            android:value="barcode" />
+
+        <activity
+            android:name=".ScanActivity"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".CompareActivity"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".ProductActivity"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".SupplierActivity"
             android:parentActivityName=".MainActivity" />
         <activity
             android:name=".MainActivity"
@@ -31,23 +53,6 @@
             </intent-filter>
         </activity>
 
-        <meta-data
-            android:name="com.google.android.gms.vision.DEPENDENCIES"
-            android:value="barcode" />
-
-        <activity
-            android:name=".ScanActivity"
-            android:parentActivityName=".MainActivity" />
-
-        <activity
-            android:name=".CompareActivity"
-            android:parentActivityName=".MainActivity" />
-        <activity
-            android:name=".ProductActivity"
-            android:parentActivityName=".MainActivity" />
-        <activity
-            android:name=".SupplierActivity"
-            android:parentActivityName=".MainActivity" />
     </application>
 
 </manifest>

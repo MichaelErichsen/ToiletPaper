@@ -17,6 +17,8 @@ import net.myerichsen.toiletpaper.ui.suppliers.SupplierModel;
 import java.util.ArrayList;
 import java.util.List;
 
+// TODO Collape GetProductDataBy to a single method
+
 /**
  * Database helper for product and supplier tables
  */
@@ -44,6 +46,31 @@ public class TPDbAdapter {
     public TPDbAdapter(Context context) {
         tpDbHelper = new TpDbHelper(context);
         this.context = context;
+    }
+
+    /**
+     * Get product data
+     *
+     * @param selection e.g "BRAND=?"
+     * @param brand
+     * @return List of columns in record
+     */
+    public ProductModel getProductData(String selection, String brand) {
+        ProductModel pm = null;
+
+        SQLiteDatabase db = tpDbHelper.getReadableDatabase();
+
+        String[] args = {brand};
+        Cursor cursor = db.query(TpDbHelper.TABLE_PRODUCT, pdColumns, selection, args, null, null, null);
+
+        if (cursor.getCount() > 0) {
+            if (cursor.moveToNext()) {
+                pm = populateProductModel(cursor);
+            }
+        }
+        cursor.close();
+
+        return pm;
     }
 
     /**
@@ -418,6 +445,8 @@ public class TPDbAdapter {
         private static final String TABLE_SUPPLIER = "TABLE_SUPPLIER";
         private static final String CHAIN = "CHAIN";
 
+        private static final String TABLE_VIRTUAL = "TABLE_VIRTUAL_PRODUCT";
+
         private static final int DATABASE_Version = 3;    // Database Version
         private static final String CREATE_PRODUCT_TABLE = "CREATE TABLE IF NOT EXISTS " + TABLE_PRODUCT +
                 " (" + UID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
@@ -448,13 +477,17 @@ public class TPDbAdapter {
 
         private static final String DROP_PRODUCT_TABLE = "DROP TABLE IF EXISTS " + TABLE_PRODUCT;
 
-
         private static final String CREATE_SUPPLIER_TABLE = "CREATE TABLE IF NOT EXISTS " + TABLE_SUPPLIER +
                 " (" + SUPPLIER + " TEXT PRIMARY KEY, " +
                 CHAIN + " TEXT, " +
                 TIME_STAMP + " TEXT);";
 
         private static final String DROP_SUPPLIER_TABLE = "DROP TABLE IF EXISTS " + TABLE_SUPPLIER;
+
+        private static final String CREATE_VIRTUAL_PRDUCT_TABLE = "CREATE VIRTUAL TABLE " +
+                TABLE_VIRTUAL + " USING FTS5(" +
+                ITEM_NO + ", " + BRAND +
+                ")";
 
         private final Context context;
 
@@ -469,6 +502,31 @@ public class TPDbAdapter {
         }
 
         /**
+         * TODO INSERT INTO tablename(a, b)
+         * SELECT a, b from tablename
+         */
+        void loadVirtualFromProduct() {
+
+
+        }
+
+        /**
+         * TODO SELECT ITEM_NO
+         * FROM VIRTUALTABLE
+         * WHERE VIRTUALTABLE MATCH 'brand'
+         *
+         * @param brand Partial or full brand name for full text search
+         * @return
+         */
+        String[] getVirtualByBrand(String brand) {
+            String[] saBrand = null;
+
+            // Get all matching brand names for display
+
+            return saBrand;
+        }
+
+        /**
          * Called when database is created
          *
          * @param db
@@ -477,6 +535,7 @@ public class TPDbAdapter {
             try {
                 db.execSQL(CREATE_SUPPLIER_TABLE);
                 db.execSQL(CREATE_PRODUCT_TABLE);
+                db.execSQL(CREATE_VIRTUAL_PRDUCT_TABLE);
             } catch (Exception e) {
                 Toast.makeText(context, e.getMessage(), Toast.LENGTH_LONG).show();
             }
