@@ -88,8 +88,17 @@
                 android:text="https://stackoverflow.com/questions/3643395/how-to-get-android-crash-logs"
                 android:textSize="24sp"
                 tools:ignore="HardcodedText" />
-        </LinearLayout>
-    </ScrollView>
 
+            <TextView
+                android:id="@+id/ftsTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:autoLink="web"
+                android:text="https://www.sqlitetutorial.net/sqlite-full-text-search/#"
+                android:textSize="24sp"
+                tools:ignore="HardcodedText" />
+        </LinearLayout>
+
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
