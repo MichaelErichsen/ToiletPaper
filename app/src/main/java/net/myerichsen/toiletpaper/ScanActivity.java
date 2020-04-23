@@ -145,7 +145,7 @@ public class ScanActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         Intent intent = new Intent();
-        intent.putExtra("item_no", barcodeText.getText().toString());
+        intent.putExtra("net.myerichsen.toiletpaper.ITEMNO", barcodeText.getText().toString());
         setResult(RESULT_OK, intent);
         finish();
     }

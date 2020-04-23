@@ -58,7 +58,6 @@ public class SupplierActivity extends AppCompatActivity {
             }
         });
 
-
         // Get supplier from Intent
         if (!getIntent().hasExtra("net.myrichsen.toiletpaper.SUPPLIER")) {
             Snackbar snackbar = Snackbar

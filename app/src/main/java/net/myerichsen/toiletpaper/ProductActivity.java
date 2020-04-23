@@ -21,6 +21,7 @@ import com.google.android.material.snackbar.Snackbar;
 
 import net.myerichsen.toiletpaper.ui.products.ProductModel;
 
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -36,63 +37,67 @@ public class ProductActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product);
         context = getApplicationContext();
-        final TPDbAdapter helper = new TPDbAdapter(context);
+        final TPDbAdapter adapter = new TPDbAdapter(context);
 
-        final TableLayout tableLayout = findViewById(R.id.productDetailTableLayout);
+        final TableLayout productDetailTableLayout = findViewById(R.id.productDetailTableLayout);
         TableRow tableRow = new TableRow(context);
         tableRow.setBackgroundColor(Color.BLACK);
         tableRow.setPadding(2, 2, 2, 2);
         tableRow.addView(addCell("Tekst"));
         tableRow.addView(addCell("Værdi"));
-        tableLayout.addView(tableRow);
+        productDetailTableLayout.addView(tableRow);
 
         if (!getIntent().hasExtra("net.myrichsen.toiletpaper.UID")) {
-            // No data
+            Snackbar snackbar = Snackbar
+                    .make(findViewById(android.R.id.content), "No intent extra data", Snackbar.LENGTH_LONG);
+            snackbar.show();
             return;
         }
 
         uid = Objects.requireNonNull(getIntent().getExtras()).getString("net.myrichsen.toiletpaper.UID");
-        ProductModel pd = null;
+        List<ProductModel> lpm = null;
+
         try {
-            pd = helper.getProductDataByUid(uid);
+            lpm = adapter.getProductData("UID=?", uid);
         } catch (Exception e) {
             Snackbar snackbar = Snackbar
                     .make(findViewById(android.R.id.content), Objects.requireNonNull(e.getMessage()), Snackbar.LENGTH_LONG);
             snackbar.show();
         }
 
-        if (pd == null) {
+        if (lpm == null) {
             Snackbar snackbar = Snackbar
                     .make(findViewById(android.R.id.content), "Produkt nr. " + uid + " findes ikke", Snackbar.LENGTH_LONG);
             snackbar.show();
             return;
         }
 
-        addTableRow(tableLayout, "Uid", pd.getUid());
-        addTableRow(tableLayout, "Item no", pd.getItemNo());
-        addTableRow(tableLayout, "Brand", pd.getBrand());
-        addTableRow(tableLayout, "Layers", pd.getLayers());
-        addTableRow(tableLayout, "Package rolls", pd.getPackageRolls());
-        addTableRow(tableLayout, "Roll sheets", pd.getRollSheets());
-        addTableRow(tableLayout, "Sheet width", pd.getSheetWidth());
-        addTableRow(tableLayout, "Sheet length", pd.getSheetLength());
-        addTableRow(tableLayout, "Roll Length", pd.getRollLength());
-        addTableRow(tableLayout, "Package price", pd.getPackagePrice());
-        addTableRow(tableLayout, "Roll price", pd.getRollPrice());
-        addTableRow(tableLayout, "Paper weight", pd.getPaperWeight());
-        addTableRow(tableLayout, "Kilo price", pd.getKiloPrice());
-        addTableRow(tableLayout, "Meter price", pd.getMeterPrice());
-        addTableRow(tableLayout, "Sheet price", pd.getSheetPrice());
-        addTableRow(tableLayout, "Supplier", pd.getSupplier());
-        addTableRow(tableLayout, "Comments", pd.getComments());
-        addTableRow(tableLayout, "Timestamp", pd.getTimestamp());
+        ProductModel pm = lpm.get(0);
+        addTableRow(productDetailTableLayout, "Uid", pm.getUid());
+        addTableRow(productDetailTableLayout, "Item no", pm.getItemNo());
+        addTableRow(productDetailTableLayout, "Brand", pm.getBrand());
+        addTableRow(productDetailTableLayout, "Layers", pm.getLayers());
+        addTableRow(productDetailTableLayout, "Package rolls", pm.getPackageRolls());
+        addTableRow(productDetailTableLayout, "Roll sheets", pm.getRollSheets());
+        addTableRow(productDetailTableLayout, "Sheet width", pm.getSheetWidth());
+        addTableRow(productDetailTableLayout, "Sheet length", pm.getSheetLength());
+        addTableRow(productDetailTableLayout, "Roll Length", pm.getRollLength());
+        addTableRow(productDetailTableLayout, "Package price", pm.getPackagePrice());
+        addTableRow(productDetailTableLayout, "Roll price", pm.getRollPrice());
+        addTableRow(productDetailTableLayout, "Paper weight", pm.getPaperWeight());
+        addTableRow(productDetailTableLayout, "Kilo price", pm.getKiloPrice());
+        addTableRow(productDetailTableLayout, "Meter price", pm.getMeterPrice());
+        addTableRow(productDetailTableLayout, "Sheet price", pm.getSheetPrice());
+        addTableRow(productDetailTableLayout, "Supplier", pm.getSupplier());
+        addTableRow(productDetailTableLayout, "Comments", pm.getComments());
+        addTableRow(productDetailTableLayout, "Timestamp", pm.getTimestamp());
 
         ImageButton productDeleteBtn = findViewById(R.id.productDeleteBtn);
         productDeleteBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 try {
-                    helper.deleteProduct(Integer.parseInt((uid)));
+                    adapter.deleteProduct(Integer.parseInt((uid)));
                 } catch (Exception e) {
                     Snackbar snackbar = Snackbar
                             .make(findViewById(android.R.id.content), Objects.requireNonNull(e.getMessage()), Snackbar.LENGTH_LONG);

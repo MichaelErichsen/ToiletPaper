@@ -41,6 +41,7 @@ import static android.app.Activity.RESULT_OK;
 
 public class HomeFragment extends Fragment {
     private final static int REQUEST_CODE_1 = 1;
+    private final static int REQUEST_CODE_2 = 2;
 
     private TPDbAdapter helper;
     private View root;
@@ -348,7 +349,7 @@ public class HomeFragment extends Fragment {
             public void onClick(View v) {
                 int requestCode = RESULT_OK;
                 Intent scanIntent = new Intent(getContext(), ScanActivity.class);
-                scanIntent.putExtra("item_no", "");
+                scanIntent.putExtra("net.myerichsen.toiletpaper.ITEMNO", "");
                 startActivityForResult(scanIntent, REQUEST_CODE_1);
             }
         };
@@ -364,21 +365,22 @@ public class HomeFragment extends Fragment {
     }
 
     /**
-     * TODO Call brand activity
-     * Get brand name from intent
-     * Insert product model in layout
-     *
      * @return
      */
     private View.OnClickListener searchBrandBtnOnclickListener() {
         return new View.OnClickListener() {
             public void onClick(View v) {
                 brand = brandEditText.getText().toString();
-                Intent brandIntent = new Intent(getContext(), BrandActivity.class);
-                brandIntent.putExtra("net.myerichsen.toiletpaper.BRAND", brand);
-                startActivityForResult(brandIntent, REQUEST_CODE_1);
-//                ProductModel pm = helper.getProductDataByBrand(brandEditText.getText().toString());
-//                populateLayoutFromProductModel(pm);
+                if (brand.equals("")) {
+                    Snackbar snackbar = Snackbar
+                            .make(requireActivity().findViewById(android.R.id.content),
+                                    R.string.enter_brand_prompt, Snackbar.LENGTH_LONG);
+                    snackbar.show();
+                } else {
+                    Intent brandIntent = new Intent(getContext(), BrandActivity.class);
+                    brandIntent.putExtra("net.myerichsen.toiletpaper.BRAND", brand);
+                    startActivityForResult(brandIntent, REQUEST_CODE_2);
+                }
             }
         };
     }
@@ -637,10 +639,28 @@ public class HomeFragment extends Fragment {
                 itemNoEditText = root.findViewById(R.id.itemNoEditText);
 
                 if (resultCode == RESULT_OK) {
-                    String messageReturn = dataIntent.getStringExtra("item_no");
+                    String messageReturn = dataIntent.getStringExtra("net.myerichsen.toiletpaper.ITEMNO");
                     itemNoEditText.setText(messageReturn);
                     pm.setItemNo(itemNoEditText.getText().toString());
                 }
+
+                // This request code is set by startActivityForResult(intent, REQUEST_CODE_2) method.
+            case REQUEST_CODE_2:
+                String messageReturn = dataIntent.getStringExtra("net.myerichsen.toiletpaper.BRAND");
+
+                if (resultCode == RESULT_OK) {
+                    brandEditText = root.findViewById(R.id.brandEditText);
+                    brandEditText.setText(messageReturn);
+                    pm.setItemNo(itemNoEditText.getText().toString());
+                    // TODO ProductModel pm = helper.getProductDataByBrand(brandEditText.getText().toString());
+//                populateLayoutFromProductModel(pm);
+                } else {
+                    Snackbar snackbar = Snackbar
+                            .make(requireActivity().findViewById(android.R.id.content), messageReturn, Snackbar.LENGTH_LONG);
+                    snackbar.show();
+                }
+
+
         }
     }
 

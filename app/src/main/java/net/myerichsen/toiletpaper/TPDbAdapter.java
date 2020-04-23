@@ -17,6 +17,8 @@ import net.myerichsen.toiletpaper.ui.suppliers.SupplierModel;
 import java.util.ArrayList;
 import java.util.List;
 
+//import android.database.sqlite.SQLiteDatabase;
+
 // TODO Collape GetProductDataBy to a single method
 
 /**
@@ -52,25 +54,25 @@ public class TPDbAdapter {
      * Get product data
      *
      * @param selection e.g "BRAND=?"
-     * @param brand
+     * @param column
      * @return List of columns in record
      */
-    public ProductModel getProductData(String selection, String brand) {
-        ProductModel pm = null;
+    public List<ProductModel> getProductData(String selection, String column) {
+        List<ProductModel> lpm = new ArrayList<>();
 
         SQLiteDatabase db = tpDbHelper.getReadableDatabase();
 
-        String[] args = {brand};
+        String[] args = {column};
         Cursor cursor = db.query(TpDbHelper.TABLE_PRODUCT, pdColumns, selection, args, null, null, null);
 
         if (cursor.getCount() > 0) {
-            if (cursor.moveToNext()) {
-                pm = populateProductModel(cursor);
+            while (cursor.moveToNext()) {
+                lpm.add(populateProductModel(cursor));
             }
         }
         cursor.close();
 
-        return pm;
+        return lpm;
     }
 
     /**
@@ -445,7 +447,7 @@ public class TPDbAdapter {
         private static final String TABLE_SUPPLIER = "TABLE_SUPPLIER";
         private static final String CHAIN = "CHAIN";
 
-        private static final String TABLE_VIRTUAL = "TABLE_VIRTUAL_PRODUCT";
+//        private static final String TABLE_VIRTUAL = "TABLE_VIRTUAL_PRODUCT";
 
         private static final int DATABASE_Version = 3;    // Database Version
         private static final String CREATE_PRODUCT_TABLE = "CREATE TABLE IF NOT EXISTS " + TABLE_PRODUCT +
@@ -484,10 +486,11 @@ public class TPDbAdapter {
 
         private static final String DROP_SUPPLIER_TABLE = "DROP TABLE IF EXISTS " + TABLE_SUPPLIER;
 
-        private static final String CREATE_VIRTUAL_PRDUCT_TABLE = "CREATE VIRTUAL TABLE " +
-                TABLE_VIRTUAL + " USING FTS5(" +
-                ITEM_NO + ", " + BRAND +
-                ")";
+//        private static final String CREATE_VIRTUAL_PRDUCT_TABLE = "CREATE VIRTUAL TABLE IF NOT EXISTS " +
+//                TABLE_VIRTUAL + " USING FTS5(" +
+//                ITEM_NO + ", " + BRAND +
+//                ")";
+//        private static final String DROP_VIRTUAL_TABLE = "DROP TABLE IF EXISTS " + TABLE_VIRTUAL;
 
         private final Context context;
 
@@ -501,30 +504,30 @@ public class TPDbAdapter {
             this.context = context;
         }
 
-        /**
-         * TODO INSERT INTO tablename(a, b)
-         * SELECT a, b from tablename
-         */
-        void loadVirtualFromProduct() {
+//        /**
+//         * TODO INSERT INTO tablename(a, b)
+//         * SELECT a, b from tablename
+//         */
+//        void loadVirtualFromProduct() {
+//
+//
+//        }
 
-
-        }
-
-        /**
-         * TODO SELECT ITEM_NO
-         * FROM VIRTUALTABLE
-         * WHERE VIRTUALTABLE MATCH 'brand'
-         *
-         * @param brand Partial or full brand name for full text search
-         * @return
-         */
-        String[] getVirtualByBrand(String brand) {
-            String[] saBrand = null;
-
-            // Get all matching brand names for display
-
-            return saBrand;
-        }
+//        /**
+//         * TODO SELECT ITEM_NO
+//         * FROM VIRTUALTABLE
+//         * WHERE VIRTUALTABLE MATCH 'brand'
+//         *
+//         * @param brand Partial or full brand name for full text search
+//         * @return
+//         */
+//        String[] getVirtualByBrand(String brand) {
+//            String[] saBrand = null;
+//
+//            // Get all matching brand names for display
+//
+//            return saBrand;
+//        }
 
         /**
          * Called when database is created
@@ -535,7 +538,7 @@ public class TPDbAdapter {
             try {
                 db.execSQL(CREATE_SUPPLIER_TABLE);
                 db.execSQL(CREATE_PRODUCT_TABLE);
-                db.execSQL(CREATE_VIRTUAL_PRDUCT_TABLE);
+//                db.execSQL(CREATE_VIRTUAL_PRDUCT_TABLE);
             } catch (Exception e) {
                 Toast.makeText(context, e.getMessage(), Toast.LENGTH_LONG).show();
             }
@@ -554,6 +557,7 @@ public class TPDbAdapter {
                 Toast.makeText(context, "OnUpgrade", Toast.LENGTH_LONG).show();
                 db.execSQL(DROP_PRODUCT_TABLE);
                 db.execSQL(DROP_SUPPLIER_TABLE);
+//                db.execSQL(DROP_VIRTUAL_TABLE);
                 onCreate(db);
             } catch (Exception e) {
                 Toast.makeText(context, e.getMessage(), Toast.LENGTH_LONG).show();
