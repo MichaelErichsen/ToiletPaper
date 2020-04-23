@@ -17,8 +17,6 @@ import net.myerichsen.toiletpaper.ui.suppliers.SupplierModel;
 import java.util.ArrayList;
 import java.util.List;
 
-//import android.database.sqlite.SQLiteDatabase;
-
 // TODO Collape GetProductDataBy to a single method
 
 /**

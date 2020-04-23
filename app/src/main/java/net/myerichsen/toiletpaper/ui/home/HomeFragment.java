@@ -632,8 +632,10 @@ public class HomeFragment extends Fragment {
 
                 if (resultCode == RESULT_OK) {
                     String messageReturn = dataIntent.getStringExtra("net.myerichsen.toiletpaper.ITEMNO");
-                    itemNoEditText.setText(messageReturn);
-                    pm.setItemNo(itemNoEditText.getText().toString());
+//                    itemNoEditText.setText(messageReturn);
+//                    pm.setItemNo(itemNoEditText.getText().toString());
+                    List<ProductModel> lpm = helper.getProductData("ITEM_NO=?", messageReturn);
+                    populateLayoutFromProductModel(lpm.get(0));
                 }
 
                 // This request code is set by startActivityForResult(intent, REQUEST_CODE_2) method.
@@ -641,11 +643,11 @@ public class HomeFragment extends Fragment {
                 String messageReturn = dataIntent.getStringExtra("net.myerichsen.toiletpaper.BRAND");
 
                 if (resultCode == RESULT_OK) {
-                    brandEditText = root.findViewById(R.id.brandEditText);
-                    brandEditText.setText(messageReturn);
-                    pm.setItemNo(itemNoEditText.getText().toString());
-                    // TODO ProductModel pm = helper.getProductDataByBrand(brandEditText.getText().toString());
-//                populateLayoutFromProductModel(pm);
+                    List<ProductModel> lpm = helper.getProductData("BRAND=?", messageReturn);
+//                    brandEditText = root.findViewById(R.id.brandEditText);
+//                    brandEditText.setText(messageReturn);
+//                    pm.setItemNo(itemNoEditText.getText().toString());
+                    populateLayoutFromProductModel(lpm.get(0));
                 } else {
                     Snackbar snackbar = Snackbar
                             .make(requireActivity().findViewById(android.R.id.content), messageReturn, Snackbar.LENGTH_LONG);

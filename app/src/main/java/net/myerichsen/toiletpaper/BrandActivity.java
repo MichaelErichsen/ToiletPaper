@@ -80,15 +80,19 @@ public class BrandActivity extends AppCompatActivity {
         }
 
         final TableLayout brandTableLayout = findViewById(R.id.brandTableLayout);
-        TableRow tableRow = new TableRow(context);
-        tableRow.setBackgroundColor(Color.BLACK);
-        tableRow.setPadding(2, 2, 2, 2);
-        tableRow.addView(addCell(context, getString(R.string.brand)));
-        brandTableLayout.addView(tableRow);
+//        TableRow tableRow = new TableRow(context);
+//        tableRow.setBackgroundColor(Color.BLACK);
+//        tableRow.setPadding(2, 2, 2, 2);
+//        tableRow.addView(addCell(context, getString(R.string.brand)));
+//        brandTableLayout.addView(tableRow);
 
         // More than one found
         for (int i = 0; i < lpm.size(); i++) {
-            addTableRow(brandTableLayout, lpm.get(i).getBrand());
+            try {
+                addTableRow(brandTableLayout, lpm.get(i).getBrand());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 
