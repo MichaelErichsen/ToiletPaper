@@ -33,7 +33,7 @@ public class BrandActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_brand);
-        Context context = getApplicationContext();
+        context = getApplicationContext();
         final TPDbAdapter adapter = new TPDbAdapter(context);
 
         if (!getIntent().hasExtra("net.myerichsen.toiletpaper.BRAND")) {
@@ -79,20 +79,15 @@ public class BrandActivity extends AppCompatActivity {
             return;
         }
 
-        final TableLayout brandTableLayout = findViewById(R.id.brandTableLayout);
-//        TableRow tableRow = new TableRow(context);
-//        tableRow.setBackgroundColor(Color.BLACK);
-//        tableRow.setPadding(2, 2, 2, 2);
-//        tableRow.addView(addCell(context, getString(R.string.brand)));
-//        brandTableLayout.addView(tableRow);
-
         // More than one found
+        final TableLayout brandTableLayout = findViewById(R.id.brandTableLayout);
+
         for (int i = 0; i < lpm.size(); i++) {
-            try {
+//            try {
                 addTableRow(brandTableLayout, lpm.get(i).getBrand());
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//            }
         }
     }
 
@@ -101,7 +96,7 @@ public class BrandActivity extends AppCompatActivity {
         tableRow = new TableRow(context);
         tableRow.setBackgroundColor(Color.BLACK);
         tableRow.setPadding(2, 2, 2, 2); //Border between rows
-        tableRow.addView(addCell(context, brand));
+        tableRow.addView(addCell(brand));
         tableRow.setClickable(true);
         tableRow.setOnClickListener(tableRowOnclickListener());
         tableLayout.addView(tableRow);
@@ -127,7 +122,7 @@ public class BrandActivity extends AppCompatActivity {
         };
     }
 
-    private LinearLayout addCell(Context context, String cellData) {
+    private LinearLayout addCell(String cellData) {
         llp.setMargins(2, 2, 2, 2);
 
         LinearLayout cell;
@@ -146,8 +141,8 @@ public class BrandActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         Intent intent = new Intent();
-        intent.putExtra("net.myerichsen.toiletpaper.BRAND", "?");
+        intent.putExtra("net.myerichsen.toiletpaper.BRAND", brand);
         setResult(RESULT_OK, intent);
-        finish();
+        super.onBackPressed();
     }
 }
