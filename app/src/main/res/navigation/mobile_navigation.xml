@@ -31,6 +31,9 @@
             app:destination="@id/scanActivity"
             app:enterAnim="@anim/nav_default_enter_anim"
             app:exitAnim="@anim/nav_default_exit_anim" />
+        <action
+            android:id="@+id/action_nav_home_to_brandActivity"
+            app:destination="@id/brandActivity" />
     </fragment>
 
     <fragment
@@ -93,5 +96,10 @@
         android:name="net.myerichsen.toiletpaper.SupplierActivity"
         android:label="activity_supplier"
         tools:layout="@layout/activity_supplier" />
+    <activity
+        android:id="@+id/brandActivity"
+        android:name="net.myerichsen.toiletpaper.BrandActivity"
+        android:label="activity_brand"
+        tools:layout="@layout/activity_brand" />
 
 </navigation>

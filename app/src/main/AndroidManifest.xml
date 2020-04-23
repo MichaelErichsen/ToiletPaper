@@ -18,14 +18,13 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".BrandActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:label="@string/title_activity_brand"
-            android:parentActivityName=".MainActivity"
-            android:theme="@style/FullscreenTheme" />
+            android:label="@string/found_brands"
+            android:parentActivityName=".MainActivity" />
         <activity
             android:name=".SettingsActivity"
             android:label="@string/title_activity_settings"
             android:parentActivityName=".MainActivity" />
+
         <meta-data
             android:name="com.google.android.gms.vision.DEPENDENCIES"
             android:value="barcode" />
@@ -52,7 +51,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
     </application>
 
 </manifest>

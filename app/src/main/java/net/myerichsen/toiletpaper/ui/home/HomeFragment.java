@@ -37,6 +37,8 @@ import java.util.Objects;
 
 import static android.app.Activity.RESULT_OK;
 
+// TODO If scan returns an item no, then do a search and populate, if succesful
+
 public class HomeFragment extends Fragment {
     private final static int REQUEST_CODE_1 = 1;
 
@@ -70,6 +72,7 @@ public class HomeFragment extends Fragment {
     private EditText commentEditText;
     private TextView messageTextView;
     private ProductModel pm;
+    private String brand;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -361,8 +364,7 @@ public class HomeFragment extends Fragment {
     }
 
     /**
-     * TODO Click brand search  button
-     * Call brand activity
+     * TODO Call brand activity
      * Get brand name from intent
      * Insert product model in layout
      *
@@ -371,8 +373,9 @@ public class HomeFragment extends Fragment {
     private View.OnClickListener searchBrandBtnOnclickListener() {
         return new View.OnClickListener() {
             public void onClick(View v) {
+                brand = brandEditText.getText().toString();
                 Intent brandIntent = new Intent(getContext(), BrandActivity.class);
-//               brandIntent.putExtra("item_no", "");
+                brandIntent.putExtra("net.myerichsen.toiletpaper.BRAND", brand);
                 startActivityForResult(brandIntent, REQUEST_CODE_1);
 //                ProductModel pm = helper.getProductDataByBrand(brandEditText.getText().toString());
 //                populateLayoutFromProductModel(pm);
