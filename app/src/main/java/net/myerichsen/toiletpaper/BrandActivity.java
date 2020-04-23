@@ -48,6 +48,9 @@ public class BrandActivity extends AppCompatActivity {
         List<ProductModel> lpm = null;
 
         try {
+            if (!brand.endsWith("%")) {
+                brand += "%";
+            }
             lpm = adapter.getProductData("BRAND LIKE ?", brand);
         } catch (Exception e) {
             Intent intent = new Intent();

@@ -16,7 +16,6 @@ import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatImageButton;
@@ -37,7 +36,7 @@ import java.util.Objects;
 
 import static android.app.Activity.RESULT_OK;
 
-// TODO If scan returns an item no, then do a search and populate, if succesful
+// TODO If scan returns an item no, then do a search and populate, if successful
 
 public class HomeFragment extends Fragment {
     private final static int REQUEST_CODE_1 = 1;
@@ -71,7 +70,6 @@ public class HomeFragment extends Fragment {
     private CheckBox sheetPriceCheckBox;
     private Spinner suppliersSpinner;
     private EditText commentEditText;
-    private TextView messageTextView;
     private ProductModel pm;
     private String brand;
 
@@ -258,16 +256,10 @@ public class HomeFragment extends Fragment {
         try {
             lsm = helper.getAllSupplierData();
         } catch (Exception e) {
-//            Snackbar snackbar = Snackbar
-//                    .make(root.findViewById(android.R.id.content), Objects.requireNonNull(e.getMessage()), Snackbar.LENGTH_LONG);
-//            snackbar.show();
             goOn = false;
         }
 
         if ((goOn) && (lsm.size() == 0)) {
-//            Snackbar snackbar = Snackbar
-//                    .make(root.findViewById(android.R.id.content), "No data in table", Snackbar.LENGTH_LONG);
-//            snackbar.show();
             goOn = false;
         }
 
