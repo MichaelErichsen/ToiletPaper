@@ -39,7 +39,7 @@ public class TPDbAdapter {
     /**
      * Constructor
      *
-     * @param context
+     * @param context The application context
      */
     public TPDbAdapter(Context context) {
         tpDbHelper = new TpDbHelper(context);
@@ -47,10 +47,32 @@ public class TPDbAdapter {
     }
 
     /**
+     * Get all product data
+     *
+     * @return List of columns in record
+     */
+    public List<ProductModel> getProductModels() {
+        List<ProductModel> lpm = new ArrayList<>();
+
+        SQLiteDatabase db = tpDbHelper.getReadableDatabase();
+
+        Cursor cursor = db.query(TpDbHelper.TABLE_PRODUCT, pdColumns, null, null, null, null, null);
+
+        if (cursor.getCount() > 0) {
+            while (cursor.moveToNext()) {
+                lpm.add(populateProductModel(cursor));
+            }
+        }
+        cursor.close();
+
+        return lpm;
+    }
+
+    /**
      * Get product data
      *
      * @param selection e.g "BRAND=?"
-     * @param column
+     * @param column    The column to use as selection argument
      * @return List of columns in record
      */
     public List<ProductModel> getProductModels(String selection, String column) {
@@ -89,30 +111,12 @@ public class TPDbAdapter {
         db.insert(TpDbHelper.TABLE_SUPPLIER, null, contentValues);
     }
 
-    /**
-     * Get all data from product table
-     *
-     * @return List of columns in record
-     */
-    public List<ProductModel> getProductModels() {
-        return getProductModels(null, null);
-    }
-
-    /**
-     * Do an initial load
-     */
-    public void doInitialLoad() throws Exception {
-        tpDbHelper.loadInitialData();
-    }
-
-    /**
-     * Get all data from supplier table
-     *
-     * @return List of supplier data
-     */
-    public List<SupplierModel> getSupplierModels() throws Exception {
-        return getSupplierModels(null, null);
-    }
+//    /**
+//     * Do an initial load
+//     */
+//    public void doInitialLoad() throws Exception {
+//        tpDbHelper.loadInitialData();
+//    }
 
     /**
      * Extract supplier data into content value object
@@ -217,7 +221,7 @@ public class TPDbAdapter {
      * Delete row from product table
      *
      * @param uid Unique identifier
-     * @throws Exception
+     * @throws Exception SQL Exception
      */
     public void deleteProduct(int uid) throws Exception {
         int rc;
@@ -236,7 +240,7 @@ public class TPDbAdapter {
     /**
      * Delete row from supplier table
      *
-     * @param supplier
+     * @param supplier The supplier to delete
      */
     public void deleteSupplier(String supplier) throws Exception {
         int rc;
@@ -278,10 +282,38 @@ public class TPDbAdapter {
     }
 
     /**
-     * Get supplier date by supplier
+     * Get all supplier date
      *
-     * @param column
-     * @return
+     * @return A list of supplier models
+     * @throws Exception An SQL Exception
+     */
+    public List<SupplierModel> getSupplierModels() throws Exception {
+        List<SupplierModel> lsm = new ArrayList<>();
+
+        try {
+            SQLiteDatabase db = tpDbHelper.getReadableDatabase();
+
+            Cursor cursor = db.query(TpDbHelper.TABLE_SUPPLIER, sdColumns, null, null, null, null, null);
+
+            if (cursor.getCount() > 0) {
+                if (cursor.moveToNext()) {
+                    lsm.add(populateSupplierData(cursor));
+                }
+            }
+            cursor.close();
+        } catch (Exception e) {
+            throw e;
+        }
+        return lsm;
+    }
+
+    /**
+     * Get supplier date
+     *
+     * @param selection The selection statement, e. g. "UID=?"
+     * @param column    The column to use as selection argument
+     * @return A list of supplier models
+     * @throws Exception An SQL Exception
      */
     public List<SupplierModel> getSupplierModels(String selection, String column) throws Exception {
         List<SupplierModel> lsm = new ArrayList<>();
@@ -302,6 +334,20 @@ public class TPDbAdapter {
             throw e;
         }
         return lsm;
+    }
+
+    /**
+     * @throws Exception
+     */
+    public void initialProductLoad() throws Exception {
+        tpDbHelper.initialProductLoad();
+    }
+
+    /**
+     * @throws Exception
+     */
+    public void initialSupplierLoad() throws Exception {
+        tpDbHelper.initialSupplierLoad();
     }
 
     /**
@@ -384,7 +430,7 @@ public class TPDbAdapter {
         /**
          * Constructor
          *
-         * @param context
+         * @param context The application context
          */
         TpDbHelper(Context context) {
             super(context, DATABASE_NAME, null, DATABASE_Version);
@@ -395,13 +441,12 @@ public class TPDbAdapter {
         /**
          * Called when database is created
          *
-         * @param db
+         * @param db Database
          */
         public void onCreate(SQLiteDatabase db) {
             try {
                 db.execSQL(CREATE_SUPPLIER_TABLE);
                 db.execSQL(CREATE_PRODUCT_TABLE);
-//                db.execSQL(CREATE_VIRTUAL_PRDUCT_TABLE);
             } catch (Exception e) {
                 Toast.makeText(context, e.getMessage(), Toast.LENGTH_LONG).show();
             }
@@ -410,9 +455,9 @@ public class TPDbAdapter {
         /**
          * Called when the database needs to be upgraded
          *
-         * @param db
-         * @param oldVersion
-         * @param newVersion
+         * @param db         Database
+         * @param oldVersion Current database version
+         * @param newVersion new database version
          */
         @Override
         public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
@@ -420,7 +465,6 @@ public class TPDbAdapter {
                 Toast.makeText(context, "OnUpgrade", Toast.LENGTH_LONG).show();
                 db.execSQL(DROP_PRODUCT_TABLE);
                 db.execSQL(DROP_SUPPLIER_TABLE);
-//                db.execSQL(DROP_VIRTUAL_TABLE);
                 onCreate(db);
             } catch (Exception e) {
                 Toast.makeText(context, e.getMessage(), Toast.LENGTH_LONG).show();
@@ -428,9 +472,39 @@ public class TPDbAdapter {
         }
 
         /**
+         * @throws Exception
+         */
+        private void initialProductLoad() throws Exception {
+            try {
+                TPDbAdapter tpHelper = new TPDbAdapter(context);
+                SQLiteDatabase db = getWritableDatabase();
+
+                onCreate(db);
+
+                Cursor cursor = db.query(TABLE_PRODUCT, tpHelper.countColumn, null,
+                        null, null, null, null, null);
+                if (cursor.getCount() > 0) {
+                    if (cursor.moveToNext()) {
+                        int count = cursor.getInt(cursor.getColumnIndex("COUNT(*)"));
+
+                        if (count == 0) {
+                            loadProducts(tpHelper);
+                        } else {
+                            throw new Exception("Product table not empty. Contains " + count + " products");
+                        }
+                    }
+                }
+                cursor.close();
+            } catch (Exception e) {
+                throw e;
+            }
+
+        }
+
+        /**
          * Initial data load
          */
-        private void loadInitialData() throws Exception {
+        private void initialSupplierLoad() throws Exception {
             try {
                 TPDbAdapter tpHelper = new TPDbAdapter(context);
                 SQLiteDatabase db = getWritableDatabase();
@@ -447,109 +521,92 @@ public class TPDbAdapter {
                         if (count == 0) {
                             loadSuppliers(tpHelper);
                         } else {
-                            Toast.makeText(context, "Supplier table not empty. Contains " + count + " suppliers",
-                                    Toast.LENGTH_LONG).show();
+                            throw new Exception("Supplier table not empty. Contains " + count + " suppliers");
                         }
                     }
                 }
                 cursor.close();
 
-
-                cursor = db.query(TABLE_PRODUCT, tpHelper.countColumn, null,
-                        null, null, null, null, null);
-                if (cursor.getCount() > 0) {
-                    if (cursor.moveToNext()) {
-                        int count = cursor.getInt(cursor.getColumnIndex("COUNT(*)"));
-
-                        if (count == 0) {
-                            loadProducts(tpHelper);
-                        } else {
-                            Toast.makeText(context, "Product table not empty. Contains " + count + " products",
-                                    Toast.LENGTH_LONG).show();
-                        }
-                    }
-                }
-                cursor.close();
             } catch (Exception e) {
                 throw e;
             }
 
         }
 
-        private void loadProducts(TPDbAdapter tpHelper) {
+        private void loadProducts(TPDbAdapter adapter) {
             ProductModel pm;
             pm = new ProductModel("5700384289095", "Irma Tusindfryd Toiletpapir",
                     3, 8, 233, 97, 125, 0, (float) 29.1,
                     0, 41, 0, (float) 5.125, 1, 48,
                     0, (float) 31.64, 0, (float) 0.1761, 1, (float) 0.022, 1,
                     "Kvickly Helsinge", "Produceret i Sverige");
-            tpHelper.insertData(pm);
+            adapter.insertData(pm);
 
             pm = new ProductModel("7311041080306", "First Price Toiletpapir 2-lags",
                     2, 8, 220, 96, 125, 1, (float) 27.5,
                     0, (float) 15.95, 0, (float) 1.99, 1, 36,
                     0, 0, 0, (float) 0.0725, 1, (float) 0.009, 1,
                     "Spar Vejby Strand", "Produceret i Litauen");
-            tpHelper.insertData(pm);
+            adapter.insertData(pm);
 
             pm = new ProductModel("5705830002242", "REMA 1000 Toiletpapir",
                     2, 8, 282, 97, 125, 0, (float) 35.25,
                     0, (float) 9.75, 0, (float) 1.21875, 1, (float) 32.6,
                     0, (float) 10.93, 0, (float) 0.0346, 1, (float) 0.004322, 1,
                     "Rema Vejby", "Produceret i Sverige");
-            tpHelper.insertData(pm);
+            adapter.insertData(pm);
 
             pm = new ProductModel("170190", "Lambi Classic Toilet Paper",
                     3, 9, 255, 0, 125, 1, (float) 31.9,
                     0, (float) 34.95, 0, (float) 3.88, 1, (float) 0,
                     0, (float) 41.26, 0, (float) 0.1217, 1, (float) 0.01523, 1,
                     "Rema Vejby", "Produceret i Sverige");
-            tpHelper.insertData(pm);
+            adapter.insertData(pm);
 
             pm = new ProductModel("WW-166808", "Staples 29 m",
                     2, 8, 250, 96, 115, 0, (float) 28.75,
                     0, (float) 24.94, 0, (float) 3.12, 1,
                     (float) 16.50, 0, (float) 188.94, 0, (float) 0.10843, 1, (float) 0.1247, 1,
                     "Staples", "Online");
-            tpHelper.insertData(pm);
+            adapter.insertData(pm);
 
             pm = new ProductModel("WW-114649", "Tork Advanced Extra Soft T4",
                     3, 42, 248, 94, 140, 1, (float) 34.70, 0,
                     (float) 386.85, 0, (float) 9.21, 1,
                     0, 0, 0, 0, (float) 0.26544, 1, (float) 0.03714, 1,
                     "Staples", "Online");
-            tpHelper.insertData(pm);
+            adapter.insertData(pm);
 
             pm = new ProductModel("WW-101012", "Scott® Performance 350",
                     3, 36, 350, 95, 125, 0, (float) 43.75, 0,
                     (float) 386.85, 0, (float) 9.21, 1,
                     0, 0, 0, 0, (float) 0.46746, 1, (float) 0.48433, 1,
                     "Staples", "Online");
-            tpHelper.insertData(pm);
+            adapter.insertData(pm);
         }
 
-        private void loadSuppliers(TPDbAdapter tpHelper) {
+        private void loadSuppliers(TPDbAdapter adapter) {
             SupplierModel sm;
             sm = new SupplierModel("Bilka Hillerød", "Salling");
-            tpHelper.insertData(sm);
+            adapter.insertData(sm);
             sm = new SupplierModel("Føtex Hillerød", "Salling");
-            tpHelper.insertData(sm);
+            adapter.insertData(sm);
             sm = new SupplierModel("Kvickly Helsinge", "Coop");
-            tpHelper.insertData(sm);
+            adapter.insertData(sm);
             sm = new SupplierModel("Netto Vejby", "Salling");
-            tpHelper.insertData(sm);
+            adapter.insertData(sm);
             sm = new SupplierModel("Rema Vejby", "REMA 1000");
-            tpHelper.insertData(sm);
+            adapter.insertData(sm);
             sm = new SupplierModel("Staples", "Staples");
-            tpHelper.insertData(sm);
+            adapter.insertData(sm);
             sm = new SupplierModel("Spar Karsemose", "Dagrofa");
-            tpHelper.insertData(sm);
+            adapter.insertData(sm);
             sm = new SupplierModel("Spar Vejby Strand", "Dagrofa");
-            tpHelper.insertData(sm);
+            adapter.insertData(sm);
             sm = new SupplierModel("SuperBest Allerød", "SuperBest");
-            tpHelper.insertData(sm);
+            adapter.insertData(sm);
             sm = new SupplierModel("Superbrugsen Gilleleje", "Coop");
-            tpHelper.insertData(sm);
+            adapter.insertData(sm);
         }
     }
 }

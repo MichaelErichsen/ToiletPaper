@@ -46,7 +46,7 @@ public class BrandActivity extends AppCompatActivity {
         }
 
         brand = Objects.requireNonNull(getIntent().getExtras()).getString("net.myerichsen.toiletpaper.BRAND");
-        List<ProductModel> lpm = null;
+        List<ProductModel> lpm;
 
         try {
             if (!brand.endsWith("%")) {

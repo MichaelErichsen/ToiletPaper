@@ -368,6 +368,7 @@ public class HomeFragment extends Fragment {
 
     /**
      * Brand search button on click listener
+     *
      * @return The listener
      */
     private View.OnClickListener searchBrandBtnOnclickListener() {
@@ -423,9 +424,9 @@ public class HomeFragment extends Fragment {
     /**
      * Spinner utility function
      *
-     * @param spinner
-     * @param myString
-     * @return
+     * @param spinner  A spinner
+     * @param myString Strint to find in spinner
+     * @return Index of string in spinner
      */
     private int getIndex(Spinner spinner, String myString) {
         for (int i = 0; i < spinner.getCount(); i++) {

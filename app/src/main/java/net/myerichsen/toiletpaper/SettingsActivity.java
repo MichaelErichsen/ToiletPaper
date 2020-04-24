@@ -18,8 +18,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.snackbar.Snackbar;
 
-import java.util.Objects;
-
 public class SettingsActivity extends AppCompatActivity {
     private SharedPreferences sharedPref;
 
@@ -49,16 +47,23 @@ public class SettingsActivity extends AppCompatActivity {
         return new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                StringBuilder sb = new StringBuilder();
                 try {
-                    adapter.doInitialLoad();
-                    Snackbar snackbar = Snackbar
-                            .make(findViewById(android.R.id.content), R.string.initial_load_done, Snackbar.LENGTH_LONG);
-                    snackbar.show();
+                    adapter.initialSupplierLoad();
                 } catch (Exception e) {
-                    Snackbar snackbar = Snackbar
-                            .make(findViewById(android.R.id.content), Objects.requireNonNull(e.getMessage()), Snackbar.LENGTH_LONG);
-                    snackbar.show();
+                    sb.append(e.getMessage() + "\n");
                 }
+
+                try {
+                    adapter.initialProductLoad();
+                    sb.append(R.string.initial_load_done);
+
+                } catch (Exception e) {
+                    sb.append(e.getMessage());
+                }
+                Snackbar snackbar = Snackbar
+                        .make(findViewById(android.R.id.content), sb.toString(), Snackbar.LENGTH_LONG);
+                snackbar.show();
             }
         };
     }
