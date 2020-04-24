@@ -3,5 +3,5 @@
   -->
 
 <resources>
-    <integer name="saved_input_key_default_key">1</integer>
+    <integer name="saved_input_default_key">1</integer>
 </resources>
