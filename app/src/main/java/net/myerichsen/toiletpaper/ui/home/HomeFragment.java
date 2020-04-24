@@ -36,7 +36,19 @@ import java.util.Objects;
 
 import static android.app.Activity.RESULT_OK;
 
-// TODO If scan returns an item no, then do a search and populate, if successful
+/**
+ * TODO Which fields to display should be controlled by preference
+ * <p>
+ * Context context = getActivity();
+ * SharedPreferences sharedPref = context.getSharedPreferences(
+ * getString(R.string.preference_file_key), Context.MODE_PRIVATE);
+ * <p>
+ * SharedPreferences sharedPref = getActivity().getPreferences(Context.MODE_PRIVATE);
+ * int defaultValue = getResources().getInteger(R.integer.saved_input_key_default_key);
+ * int highScore = sharedPref.getInt(getString(R.string.saved_input_key), defaultValue);
+ * simple is 0
+ * advanced is 1
+ */
 
 public class HomeFragment extends Fragment {
     private final static int REQUEST_CODE_1 = 1;
@@ -444,7 +456,7 @@ public class HomeFragment extends Fragment {
         String s = et.getText().toString();
 
         if (s.equals("")) {
-            return Float.valueOf(0);
+            return (float) 0;
         } else {
             return Float.parseFloat(s);
         }
@@ -513,6 +525,7 @@ public class HomeFragment extends Fragment {
     /**
      * Calculate all calculable fields
      */
+    // TODO Reconsider what and how to calculate
     private void calculate() {
         try {
             boolean fSheetLength = divide(rollLengthEditText, rollLengthCheckBox, rollSheetsEditText, null, sheetLengthEditText, sheetLengthCheckBox);

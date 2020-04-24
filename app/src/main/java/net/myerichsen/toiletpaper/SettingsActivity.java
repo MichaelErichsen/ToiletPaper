@@ -5,6 +5,7 @@
 package net.myerichsen.toiletpaper;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -20,12 +21,15 @@ import com.google.android.material.snackbar.Snackbar;
 import java.util.Objects;
 
 public class SettingsActivity extends AppCompatActivity {
+    SharedPreferences sharedPref;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.settings_activity);
         Context context = getApplicationContext();
+        sharedPref = context.getSharedPreferences(
+                getString(R.string.preference_file_key), Context.MODE_PRIVATE);
         final TPDbAdapter adapter = new TPDbAdapter(context);
 
 
@@ -37,7 +41,6 @@ public class SettingsActivity extends AppCompatActivity {
         ImageButton initLoadBtn = findViewById(R.id.initLoadBtn);
         initLoadBtn.setOnClickListener(initLoadOnClickListener(adapter));
 
-        // TODO Implement preferences
         RadioGroup inputFormatRg = findViewById(R.id.inputFormatRg);
         inputFormatRg.setOnCheckedChangeListener(inputFormatOnCheckedListener());
     }
@@ -64,15 +67,20 @@ public class SettingsActivity extends AppCompatActivity {
         return new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
+                SharedPreferences.Editor editor = sharedPref.edit();
                 Snackbar snackbar;
 
                 switch (checkedId) {
                     case R.id.simpleInputRb:
+                        editor.putInt(getString(R.string.saved_input_key), 0);
+                        editor.apply();
                         snackbar = Snackbar
                                 .make(findViewById(android.R.id.content), "Not implemented", Snackbar.LENGTH_LONG);
                         snackbar.show();
                         break;
                     case R.id.advancedInputRb:
+                        editor.putInt(getString(R.string.saved_input_key), 1);
+                        editor.commit();
                         snackbar = Snackbar
                                 .make(findViewById(android.R.id.content), "Only option implemented", Snackbar.LENGTH_LONG);
                         snackbar.show();
