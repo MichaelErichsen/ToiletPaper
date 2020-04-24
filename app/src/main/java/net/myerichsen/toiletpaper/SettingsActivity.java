@@ -21,7 +21,7 @@ import com.google.android.material.snackbar.Snackbar;
 import java.util.Objects;
 
 public class SettingsActivity extends AppCompatActivity {
-    SharedPreferences sharedPref;
+    private SharedPreferences sharedPref;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
