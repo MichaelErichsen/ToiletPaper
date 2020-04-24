@@ -36,19 +36,7 @@ import java.util.Objects;
 
 import static android.app.Activity.RESULT_OK;
 
-/**
- * TODO Which fields to display should be controlled by preference
- * <p>
- * Context context = getActivity();
- * SharedPreferences sharedPref = context.getSharedPreferences(
- * getString(R.string.preference_file_key), Context.MODE_PRIVATE);
- * <p>
- * SharedPreferences sharedPref = getActivity().getPreferences(Context.MODE_PRIVATE);
- * int defaultValue = getResources().getInteger(R.integer.saved_input_key_default_key);
- * int highScore = sharedPref.getInt(getString(R.string.saved_input_key), defaultValue);
- * simple is 0
- * advanced is 1
- */
+// TODO Which fields to display should be controlled by preference
 
 public class HomeFragment extends Fragment {
     private final static int REQUEST_CODE_1 = 1;
@@ -89,6 +77,9 @@ public class HomeFragment extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
         root = inflater.inflate(R.layout.fragment_home, container, false);
         Context context = getContext();
+//        SharedPreferences sharedPref = context.getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE);
+//        int defaultValue = getResources().getInteger(R.integer.saved_input_key_default_key);
+//        int input_format_key = sharedPref.getInt(getString(R.string.saved_input_key), defaultValue);
         helper = new TPDbAdapter(context);
         pm = new ProductModel();
 
@@ -281,6 +272,14 @@ public class HomeFragment extends Fragment {
             }
         }
 
+        /*
+          simple is 0
+          advanced is 1
+         */
+        // TODO Preference-controller field suppression does npt work, since the definitions are
+        //  static and made in the XML file
+
+//        if (input_format_key > 0) {
         ArrayAdapter<String> supplierArrayAdapter = new ArrayAdapter<>(context, android.R.layout.simple_spinner_item, supplierArrayList);
         supplierArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         suppliersSpinner.setAdapter(supplierArrayAdapter);
@@ -297,6 +296,7 @@ public class HomeFragment extends Fragment {
 
         // Comments
         commentEditText = root.findViewById(R.id.commentEditText);
+//        }
 
         // Buttons
         AppCompatImageButton calculateBtn = root.findViewById(R.id.calculateBtn);
@@ -369,7 +369,8 @@ public class HomeFragment extends Fragment {
     }
 
     /**
-     * @return
+     * Brand search button on click listener
+     * @return The listener
      */
     private View.OnClickListener searchBrandBtnOnclickListener() {
         return new View.OnClickListener() {

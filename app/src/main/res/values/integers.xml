@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright (c) 2020. Michael Erichsen.
+  -->
+
+<resources>
+    <integer name="saved_input_key_default_key">1</integer>
+</resources>
