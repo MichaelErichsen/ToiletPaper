@@ -72,18 +72,18 @@ public class SettingsActivity extends AppCompatActivity {
 
                 switch (checkedId) {
                     case R.id.simpleInputRb:
-                        editor.putInt(getString(R.string.saved_input_key), 0);
+                        editor.putBoolean(getString(R.string.advanced_input_key), false);
                         editor.apply();
-//                        snackbar = Snackbar
-//                                .make(findViewById(android.R.id.content), "Not implemented", Snackbar.LENGTH_LONG);
-//                        snackbar.show();
+                        snackbar = Snackbar
+                                .make(findViewById(android.R.id.content), "Not implemented", Snackbar.LENGTH_LONG);
+                        snackbar.show();
                         break;
                     case R.id.advancedInputRb:
-                        editor.putInt(getString(R.string.saved_input_key), 1);
+                        editor.putBoolean(getString(R.string.advanced_input_key), true);
                         editor.apply();
-//                        snackbar = Snackbar
-//                                .make(findViewById(android.R.id.content), "Only option implemented", Snackbar.LENGTH_LONG);
-//                        snackbar.show();
+                        snackbar = Snackbar
+                                .make(findViewById(android.R.id.content), "Only option implemented", Snackbar.LENGTH_LONG);
+                        snackbar.show();
                         break;
                     default:
                         snackbar = Snackbar

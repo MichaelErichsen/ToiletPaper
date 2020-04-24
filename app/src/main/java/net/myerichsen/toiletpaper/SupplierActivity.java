@@ -17,6 +17,7 @@ import com.google.android.material.snackbar.Snackbar;
 
 import net.myerichsen.toiletpaper.ui.suppliers.SupplierModel;
 
+import java.util.List;
 import java.util.Objects;
 
 public class SupplierActivity extends AppCompatActivity {
@@ -26,7 +27,7 @@ public class SupplierActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_supplier);
         Context context = getApplicationContext();
-        final TPDbAdapter helper = new TPDbAdapter(context);
+        final TPDbAdapter adapter = new TPDbAdapter(context);
 
         final EditText supplierDetailSupplierEditText = findViewById(R.id.supplierDetailSupplierEditText);
         final EditText supplierDetailChainEditText = findViewById(R.id.supplierDetailChainEditText);
@@ -38,7 +39,7 @@ public class SupplierActivity extends AppCompatActivity {
                 SupplierModel sm = new SupplierModel();
                 sm.setSupplier(supplierDetailSupplierEditText.getText().toString());
                 sm.setChain(supplierDetailChainEditText.getText().toString());
-                helper.insertData(sm);
+                adapter.insertData(sm);
                 Snackbar snackbar = Snackbar
                         .make(findViewById(android.R.id.content), R.string.supplier_added, Snackbar.LENGTH_LONG);
                 snackbar.show();
@@ -49,7 +50,7 @@ public class SupplierActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 try {
-                    helper.deleteSupplier(supplierDetailSupplierEditText.getText().toString());
+                    adapter.deleteSupplier(supplierDetailSupplierEditText.getText().toString());
                 } catch (Exception e) {
                     Snackbar snackbar = Snackbar
                             .make(findViewById(android.R.id.content), Objects.requireNonNull(e.getMessage()), Snackbar.LENGTH_LONG);
@@ -68,7 +69,8 @@ public class SupplierActivity extends AppCompatActivity {
 
         try {
             String supplier = Objects.requireNonNull(getIntent().getExtras()).getString("net.myrichsen.toiletpaper.SUPPLIER");
-            SupplierModel sm = helper.getSupplierModelBySupplier(supplier);
+            List<SupplierModel> lsm = adapter.getSupplierModels("SUPPLIER=?", supplier);
+            SupplierModel sm = lsm.get(0);
             supplierDetailSupplierEditText.setText(sm.getSupplier());
             supplierDetailChainEditText.setText(sm.getChain());
             supplierDetailTimestampTextView.setText(sm.getTimestamp());

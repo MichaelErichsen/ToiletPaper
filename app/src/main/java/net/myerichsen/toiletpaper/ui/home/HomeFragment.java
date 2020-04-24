@@ -42,7 +42,7 @@ public class HomeFragment extends Fragment {
     private final static int REQUEST_CODE_1 = 1;
     private final static int REQUEST_CODE_2 = 2;
 
-    private TPDbAdapter helper;
+    private TPDbAdapter adapter;
     private View root;
 
     private EditText itemNoEditText;
@@ -80,7 +80,7 @@ public class HomeFragment extends Fragment {
 //        SharedPreferences sharedPref = context.getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE);
 //        int defaultValue = getResources().getInteger(R.integer.saved_input_key_default_key);
 //        int input_format_key = sharedPref.getInt(getString(R.string.saved_input_key), defaultValue);
-        helper = new TPDbAdapter(context);
+        adapter = new TPDbAdapter(context);
         pm = new ProductModel();
 
         // Item no
@@ -257,7 +257,7 @@ public class HomeFragment extends Fragment {
         boolean goOn = true;
 
         try {
-            lsm = helper.getAllSupplierData();
+            lsm = adapter.getSupplierModels();
         } catch (Exception e) {
             goOn = false;
         }
@@ -279,7 +279,6 @@ public class HomeFragment extends Fragment {
         // TODO Preference-controller field suppression does npt work, since the definitions are
         //  static and made in the XML file
 
-//        if (input_format_key > 0) {
         ArrayAdapter<String> supplierArrayAdapter = new ArrayAdapter<>(context, android.R.layout.simple_spinner_item, supplierArrayList);
         supplierArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         suppliersSpinner.setAdapter(supplierArrayAdapter);
@@ -296,7 +295,6 @@ public class HomeFragment extends Fragment {
 
         // Comments
         commentEditText = root.findViewById(R.id.commentEditText);
-//        }
 
         // Buttons
         AppCompatImageButton calculateBtn = root.findViewById(R.id.calculateBtn);
@@ -315,7 +313,7 @@ public class HomeFragment extends Fragment {
 
                 try {
                     pm = populateProductModelFromLayout();
-                    helper.insertData(pm);
+                    adapter.insertData(pm);
                     message = getString(R.string.home_fragment_save_message);
                 } catch (Exception e) {
                     message = e.getMessage();
@@ -362,8 +360,8 @@ public class HomeFragment extends Fragment {
     private View.OnClickListener searchItemNoBtnOnclickListener() {
         return new View.OnClickListener() {
             public void onClick(View v) {
-                ProductModel pm = helper.getProductDataByItemNo(itemNoEditText.getText().toString());
-                populateLayoutFromProductModel(pm);
+                List<ProductModel> lpm = adapter.getProductModels("ITEM_NO=?", itemNoEditText.getText().toString());
+                populateLayoutFromProductModel(lpm.get(0));
             }
         };
     }
@@ -646,9 +644,7 @@ public class HomeFragment extends Fragment {
 
                 if (resultCode == RESULT_OK) {
                     String messageReturn = dataIntent.getStringExtra("net.myerichsen.toiletpaper.ITEMNO");
-//                    itemNoEditText.setText(messageReturn);
-//                    pm.setItemNo(itemNoEditText.getText().toString());
-                    List<ProductModel> lpm = helper.getProductData("ITEM_NO=?", messageReturn);
+                    List<ProductModel> lpm = adapter.getProductModels("ITEM_NO=?", messageReturn);
                     populateLayoutFromProductModel(lpm.get(0));
                 }
 
@@ -657,10 +653,7 @@ public class HomeFragment extends Fragment {
                 String messageReturn = dataIntent.getStringExtra("net.myerichsen.toiletpaper.BRAND");
 
                 if (resultCode == RESULT_OK) {
-                    List<ProductModel> lpm = helper.getProductData("BRAND=?", messageReturn);
-//                    brandEditText = root.findViewById(R.id.brandEditText);
-//                    brandEditText.setText(messageReturn);
-//                    pm.setItemNo(itemNoEditText.getText().toString());
+                    List<ProductModel> lpm = adapter.getProductModels("BRAND=?", messageReturn);
                     populateLayoutFromProductModel(lpm.get(0));
                 } else {
                     Snackbar snackbar = Snackbar
@@ -674,33 +667,9 @@ public class HomeFragment extends Fragment {
 
     public void addProduct(View view) {
         ProductModel pm = new ProductModel();
-
-//        String itemNo = ((EditText) root.findViewById(R.id.itemNoEditText)).getText().toString();
-//        if (itemNo.isEmpty()) {
-//            itemNo = "";
-//        }
-//        pm.setItemNo(itemNo);
-        helper.insertData(pm);
+        adapter.insertData(pm);
         Snackbar snackbar = Snackbar
                 .make(requireActivity().findViewById(android.R.id.content), R.string.product_added, Snackbar.LENGTH_LONG);
-        snackbar.show();
-    }
-
-
-    public void getDataByItemNo(View view) {
-        EditText itemNoEditText = root.findViewById(R.id.itemNoEditText);
-        ProductModel pm = helper.getProductDataByItemNo(itemNoEditText.getText().toString());
-        Snackbar snackbar = Snackbar
-                .make(requireActivity().findViewById(android.R.id.content), "Found item no. " + pm.getItemNo(), Snackbar.LENGTH_LONG);
-        snackbar.show();
-    }
-
-
-    public void getDataByBrand(View view) {
-        EditText brandEditText = root.findViewById(R.id.brandEditText);
-        ProductModel pm = helper.getProductDataByBrand(brandEditText.getText().toString());
-        Snackbar snackbar = Snackbar
-                .make(requireActivity().findViewById(android.R.id.content), "Found brand. " + pm.getItemNo(), Snackbar.LENGTH_LONG);
         snackbar.show();
     }
 }

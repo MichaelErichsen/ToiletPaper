@@ -58,7 +58,7 @@ public class ProductActivity extends AppCompatActivity {
         List<ProductModel> lpm = null;
 
         try {
-            lpm = adapter.getProductData("UID=?", uid);
+            lpm = adapter.getProductModels("UID=?", uid);
         } catch (Exception e) {
             Snackbar snackbar = Snackbar
                     .make(findViewById(android.R.id.content), Objects.requireNonNull(e.getMessage()), Snackbar.LENGTH_LONG);

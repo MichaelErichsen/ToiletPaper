@@ -50,7 +50,7 @@ public class ProductFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        TPDbAdapter helper = new TPDbAdapter(context);
+        TPDbAdapter adapter = new TPDbAdapter(context);
 
         final TableLayout tableLayout = root.findViewById(R.id.productTableLayout);
         TableRow tableRow = new TableRow(context);
@@ -63,7 +63,7 @@ public class ProductFragment extends Fragment {
 
         List<ProductModel> lpd;
         try {
-            lpd = helper.getAllProductData();
+            lpd = adapter.getProductModels();
         } catch (Exception e) {
             Snackbar snackbar = Snackbar
                     .make(requireActivity().findViewById(android.R.id.content), Objects.requireNonNull(e.getMessage()), Snackbar.LENGTH_LONG);

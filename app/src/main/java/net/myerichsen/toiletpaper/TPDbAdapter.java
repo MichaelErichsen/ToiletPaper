@@ -17,10 +17,8 @@ import net.myerichsen.toiletpaper.ui.suppliers.SupplierModel;
 import java.util.ArrayList;
 import java.util.List;
 
-// TODO Collape GetProductDataBy to a single method
-
 /**
- * Database helper for product and supplier tables
+ * Database adapter for product and supplier tables
  */
 public class TPDbAdapter {
     private final TpDbHelper tpDbHelper;
@@ -55,7 +53,7 @@ public class TPDbAdapter {
      * @param column
      * @return List of columns in record
      */
-    public List<ProductModel> getProductData(String selection, String column) {
+    public List<ProductModel> getProductModels(String selection, String column) {
         List<ProductModel> lpm = new ArrayList<>();
 
         SQLiteDatabase db = tpDbHelper.getReadableDatabase();
@@ -72,30 +70,6 @@ public class TPDbAdapter {
 
         return lpm;
     }
-
-    /**
-     * Get data by brand
-     *
-     * @return List of columns in record
-     */
-    public ProductModel getProductDataByBrand(String brand) {
-        ProductModel pm = null;
-
-        SQLiteDatabase db = tpDbHelper.getReadableDatabase();
-
-        String[] args = {brand};
-        Cursor cursor = db.query(TpDbHelper.TABLE_PRODUCT, pdColumns, "BRAND=?", args, null, null, null);
-
-        if (cursor.getCount() > 0) {
-            if (cursor.moveToNext()) {
-                pm = populateProductModel(cursor);
-            }
-        }
-        cursor.close();
-
-        return pm;
-    }
-
 
     /**
      * Insert a product row
@@ -116,71 +90,12 @@ public class TPDbAdapter {
     }
 
     /**
-     * Get data by item number
-     *
-     * @return List of columns in record
-     */
-    public ProductModel getProductDataByItemNo(String itemNo) {
-        ProductModel pm = null;
-
-        SQLiteDatabase db = tpDbHelper.getReadableDatabase();
-        String[] args = {itemNo};
-        Cursor cursor = db.query(TpDbHelper.TABLE_PRODUCT, pdColumns, "ITEM_NO=?", args, null, null, null);
-
-        if (cursor.getCount() > 0) {
-            if (cursor.moveToNext()) {
-                pm = populateProductModel(cursor);
-            }
-        }
-
-        cursor.close();
-        return pm;
-    }
-
-    /**
-     * Get data by unique ID
-     *
-     * @return List of columns in record
-     */
-    public ProductModel getProductDataByUid(String uid) throws Exception {
-        ProductModel pd = null;
-
-        try {
-            SQLiteDatabase db = tpDbHelper.getReadableDatabase();
-
-            String[] args = {uid};
-            Cursor cursor = db.query(TpDbHelper.TABLE_PRODUCT, pdColumns, "UID=?", args, null, null, null);
-
-            if (cursor.getCount() > 0) {
-                if (cursor.moveToNext()) {
-                    pd = populateProductModel(cursor);
-                }
-            }
-            cursor.close();
-        } catch (Exception e) {
-            throw e;
-        }
-
-        return pd;
-    }
-
-    /**
      * Get all data from product table
      *
      * @return List of columns in record
      */
-    public List<ProductModel> getAllProductData() {
-        List<ProductModel> lpd = new ArrayList<>();
-
-        SQLiteDatabase db = tpDbHelper.getReadableDatabase();
-
-        Cursor cursor = db.query(TpDbHelper.TABLE_PRODUCT, pdColumns, null, null, null, null, null);
-
-        while (cursor.moveToNext()) {
-            lpd.add(populateProductModel(cursor));
-        }
-        cursor.close();
-        return lpd;
+    public List<ProductModel> getProductModels() {
+        return getProductModels(null, null);
     }
 
     /**
@@ -195,24 +110,8 @@ public class TPDbAdapter {
      *
      * @return List of supplier data
      */
-    public List<SupplierModel> getAllSupplierData() throws Exception {
-        List<SupplierModel> lsm = new ArrayList<>();
-
-        try {
-            SQLiteDatabase db = tpDbHelper.getReadableDatabase();
-
-            Cursor cursor = db.query(TpDbHelper.TABLE_SUPPLIER, sdColumns, null, null, null, null, null);
-
-            while (cursor.moveToNext()) {
-                lsm.add(populateSupplierData(cursor));
-            }
-
-            cursor.close();
-        } catch (Exception e) {
-            throw e;
-        }
-
-        return lsm;
+    public List<SupplierModel> getSupplierModels() throws Exception {
+        return getSupplierModels(null, null);
     }
 
     /**
@@ -318,10 +217,9 @@ public class TPDbAdapter {
      * Delete row from product table
      *
      * @param uid Unique identifier
-     * @return
      * @throws Exception
      */
-    public int deleteProduct(int uid) throws Exception {
+    public void deleteProduct(int uid) throws Exception {
         int rc;
         try {
             SQLiteDatabase db = tpDbHelper.getWritableDatabase();
@@ -333,16 +231,14 @@ public class TPDbAdapter {
         } catch (Exception e) {
             throw e;
         }
-        return rc;
     }
 
     /**
      * Delete row from supplier table
      *
      * @param supplier
-     * @return
      */
-    public int deleteSupplier(String supplier) throws Exception {
+    public void deleteSupplier(String supplier) throws Exception {
         int rc;
         try {
             SQLiteDatabase db = tpDbHelper.getWritableDatabase();
@@ -352,10 +248,9 @@ public class TPDbAdapter {
         } catch (Exception e) {
             throw e;
         }
-        return rc;
     }
 
-    public List<ProductModel> getSortedProductData(String sortKey, String sortFilter) throws Exception {
+    public List<ProductModel> getSortedProductModels(String sortKey, String sortFilter) throws Exception {
         Cursor cursor;
         List<ProductModel> lpd = new ArrayList<>();
 
@@ -385,28 +280,28 @@ public class TPDbAdapter {
     /**
      * Get supplier date by supplier
      *
-     * @param supplier
+     * @param column
      * @return
      */
-    public SupplierModel getSupplierModelBySupplier(String supplier) throws Exception {
-        SupplierModel sm = new SupplierModel();
+    public List<SupplierModel> getSupplierModels(String selection, String column) throws Exception {
+        List<SupplierModel> lsm = new ArrayList<>();
 
         try {
             SQLiteDatabase db = tpDbHelper.getReadableDatabase();
 
-            String[] args = {supplier};
-            Cursor cursor = db.query(TpDbHelper.TABLE_SUPPLIER, sdColumns, "SUPPLIER=?", args, null, null, null);
+            String[] args = {column};
+            Cursor cursor = db.query(TpDbHelper.TABLE_SUPPLIER, sdColumns, selection, args, null, null, null);
 
             if (cursor.getCount() > 0) {
                 if (cursor.moveToNext()) {
-                    sm = populateSupplierData(cursor);
+                    lsm.add(populateSupplierData(cursor));
                 }
             }
             cursor.close();
         } catch (Exception e) {
             throw e;
         }
-        return sm;
+        return lsm;
     }
 
     /**
@@ -484,12 +379,6 @@ public class TPDbAdapter {
 
         private static final String DROP_SUPPLIER_TABLE = "DROP TABLE IF EXISTS " + TABLE_SUPPLIER;
 
-//        private static final String CREATE_VIRTUAL_PRDUCT_TABLE = "CREATE VIRTUAL TABLE IF NOT EXISTS " +
-//                TABLE_VIRTUAL + " USING FTS5(" +
-//                ITEM_NO + ", " + BRAND +
-//                ")";
-//        private static final String DROP_VIRTUAL_TABLE = "DROP TABLE IF EXISTS " + TABLE_VIRTUAL;
-
         private final Context context;
 
         /**
@@ -502,30 +391,6 @@ public class TPDbAdapter {
             this.context = context;
         }
 
-//        /**
-//         * TODO INSERT INTO tablename(a, b)
-//         * SELECT a, b from tablename
-//         */
-//        void loadVirtualFromProduct() {
-//
-//
-//        }
-
-//        /**
-//         * TODO SELECT ITEM_NO
-//         * FROM VIRTUALTABLE
-//         * WHERE VIRTUALTABLE MATCH 'brand'
-//         *
-//         * @param brand Partial or full brand name for full text search
-//         * @return
-//         */
-//        String[] getVirtualByBrand(String brand) {
-//            String[] saBrand = null;
-//
-//            // Get all matching brand names for display
-//
-//            return saBrand;
-//        }
 
         /**
          * Called when database is created

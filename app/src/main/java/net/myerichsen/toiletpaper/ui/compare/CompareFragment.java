@@ -45,7 +45,7 @@ public class CompareFragment extends Fragment {
 
         View root = inflater.inflate(R.layout.compare_fragment, container, false);
         context = getContext();
-        TPDbAdapter helper = new TPDbAdapter(context);
+        TPDbAdapter adapter = new TPDbAdapter(context);
 
         ActionBar ab = ((AppCompatActivity) getActivity()).getSupportActionBar();
         if (ab != null) {
@@ -61,7 +61,7 @@ public class CompareFragment extends Fragment {
         boolean goOn = true;
 
         try {
-            lsd = helper.getAllSupplierData();
+            lsd = adapter.getSupplierModels();
         } catch (Exception e) {
             Snackbar snackbar = Snackbar
                     .make(root.findViewById(android.R.id.content), Objects.requireNonNull(e.getMessage()), Snackbar.LENGTH_LONG);

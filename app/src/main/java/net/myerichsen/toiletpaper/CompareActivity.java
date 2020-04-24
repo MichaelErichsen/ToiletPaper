@@ -38,7 +38,7 @@ public class CompareActivity extends AppCompatActivity {
 
 
         context = getApplicationContext();
-        TPDbAdapter helper = new TPDbAdapter(context);
+        TPDbAdapter adapter = new TPDbAdapter(context);
 
         String sortKey = Objects.requireNonNull(getIntent().getExtras()).getString("net.myerichsen.toiletpaper.SORT_KEY");
         String sortFilter = getIntent().getExtras().getString("net.myerichsen.toiletpaper.SORT_FILTER");
@@ -56,7 +56,7 @@ public class CompareActivity extends AppCompatActivity {
         List<ProductModel> lpd;
 
         try {
-            lpd = helper.getSortedProductData(sortKey, sortFilter);
+            lpd = adapter.getSortedProductModels(sortKey, sortFilter);
         } catch (Exception e) {
             Snackbar snackbar = Snackbar
                     .make(findViewById(android.R.id.content), Objects.requireNonNull(e.getMessage()), Snackbar.LENGTH_LONG);

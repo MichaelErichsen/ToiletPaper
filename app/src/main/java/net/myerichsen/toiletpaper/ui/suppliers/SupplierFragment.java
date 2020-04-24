@@ -42,7 +42,7 @@ public class SupplierFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        TPDbAdapter helper = new TPDbAdapter(context);
+        TPDbAdapter adapter = new TPDbAdapter(context);
 
         final TableLayout tableLayout = root.findViewById(R.id.supplierTableLayout);
 
@@ -55,7 +55,7 @@ public class SupplierFragment extends Fragment {
 
         List<SupplierModel> lsd;
         try {
-            lsd = helper.getAllSupplierData();
+            lsd = adapter.getSupplierModels();
         } catch (Exception e) {
             Snackbar snackbar = Snackbar
                     .make(requireActivity().findViewById(android.R.id.content), Objects.requireNonNull(e.getMessage()), Snackbar.LENGTH_LONG);
