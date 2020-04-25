@@ -360,8 +360,21 @@ public class HomeFragment extends Fragment {
     private View.OnClickListener searchItemNoBtnOnclickListener() {
         return new View.OnClickListener() {
             public void onClick(View v) {
-                List<ProductModel> lpm = adapter.getProductModels("ITEM_NO=?", itemNoEditText.getText().toString());
-                populateLayoutFromProductModel(lpm.get(0));
+                try {
+                    List<ProductModel> lpm = adapter.getProductModels("ITEM_NO=?", itemNoEditText.getText().toString());
+                    if (lpm.size() > 0) {
+                        populateLayoutFromProductModel(lpm.get(0));
+                    } else {
+                        Snackbar snackbar = Snackbar
+                                .make(requireActivity().findViewById(android.R.id.content), "Varenummer ikke fundet", Snackbar.LENGTH_LONG);
+                        snackbar.show();
+                    }
+
+                } catch (Exception e) {
+                    Snackbar snackbar = Snackbar
+                            .make(requireActivity().findViewById(android.R.id.content), e.getMessage(), Snackbar.LENGTH_LONG);
+                    snackbar.show();
+                }
             }
         };
     }
@@ -635,23 +648,34 @@ public class HomeFragment extends Fragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent dataIntent) {
         super.onActivityResult(requestCode, resultCode, dataIntent);
+        String messageReturn;
 
         // The returned result data is identified by requestCode.
         // The request code is specified in startActivityForResult(intent, REQUEST_CODE_1); method.
         switch (requestCode) {
             // This request code is set by startActivityForResult(intent, REQUEST_CODE_1) method.
             case REQUEST_CODE_1:
-                itemNoEditText = root.findViewById(R.id.itemNoEditText);
+                messageReturn = dataIntent.getStringExtra("net.myerichsen.toiletpaper.ITEMNO");
 
                 if (resultCode == RESULT_OK) {
-                    String messageReturn = dataIntent.getStringExtra("net.myerichsen.toiletpaper.ITEMNO");
-                    List<ProductModel> lpm = adapter.getProductModels("ITEM_NO=?", messageReturn);
-                    populateLayoutFromProductModel(lpm.get(0));
-                }
 
-                // This request code is set by startActivityForResult(intent, REQUEST_CODE_2) method.
+                    List<ProductModel> lpm = adapter.getProductModels("ITEM_NO=?", messageReturn);
+
+                    if (lpm.size() > 0) {
+                        populateLayoutFromProductModel(lpm.get(0));
+                    } else {
+                        populateLayoutFromProductModel(new ProductModel());
+                    }
+                } else {
+                    Snackbar snackbar = Snackbar
+                            .make(requireActivity().findViewById(android.R.id.content), messageReturn, Snackbar.LENGTH_LONG);
+                    snackbar.show();
+                }
+                break;
+
+            // This request code is set by startActivityForResult(intent, REQUEST_CODE_2) method.
             case REQUEST_CODE_2:
-                String messageReturn = dataIntent.getStringExtra("net.myerichsen.toiletpaper.BRAND");
+                messageReturn = dataIntent.getStringExtra("net.myerichsen.toiletpaper.BRAND");
 
                 if (resultCode == RESULT_OK) {
                     List<ProductModel> lpm = adapter.getProductModels("BRAND=?", messageReturn);
@@ -661,8 +685,7 @@ public class HomeFragment extends Fragment {
                             .make(requireActivity().findViewById(android.R.id.content), messageReturn, Snackbar.LENGTH_LONG);
                     snackbar.show();
                 }
-
-
+                break;
         }
     }
 

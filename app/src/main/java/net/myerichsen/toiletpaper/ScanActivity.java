@@ -32,14 +32,13 @@ public class ScanActivity extends AppCompatActivity {
     private CameraSource cameraSource;
     private ToneGenerator toneGen1;
     private TextView barcodeText;
-    private String barcodeData;
+    private String returnMessage = "Intet varenummer er scannet";
+    private int result = RESULT_CANCELED;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scan);
-
-//        Toolbar myChildToolbar = findViewById(R.id.scan_toolbar);
 
         ActionBar ab = getSupportActionBar();
         if (ab != null) {
@@ -74,7 +73,10 @@ public class ScanActivity extends AppCompatActivity {
                     }
 
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    Intent intent = new Intent();
+                    intent.putExtra("net.myerichsen.toiletpaper.ITEMNO", e.getMessage());
+                    setResult(RESULT_CANCELED, intent);
+                    finish();
                 }
             }
 
@@ -104,13 +106,15 @@ public class ScanActivity extends AppCompatActivity {
                         public void run() {
                             if (barcodes.valueAt(0).email != null) {
                                 barcodeText.removeCallbacks(null);
-                                barcodeData = barcodes.valueAt(0).email.address;
-                                barcodeText.setText(barcodeData);
+                                returnMessage = barcodes.valueAt(0).email.address;
+                                barcodeText.setText(returnMessage);
                                 toneGen1.startTone(ToneGenerator.TONE_CDMA_PIP, 150);
+                                result = RESULT_OK;
                             } else {
-                                barcodeData = barcodes.valueAt(0).displayValue;
-                                barcodeText.setText(barcodeData);
+                                returnMessage = barcodes.valueAt(0).displayValue;
+                                barcodeText.setText(returnMessage);
                                 toneGen1.startTone(ToneGenerator.TONE_CDMA_PIP, 150);
+                                result = RESULT_OK;
                             }
                         }
                     });
@@ -144,8 +148,8 @@ public class ScanActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         Intent intent = new Intent();
-        intent.putExtra("net.myerichsen.toiletpaper.ITEMNO", barcodeText.getText().toString());
-        setResult(RESULT_OK, intent);
+        intent.putExtra("net.myerichsen.toiletpaper.ITEMNO", returnMessage);
+        setResult(result, intent);
         finish();
     }
 

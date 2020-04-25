@@ -296,7 +296,7 @@ public class TPDbAdapter {
             Cursor cursor = db.query(TpDbHelper.TABLE_SUPPLIER, sdColumns, null, null, null, null, null);
 
             if (cursor.getCount() > 0) {
-                if (cursor.moveToNext()) {
+                while (cursor.moveToNext()) {
                     lsm.add(populateSupplierData(cursor));
                 }
             }

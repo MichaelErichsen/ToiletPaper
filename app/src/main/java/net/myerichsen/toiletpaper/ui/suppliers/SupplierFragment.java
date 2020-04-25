@@ -53,9 +53,9 @@ public class SupplierFragment extends Fragment {
         tableRow.addView(addCell("Kæde"));
         tableLayout.addView(tableRow);
 
-        List<SupplierModel> lsd;
+        List<SupplierModel> lsm;
         try {
-            lsd = adapter.getSupplierModels();
+            lsm = adapter.getSupplierModels();
         } catch (Exception e) {
             Snackbar snackbar = Snackbar
                     .make(requireActivity().findViewById(android.R.id.content), Objects.requireNonNull(e.getMessage()), Snackbar.LENGTH_LONG);
@@ -63,15 +63,15 @@ public class SupplierFragment extends Fragment {
             return;
         }
 
-        if (lsd.size() == 0) {
+        if (lsm.size() == 0) {
             Snackbar snackbar = Snackbar
-                    .make(requireActivity().findViewById(android.R.id.content), "No data in table", Snackbar.LENGTH_LONG);
+                    .make(requireActivity().findViewById(android.R.id.content), "Ingen butikker i tabellen", Snackbar.LENGTH_LONG);
             snackbar.show();
             return;
         }
 
-        for (int i = 0; i < lsd.size(); i++) {
-            SupplierModel sd = lsd.get(i);
+        for (int i = 0; i < lsm.size(); i++) {
+            SupplierModel sd = lsm.get(i);
 
             tableRow = new TableRow(context);
             tableRow.setBackgroundColor(Color.BLACK);
