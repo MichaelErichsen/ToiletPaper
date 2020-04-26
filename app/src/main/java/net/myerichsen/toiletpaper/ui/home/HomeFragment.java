@@ -2,6 +2,7 @@ package net.myerichsen.toiletpaper.ui.home;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.Editable;
@@ -16,6 +17,7 @@ import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatImageButton;
@@ -36,14 +38,11 @@ import java.util.Objects;
 
 import static android.app.Activity.RESULT_OK;
 
-// TODO Which fields to display should be controlled by preference
-
 public class HomeFragment extends Fragment {
     private final static int REQUEST_CODE_1 = 1;
     private final static int REQUEST_CODE_2 = 2;
 
     private TPDbAdapter adapter;
-    private View root;
 
     private EditText itemNoEditText;
     private AppCompatImageButton searchItemNoBtn;
@@ -75,11 +74,11 @@ public class HomeFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        root = inflater.inflate(R.layout.fragment_home, container, false);
+        View root = inflater.inflate(R.layout.fragment_home, container, false);
         Context context = getContext();
-//        SharedPreferences sharedPref = context.getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE);
-//        int defaultValue = getResources().getInteger(R.integer.saved_input_key_default_key);
-//        int input_format_key = sharedPref.getInt(getString(R.string.saved_input_key), defaultValue);
+        SharedPreferences sharedPref = context.getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE);
+        boolean advancedInputKey = sharedPref.getBoolean(getString(R.string.advanced_input_key), false);
+
         adapter = new TPDbAdapter(context);
         pm = new ProductModel();
 
@@ -272,13 +271,6 @@ public class HomeFragment extends Fragment {
             }
         }
 
-        /*
-          simple is 0
-          advanced is 1
-         */
-        // TODO Preference-controller field suppression does npt work, since the definitions are
-        //  static and made in the XML file
-
         ArrayAdapter<String> supplierArrayAdapter = new ArrayAdapter<>(context, android.R.layout.simple_spinner_item, supplierArrayList);
         supplierArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         suppliersSpinner.setAdapter(supplierArrayAdapter);
@@ -294,14 +286,25 @@ public class HomeFragment extends Fragment {
         });
 
         // Comments
+
+        TextView commentTextView = root.findViewById(R.id.commentTextViev);
+        commentTextView.setVisibility(advancedInputKey ? View.VISIBLE : View.INVISIBLE);
         commentEditText = root.findViewById(R.id.commentEditText);
+        commentEditText.setVisibility(advancedInputKey ? View.VISIBLE : View.INVISIBLE);
 
         // Buttons
         AppCompatImageButton calculateBtn = root.findViewById(R.id.calculateBtn);
         calculateBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                calculate();
+                String message = "Intet blev beregnet";
+                boolean rc = calculate();
+                if (rc) {
+                    message = "Beregninger lykkedes";
+                }
+                Snackbar snackbar = Snackbar
+                        .make(requireActivity().findViewById(android.R.id.content), message, Snackbar.LENGTH_LONG);
+                snackbar.show();
             }
         });
 
@@ -539,7 +542,7 @@ public class HomeFragment extends Fragment {
      * Calculate all calculable fields
      */
     // TODO Reconsider what and how to calculate
-    private void calculate() {
+    private boolean calculate() {
         try {
             boolean fSheetLength = divide(rollLengthEditText, rollLengthCheckBox, rollSheetsEditText, null, sheetLengthEditText, sheetLengthCheckBox);
 
@@ -560,12 +563,13 @@ public class HomeFragment extends Fragment {
 //            boolean fSheetPrice1 = divide(packagePriceEditText, null, packageRollsEditText, null, dummy, dummyC);
 //            boolean fSheetPrice = divide(dummy, dummyC, rollSheetsEditText, null, rollLengthEditText, rollLengthCheckBox);
 
+            return fKiloPrice | fMeterPrice | fRollLength | fRollPrice | fSheetLength;
         } catch (Exception e) {
             Snackbar snackbar = Snackbar
                     .make(requireActivity().findViewById(android.R.id.content), Objects.requireNonNull(e.getMessage()), Snackbar.LENGTH_LONG);
             snackbar.show();
         }
-//        return fKiloPrice | fMeterPrice | fPaperWeight | fRollLength | fRollPrice | fSheetLength | fSheetPrice;
+        return false;
     }
 
     private boolean multiply(EditText multiplicand, CheckBox cb1, EditText multiplier, CheckBox cb2, EditText product, CheckBox cb3, int precision) {
@@ -689,11 +693,13 @@ public class HomeFragment extends Fragment {
         }
     }
 
-    public void addProduct(View view) {
-        ProductModel pm = new ProductModel();
-        adapter.insertData(pm);
-        Snackbar snackbar = Snackbar
-                .make(requireActivity().findViewById(android.R.id.content), R.string.product_added, Snackbar.LENGTH_LONG);
-        snackbar.show();
-    }
+// --Commented out by Inspection START (26-04-2020 10:36):
+//    public void addProduct(View view) {
+//        ProductModel pm = new ProductModel();
+//        adapter.insertData(pm);
+//        Snackbar snackbar = Snackbar
+//                .make(requireActivity().findViewById(android.R.id.content), R.string.product_added, Snackbar.LENGTH_LONG);
+//        snackbar.show();
+//    }
+// --Commented out by Inspection STOP (26-04-2020 10:36)
 }

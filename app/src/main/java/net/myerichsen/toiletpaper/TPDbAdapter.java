@@ -224,14 +224,13 @@ public class TPDbAdapter {
      * @throws Exception SQL Exception
      */
     public void deleteProduct(int uid) throws Exception {
-        int rc;
         try {
             SQLiteDatabase db = tpDbHelper.getWritableDatabase();
             String s = uid + "";
             String[] whereArgs = {s};
             Toast.makeText(context, "Deleting product", Toast.LENGTH_LONG).show();
 
-            rc = db.delete(TpDbHelper.TABLE_PRODUCT, TpDbHelper.UID + " = ?", whereArgs);
+            db.delete(TpDbHelper.TABLE_PRODUCT, TpDbHelper.UID + " = ?", whereArgs);
         } catch (Exception e) {
             throw e;
         }
@@ -243,12 +242,11 @@ public class TPDbAdapter {
      * @param supplier The supplier to delete
      */
     public void deleteSupplier(String supplier) throws Exception {
-        int rc;
         try {
             SQLiteDatabase db = tpDbHelper.getWritableDatabase();
             String[] whereArgs = {supplier};
             Toast.makeText(context, "Deletng supplier", Toast.LENGTH_LONG).show();
-            rc = db.delete(TpDbHelper.TABLE_SUPPLIER, TpDbHelper.SUPPLIER + " = ?", whereArgs);
+            db.delete(TpDbHelper.TABLE_SUPPLIER, TpDbHelper.SUPPLIER + " = ?", whereArgs);
         } catch (Exception e) {
             throw e;
         }

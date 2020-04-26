@@ -2,7 +2,6 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/mobile_navigation"
     app:startDestination="@+id/nav_home">
 
     <fragment
@@ -11,29 +10,16 @@
         android:label="@string/menu_home"
         tools:layout="@layout/fragment_home">
 
+        <action app:destination="@id/nav_about" />
+        <action app:destination="@id/nav_products" />
+        <action app:destination="@id/nav_compare" />
+        <action app:destination="@id/nav_suppliers" />
+        <action app:destination="@id/settingsActivity" />
         <action
-            android:id="@+id/action_nav_home_to_nav_about"
-            app:destination="@id/nav_about" />
-        <action
-            android:id="@+id/action_nav_home_to_nav_products"
-            app:destination="@id/nav_products" />
-        <action
-            android:id="@+id/action_nav_home_to_nav_compare"
-            app:destination="@id/nav_compare" />
-        <action
-            android:id="@+id/action_nav_home_to_nav_suppliers"
-            app:destination="@id/nav_suppliers" />
-        <action
-            android:id="@+id/action_nav_home_to_settingsActivity"
-            app:destination="@id/settingsActivity" />
-        <action
-            android:id="@+id/action_nav_home_to_scanActivity"
             app:destination="@id/scanActivity"
             app:enterAnim="@anim/nav_default_enter_anim"
             app:exitAnim="@anim/nav_default_exit_anim" />
-        <action
-            android:id="@+id/action_nav_home_to_brandActivity"
-            app:destination="@id/brandActivity" />
+        <action app:destination="@id/brandActivity" />
     </fragment>
 
     <fragment
@@ -41,9 +27,7 @@
         android:name="net.myerichsen.toiletpaper.ui.compare.CompareFragment"
         android:label="@string/menu_compare"
         tools:layout="@layout/compare_fragment">
-        <action
-            android:id="@+id/action_nav_compare_to_compareActivity"
-            app:destination="@id/compareActivity" />
+        <action app:destination="@id/compareActivity" />
     </fragment>
 
 
@@ -52,9 +36,7 @@
         android:name="net.myerichsen.toiletpaper.ui.products.ProductFragment"
         android:label="@string/menu_products"
         tools:layout="@layout/product_fragment">
-        <action
-            android:id="@+id/action_nav_products_to_productActivity"
-            app:destination="@id/productActivity" />
+        <action app:destination="@id/productActivity" />
     </fragment>
 
     <fragment
@@ -62,9 +44,7 @@
         android:name="net.myerichsen.toiletpaper.ui.suppliers.SupplierFragment"
         android:label="@string/menu_suppliers"
         tools:layout="@layout/supplier_fragment">
-        <action
-            android:id="@+id/action_nav_suppliers_to_supplierActivity"
-            app:destination="@id/supplierActivity" />
+        <action app:destination="@id/supplierActivity" />
     </fragment>
 
     <fragment

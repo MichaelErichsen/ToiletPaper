@@ -40,9 +40,12 @@ public class SettingsActivity extends AppCompatActivity {
         initLoadBtn.setOnClickListener(initLoadOnClickListener(adapter));
 
         RadioGroup inputFormatRg = findViewById(R.id.inputFormatRg);
+        boolean advancedInputKey = sharedPref.getBoolean(getString(R.string.advanced_input_key), false);
+        inputFormatRg.check(advancedInputKey ? R.id.advancedInputRb : R.id.simpleInputRb);
         inputFormatRg.setOnCheckedChangeListener(inputFormatOnCheckedListener());
     }
 
+    // FIXME Strange return code when empty
     private View.OnClickListener initLoadOnClickListener(final TPDbAdapter adapter) {
         return new View.OnClickListener() {
             @Override
@@ -51,7 +54,7 @@ public class SettingsActivity extends AppCompatActivity {
                 try {
                     adapter.initialSupplierLoad();
                 } catch (Exception e) {
-                    sb.append(e.getMessage() + "\n");
+                    sb.append(e.getMessage()).append("\n");
                 }
 
                 try {
@@ -79,16 +82,10 @@ public class SettingsActivity extends AppCompatActivity {
                     case R.id.simpleInputRb:
                         editor.putBoolean(getString(R.string.advanced_input_key), false);
                         editor.apply();
-                        snackbar = Snackbar
-                                .make(findViewById(android.R.id.content), "Not implemented", Snackbar.LENGTH_LONG);
-                        snackbar.show();
                         break;
                     case R.id.advancedInputRb:
                         editor.putBoolean(getString(R.string.advanced_input_key), true);
                         editor.apply();
-                        snackbar = Snackbar
-                                .make(findViewById(android.R.id.content), "Only option implemented", Snackbar.LENGTH_LONG);
-                        snackbar.show();
                         break;
                     default:
                         snackbar = Snackbar

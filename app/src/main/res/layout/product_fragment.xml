@@ -12,7 +12,6 @@
         android:orientation="horizontal">
 
         <TextView
-            android:id="@+id/textView16"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/product_fragment_prompt"
@@ -21,14 +20,13 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_weight="1">
 
         <TableLayout
             android:id="@+id/productTableLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:stretchColumns="1" />
 
     </ScrollView>

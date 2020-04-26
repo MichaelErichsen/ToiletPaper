@@ -1,12 +1,4 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <string name="app_name">ToiletPaper</string>
-    <string name="nav_header_title">Toiletpapir</string>
-    <string name="nav_header_subtitle">info@myerichsen.net</string>
-    <string name="nav_header_desc">Navigation header</string>
-    <string name="action_settings">Indstillinger</string>
-
-    <string name="menu_home">Toiletpapir</string>
-
     <string name="intro">
         "Dette er en prototype til et supermarkedsprogram, der skal kunne sammenligne produkter."
         "\n\nI første omgang behandler det toiletpapir.\n\n"
@@ -22,81 +14,77 @@
         "* Om\n\n"
     </string>
 
-    <string name="action_calculate">Beregn</string>
-    <string name="action_save">Gem</string>
-    <string name="action_suppliers">Søg hos butikken</string>
-    <string name="action_pricerunner">Pricerunner</string>
-    <string name="action_productdata">Produktliste</string>
-    <string name="action_supplier_list">Butiksliste</string>
-    <string name="action_about">Om</string>
-    <string name="test_button">Tryk her</string>
-    <string name="item_no">Varenummer</string>
-    <string name="brand">Varemærke</string>
-    <string name="layers">Lag</string>
-    <string name="package_rolls">Ruller pr. pakke</string>
-    <string name="count">Antal</string>
-    <string name="roll_sheets" tools:ignore="Typos">Ark pr. rulle</string>
-    <string name="sheet_width">Arkbredde</string>
-    <string name="mm">mm</string>
-    <string name="sheet_length">Arklængde</string>
-    <string name="calculated">Beregnet</string>
-    <string name="roll_length">Rullelængde</string>
-    <string name="m">meter</string>
-    <string name="package_price">Pris pr. pakke</string>
-    <string name="kr">kr.</string>
-    <string name="gm2">g pr. m2</string>
-    <string name="paper_weight">Papirvægt</string>
-    <string name="kilo_price">Kilopris</string>
-    <string name="comment">Kommentar</string>
-    <string name="suppliers">Butikker</string>
-
-    <string name="menu_about">Om</string>
     <string name="about_heading">\nInspiration, kilder og kodestumper er planket fra\n\n</string>
-    <string name="scan">Scan</string>
-    <string name="search">Søg</string>
-    <string name="uid">UID</string>
-    <string name="menu_pd">Produktdata</string>
-    <string name="meter_price">Pris pr. meter</string>
-    <string name="menu_products">Produkter</string>
-    <string name="menu_suppliers">Butikker</string>
-    <string name="uri">URI</string>
-    <string name="scan_prompt">Scan en stregkode eller QR-kode. Telefonen vil bippe, og koden vil blive vist nedenfor.</string>
-    <string name="supplier">Butik</string>
-    <string name="roll_price" tools:ignore="Typos">Pris pr. rulle</string>
-    <string name="home_fragment_save_message">Produktet er gemt på telefonen</string>
-    <string name="compare">Sammenligning</string>
-    <string name="menu_compare">Sammenlign</string>
-    <string name="menu_product_details">Detaljer</string>
-    <string name="menu_compare_details">Detaljer</string>
+    <string name="action_about">Om</string>
+    <string name="action_productdata">Produktliste</string>
+    <string name="action_settings">Indstillinger</string>
+    <string name="action_supplier_list">Butiksliste</string>
+    <string name="add">Tilføj</string>
+    <string name="advanced_input_key">advanced_input_key</string>
+    <string name="advanced">Avanceret</string>
+    <string name="app_name">ToiletPaper</string>
+    <string name="brand_activity_prompt">Klik på et varemærke for at vælge det\n\n</string>
+    <string name="brand">Varemærke</string>
+    <string name="calculate">Beregn</string>
+    <string name="calculated">Beregnet</string>
+    <string name="chain">Kæde</string>
+    <string name="clickToDelete">Klik her for at slette</string>
+    <string name="comment">Kommentar</string>
     <string name="compare_filter">\n\nFiltrer butikker</string>
     <string name="compare_key">\n\nVælg sorteringsnøgle</string>
-    <string name="title_activity_compare">CompareActivity</string>
-    <string name="product_fragment_prompt">Klik på en række for at se detaljer\n\n</string>
-    <string name="paperWeightRb">Papirvægt (g pr. m2)</string>
-    <string name="kiloPriceRb">Kilopris</string>
-    <string name="meterPriceRb">Meterpris</string>
-    <string name="sheetPriceRb">Pris pr. ark</string>
-    <string name="sortListPrompt">\n\nKlik for at se sorteret liste</string>
-    <string name="clickToDelete">Klik her for at slette</string>
-    <string name="no_products_found">Der er ikke fundet nogen produkter</string>
-    <string name="invalid_sort_key">Ugyldig sorteringsnøgle: </string>
-    <string name="supplier_activity_prompt">Klik for at oprette eller slette en butik</string>
-    <string name="timestamp">Timestamp</string>
-    <string name="chain">Kæde</string>
-    <string name="add">Tilføj</string>
+    <string name="compare">Sammenligning</string>
+    <string name="count">Antal</string>
     <string name="delete">Slet</string>
-    <string name="title_activity_settings">Indstillinger</string>
+    <string name="enter_brand_prompt">Indtast et varemærke eller begyndelsen af det</string>
+    <string name="found_brands">Fundne varemærker</string>
+    <string name="gm2">g pr. m2</string>
+    <string name="home_fragment_save_message">Produktet er gemt på telefonen</string>
+    <string name="initial_load_done">Grunddata indsat</string>
     <string name="initial_load">Gendan grunddata</string>
     <string name="input_screen_format">Format for inddataskærmen</string>
-    <string name="simple">Enkel</string>
-    <string name="advanced">Avanceret</string>
-    <string name="product_added">Produkt tilføjet</string>
-    <string name="supplier_added">Butik tilføjet</string>
-    <string name="initial_load_done">Grunddata indsat</string>
-    <string name="found_brands">Fundne varemærker</string>
-    <string name="brand_activity_prompt">Klik på et varemærke for at vælge det\n\n</string>
-    <string name="enter_brand_prompt">Indtast et varemærke eller begyndelsen af det</string>
+    <string name="invalid_sort_key">Ugyldig sorteringsnøgle: </string>
+    <string name="item_no">Varenummer</string>
+    <string name="kilo_price">Kilopris</string>
+    <string name="kiloPriceRb">Kilopris</string>
+    <string name="kr">kr.</string>
+    <string name="layers">Lag</string>
+    <string name="m">meter</string>
+    <string name="menu_about">Om</string>
+    <string name="menu_compare">Sammenlign</string>
+    <string name="menu_home">Toiletpapir</string>
+    <string name="menu_products">Produkter</string>
+    <string name="menu_suppliers">Butikker</string>
+    <string name="meter_price">Pris pr. meter</string>
+    <string name="meterPriceRb">Meterpris</string>
+    <string name="mm">mm</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="nav_header_subtitle">info@myerichsen.net</string>
+    <string name="nav_header_title">Toiletpapir</string>
+    <string name="no_products_found">Der er ikke fundet nogen produkter</string>
+    <string name="package_price">Pris pr. pakke</string>
+    <string name="package_rolls">Ruller pr. pakke</string>
+    <string name="paper_weight">Papirvægt</string>
+    <string name="paperWeightRb">Papirvægt (g pr. m2)</string>
     <string name="preference_file_key">net.myerichsen.toiletpaper.PREFERENCE_FILE_KEY</string>
-    <string name="saved_input_key">saved_input_format</string>
-    <string name="advanced_input_key">advanced_input_key</string>
+    <string name="pricerunner">Pricerunner</string>
+    <string name="product_fragment_prompt">Klik på en række for at se detaljer\n\n</string>
+    <string name="roll_length">Rullelængde</string>
+    <string name="roll_price" tools:ignore="Typos">Pris pr. rulle</string>
+    <string name="roll_sheets" tools:ignore="Typos">Ark pr. rulle</string>
+    <string name="save">Gem</string>
+    <string name="scan_prompt">Scan en stregkode eller QR-kode. Telefonen vil bippe, og koden vil blive vist nedenfor.</string>
+    <string name="scan">Scan</string>
+    <string name="search">Søg</string>
+    <string name="sheet_length">Arklængde</string>
+    <string name="sheet_width">Arkbredde</string>
+    <string name="sheetPriceRb">Pris pr. ark</string>
+    <string name="simple">Enkel</string>
+    <string name="sortListPrompt">\n\nKlik for at se sorteret liste</string>
+    <string name="supplier_activity_prompt">Klik for at oprette eller slette en butik</string>
+    <string name="supplier_added">Butik tilføjet</string>
+    <string name="supplier">Butik</string>
+    <string name="timestamp">Timestamp</string>
+    <string name="title_activity_settings">Indstillinger</string>
+    <string name="sort">Sortér</string>
+
 </resources>
