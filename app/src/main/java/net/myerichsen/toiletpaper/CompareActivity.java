@@ -56,7 +56,7 @@ public class CompareActivity extends AppCompatActivity {
         List<ProductModel> lpd;
 
         try {
-            lpd = helper.getSortedProductData(sortKey, sortFilter);
+            lpd = helper.getProductModelsSorted(sortKey, sortFilter);
         } catch (Exception e) {
             Snackbar snackbar = Snackbar
                     .make(findViewById(android.R.id.content), Objects.requireNonNull(e.getMessage()), Snackbar.LENGTH_LONG);

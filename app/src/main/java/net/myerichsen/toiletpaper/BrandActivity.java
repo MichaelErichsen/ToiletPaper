@@ -52,7 +52,7 @@ public class BrandActivity extends AppCompatActivity {
             if (!brand.endsWith("%")) {
                 brand += "%";
             }
-            lpm = adapter.getProductData("BRAND LIKE ?", brand);
+            lpm = adapter.getProductModels("BRAND LIKE ?", brand);
         } catch (Exception e) {
             Intent intent = new Intent();
             intent.putExtra("net.myerichsen.toiletpaper.BRAND", (e.getMessage()));

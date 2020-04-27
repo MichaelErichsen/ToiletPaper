@@ -68,7 +68,7 @@ public class SupplierActivity extends AppCompatActivity {
 
         try {
             String supplier = Objects.requireNonNull(getIntent().getExtras()).getString("net.myrichsen.toiletpaper.SUPPLIER");
-            SupplierModel sm = helper.getSupplierModelBySupplier(supplier);
+            SupplierModel sm = helper.getSupplierModels("SUPPLIER=?", supplier).get(0);
             supplierDetailSupplierEditText.setText(sm.getSupplier());
             supplierDetailChainEditText.setText(sm.getChain());
             supplierDetailTimestampTextView.setText(sm.getTimestamp());

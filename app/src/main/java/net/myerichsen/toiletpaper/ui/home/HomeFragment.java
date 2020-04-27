@@ -359,8 +359,8 @@ public class HomeFragment extends Fragment {
         return new View.OnClickListener() {
             public void onClick(View v) {
                 hideSoftKeyboard(getActivity());
-                ProductModel pm = helper.getProductDataByItemNo(itemNoEditText.getText().toString());
-                if (pm == null) {
+                List<ProductModel> lpm = helper.getProductModels("ITEM_NO=?", itemNoEditText.getText().toString());
+                if (lpm.size() == 0) {
                     Snackbar snackbar = Snackbar
                             .make(requireActivity().findViewById(android.R.id.content),
                                     R.string.itemno_not_found, Snackbar.LENGTH_LONG);
@@ -368,7 +368,7 @@ public class HomeFragment extends Fragment {
                     return;
                 }
 
-                populateLayoutFromProductModel(pm);
+                populateLayoutFromProductModel(lpm.get(0));
             }
         };
     }
@@ -652,7 +652,7 @@ public class HomeFragment extends Fragment {
                 if (resultCode == RESULT_OK) {
                     String messageReturn = dataIntent.getStringExtra("net.myerichsen.toiletpaper.ITEMNO");
 
-                    List<ProductModel> lpm = helper.getProductData("ITEM_NO=?", messageReturn);
+                    List<ProductModel> lpm = helper.getProductModels("ITEM_NO=?", messageReturn);
 
                     if (lpm.size() == 0) {
                         Snackbar snackbar = Snackbar
@@ -670,7 +670,7 @@ public class HomeFragment extends Fragment {
                 String messageReturn = dataIntent.getStringExtra("net.myerichsen.toiletpaper.BRAND");
 
                 if (resultCode == RESULT_OK) {
-                    List<ProductModel> lpm = helper.getProductData("BRAND=?", messageReturn);
+                    List<ProductModel> lpm = helper.getProductModels("BRAND=?", messageReturn);
 
                     if (lpm.size() == 0) {
                         Snackbar snackbar = Snackbar

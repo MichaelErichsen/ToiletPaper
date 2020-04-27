@@ -66,7 +66,7 @@ public class ProductFragment extends Fragment {
 
         List<ProductModel> lpd;
         try {
-            lpd = helper.getAllProductData();
+            lpd = helper.getProductModels();
         } catch (Exception e) {
             Snackbar snackbar = Snackbar
                     .make(requireActivity().findViewById(android.R.id.content), Objects.requireNonNull(e.getMessage()), Snackbar.LENGTH_LONG);
