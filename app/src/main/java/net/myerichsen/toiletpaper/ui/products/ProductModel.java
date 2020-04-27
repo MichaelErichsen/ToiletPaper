@@ -7,7 +7,6 @@ package net.myerichsen.toiletpaper.ui.products;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-// TODO Remove     private int packagePrice_c = 0;
 /**
  * Class to encapsulate all toilet paper product data.
  * Boolean values are stored as integers 0 (false) and 1 (true).

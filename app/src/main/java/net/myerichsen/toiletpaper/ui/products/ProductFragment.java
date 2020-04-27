@@ -30,9 +30,6 @@ import net.myerichsen.toiletpaper.TPDbAdapter;
 import java.util.List;
 import java.util.Objects;
 
-// TODO Sort by brand
-// TODO Display brand before itemno
-
 /**
  * Product list fragment
  */
@@ -59,9 +56,9 @@ public class ProductFragment extends Fragment {
         TableRow tableRow = new TableRow(context);
         tableRow.setBackgroundColor(Color.BLACK);
         tableRow.setPadding(2, 2, 2, 2);
-        tableRow.addView(addCell("UID"));
-        tableRow.addView(addCell("Varenummer"));
         tableRow.addView(addCell("Varemærke"));
+        tableRow.addView(addCell("Varenummer"));
+        tableRow.addView(addCell("UID"));
         tableLayout.addView(tableRow);
 
         List<ProductModel> lpd;
@@ -88,9 +85,9 @@ public class ProductFragment extends Fragment {
             tableRow.setBackgroundColor(Color.BLACK);
             tableRow.setPadding(2, 2, 2, 2); //Border between rows
 
-            tableRow.addView(addCell(Integer.toString(pd.getUid())));
-            tableRow.addView(addCell(pd.getItemNo()));
             tableRow.addView(addCell(pd.getBrand()));
+            tableRow.addView(addCell(pd.getItemNo()));
+            tableRow.addView(addCell(Integer.toString(pd.getUid())));
             tableRow.setClickable(true);
             tableRow.setOnClickListener(tableRowOnclickListener());
             tableLayout.addView(tableRow);
