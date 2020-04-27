@@ -17,8 +17,6 @@ import net.myerichsen.toiletpaper.ui.suppliers.SupplierModel;
 import java.util.ArrayList;
 import java.util.List;
 
-// TODO Collapse GetProductDataBy to a single method
-
 /**
  * Database helper for product and supplier tables
  */

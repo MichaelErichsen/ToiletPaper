@@ -94,7 +94,6 @@ public class ProductFragment extends Fragment {
         }
     }
 
-    // FIXME Strange message
     private View.OnClickListener tableRowOnclickListener() {
         return new View.OnClickListener() {
             public void onClick(View v) {
