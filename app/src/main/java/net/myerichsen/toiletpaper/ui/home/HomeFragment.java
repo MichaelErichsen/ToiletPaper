@@ -1,5 +1,6 @@
 package net.myerichsen.toiletpaper.ui.home;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -11,6 +12,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
@@ -347,10 +349,28 @@ public class HomeFragment extends Fragment {
         };
     }
 
+    private static void hideSoftKeyboard(Activity activity) {
+        if (activity.getCurrentFocus() == null) {
+            return;
+        }
+        InputMethodManager inputMethodManager = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
+        inputMethodManager.hideSoftInputFromWindow(activity.getCurrentFocus().getWindowToken(), 0);
+    }
+
+    // FIXME Attempt to invoke virtual method ProductModel.getLayers on a null ...
     private View.OnClickListener searchItemNoBtnOnclickListener() {
         return new View.OnClickListener() {
             public void onClick(View v) {
+                hideSoftKeyboard(getActivity());
                 ProductModel pm = helper.getProductDataByItemNo(itemNoEditText.getText().toString());
+                if (pm == null) {
+                    Snackbar snackbar = Snackbar
+                            .make(requireActivity().findViewById(android.R.id.content),
+                                    R.string.itemno_not_found, Snackbar.LENGTH_LONG);
+                    snackbar.show();
+                    return;
+                }
+
                 populateLayoutFromProductModel(pm);
             }
         };

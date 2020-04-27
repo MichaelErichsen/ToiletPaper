@@ -26,6 +26,7 @@ import net.myerichsen.toiletpaper.TPDbAdapter;
 import java.util.List;
 import java.util.Objects;
 
+// TODO Sort by supplier
 public class SupplierFragment extends Fragment {
     private final TableRow.LayoutParams llp = new TableRow.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
     private View root;

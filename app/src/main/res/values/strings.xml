@@ -96,4 +96,5 @@
     <string name="found_brands">Fundne varemærker</string>
     <string name="brand_activity_prompt">Klik på et varemærke for at vælge det\n\n</string>
     <string name="enter_brand_prompt">Indtast et varemærke eller begyndelsen af det</string>
+    <string name="itemno_not_found">Varenummer ikke fundet</string>
 </resources>

@@ -30,6 +30,9 @@ import net.myerichsen.toiletpaper.TPDbAdapter;
 import java.util.List;
 import java.util.Objects;
 
+// TODO Sort by brand
+// TODO Display brand before itemno
+
 /**
  * Product list fragment
  */
