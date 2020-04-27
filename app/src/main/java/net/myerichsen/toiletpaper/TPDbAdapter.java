@@ -73,28 +73,30 @@ public class TPDbAdapter {
         return lpm;
     }
 
-    /**
-     * Get data by brand
-     *
-     * @return List of columns in record
-     */
-    public ProductModel getProductDataByBrand(String brand) {
-        ProductModel pm = null;
-
-        SQLiteDatabase db = tpDbHelper.getReadableDatabase();
-
-        String[] args = {brand};
-        Cursor cursor = db.query(TpDbHelper.TABLE_PRODUCT, pdColumns, "BRAND=?", args, null, null, null);
-
-        if (cursor.getCount() > 0) {
-            if (cursor.moveToNext()) {
-                pm = populateProductModel(cursor);
-            }
-        }
-        cursor.close();
-
-        return pm;
-    }
+// --Commented out by Inspection START (27-04-2020 18:46):
+//    /**
+//     * Get data by brand
+//     *
+//     * @return List of columns in record
+//     */
+//    public ProductModel getProductDataByBrand(String brand) {
+//        ProductModel pm = null;
+//
+//        SQLiteDatabase db = tpDbHelper.getReadableDatabase();
+//
+//        String[] args = {brand};
+//        Cursor cursor = db.query(TpDbHelper.TABLE_PRODUCT, pdColumns, "BRAND=?", args, null, null, null);
+//
+//        if (cursor.getCount() > 0) {
+//            if (cursor.moveToNext()) {
+//                pm = populateProductModel(cursor);
+//            }
+//        }
+//        cursor.close();
+//
+//        return pm;
+//    }
+// --Commented out by Inspection STOP (27-04-2020 18:46)
 
 
     /**
