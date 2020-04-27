@@ -94,12 +94,13 @@ public class ProductFragment extends Fragment {
         }
     }
 
+    // FIXME Strange message
     private View.OnClickListener tableRowOnclickListener() {
         return new View.OnClickListener() {
             public void onClick(View v) {
                 try {
                     TableRow selectedRow = (TableRow) v;
-                    LinearLayout ll = (LinearLayout) selectedRow.getChildAt(0);
+                    LinearLayout ll = (LinearLayout) selectedRow.getChildAt(2);
                     TextView tv = (TextView) ll.getChildAt(0);
                     int uid = Integer.parseInt(tv.getText().toString());
                     Snackbar snackbar = Snackbar
