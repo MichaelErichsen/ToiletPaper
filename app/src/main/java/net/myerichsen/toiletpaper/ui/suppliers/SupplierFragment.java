@@ -26,7 +26,6 @@ import net.myerichsen.toiletpaper.TPDbAdapter;
 import java.util.List;
 import java.util.Objects;
 
-// TODO Sort by supplier
 public class SupplierFragment extends Fragment {
     private final TableRow.LayoutParams llp = new TableRow.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
     private View root;
@@ -56,7 +55,7 @@ public class SupplierFragment extends Fragment {
 
         List<SupplierModel> lsd;
         try {
-            lsd = helper.getAllSupplierData();
+            lsd = helper.getSupplierModels();
         } catch (Exception e) {
             Snackbar snackbar = Snackbar
                     .make(requireActivity().findViewById(android.R.id.content), Objects.requireNonNull(e.getMessage()), Snackbar.LENGTH_LONG);

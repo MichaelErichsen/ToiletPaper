@@ -17,7 +17,7 @@ import net.myerichsen.toiletpaper.ui.suppliers.SupplierModel;
 import java.util.ArrayList;
 import java.util.List;
 
-// TODO Collape GetProductDataBy to a single method
+// TODO Collapse GetProductDataBy to a single method
 
 /**
  * Database helper for product and supplier tables
@@ -195,13 +195,14 @@ public class TPDbAdapter {
      *
      * @return List of supplier data
      */
-    public List<SupplierModel> getAllSupplierData() throws Exception {
+    public List<SupplierModel> getSupplierModels() throws Exception {
         List<SupplierModel> lsm = new ArrayList<>();
 
         try {
             SQLiteDatabase db = tpDbHelper.getReadableDatabase();
 
-            Cursor cursor = db.query(TpDbHelper.TABLE_SUPPLIER, sdColumns, null, null, null, null, null);
+            Cursor cursor = db.query(TpDbHelper.TABLE_SUPPLIER, sdColumns, null,
+                    null, null, null, TpDbHelper.SUPPLIER);
 
             while (cursor.moveToNext()) {
                 lsm.add(populateSupplierData(cursor));

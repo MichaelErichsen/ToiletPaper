@@ -8,6 +8,7 @@
     <string name="menu_home">Toiletpapir</string>
 
     <string name="intro">
+        "Toiletpapir, version 0.0.2\n\n"
         "Dette er en prototype til et supermarkedsprogram, der skal kunne sammenligne produkter."
         "\n\nI første omgang behandler det toiletpapir.\n\n"
         "Indtast de data, du kender, og lad programmet beregne resten.\n\n"

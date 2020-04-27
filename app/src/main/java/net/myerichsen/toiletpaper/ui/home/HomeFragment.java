@@ -38,8 +38,6 @@ import java.util.Objects;
 
 import static android.app.Activity.RESULT_OK;
 
-// TODO If scan returns an item no, then do a search and populate, if successful
-
 public class HomeFragment extends Fragment {
     private final static int REQUEST_CODE_1 = 1;
     private final static int REQUEST_CODE_2 = 2;
@@ -256,7 +254,7 @@ public class HomeFragment extends Fragment {
         boolean goOn = true;
 
         try {
-            lsm = helper.getAllSupplierData();
+            lsm = helper.getSupplierModels();
         } catch (Exception e) {
             goOn = false;
         }
@@ -534,6 +532,7 @@ public class HomeFragment extends Fragment {
      * Calculate all calculable fields
      */
     private void calculate() {
+        // TODO Test and expand calculations
         try {
             boolean fSheetLength = divide(rollLengthEditText, rollLengthCheckBox, rollSheetsEditText, null, sheetLengthEditText, sheetLengthCheckBox);
 
