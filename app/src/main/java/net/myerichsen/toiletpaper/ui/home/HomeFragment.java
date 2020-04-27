@@ -48,9 +48,9 @@ public class HomeFragment extends Fragment {
     private View root;
 
     private EditText itemNoEditText;
-    private AppCompatImageButton searchItemNoBtn;
+    // --Commented out by Inspection (27-04-2020 17:47):private AppCompatImageButton searchItemNoBtn;
     private EditText brandEditText;
-    private AppCompatImageButton searchBrandBtn;
+    // --Commented out by Inspection (27-04-2020 17:47):private AppCompatImageButton searchBrandBtn;
     private Spinner layersSpinner;
     private EditText packageRollsEditText;
     private EditText rollSheetsEditText;
@@ -341,7 +341,7 @@ public class HomeFragment extends Fragment {
         return new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int requestCode = RESULT_OK;
+//                int requestCode = RESULT_OK;
                 Intent scanIntent = new Intent(getContext(), ScanActivity.class);
                 scanIntent.putExtra("net.myerichsen.toiletpaper.ITEMNO", "");
                 startActivityForResult(scanIntent, REQUEST_CODE_1);
@@ -357,7 +357,6 @@ public class HomeFragment extends Fragment {
         inputMethodManager.hideSoftInputFromWindow(activity.getCurrentFocus().getWindowToken(), 0);
     }
 
-    // FIXME Attempt to invoke virtual method ProductModel.getLayers on a null ...
     private View.OnClickListener searchItemNoBtnOnclickListener() {
         return new View.OnClickListener() {
             public void onClick(View v) {
@@ -382,6 +381,7 @@ public class HomeFragment extends Fragment {
     private View.OnClickListener searchBrandBtnOnclickListener() {
         return new View.OnClickListener() {
             public void onClick(View v) {
+                hideSoftKeyboard(getActivity());
                 brand = brandEditText.getText().toString();
                 if (brand.equals("")) {
                     Snackbar snackbar = Snackbar
@@ -464,7 +464,7 @@ public class HomeFragment extends Fragment {
         String s = et.getText().toString();
 
         if (s.equals("")) {
-            return Float.valueOf(0);
+            return (float) 0;
         } else {
             return Float.parseFloat(s);
         }
@@ -652,61 +652,79 @@ public class HomeFragment extends Fragment {
 
                 if (resultCode == RESULT_OK) {
                     String messageReturn = dataIntent.getStringExtra("net.myerichsen.toiletpaper.ITEMNO");
-//                    itemNoEditText.setText(messageReturn);
-//                    pm.setItemNo(itemNoEditText.getText().toString());
-                    List<ProductModel> lpm = helper.getProductData("ITEM_NO=?", messageReturn);
-                    populateLayoutFromProductModel(lpm.get(0));
-                }
 
-                // This request code is set by startActivityForResult(intent, REQUEST_CODE_2) method.
+                    List<ProductModel> lpm = helper.getProductData("ITEM_NO=?", messageReturn);
+
+                    if (lpm.size() == 0) {
+                        Snackbar snackbar = Snackbar
+                                .make(requireActivity().findViewById(android.R.id.content),
+                                        R.string.itemno_not_found, Snackbar.LENGTH_LONG);
+                        snackbar.show();
+                    } else {
+                        populateLayoutFromProductModel(lpm.get(0));
+                    }
+                }
+                break;
+
+            // This request code is set by startActivityForResult(intent, REQUEST_CODE_2) method.
             case REQUEST_CODE_2:
                 String messageReturn = dataIntent.getStringExtra("net.myerichsen.toiletpaper.BRAND");
 
                 if (resultCode == RESULT_OK) {
                     List<ProductModel> lpm = helper.getProductData("BRAND=?", messageReturn);
-//                    brandEditText = root.findViewById(R.id.brandEditText);
-//                    brandEditText.setText(messageReturn);
-//                    pm.setItemNo(itemNoEditText.getText().toString());
-                    populateLayoutFromProductModel(lpm.get(0));
+
+                    if (lpm.size() == 0) {
+                        Snackbar snackbar = Snackbar
+                                .make(requireActivity().findViewById(android.R.id.content),
+                                        R.string.brand_not_found, Snackbar.LENGTH_LONG);
+                        snackbar.show();
+                    } else {
+                        populateLayoutFromProductModel(lpm.get(0));
+                    }
                 } else {
                     Snackbar snackbar = Snackbar
                             .make(requireActivity().findViewById(android.R.id.content), messageReturn, Snackbar.LENGTH_LONG);
                     snackbar.show();
                 }
-
-
+                break;
         }
     }
 
-    public void addProduct(View view) {
-        ProductModel pm = new ProductModel();
-
-//        String itemNo = ((EditText) root.findViewById(R.id.itemNoEditText)).getText().toString();
-//        if (itemNo.isEmpty()) {
-//            itemNo = "";
-//        }
-//        pm.setItemNo(itemNo);
-        helper.insertData(pm);
-        Snackbar snackbar = Snackbar
-                .make(requireActivity().findViewById(android.R.id.content), R.string.product_added, Snackbar.LENGTH_LONG);
-        snackbar.show();
-    }
-
-
-    public void getDataByItemNo(View view) {
-        EditText itemNoEditText = root.findViewById(R.id.itemNoEditText);
-        ProductModel pm = helper.getProductDataByItemNo(itemNoEditText.getText().toString());
-        Snackbar snackbar = Snackbar
-                .make(requireActivity().findViewById(android.R.id.content), "Found item no. " + pm.getItemNo(), Snackbar.LENGTH_LONG);
-        snackbar.show();
-    }
+// --Commented out by Inspection START (27-04-2020 17:46):
+//    public void addProduct(View view) {
+//        ProductModel pm = new ProductModel();
+//
+////        String itemNo = ((EditText) root.findViewById(R.id.itemNoEditText)).getText().toString();
+////        if (itemNo.isEmpty()) {
+////            itemNo = "";
+////        }
+////        pm.setItemNo(itemNo);
+//        helper.insertData(pm);
+//        Snackbar snackbar = Snackbar
+//                .make(requireActivity().findViewById(android.R.id.content), R.string.product_added, Snackbar.LENGTH_LONG);
+//        snackbar.show();
+//    }
+// --Commented out by Inspection STOP (27-04-2020 17:46)
 
 
-    public void getDataByBrand(View view) {
-        EditText brandEditText = root.findViewById(R.id.brandEditText);
-        ProductModel pm = helper.getProductDataByBrand(brandEditText.getText().toString());
-        Snackbar snackbar = Snackbar
-                .make(requireActivity().findViewById(android.R.id.content), "Found brand. " + pm.getItemNo(), Snackbar.LENGTH_LONG);
-        snackbar.show();
-    }
+// --Commented out by Inspection START (27-04-2020 17:46):
+//    public void getDataByItemNo(View view) {
+//        EditText itemNoEditText = root.findViewById(R.id.itemNoEditText);
+//        ProductModel pm = helper.getProductDataByItemNo(itemNoEditText.getText().toString());
+//        Snackbar snackbar = Snackbar
+//                .make(requireActivity().findViewById(android.R.id.content), "Found item no. " + pm.getItemNo(), Snackbar.LENGTH_LONG);
+//        snackbar.show();
+//    }
+// --Commented out by Inspection STOP (27-04-2020 17:46)
+
+
+// --Commented out by Inspection START (27-04-2020 17:46):
+//    public void getDataByBrand(View view) {
+//        EditText brandEditText = root.findViewById(R.id.brandEditText);
+//        ProductModel pm = helper.getProductDataByBrand(brandEditText.getText().toString());
+//        Snackbar snackbar = Snackbar
+//                .make(requireActivity().findViewById(android.R.id.content), "Found brand. " + pm.getItemNo(), Snackbar.LENGTH_LONG);
+//        snackbar.show();
+//    }
+// --Commented out by Inspection STOP (27-04-2020 17:46)
 }
