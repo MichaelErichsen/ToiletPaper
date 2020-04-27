@@ -139,32 +139,34 @@ public class TPDbAdapter {
         return pm;
     }
 
-    /**
-     * Get data by unique ID
-     *
-     * @return List of columns in record
-     */
-    public ProductModel getProductDataByUid(String uid) throws Exception {
-        ProductModel pd = null;
-
-        try {
-            SQLiteDatabase db = tpDbHelper.getReadableDatabase();
-
-            String[] args = {uid};
-            Cursor cursor = db.query(TpDbHelper.TABLE_PRODUCT, pdColumns, "UID=?", args, null, null, null);
-
-            if (cursor.getCount() > 0) {
-                if (cursor.moveToNext()) {
-                    pd = populateProductModel(cursor);
-                }
-            }
-            cursor.close();
-        } catch (Exception e) {
-            throw e;
-        }
-
-        return pd;
-    }
+// --Commented out by Inspection START (27-04-2020 19:20):
+//    /**
+//     * Get data by unique ID
+//     *
+//     * @return List of columns in record
+//     */
+//    public ProductModel getProductDataByUid(String uid) throws Exception {
+//        ProductModel pd = null;
+//
+//        try {
+//            SQLiteDatabase db = tpDbHelper.getReadableDatabase();
+//
+//            String[] args = {uid};
+//            Cursor cursor = db.query(TpDbHelper.TABLE_PRODUCT, pdColumns, "UID=?", args, null, null, null);
+//
+//            if (cursor.getCount() > 0) {
+//                if (cursor.moveToNext()) {
+//                    pd = populateProductModel(cursor);
+//                }
+//            }
+//            cursor.close();
+//        } catch (Exception e) {
+//            throw e;
+//        }
+//
+//        return pd;
+//    }
+// --Commented out by Inspection STOP (27-04-2020 19:20)
 
     /**
      * Get all data from product table
@@ -448,8 +450,6 @@ public class TPDbAdapter {
         private static final String TABLE_SUPPLIER = "TABLE_SUPPLIER";
         private static final String CHAIN = "CHAIN";
 
-//        private static final String TABLE_VIRTUAL = "TABLE_VIRTUAL_PRODUCT";
-
         private static final int DATABASE_Version = 3;    // Database Version
         private static final String CREATE_PRODUCT_TABLE = "CREATE TABLE IF NOT EXISTS " + TABLE_PRODUCT +
                 " (" + UID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
@@ -487,12 +487,6 @@ public class TPDbAdapter {
 
         private static final String DROP_SUPPLIER_TABLE = "DROP TABLE IF EXISTS " + TABLE_SUPPLIER;
 
-//        private static final String CREATE_VIRTUAL_PRDUCT_TABLE = "CREATE VIRTUAL TABLE IF NOT EXISTS " +
-//                TABLE_VIRTUAL + " USING FTS5(" +
-//                ITEM_NO + ", " + BRAND +
-//                ")";
-//        private static final String DROP_VIRTUAL_TABLE = "DROP TABLE IF EXISTS " + TABLE_VIRTUAL;
-
         private final Context context;
 
         /**
@@ -505,30 +499,6 @@ public class TPDbAdapter {
             this.context = context;
         }
 
-//        /**
-//         * TODO INSERT INTO tablename(a, b)
-//         * SELECT a, b from tablename
-//         */
-//        void loadVirtualFromProduct() {
-//
-//
-//        }
-
-//        /**
-//         * TODO SELECT ITEM_NO
-//         * FROM VIRTUALTABLE
-//         * WHERE VIRTUALTABLE MATCH 'brand'
-//         *
-//         * @param brand Partial or full brand name for full text search
-//         * @return
-//         */
-//        String[] getVirtualByBrand(String brand) {
-//            String[] saBrand = null;
-//
-//            // Get all matching brand names for display
-//
-//            return saBrand;
-//        }
 
         /**
          * Called when database is created
@@ -618,49 +588,49 @@ public class TPDbAdapter {
             ProductModel pm;
             pm = new ProductModel("5700384289095", "Irma Tusindfryd Toiletpapir",
                     3, 8, 233, 97, 125, 0, (float) 29.1,
-                    0, 41, 0, (float) 5.125, 1, 48,
+                    0, 41, (float) 5.125, 1, 48,
                     0, (float) 31.64, 0, (float) 0.1761, 1, (float) 0.022, 1,
                     "Kvickly Helsinge", "Produceret i Sverige");
             tpHelper.insertData(pm);
 
             pm = new ProductModel("7311041080306", "First Price Toiletpapir 2-lags",
                     2, 8, 220, 96, 125, 1, (float) 27.5,
-                    0, (float) 15.95, 0, (float) 1.99, 1, 36,
+                    0, (float) 15.95, (float) 1.99, 1, 36,
                     0, 0, 0, (float) 0.0725, 1, (float) 0.009, 1,
                     "Spar Vejby Strand", "Produceret i Litauen");
             tpHelper.insertData(pm);
 
             pm = new ProductModel("5705830002242", "REMA 1000 Toiletpapir",
                     2, 8, 282, 97, 125, 0, (float) 35.25,
-                    0, (float) 9.75, 0, (float) 1.21875, 1, (float) 32.6,
+                    0, (float) 9.75, (float) 1.21875, 1, (float) 32.6,
                     0, (float) 10.93, 0, (float) 0.0346, 1, (float) 0.004322, 1,
                     "Rema Vejby", "Produceret i Sverige");
             tpHelper.insertData(pm);
 
             pm = new ProductModel("170190", "Lambi Classic Toilet Paper",
                     3, 9, 255, 0, 125, 1, (float) 31.9,
-                    0, (float) 34.95, 0, (float) 3.88, 1, (float) 0,
+                    0, (float) 34.95, (float) 3.88, 1, (float) 0,
                     0, (float) 41.26, 0, (float) 0.1217, 1, (float) 0.01523, 1,
                     "Rema Vejby", "Produceret i Sverige");
             tpHelper.insertData(pm);
 
             pm = new ProductModel("WW-166808", "Staples 29 m",
                     2, 8, 250, 96, 115, 0, (float) 28.75,
-                    0, (float) 24.94, 0, (float) 3.12, 1,
+                    0, (float) 24.94, (float) 3.12, 1,
                     (float) 16.50, 0, (float) 188.94, 0, (float) 0.10843, 1, (float) 0.1247, 1,
                     "Staples", "Online");
             tpHelper.insertData(pm);
 
             pm = new ProductModel("WW-114649", "Tork Advanced Extra Soft T4",
                     3, 42, 248, 94, 140, 1, (float) 34.70, 0,
-                    (float) 386.85, 0, (float) 9.21, 1,
+                    (float) 386.85, (float) 9.21, 1,
                     0, 0, 0, 0, (float) 0.26544, 1, (float) 0.03714, 1,
                     "Staples", "Online");
             tpHelper.insertData(pm);
 
             pm = new ProductModel("WW-101012", "Scott® Performance 350",
                     3, 36, 350, 95, 125, 0, (float) 43.75, 0,
-                    (float) 386.85, 0, (float) 9.21, 1,
+                    (float) 589, (float) 9.21, 1,
                     0, 0, 0, 0, (float) 0.46746, 1, (float) 0.48433, 1,
                     "Staples", "Online");
             tpHelper.insertData(pm);
