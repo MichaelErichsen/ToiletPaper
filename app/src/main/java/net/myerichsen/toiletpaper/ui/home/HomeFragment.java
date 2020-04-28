@@ -46,9 +46,7 @@ public class HomeFragment extends Fragment {
     private View root;
 
     private EditText itemNoEditText;
-    // --Commented out by Inspection (27-04-2020 17:47):private AppCompatImageButton searchItemNoBtn;
     private EditText brandEditText;
-    // --Commented out by Inspection (27-04-2020 17:47):private AppCompatImageButton searchBrandBtn;
     private Spinner layersSpinner;
     private EditText packageRollsEditText;
     private EditText rollSheetsEditText;
@@ -291,7 +289,14 @@ public class HomeFragment extends Fragment {
         calculateBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                calculate();
+                hideSoftKeyboard(getActivity());
+                String message = "Beregning lykkedes ikke";
+                if (calculate()) {
+                    message = "Beregninger foretaget";
+                }
+                Snackbar snackbar = Snackbar
+                        .make(requireActivity().findViewById(android.R.id.content), message, Snackbar.LENGTH_LONG);
+                snackbar.show();
             }
         });
 
@@ -299,6 +304,7 @@ public class HomeFragment extends Fragment {
         saveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                hideSoftKeyboard(getActivity());
                 String message;
 
                 try {
@@ -339,7 +345,6 @@ public class HomeFragment extends Fragment {
         return new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                int requestCode = RESULT_OK;
                 Intent scanIntent = new Intent(getContext(), ScanActivity.class);
                 scanIntent.putExtra("net.myerichsen.toiletpaper.ITEMNO", "");
                 startActivityForResult(scanIntent, REQUEST_CODE_1);
@@ -531,33 +536,53 @@ public class HomeFragment extends Fragment {
     /**
      * Calculate all calculable fields
      */
-    private void calculate() {
+    private boolean calculate() {
         // TODO Test and expand calculations
+        // Sheet length = roll length / sheets pet roll (OK)
+        boolean fSheetLength = false;
         try {
-            boolean fSheetLength = divide(rollLengthEditText, rollLengthCheckBox, rollSheetsEditText, null, sheetLengthEditText, sheetLengthCheckBox);
+            fSheetLength = divide(rollLengthEditText, rollLengthCheckBox, rollSheetsEditText, null,
+                    sheetLengthEditText, sheetLengthCheckBox, 1000);
+        } catch (Exception e) {
+        }
 
-            boolean fRollLength = multiply(sheetLengthEditText, sheetLengthCheckBox, rollSheetsEditText, null, rollLengthEditText, rollLengthCheckBox, 100);
+        // Roll length = sheet length * sheets per roll (OK)
+        boolean fRollLength = false;
+        try {
+            fRollLength = multiply(sheetLengthEditText, sheetLengthCheckBox, rollSheetsEditText, null,
+                    rollLengthEditText, rollLengthCheckBox, 1000);
+        } catch (Exception e) {
+        }
 
-            boolean fRollPrice = divide(packagePriceEditText, null, rollSheetsEditText, null, rollPriceEditText, rollPriceCheckBox);
+        // Price per roll = price per package / rolls per package (OK)
+        boolean fRollPrice = false;
+        try {
+            fRollPrice = divide(packagePriceEditText, null, packageRollsEditText, null,
+                    rollPriceEditText, rollPriceCheckBox, 1);
+        } catch (Exception e) {
+        }
 
-            // Kilo price
-            boolean fKiloPrice = multiply(sheetLengthEditText, sheetLengthCheckBox, rollSheetsEditText, null, rollLengthEditText, rollLengthCheckBox, 100);
+        // Kilo price
+//            boolean fKiloPrice = multiply(sheetLengthEditText, sheetLengthCheckBox, rollSheetsEditText, null, rollLengthEditText, rollLengthCheckBox, 100);
 
-            // Meter price: package price / sheet length
-            boolean fMeterPrice = divide(packagePriceEditText, null, sheetLengthEditText, sheetLengthCheckBox, meterPriceEditText, meterPriceCheckBox);
+        // Price per meter = price per package / rolls per package / roll length
+//            boolean fMeterPrice = divide(packagePriceEditText, null, sheetLengthEditText, sheetLengthCheckBox, meterPriceEditText, meterPriceCheckBox);
 
-            // Sheet price: package price / rolls pr package / sheets per roll
+        // Price per sheet = price per package / rolls pr package / sheets per roll
 //            EditText dummy = new EditText(context);
 //            CheckBox dummyC = new CheckBox(context);
 //            dummyC.setChecked(false);
 //            boolean fSheetPrice1 = divide(packagePriceEditText, null, packageRollsEditText, null, dummy, dummyC);
 //            boolean fSheetPrice = divide(dummy, dummyC, rollSheetsEditText, null, rollLengthEditText, rollLengthCheckBox);
 
-        } catch (Exception e) {
-            Snackbar snackbar = Snackbar
-                    .make(requireActivity().findViewById(android.R.id.content), Objects.requireNonNull(e.getMessage()), Snackbar.LENGTH_LONG);
-            snackbar.show();
-        }
+        return fRollLength | fRollPrice | fSheetLength;
+//        } catch (Exception e) {
+//            Snackbar snackbar = Snackbar
+//                    .make(requireActivity().findViewById(android.R.id.content), Objects.requireNonNull(e.getMessage()), Snackbar.LENGTH_LONG);
+//            snackbar.show();
+//            return false;
+//    }
+
 //        return fKiloPrice | fMeterPrice | fPaperWeight | fRollLength | fRollPrice | fSheetLength | fSheetPrice;
     }
 
@@ -599,7 +624,7 @@ public class HomeFragment extends Fragment {
         return true;
     }
 
-    private boolean divide(EditText dividend, CheckBox cb1, EditText divisor, CheckBox cb2, EditText quotient, CheckBox cb3) {
+    private boolean divide(EditText dividend, CheckBox cb1, EditText divisor, CheckBox cb2, EditText quotient, CheckBox cb3, int precision) {
         String s1, s2;
         String s3;
 
@@ -631,7 +656,7 @@ public class HomeFragment extends Fragment {
         }
 
         // Now do the calculation
-        float i3 = Float.parseFloat(s1) / Float.parseFloat(s2);
+        float i3 = Float.parseFloat(s1) * precision / Float.parseFloat(s2);
         quotient.setText(String.valueOf(i3));
         Objects.requireNonNull(cb3).setChecked(true);
         return true;
