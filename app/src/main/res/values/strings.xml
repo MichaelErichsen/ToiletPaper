@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">ToiletPaper</string>
     <string name="nav_header_title">Toiletpapir</string>
     <string name="nav_header_subtitle">info@myerichsen.net</string>
@@ -36,7 +36,7 @@
     <string name="layers">Lag</string>
     <string name="package_rolls">Ruller pr. pakke</string>
     <string name="count">Antal</string>
-    <string name="roll_sheets">Ark pr. rulle</string>
+    <string name="roll_sheets" tools:ignore="Typos">Ark pr. rulle</string>
     <string name="sheet_width">Arkbredde</string>
     <string name="mm">mm</string>
     <string name="sheet_length">Arklængde</string>
@@ -63,7 +63,7 @@
     <string name="uri">URI</string>
     <string name="scan_prompt">Scan en stregkode eller QR-kode. Telefonen vil bippe, og koden vil blive vist nedenfor.</string>
     <string name="supplier">Butik</string>
-    <string name="roll_price">Pris pr. rulle</string>
+    <string name="roll_price" tools:ignore="Typos">Pris pr. rulle</string>
     <string name="home_fragment_save_message">Produktet er gemt på telefonen</string>
     <string name="compare">Sammenligning</string>
     <string name="menu_compare">Sammenlign</string>
@@ -99,4 +99,6 @@
     <string name="enter_brand_prompt">Indtast et varemærke eller begyndelsen af det</string>
     <string name="itemno_not_found">Varenummer ikke fundet</string>
     <string name="brand_not_found">Varemærke ikke fundet</string>
+    <string name="calculation_failed">Beregning lykkedes ikke</string>
+    <string name="calculation_suceeded">Beregninger foretaget</string>
 </resources>

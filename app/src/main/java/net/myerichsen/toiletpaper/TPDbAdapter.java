@@ -36,23 +36,11 @@ public class TPDbAdapter {
     private final String[] countColumn = {"COUNT(*)"};
     private final Context context;
 
-    /**
-     * Constructor
-     *
-     * @param context
-     */
     public TPDbAdapter(Context context) {
         tpDbHelper = new TpDbHelper(context);
         this.context = context;
     }
 
-    /**
-     * Get product data
-     *
-     * @param selection e.g "BRAND=?"
-     * @param column
-     * @return List of columns in record
-     */
     public List<ProductModel> getProductModels(String selection, String column) {
         List<ProductModel> lpm = new ArrayList<>();
 
@@ -83,7 +71,7 @@ public class TPDbAdapter {
     /**
      * Insert a supplier row
      */
-    public void insertData(SupplierModel sm) {
+    void insertData(SupplierModel sm) {
         SQLiteDatabase db = tpDbHelper.getWritableDatabase();
         ContentValues contentValues = extractData(sm);
         db.insert(TpDbHelper.TABLE_SUPPLIER, null, contentValues);
@@ -112,7 +100,7 @@ public class TPDbAdapter {
     /**
      * Do an initial load
      */
-    public void doInitialLoad() throws Exception {
+    void doInitialLoad() throws Exception {
         tpDbHelper.loadInitialData();
     }
 
@@ -241,14 +229,7 @@ public class TPDbAdapter {
         return pm;
     }
 
-    /**
-     * Delete row from product table
-     *
-     * @param uid Unique identifier
-     * @return
-     * @throws Exception
-     */
-    public int deleteProduct(int uid) throws Exception {
+    int deleteProduct(int uid) throws Exception {
         int rc;
         try {
             SQLiteDatabase db = tpDbHelper.getWritableDatabase();
@@ -263,13 +244,7 @@ public class TPDbAdapter {
         return rc;
     }
 
-    /**
-     * Delete row from supplier table
-     *
-     * @param supplier
-     * @return
-     */
-    public int deleteSupplier(String supplier) throws Exception {
+    int deleteSupplier(String supplier) throws Exception {
         int rc;
         try {
             SQLiteDatabase db = tpDbHelper.getWritableDatabase();
@@ -282,7 +257,7 @@ public class TPDbAdapter {
         return rc;
     }
 
-    public List<ProductModel> getProductModelsSorted(String sortKey, String sortFilter) throws Exception {
+    List<ProductModel> getProductModelsSorted(String sortKey, String sortFilter) throws Exception {
         Cursor cursor;
         List<ProductModel> lpm = new ArrayList<>();
 
@@ -309,13 +284,7 @@ public class TPDbAdapter {
         return lpm;
     }
 
-    /**
-     * Get supplier date by supplier
-     *
-     * @param supplier
-     * @return
-     */
-    public List<SupplierModel> getSupplierModels(String selection, String supplier) throws Exception {
+    List<SupplierModel> getSupplierModels(String selection, String supplier) throws Exception {
         List<SupplierModel> lsm = new ArrayList<>();
 
         try {
@@ -412,55 +381,32 @@ public class TPDbAdapter {
 
         private final Context context;
 
-        /**
-         * Constructor
-         *
-         * @param context
-         */
         TpDbHelper(Context context) {
             super(context, DATABASE_NAME, null, DATABASE_Version);
             this.context = context;
         }
 
-
-        /**
-         * Called when database is created
-         *
-         * @param db
-         */
         public void onCreate(SQLiteDatabase db) {
             try {
                 db.execSQL(CREATE_SUPPLIER_TABLE);
                 db.execSQL(CREATE_PRODUCT_TABLE);
-//                db.execSQL(CREATE_VIRTUAL_PRDUCT_TABLE);
             } catch (Exception e) {
                 Toast.makeText(context, e.getMessage(), Toast.LENGTH_LONG).show();
             }
         }
 
-        /**
-         * Called when the database needs to be upgraded
-         *
-         * @param db
-         * @param oldVersion
-         * @param newVersion
-         */
         @Override
         public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
             try {
                 Toast.makeText(context, "OnUpgrade", Toast.LENGTH_LONG).show();
                 db.execSQL(DROP_PRODUCT_TABLE);
                 db.execSQL(DROP_SUPPLIER_TABLE);
-//                db.execSQL(DROP_VIRTUAL_TABLE);
                 onCreate(db);
             } catch (Exception e) {
                 Toast.makeText(context, e.getMessage(), Toast.LENGTH_LONG).show();
             }
         }
 
-        /**
-         * Initial data load
-         */
         private void loadInitialData() throws Exception {
             try {
                 TPDbAdapter tpHelper = new TPDbAdapter(context);
@@ -557,6 +503,27 @@ public class TPDbAdapter {
                     0, 0, 0, 0, (float) 0.46746, 1, (float) 0.48433, 1,
                     "Staples", "Online");
             tpHelper.insertData(pm);
+
+            pm = new ProductModel("?", "Nemlig Plus",
+                    3, 8, 200, 96, 125, 1, (float) 25, 0,
+                    (float) 20.40, (float) 2.55, 1,
+                    45, 0, (float) 23.61, 1, (float) 0.102, 1, (float) 0.01275, 1,
+                    "nemlig.com", "Litauen");
+            tpHelper.insertData(pm);
+
+            pm = new ProductModel("?", "Nemlig Basic",
+                    2, 8, 220, 96, 125, 1, (float) 27.5, 0,
+                    (float) 9.2, (float) 1.15, 1,
+                    36, 0, (float) 12.11, 0, (float) 0.041818182, 1, (float) 0.005227273, 1,
+                    "nemlig.com", "Litauen");
+            tpHelper.insertData(pm);
+
+            pm = new ProductModel("?", "Lotus Comfort",
+                    3, 8, 155, 98, 125, 0, (float) 19.1, 0,
+                    (float) 22, (float) 2.75, 1,
+                    0, 0, (float) 29.06, 0, (float) 0.143979058, 1, (float) 0.017973856, 1,
+                    "nemlig.com", "");
+            tpHelper.insertData(pm);
         }
 
         private void loadSuppliers(TPDbAdapter tpHelper) {
@@ -566,6 +533,8 @@ public class TPDbAdapter {
             sm = new SupplierModel("Føtex Hillerød", "Salling");
             tpHelper.insertData(sm);
             sm = new SupplierModel("Kvickly Helsinge", "Coop");
+            tpHelper.insertData(sm);
+            sm = new SupplierModel("Nemlig.com", "Nemlig");
             tpHelper.insertData(sm);
             sm = new SupplierModel("Netto Vejby", "Salling");
             tpHelper.insertData(sm);

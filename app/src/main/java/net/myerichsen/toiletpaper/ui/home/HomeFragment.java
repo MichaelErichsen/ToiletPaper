@@ -44,6 +44,7 @@ public class HomeFragment extends Fragment {
 
     private TPDbAdapter helper;
     private View root;
+    private Activity activity;
 
     private EditText itemNoEditText;
     private EditText brandEditText;
@@ -71,9 +72,30 @@ public class HomeFragment extends Fragment {
     private ProductModel pm;
     private String brand;
 
+    private static void hideSoftKeyboard(Activity activity) {
+        if (activity.getCurrentFocus() == null) {
+            return;
+        }
+
+        InputMethodManager inputMethodManager = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
+        Objects.requireNonNull(inputMethodManager).hideSoftInputFromWindow(activity.getCurrentFocus().getWindowToken(), 0);
+    }
+
+    private View.OnClickListener scanBtnOnClickListener() {
+        return new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent scanIntent = new Intent(getContext(), ScanActivity.class);
+                scanIntent.putExtra("net.myerichsen.toiletpaper.ITEMNO", "");
+                startActivityForResult(scanIntent, REQUEST_CODE_1);
+            }
+        };
+    }
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         root = inflater.inflate(R.layout.fragment_home, container, false);
+        activity = getActivity();
         Context context = getContext();
         helper = new TPDbAdapter(context);
         pm = new ProductModel();
@@ -289,10 +311,10 @@ public class HomeFragment extends Fragment {
         calculateBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                hideSoftKeyboard(getActivity());
-                String message = "Beregning lykkedes ikke";
+                hideSoftKeyboard(activity);
+                String message = getString(R.string.calculation_failed);
                 if (calculate()) {
-                    message = "Beregninger foretaget";
+                    message = getString(R.string.calculation_suceeded);
                 }
                 Snackbar snackbar = Snackbar
                         .make(requireActivity().findViewById(android.R.id.content), message, Snackbar.LENGTH_LONG);
@@ -304,7 +326,7 @@ public class HomeFragment extends Fragment {
         saveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                hideSoftKeyboard(getActivity());
+                hideSoftKeyboard(activity);
                 String message;
 
                 try {
@@ -341,29 +363,10 @@ public class HomeFragment extends Fragment {
         return root;
     }
 
-    private View.OnClickListener scanBtnOnClickListener() {
-        return new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent scanIntent = new Intent(getContext(), ScanActivity.class);
-                scanIntent.putExtra("net.myerichsen.toiletpaper.ITEMNO", "");
-                startActivityForResult(scanIntent, REQUEST_CODE_1);
-            }
-        };
-    }
-
-    private static void hideSoftKeyboard(Activity activity) {
-        if (activity.getCurrentFocus() == null) {
-            return;
-        }
-        InputMethodManager inputMethodManager = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
-        inputMethodManager.hideSoftInputFromWindow(activity.getCurrentFocus().getWindowToken(), 0);
-    }
-
     private View.OnClickListener searchItemNoBtnOnclickListener() {
         return new View.OnClickListener() {
             public void onClick(View v) {
-                hideSoftKeyboard(getActivity());
+                hideSoftKeyboard(activity);
                 List<ProductModel> lpm = helper.getProductModels("ITEM_NO=?", itemNoEditText.getText().toString());
                 if (lpm.size() == 0) {
                     Snackbar snackbar = Snackbar
@@ -378,13 +381,10 @@ public class HomeFragment extends Fragment {
         };
     }
 
-    /**
-     * @return
-     */
     private View.OnClickListener searchBrandBtnOnclickListener() {
         return new View.OnClickListener() {
             public void onClick(View v) {
-                hideSoftKeyboard(getActivity());
+                hideSoftKeyboard(activity);
                 brand = brandEditText.getText().toString();
                 if (brand.equals("")) {
                     Snackbar snackbar = Snackbar
@@ -432,13 +432,6 @@ public class HomeFragment extends Fragment {
         }
     }
 
-    /**
-     * Spinner utility function
-     *
-     * @param spinner
-     * @param myString
-     * @return
-     */
     private int getIndex(Spinner spinner, String myString) {
         for (int i = 0; i < spinner.getCount(); i++) {
             if (spinner.getItemAtPosition(i).toString().equalsIgnoreCase(myString)) {
@@ -536,14 +529,14 @@ public class HomeFragment extends Fragment {
     /**
      * Calculate all calculable fields
      */
+    // TODO Input: g per rulle
     private boolean calculate() {
-        // TODO Test and expand calculations
         // Sheet length = roll length / sheets pet roll (OK)
         boolean fSheetLength = false;
         try {
             fSheetLength = divide(rollLengthEditText, rollLengthCheckBox, rollSheetsEditText, null,
                     sheetLengthEditText, sheetLengthCheckBox, 1000);
-        } catch (Exception e) {
+        } catch (Exception ignored) {
         }
 
         // Roll length = sheet length * sheets per roll (OK)
@@ -551,7 +544,7 @@ public class HomeFragment extends Fragment {
         try {
             fRollLength = multiply(sheetLengthEditText, sheetLengthCheckBox, rollSheetsEditText, null,
                     rollLengthEditText, rollLengthCheckBox, 1000);
-        } catch (Exception e) {
+        } catch (Exception ignored) {
         }
 
         // Price per roll = price per package / rolls per package (OK)
@@ -559,29 +552,33 @@ public class HomeFragment extends Fragment {
         try {
             fRollPrice = divide(packagePriceEditText, null, packageRollsEditText, null,
                     rollPriceEditText, rollPriceCheckBox, 1);
-        } catch (Exception e) {
+        } catch (Exception ignored) {
         }
 
-        // Kilo price
+        // TODO Paper weight (g per m2) ???
+
+        // TODO Kilo price ???
 //            boolean fKiloPrice = multiply(sheetLengthEditText, sheetLengthCheckBox, rollSheetsEditText, null, rollLengthEditText, rollLengthCheckBox, 100);
 
-        // Price per meter = price per package / rolls per package / roll length
-//            boolean fMeterPrice = divide(packagePriceEditText, null, sheetLengthEditText, sheetLengthCheckBox, meterPriceEditText, meterPriceCheckBox);
+        // TODO Price per meter = price per package / rolls per package / roll length
+        boolean fMeterPrice = false;
+        try {
+            fMeterPrice = divide(packagePriceEditText, null,
+                    packageRollsEditText, null,
+                    rollLengthEditText, rollLengthCheckBox,
+                    meterPriceEditText, meterPriceCheckBox, 1);
+        } catch (Exception ignored) {
+        }
 
-        // Price per sheet = price per package / rolls pr package / sheets per roll
-//            EditText dummy = new EditText(context);
-//            CheckBox dummyC = new CheckBox(context);
-//            dummyC.setChecked(false);
-//            boolean fSheetPrice1 = divide(packagePriceEditText, null, packageRollsEditText, null, dummy, dummyC);
-//            boolean fSheetPrice = divide(dummy, dummyC, rollSheetsEditText, null, rollLengthEditText, rollLengthCheckBox);
+        // TODO Price per sheet = price per package / rolls pr package / sheets per roll
+        boolean fSheetPrice = false;
+        try {
+            fSheetPrice = divide(packagePriceEditText, null, packageRollsEditText, null,
+                    rollSheetsEditText, null, rollLengthEditText, rollLengthCheckBox, 1);
+        } catch (Exception ignored) {
+        }
 
-        return fRollLength | fRollPrice | fSheetLength;
-//        } catch (Exception e) {
-//            Snackbar snackbar = Snackbar
-//                    .make(requireActivity().findViewById(android.R.id.content), Objects.requireNonNull(e.getMessage()), Snackbar.LENGTH_LONG);
-//            snackbar.show();
-//            return false;
-//    }
+        return fMeterPrice | fRollLength | fRollPrice | fSheetLength | fSheetPrice;
 
 //        return fKiloPrice | fMeterPrice | fPaperWeight | fRollLength | fRollPrice | fSheetLength | fSheetPrice;
     }
@@ -602,7 +599,7 @@ public class HomeFragment extends Fragment {
         if ((cb3 != null) && !(cb3.isSelected())) {
             s3 = product.getText().toString();
 
-            if ((!s3.isEmpty()) && (Integer.getInteger(s3) > 0)) {
+            if ((!s3.isEmpty()) && (Integer.parseInt(s3) > 0)) {
                 return false;
             }
         }
@@ -640,7 +637,7 @@ public class HomeFragment extends Fragment {
         if ((cb3 != null) && !(cb3.isSelected())) {
             s3 = quotient.getText().toString();
 
-            if ((!s3.isEmpty()) && (Integer.getInteger(s3) > 0)) {
+            if ((!s3.isEmpty()) && (Integer.parseInt(s3) > 0)) {
                 return false;
             }
         }
@@ -659,6 +656,51 @@ public class HomeFragment extends Fragment {
         float i3 = Float.parseFloat(s1) * precision / Float.parseFloat(s2);
         quotient.setText(String.valueOf(i3));
         Objects.requireNonNull(cb3).setChecked(true);
+        return true;
+    }
+
+    private boolean divide(EditText dividend, CheckBox cb1, EditText divisor, CheckBox cb2,
+                           EditText divisor2, CheckBox cb3,
+                           EditText quotient, CheckBox cb4, int precision) {
+        String s1, s2, s3, s4;
+
+        // First test if calculated
+        if ((cb1 != null) && (cb1.isSelected())) {
+            return false;
+        }
+        if ((cb2 != null) && (cb2.isSelected())) {
+            return false;
+        }
+        if ((cb3 != null) && (cb3.isSelected())) {
+            return false;
+        }
+
+        if ((cb4 != null) && !(cb4.isSelected())) {
+            s4 = quotient.getText().toString();
+
+            if ((!s4.isEmpty()) && (Integer.parseInt(s4) > 0)) {
+                return false;
+            }
+        }
+
+        // Then test for zero values
+        s1 = dividend.getText().toString();
+        if ((s1.isEmpty()) || (s1.equals("0"))) {
+            return false;
+        }
+        s2 = divisor.getText().toString();
+        if ((s2.isEmpty()) || (s2.equals("0"))) {
+            return false;
+        }
+        s3 = divisor2.getText().toString();
+        if ((s3.isEmpty()) || (s3.equals("0"))) {
+            return false;
+        }
+
+        // Now do the calculation
+        float fq = Float.parseFloat(s1) * precision / Float.parseFloat(s2) / Float.parseFloat(s3);
+        quotient.setText(String.valueOf(fq));
+        Objects.requireNonNull(cb4).setChecked(true);
         return true;
     }
 
@@ -707,7 +749,7 @@ public class HomeFragment extends Fragment {
                     }
                 } else {
                     Snackbar snackbar = Snackbar
-                            .make(requireActivity().findViewById(android.R.id.content), messageReturn, Snackbar.LENGTH_LONG);
+                            .make(requireActivity().findViewById(android.R.id.content), Objects.requireNonNull(messageReturn), Snackbar.LENGTH_LONG);
                     snackbar.show();
                 }
                 break;
