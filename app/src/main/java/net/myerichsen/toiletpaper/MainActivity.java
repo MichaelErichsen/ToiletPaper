@@ -30,8 +30,8 @@ import androidx.preference.PreferenceManager;
 
 import com.google.android.material.navigation.NavigationView;
 
-import net.myerichsen.toiletpaper.ui.pricedevelopment.PriceFragment;
-import net.myerichsen.toiletpaper.ui.pricedevelopment.dummy.DummyContent;
+import net.myerichsen.toiletpaper.ui.prices.PriceListFragment;
+import net.myerichsen.toiletpaper.ui.prices.dummy.DummyContent;
 import net.myerichsen.toiletpaper.ui.settings.SettingsActivity;
 
 import java.util.Deque;
@@ -40,7 +40,7 @@ import java.util.Objects;
 
 import static androidx.navigation.Navigation.findNavController;
 
-public class MainActivity extends AppCompatActivity implements PriceFragment.OnListFragmentInteractionListener {
+public class MainActivity extends AppCompatActivity implements PriceListFragment.OnListFragmentInteractionListener {
     private AppBarConfiguration mAppBarConfiguration;
 
     @Override
@@ -55,8 +55,12 @@ public class MainActivity extends AppCompatActivity implements PriceFragment.OnL
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home, R.id.nav_about, R.id.nav_products,
-                R.id.nav_suppliers, R.id.nav_compare, R.id.nav_price)
+                R.id.nav_home,
+                R.id.nav_compare,
+                R.id.nav_price_select,
+                R.id.nav_products,
+                R.id.nav_suppliers,
+                R.id.nav_about)
                 .setDrawerLayout(drawer)
                 .build();
         NavController navController = findNavController(this, R.id.nav_host_fragment);
@@ -132,11 +136,6 @@ public class MainActivity extends AppCompatActivity implements PriceFragment.OnL
                 || super.onSupportNavigateUp();
     }
 
-    @Override
-    public void onListFragmentInteraction(DummyContent.DummyItem item) {
-
-    }
-
     private String getCallingFragmentLabel() {
         FragmentManager fragmentManager = MainActivity.this.getSupportFragmentManager();
         List<Fragment> fragments = fragmentManager.getFragments();
@@ -157,5 +156,10 @@ public class MainActivity extends AppCompatActivity implements PriceFragment.OnL
 
         }
         return null;
+    }
+
+    @Override
+    public void onListFragmentInteraction(DummyContent.DummyItem item) {
+
     }
 }

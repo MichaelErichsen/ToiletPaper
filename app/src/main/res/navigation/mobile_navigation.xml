@@ -36,8 +36,8 @@
             android:id="@+id/action_nav_home_to_nav_scan"
             app:destination="@id/nav_scan" />
         <action
-            android:id="@+id/action_nav_home_to_nav_price"
-            app:destination="@id/nav_price" />
+            android:id="@+id/action_nav_home_to_nav_price_select"
+            app:destination="@id/nav_price_select" />
 
     </fragment>
 
@@ -129,9 +129,40 @@
         android:label="@string/menu_about"
         tools:layout="@layout/fragment_about" />
     <fragment
-        android:id="@+id/nav_price"
-        android:name="net.myerichsen.toiletpaper.ui.pricedevelopment.PriceFragment"
-        android:label="fragment_price_list"
-        tools:layout="@layout/fragment_price_list" />
+        android:id="@+id/nav_price_graph"
+        android:name="net.myerichsen.toiletpaper.ui.prices.PriceGraphFragment"
+        android:label="fragment_price_graph"
+        tools:layout="@layout/fragment_price_graph">
+        <argument
+            android:name="itemNo"
+            app:argType="string" />
+        <argument
+            android:name="brand"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/nav_price_select"
+        android:name="net.myerichsen.toiletpaper.ui.prices.PriceSelectFragment"
+        android:label="fragment_price_select"
+        tools:layout="@layout/fragment_price_select">
+        <action
+            android:id="@+id/action_nav_price_select_to_nav_prices_list"
+            app:destination="@id/nav_prices_list" />
+    </fragment>
+    <fragment
+        android:id="@+id/nav_prices_list"
+        android:name="net.myerichsen.toiletpaper.ui.prices.PriceListFragment"
+        android:label="fragment_prices_list"
+        tools:layout="@layout/fragment_prices_list">
+        <action
+            android:id="@+id/action_nav_prices_list_to_nav_price_graph"
+            app:destination="@id/nav_price_graph" />
+        <argument
+            android:name="itemNo"
+            app:argType="string" />
+        <argument
+            android:name="brand"
+            app:argType="string" />
+    </fragment>
 
 </navigation>

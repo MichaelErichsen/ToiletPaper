@@ -1,8 +1,4 @@
-/*
- * Copyright (c) 2020. Michael Erichsen.
- */
-
-package net.myerichsen.toiletpaper.ui.pricedevelopment.dummy;
+package net.myerichsen.toiletpaper.ui.prices.dummy;
 
 import java.util.ArrayList;
 import java.util.HashMap;

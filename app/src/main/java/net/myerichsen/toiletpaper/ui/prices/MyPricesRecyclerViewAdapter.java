@@ -1,8 +1,4 @@
-/*
- * Copyright (c) 2020. Michael Erichsen.
- */
-
-package net.myerichsen.toiletpaper.ui.pricedevelopment;
+package net.myerichsen.toiletpaper.ui.prices;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,8 +8,8 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import net.myerichsen.toiletpaper.R;
-import net.myerichsen.toiletpaper.ui.pricedevelopment.PriceFragment.OnListFragmentInteractionListener;
-import net.myerichsen.toiletpaper.ui.pricedevelopment.dummy.DummyContent.DummyItem;
+import net.myerichsen.toiletpaper.ui.prices.PriceListFragment.OnListFragmentInteractionListener;
+import net.myerichsen.toiletpaper.ui.prices.dummy.DummyContent.DummyItem;
 
 import java.util.List;
 
@@ -22,12 +18,12 @@ import java.util.List;
  * specified {@link OnListFragmentInteractionListener}.
  * TODO: Replace the implementation with code for your data type.
  */
-public class MyPriceRecyclerViewAdapter extends RecyclerView.Adapter<MyPriceRecyclerViewAdapter.ViewHolder> {
+public class MyPricesRecyclerViewAdapter extends RecyclerView.Adapter<MyPricesRecyclerViewAdapter.ViewHolder> {
 
     private final List<DummyItem> mValues;
     private final OnListFragmentInteractionListener mListener;
 
-    public MyPriceRecyclerViewAdapter(List<DummyItem> items, OnListFragmentInteractionListener listener) {
+    public MyPricesRecyclerViewAdapter(List<DummyItem> items, OnListFragmentInteractionListener listener) {
         mValues = items;
         mListener = listener;
     }
@@ -35,7 +31,7 @@ public class MyPriceRecyclerViewAdapter extends RecyclerView.Adapter<MyPriceRecy
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.fragment_price, parent, false);
+                .inflate(R.layout.fragment_prices, parent, false);
         return new ViewHolder(view);
     }
 
@@ -63,12 +59,12 @@ public class MyPriceRecyclerViewAdapter extends RecyclerView.Adapter<MyPriceRecy
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        final View mView;
-        final TextView mIdView;
-        final TextView mContentView;
-        DummyItem mItem;
+        public final View mView;
+        public final TextView mIdView;
+        public final TextView mContentView;
+        public DummyItem mItem;
 
-        ViewHolder(View view) {
+        public ViewHolder(View view) {
             super(view);
             mView = view;
             mIdView = view.findViewById(R.id.item_number);
