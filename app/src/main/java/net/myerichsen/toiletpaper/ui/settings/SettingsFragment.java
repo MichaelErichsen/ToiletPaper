@@ -25,8 +25,6 @@ import java.util.Objects;
 public class SettingsFragment extends PreferenceFragmentCompat {
     private Snackbar snackbar;
     private View snackView;
-    private TPDbAdapter adapter;
-    private SharedPreferences preferences;
 
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
@@ -34,8 +32,8 @@ public class SettingsFragment extends PreferenceFragmentCompat {
         setPreferencesFromResource(R.xml.preferences, rootKey);
 
         try {
-            adapter = new TPDbAdapter(getContext());
-            preferences = PreferenceManager.getDefaultSharedPreferences(getContext());
+            TPDbAdapter adapter = new TPDbAdapter(getContext());
+            SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(requireContext());
 
             // TODO Implement simple and advanced screens
             SwitchPreferenceCompat advancedScreenPreference = findPreference("advancedscreen");
@@ -47,11 +45,11 @@ public class SettingsFragment extends PreferenceFragmentCompat {
             DropDownPreference fontSizePreference = findPreference("fontsize");
             String fontsize = preferences.getString("fontsize", "0");
             if (!fontsize.equals("0")) {
-                fontSizePreference.setSummary(getString(R.string.fontsize_preference_summary) + fontsize);
+                Objects.requireNonNull(fontSizePreference).setSummary(getString(R.string.fontsize_preference_summary) + fontsize);
             }
 
             DropDownPreference defaultSupplierPreference = findPreference("defaultsupplier");
-            defaultSupplierPreference.setSummary(preferences.getString("defaultsupplier",
+            Objects.requireNonNull(defaultSupplierPreference).setSummary(preferences.getString("defaultsupplier",
                     "Vælg foretrukken butik fra databasen"));
             populateSupplierDropDown(adapter, defaultSupplierPreference);
         } catch (Exception e) {
