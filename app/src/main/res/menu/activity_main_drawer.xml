@@ -17,7 +17,7 @@
             android:icon="@drawable/baseline_compare_black_48dp"
             android:title="@string/compare" />
         <item
-            android:id="@+id/nav_price"
+            android:id="@+id/nav_price_select"
             android:icon="@drawable/baseline_euro_symbol_black_48dp"
             android:title="@string/priceDevelopment" />
         <item
