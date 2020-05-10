@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright (c) 2020. Michael Erichsen.
+  -->
+
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_home">
+
+    <fragment
+        android:id="@+id/nav_home"
+        android:name="net.myerichsen.toiletpaper.ui.home.HomeFragment"
+        android:label="@string/menu_home"
+        tools:layout="@layout/fragment_home">
+
+        <action
+            android:id="@+id/action_nav_home_to_nav_about"
+            app:destination="@id/nav_about" />
+        <action
+            android:id="@+id/action_nav_home_to_nav_products"
+            app:destination="@id/nav_products" />
+        <action
+            android:id="@+id/action_nav_home_to_nav_compare"
+            app:destination="@id/nav_compare" />
+        <action
+            android:id="@+id/action_nav_home_to_nav_suppliers"
+            app:destination="@id/nav_suppliers" />
+        <argument
+            android:name="brand"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_nav_home_to_nav_brand"
+            app:destination="@id/nav_brand" />
+        <action
+            android:id="@+id/action_nav_home_to_nav_scan"
+            app:destination="@id/nav_scan" />
+        <action
+            android:id="@+id/action_nav_home_to_nav_price"
+            app:destination="@id/nav_price" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_scan"
+        android:name="net.myerichsen.toiletpaper.ui.home.ScanFragment"
+        android:label="@string/scan"
+        tools:layout="@layout/fragment_scan" />
+
+    <fragment
+        android:id="@+id/nav_brand"
+        android:name="net.myerichsen.toiletpaper.ui.home.BrandFragment"
+        android:label="@string/found_brands"
+        tools:layout="@layout/fragment_brand">
+        <argument
+            android:name="brand"
+            app:argType="string" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_compare"
+        android:name="net.myerichsen.toiletpaper.ui.compare.CompareFragment"
+        android:label="@string/menu_compare"
+        tools:layout="@layout/fragment_compare">
+        <action
+            android:id="@+id/action_nav_compare_to_nav_compare_details"
+            app:destination="@id/nav_compare_details" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_compare_details"
+        android:name="net.myerichsen.toiletpaper.ui.compare.CompareDetailsFragment"
+        android:label="Sorteret produktliste"
+        tools:layout="@layout/fragment_compare_details">
+        <argument
+            android:name="sortKey"
+            app:argType="string" />
+        <argument
+            android:name="sortFilter"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_nav_compare_details_to_nav_product_details"
+            app:destination="@id/nav_product_details" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_products"
+        android:name="net.myerichsen.toiletpaper.ui.products.ProductFragment"
+        android:label="@string/menu_products"
+        tools:layout="@layout/fragment_product">
+        <action
+            android:id="@+id/action_nav_products_to_nav_product_details"
+            app:destination="@id/nav_product_details" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_product_details"
+        android:name="net.myerichsen.toiletpaper.ui.products.ProductDetailsFragment"
+        android:label="@string/menu_product_details"
+        tools:layout="@layout/fragment_product_details">
+        <argument
+            android:name="uid"
+            app:argType="integer" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_suppliers"
+        android:name="net.myerichsen.toiletpaper.ui.suppliers.SupplierFragment"
+        android:label="@string/menu_suppliers"
+        tools:layout="@layout/fragment_supplier">
+        <action
+            android:id="@+id/action_nav_suppliers_to_nav_supplier_details"
+            app:destination="@id/nav_supplier_details" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_supplier_details"
+        android:name="net.myerichsen.toiletpaper.ui.suppliers.SupplierDetailsFragment"
+        android:label="Butiksdetaljer"
+        tools:layout="@layout/fragment_supplier_details">
+        <argument
+            android:name="supplier"
+            app:argType="string" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_about"
+        android:name="net.myerichsen.toiletpaper.ui.about.AboutFragment"
+        android:label="@string/menu_about"
+        tools:layout="@layout/fragment_about" />
+    <fragment
+        android:id="@+id/nav_price"
+        android:name="net.myerichsen.toiletpaper.ui.pricedevelopment.PriceFragment"
+        android:label="fragment_price_list"
+        tools:layout="@layout/fragment_price_list" />
+
+</navigation>

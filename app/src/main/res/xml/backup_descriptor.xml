@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright (c) 2020. Michael Erichsen.
+  -->
+
+<full-backup-content>
+    <exclude
+        domain="database"
+        path="TOILET_PAPER_DATABASE" />
+    <!-- Exclude specific shared preferences that contain GCM registration Id -->
+</full-backup-content>
