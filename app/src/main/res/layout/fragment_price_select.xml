@@ -9,7 +9,6 @@
     android:layout_height="match_parent"
     tools:context=".ui.prices.PriceSelectFragment">
 
-
     <TextView
         android:id="@+id/priceSelectPrompt"
         android:layout_width="wrap_content"
@@ -40,8 +39,9 @@
         android:id="@+id/pBrandTextInputLayout"
         android:layout_width="409dp"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/pItemNoTextInputLayout"
-        tools:layout_editor_absoluteX="1dp">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pItemNoTextInputLayout">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/pBrandEditText"
@@ -54,10 +54,17 @@
         android:id="@+id/priceSelectionBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:contentDescription="Vælg"
         android:src="@drawable/baseline_search_black_24dp"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/pBrandTextInputLayout" />
 
+    <ImageButton
+        android:id="@+id/graphSelectionBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@android:drawable/btn_star"
+        app:layout_constraintStart_toEndOf="@+id/priceSelectionBtn"
+        app:layout_constraintTop_toBottomOf="@+id/pBrandTextInputLayout" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

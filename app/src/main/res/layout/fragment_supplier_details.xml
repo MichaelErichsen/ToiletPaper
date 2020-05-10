@@ -93,13 +93,10 @@
                 android:id="@+id/supplierDetailTimestampTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:editable="false"
                 android:hint="@string/timestamp"
                 android:inputType="none"
-                android:textSize="24sp"
-                app:autoSizeTextType="uniform" />
+                android:textSize="24sp" />
         </com.google.android.material.textfield.TextInputLayout>
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

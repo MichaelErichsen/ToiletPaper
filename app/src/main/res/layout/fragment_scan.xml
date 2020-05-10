@@ -32,7 +32,6 @@
         android:layout_margin="50dp"
         android:text="@string/scan_prompt"
         android:textSize="24sp"
-        app:autoSizeTextType="uniform"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/surface_view" />
