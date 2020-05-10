@@ -11,6 +11,4 @@
     app:layoutManager="LinearLayoutManager"
     tools:context=".ui.prices.PriceListFragment"
     tools:listitem="@layout/fragment_prices">
-
-
 </androidx.recyclerview.widget.RecyclerView>
