@@ -10,6 +10,7 @@ import android.view.inputmethod.InputMethodManager;
 
 import androidx.fragment.app.Fragment;
 
+import com.jjoe64.graphview.DefaultLabelFormatter;
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.helper.DateAsXAxisLabelFormatter;
 import com.jjoe64.graphview.series.DataPoint;
@@ -20,6 +21,9 @@ import net.myerichsen.toiletpaper.TPDbAdapter;
 import net.myerichsen.toiletpaper.ui.home.HomeFragment;
 import net.myerichsen.toiletpaper.ui.products.ProductModel;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.text.NumberFormat;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
@@ -34,6 +38,9 @@ public class PriceGraphFragment extends Fragment {
     private String itemNo;
     private String brand;
 
+    /**
+     * No arg constructor
+     */
     public PriceGraphFragment() {
         // Required empty public constructor
     }
@@ -41,8 +48,11 @@ public class PriceGraphFragment extends Fragment {
     /**
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
+     *
+     * @param itemNo Iten number
+     * @param brand Brand
+     * @return A new instance of the class
      */
-
     public static PriceGraphFragment newInstance(String itemNo, String brand) {
         PriceGraphFragment fragment = new PriceGraphFragment();
         Bundle args = new Bundle();
@@ -52,6 +62,10 @@ public class PriceGraphFragment extends Fragment {
         return fragment;
     }
 
+    /**
+     *
+     * @param savedInstanceState The state of the saved instance
+     */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,6 +75,13 @@ public class PriceGraphFragment extends Fragment {
         }
     }
 
+    /**
+     *
+     * @param inflater Inflater
+     * @param container Container
+     * @param savedInstanceState The state of the saved instance
+     * @return The view
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -80,7 +101,7 @@ public class PriceGraphFragment extends Fragment {
 
         LineGraphSeries<DataPoint> series = new LineGraphSeries<>();
 
-        DateTimeFormatter f = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+        DateTimeFormatter f = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         LocalDateTime ldt;
         Date date;
 
@@ -88,7 +109,7 @@ public class PriceGraphFragment extends Fragment {
             ldt = LocalDateTime.parse(lpm.get(i).getTimestamp(), f);
             date = Date.from(ldt.atZone(ZoneId.systemDefault()).toInstant());
 
-            DataPoint dp = new DataPoint(date, Double.parseDouble(String.valueOf(lpm.get(i).getRollPrice())));
+            DataPoint dp = new DataPoint(date, Double.parseDouble(String.valueOf(lpm.get(i).getPackagePrice())));
             series.appendData(dp, true, 10, true);
         }
 
@@ -96,6 +117,7 @@ public class PriceGraphFragment extends Fragment {
 
         graph.getGridLabelRenderer().setLabelFormatter(new DateAsXAxisLabelFormatter(getActivity()));
         graph.getGridLabelRenderer().setNumHorizontalLabels(4); // only 4 because of the space
+        graph.getGridLabelRenderer().setHumanRounding(false);
 
         hideSoftKeyboard(getActivity());
 

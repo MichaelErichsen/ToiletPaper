@@ -43,9 +43,9 @@ public class ProductModel {
      * No arg constructor
      */
     public ProductModel() {
-        timestamp =
-                LocalDateTime.now()
-                        .format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss"));
+//        timestamp =
+//                LocalDateTime.now()
+//                        .format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss"));
     }
 
     public ProductModel(String itemNo, String brand, int layers, int packageRolls, int rollSheets, int sheetWidth,
@@ -77,9 +77,9 @@ public class ProductModel {
         this.comments = comments;
         this.itemNo = itemNo;
         this.brand = brand;
-        timestamp =
-                LocalDateTime.now()
-                        .format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss"));
+//        timestamp =
+//                LocalDateTime.now()
+//                        .format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss"));
     }
 
     public int getUid() {
