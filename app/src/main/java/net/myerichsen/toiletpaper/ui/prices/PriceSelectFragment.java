@@ -1,9 +1,12 @@
 package net.myerichsen.toiletpaper.ui.prices;
 
+import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 
 import androidx.appcompat.widget.AppCompatImageButton;
 import androidx.fragment.app.Fragment;
@@ -46,7 +49,6 @@ public class PriceSelectFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_price_select, container, false);
-//        Context context = getContext();
         snackView = requireActivity().findViewById(android.R.id.content);
 
         pItemNoEditText = root.findViewById(R.id.pItemNoEditText);
@@ -57,10 +59,17 @@ public class PriceSelectFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 try {
-                    PriceSelectFragmentDirections.ActionNavPriceSelectToNavPricesList action =
-                            PriceSelectFragmentDirections.actionNavPriceSelectToNavPricesList(Objects.requireNonNull(pItemNoEditText.getText()).toString(),
-                                    Objects.requireNonNull(pBrandEditText.getText()).toString());
-                    Navigation.findNavController(v).navigate(action);
+                    String itemNo = Objects.requireNonNull(pItemNoEditText.getText()).toString();
+                    String brand = Objects.requireNonNull(pBrandEditText.getText()).toString();
+
+                    if (itemNo.equals("") && brand.equals("")) {
+                        complain();
+                    } else {
+                        PriceSelectFragmentDirections.ActionNavPriceSelectToNavPricesList action =
+                                PriceSelectFragmentDirections.actionNavPriceSelectToNavPricesList(Objects.requireNonNull(pItemNoEditText.getText()).toString(),
+                                        Objects.requireNonNull(pBrandEditText.getText()).toString());
+                        Navigation.findNavController(v).navigate(action);
+                    }
                 } catch (Exception e) {
                     snackbar = Snackbar
                             .make(requireActivity().findViewById(android.R.id.content), Objects.requireNonNull(e.getMessage()), Snackbar.LENGTH_LONG);
@@ -78,9 +87,7 @@ public class PriceSelectFragment extends Fragment {
                     String brand = Objects.requireNonNull(pBrandEditText.getText()).toString();
 
                     if (itemNo.equals("") && brand.equals("")) {
-                        snackbar = Snackbar
-                                .make(snackView, "Indtast varenummer eller varemærke", Snackbar.LENGTH_LONG);
-                        snackbar.show();
+                        complain();
                     } else {
                         PriceSelectFragmentDirections.ActionNavPriceSelectToNavPriceGraph action =
                                 PriceSelectFragmentDirections.actionNavPriceSelectToNavPriceGraph((Objects.requireNonNull(pItemNoEditText.getText()).toString()),
@@ -96,4 +103,18 @@ public class PriceSelectFragment extends Fragment {
         });
         return root;
     }
+
+    private void complain() {
+        Activity activity = getActivity();
+
+        if (activity.getCurrentFocus() != null) {
+            InputMethodManager inputMethodManager = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
+            Objects.requireNonNull(inputMethodManager).hideSoftInputFromWindow(activity.getCurrentFocus().getWindowToken(), 0);
+        }
+        snackbar = Snackbar
+                .make(snackView, "Indtast varenummer eller varemærke", Snackbar.LENGTH_LONG);
+        snackbar.show();
+
+    }
+
 }

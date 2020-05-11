@@ -120,8 +120,8 @@ public class BrandFragment extends Fragment {
         // More than one found
         final TableLayout brandTableLayout = root.findViewById(R.id.brandTableLayout);
 
-        for (int i = 0; i < lpm.size(); i++) {
-            addTableRow(brandTableLayout, lpm.get(i).getBrand());
+        for (ProductModel pm : lpm) {
+            addTableRow(brandTableLayout, pm.getBrand());
         }
     }
 

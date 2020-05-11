@@ -34,6 +34,7 @@ import androidx.navigation.Navigation;
 import androidx.preference.PreferenceManager;
 
 import com.google.android.material.snackbar.Snackbar;
+import com.google.android.material.textfield.TextInputEditText;
 
 import net.myerichsen.toiletpaper.R;
 import net.myerichsen.toiletpaper.TPDbAdapter;
@@ -98,27 +99,27 @@ public class HomeFragment extends Fragment {
 
         snackView = requireActivity().findViewById(android.R.id.content);
 
-        ((TextView) root.findViewById(R.id.brandEditText)).setTextSize(fontSize);
-        ((TextView) root.findViewById(R.id.commentEditText)).setTextSize(fontSize);
-        ((TextView) root.findViewById(R.id.itemNoEditText)).setTextSize(fontSize);
-        ((TextView) root.findViewById(R.id.kiloPriceCheckBox)).setTextSize(fontSize);
-        ((TextView) root.findViewById(R.id.kiloPriceEditText)).setTextSize(fontSize);
-        ((TextView) root.findViewById(R.id.meterPriceCheckBox)).setTextSize(fontSize);
-        ((TextView) root.findViewById(R.id.meterPriceEditText)).setTextSize(fontSize);
-        ((TextView) root.findViewById(R.id.packagePriceEditText)).setTextSize(fontSize);
-        ((TextView) root.findViewById(R.id.packageRollsEditText)).setTextSize(fontSize);
-        ((TextView) root.findViewById(R.id.paperWeightCheckBox)).setTextSize(fontSize);
-        ((TextView) root.findViewById(R.id.paperWeightEditText)).setTextSize(fontSize);
-        ((TextView) root.findViewById(R.id.rollLengthCheckBox)).setTextSize(fontSize);
-        ((TextView) root.findViewById(R.id.rollLengthEditText)).setTextSize(fontSize);
-        ((TextView) root.findViewById(R.id.rollPriceCheckBox)).setTextSize(fontSize);
-        ((TextView) root.findViewById(R.id.rollPriceEditText)).setTextSize(fontSize);
-        ((TextView) root.findViewById(R.id.rollSheetsEditText)).setTextSize(fontSize);
+        ((TextInputEditText) root.findViewById(R.id.brandEditText)).setTextSize(fontSize);
+        ((TextInputEditText) root.findViewById(R.id.commentEditText)).setTextSize(fontSize);
+        ((TextInputEditText) root.findViewById(R.id.itemNoEditText)).setTextSize(fontSize);
+        ((Button) root.findViewById(R.id.kiloPriceCheckBox)).setTextSize(fontSize);
+        ((TextInputEditText) root.findViewById(R.id.kiloPriceEditText)).setTextSize(fontSize);
+        ((Button) root.findViewById(R.id.meterPriceCheckBox)).setTextSize(fontSize);
+        ((TextInputEditText) root.findViewById(R.id.meterPriceEditText)).setTextSize(fontSize);
+        ((TextInputEditText) root.findViewById(R.id.packagePriceEditText)).setTextSize(fontSize);
+        ((TextInputEditText) root.findViewById(R.id.packageRollsEditText)).setTextSize(fontSize);
+        ((Button) root.findViewById(R.id.paperWeightCheckBox)).setTextSize(fontSize);
+        ((TextInputEditText) root.findViewById(R.id.paperWeightEditText)).setTextSize(fontSize);
+        ((Button) root.findViewById(R.id.rollLengthCheckBox)).setTextSize(fontSize);
+        ((TextInputEditText) root.findViewById(R.id.rollLengthEditText)).setTextSize(fontSize);
+        ((Button) root.findViewById(R.id.rollPriceCheckBox)).setTextSize(fontSize);
+        ((TextInputEditText) root.findViewById(R.id.rollPriceEditText)).setTextSize(fontSize);
+        ((TextInputEditText) root.findViewById(R.id.rollSheetsEditText)).setTextSize(fontSize);
         ((Button) root.findViewById(R.id.sheetLengthCheckBox)).setTextSize(fontSize);
-        ((TextView) root.findViewById(R.id.sheetLengthEditText)).setTextSize(fontSize);
-        ((TextView) root.findViewById(R.id.sheetPriceCheckBox)).setTextSize(fontSize);
-        ((TextView) root.findViewById(R.id.sheetPriceEditText)).setTextSize(fontSize);
-        ((TextView) root.findViewById(R.id.sheetWidthEditText)).setTextSize(fontSize);
+        ((TextInputEditText) root.findViewById(R.id.sheetLengthEditText)).setTextSize(fontSize);
+        ((Button) root.findViewById(R.id.sheetPriceCheckBox)).setTextSize(fontSize);
+        ((TextInputEditText) root.findViewById(R.id.sheetPriceEditText)).setTextSize(fontSize);
+        ((TextInputEditText) root.findViewById(R.id.sheetWidthEditText)).setTextSize(fontSize);
 
         adapter = new TPDbAdapter(context);
         pm = new ProductModel();
