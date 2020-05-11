@@ -114,23 +114,23 @@ public class ProductDetailsFragment extends Fragment {
         }
 
         ProductModel pm = lpm.get(0);
-        addTableRow(productDetailTableLayout, "Uid", pm.getUid());
-        addTableRow(productDetailTableLayout, "Item no", pm.getItemNo());
-        addTableRow(productDetailTableLayout, "Brand", pm.getBrand());
-        addTableRow(productDetailTableLayout, "Layers", pm.getLayers());
-        addTableRow(productDetailTableLayout, "Package rolls", pm.getPackageRolls());
-        addTableRow(productDetailTableLayout, "Roll sheets", pm.getRollSheets());
-        addTableRow(productDetailTableLayout, "Sheet width", pm.getSheetWidth());
-        addTableRow(productDetailTableLayout, "Sheet length", pm.getSheetLength());
-        addTableRow(productDetailTableLayout, "Roll Length", pm.getRollLength());
-        addTableRow(productDetailTableLayout, "Package price", pm.getPackagePrice());
-        addTableRow(productDetailTableLayout, "Roll price", pm.getRollPrice());
-        addTableRow(productDetailTableLayout, "Paper weight", pm.getPaperWeight());
-        addTableRow(productDetailTableLayout, "Kilo price", pm.getKiloPrice());
-        addTableRow(productDetailTableLayout, "Meter price", pm.getMeterPrice());
-        addTableRow(productDetailTableLayout, "Sheet price", pm.getSheetPrice());
-        addTableRow(productDetailTableLayout, "Supplier", pm.getSupplier());
-        addTableRow(productDetailTableLayout, "Comments", pm.getComments());
+        addTableRow(productDetailTableLayout, "Løbenr.", pm.getUid());
+        addTableRow(productDetailTableLayout, "Varenummer", pm.getItemNo());
+        addTableRow(productDetailTableLayout, "Varemærke", pm.getBrand());
+        addTableRow(productDetailTableLayout, "Lag", pm.getLayers());
+        addTableRow(productDetailTableLayout, "Ruller pr. pakker", pm.getPackageRolls());
+        addTableRow(productDetailTableLayout, "Ark pr. rulle", pm.getRollSheets());
+        addTableRow(productDetailTableLayout, "Arkbredde", pm.getSheetWidth());
+        addTableRow(productDetailTableLayout, "Arklængde", pm.getSheetLength());
+        addTableRow(productDetailTableLayout, "Rullelængde", pm.getRollLength());
+        addTableRow(productDetailTableLayout, "Pakkepris", pm.getPackagePrice());
+        addTableRow(productDetailTableLayout, "Rullepris", pm.getRollPrice());
+        addTableRow(productDetailTableLayout, "Papirvægt", pm.getPaperWeight());
+        addTableRow(productDetailTableLayout, "Kilopris", pm.getKiloPrice());
+        addTableRow(productDetailTableLayout, "Meterpris", pm.getMeterPrice());
+        addTableRow(productDetailTableLayout, "Arkpris", pm.getSheetPrice());
+        addTableRow(productDetailTableLayout, "Butik", pm.getSupplier());
+        addTableRow(productDetailTableLayout, "Kommentarer", pm.getComments());
         addTableRow(productDetailTableLayout, "Timestamp", pm.getTimestamp());
 
         ImageButton productDeleteBtn = root.findViewById(R.id.productDeleteBtn);
