@@ -1,10 +1,12 @@
 package net.myerichsen.toiletpaper.ui.prices;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 
 import androidx.fragment.app.Fragment;
 
@@ -23,6 +25,7 @@ import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Display a graph with a line for each price at viewable scales along a time line
@@ -86,14 +89,25 @@ public class PriceGraphFragment extends Fragment {
             date = Date.from(ldt.atZone(ZoneId.systemDefault()).toInstant());
 
             DataPoint dp = new DataPoint(date, Double.parseDouble(String.valueOf(lpm.get(i).getRollPrice())));
-            series.appendData(dp, true, 100, true);
+            series.appendData(dp, true, 10, true);
         }
 
         graph.addSeries(series);
 
         graph.getGridLabelRenderer().setLabelFormatter(new DateAsXAxisLabelFormatter(getActivity()));
-        graph.getGridLabelRenderer().setNumHorizontalLabels(3); // only 4 because of the space
+        graph.getGridLabelRenderer().setNumHorizontalLabels(4); // only 4 because of the space
+
+        hideSoftKeyboard(getActivity());
 
         return root;
+    }
+
+    private static void hideSoftKeyboard(Activity activity) {
+        if (activity.getCurrentFocus() == null) {
+            return;
+        }
+
+        InputMethodManager inputMethodManager = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
+        Objects.requireNonNull(inputMethodManager).hideSoftInputFromWindow(activity.getCurrentFocus().getWindowToken(), 0);
     }
 }

@@ -4,21 +4,20 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <!--    TODO This should display itemno, brand, all prices and timestamp-->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal">
 
         <TextView
-            android:id="@+id/item_number"
+            android:id="@+id/plItemNo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/text_margin"
             android:textAppearance="?attr/textAppearanceListItem" />
 
         <TextView
-            android:id="@+id/content"
+            android:id="@+id/plBrand"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/text_margin"
@@ -34,34 +33,14 @@
             android:id="@+id/plPackagePrice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/package_price" />
-
-        <TextView
-            android:id="@+id/plRollPrice"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/roll_price" />
-
-        <TextView
-            android:id="@+id/plKiloPrice"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/kiloPriceRb" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal">
+            android:layout_margin="@dimen/text_margin2"
+            android:textAppearance="?attr/textAppearanceListItem" />
 
         <TextView
             android:id="@+id/plTimeStamp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/timestamp" />
+            android:layout_margin="@dimen/text_margin"
+            android:textAppearance="?attr/textAppearanceListItem" />
     </LinearLayout>
 </LinearLayout>

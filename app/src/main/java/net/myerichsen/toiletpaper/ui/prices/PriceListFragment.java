@@ -1,10 +1,12 @@
 package net.myerichsen.toiletpaper.ui.prices;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -16,8 +18,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import net.myerichsen.toiletpaper.R;
 import net.myerichsen.toiletpaper.TPDbAdapter;
 import net.myerichsen.toiletpaper.ui.home.HomeFragment;
-import net.myerichsen.toiletpaper.ui.prices.dummy.DummyContent;
-import net.myerichsen.toiletpaper.ui.prices.dummy.DummyContent.DummyItem;
+import net.myerichsen.toiletpaper.ui.prices.PriceModel.PriceItem;
+
+import java.util.Objects;
 
 /**
  * A fragment representing a list of Items.
@@ -26,14 +29,15 @@ import net.myerichsen.toiletpaper.ui.prices.dummy.DummyContent.DummyItem;
  * interface.
  */
 public class PriceListFragment extends Fragment {
-    // TODO: Customize parameter argument names
     private static final String ARG_COLUMN_COUNT = "column-count";
     private String itemNo;
     private String brand;
-    // TODO: Customize parameters
+
     private int mColumnCount = 4;
     private OnListFragmentInteractionListener mListener;
     private Context context;
+
+    // TODO Add a listener to navigate to product details
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -42,11 +46,6 @@ public class PriceListFragment extends Fragment {
     public PriceListFragment() {
     }
 
-    /**
-     * TODO Display with suppliers, all prices and timestamp.
-     */
-
-    // TODO: Customize parameter initialization
     @SuppressWarnings("unused")
     public static PriceListFragment newInstance(int columnCount) {
         PriceListFragment fragment = new PriceListFragment();
@@ -75,17 +74,28 @@ public class PriceListFragment extends Fragment {
 
         // Set the adapter
         if (root instanceof RecyclerView) {
-//            Context context = root.getContext();
             RecyclerView recyclerView = (RecyclerView) root;
-            // FIXME Crashes here
+
             if (mColumnCount <= 1) {
                 recyclerView.setLayoutManager(new LinearLayoutManager(context));
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-            recyclerView.setAdapter(new MyPricesRecyclerViewAdapter(DummyContent.ITEMS, mListener));
+            PriceModel priceModel = new PriceModel(context, itemNo, brand);
+            recyclerView.setAdapter(new PricesRecyclerViewAdapter(priceModel.ITEMS, mListener));
         }
+        hideSoftKeyboard(getActivity());
+
         return root;
+    }
+
+    private static void hideSoftKeyboard(Activity activity) {
+        if (activity.getCurrentFocus() == null) {
+            return;
+        }
+
+        InputMethodManager inputMethodManager = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
+        Objects.requireNonNull(inputMethodManager).hideSoftInputFromWindow(activity.getCurrentFocus().getWindowToken(), 0);
     }
 
     @Override
@@ -128,7 +138,6 @@ public class PriceListFragment extends Fragment {
      * >Communicating with Other Fragments</a> for more information.
      */
     public interface OnListFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onListFragmentInteraction(DummyItem item);
+        void onListFragmentInteraction(PriceItem item);
     }
 }

@@ -78,9 +78,7 @@ public class SupplierFragment extends Fragment {
             return;
         }
 
-        for (int i = 0; i < lsm.size(); i++) {
-            SupplierModel sm = lsm.get(i);
-
+        for (SupplierModel sm : lsm) {
             tableRow = new TableRow(context);
             tableRow.setBackgroundColor(Color.BLACK);
             tableRow.setPadding(2, 2, 2, 2); //Border between rows

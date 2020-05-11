@@ -123,9 +123,7 @@ public class CompareDetailsFragment extends Fragment {
             return;
         }
 
-        for (int i = 0; i < lpd.size(); i++) {
-            ProductModel pd = lpd.get(i);
-
+        for (ProductModel pd : lpd) {
             tableRow = new TableRow(context);
             tableRow.setBackgroundColor(Color.BLACK);
             tableRow.setPadding(2, 2, 2, 2); //Border between rows

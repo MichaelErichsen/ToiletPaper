@@ -31,7 +31,8 @@ import androidx.preference.PreferenceManager;
 import com.google.android.material.navigation.NavigationView;
 
 import net.myerichsen.toiletpaper.ui.prices.PriceListFragment;
-import net.myerichsen.toiletpaper.ui.prices.dummy.DummyContent;
+import net.myerichsen.toiletpaper.ui.prices.PriceListFragmentDirections;
+import net.myerichsen.toiletpaper.ui.prices.PriceModel;
 import net.myerichsen.toiletpaper.ui.settings.SettingsActivity;
 
 import java.util.Deque;
@@ -153,13 +154,20 @@ public class MainActivity extends AppCompatActivity implements PriceListFragment
                     e.printStackTrace();
                 }
             }
-
         }
         return null;
     }
 
+    /**
+     * Must be implemented for price list fragment
+     *
+     * @param item a price item
+     */
     @Override
-    public void onListFragmentInteraction(DummyContent.DummyItem item) {
-
+    public void onListFragmentInteraction(PriceModel.PriceItem item) {
+        int uid = item.uid;
+        PriceListFragmentDirections.ActionNavPricesListToNavProductDetails action =
+                PriceListFragmentDirections.actionNavPricesListToNavProductDetails(uid);
+        Navigation.findNavController(this, R.id.nav_host_fragment).navigate(action);
     }
 }
