@@ -20,9 +20,9 @@ public class SupplierModel {
      * no-arg constructor
      */
     public SupplierModel() {
-        timestamp =
-                LocalDateTime.now()
-                        .format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss"));
+//        timestamp =
+//                LocalDateTime.now()
+//                        .format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss"));
     }
 
     /**
@@ -31,9 +31,9 @@ public class SupplierModel {
     public SupplierModel(String supplier, String chain) {
         this.supplier = supplier;
         this.chain = chain;
-        timestamp =
-                LocalDateTime.now()
-                        .format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss"));
+//        timestamp =
+//                LocalDateTime.now()
+//                        .format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss"));
     }
 
     public String getSupplier() {

@@ -49,7 +49,7 @@ public class AboutFragment extends Fragment {
         }
 
         TextView versionTextView = root.findViewById(R.id.versionTextView);
-        versionTextView.setText(getString(R.string.version_text, BuildConfig.VERSION_CODE, BuildConfig.VERSION_NAME));
+        versionTextView.setText(getString(R.string.version_text, BuildConfig.VERSION_NAME));
         versionTextView.setTextSize(fontSize);
 
         TextView textView = root.findViewById(R.id.textView);
