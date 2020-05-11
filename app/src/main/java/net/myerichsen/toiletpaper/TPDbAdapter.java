@@ -37,6 +37,13 @@ public class TPDbAdapter {
         tpDbHelper = new TpDbHelper(context);
     }
 
+    /**
+     * Select from product table with selection arguments
+     *
+     * @param selection e.g. BRAND=?
+     * @param column    Selection argument column
+     * @return List of product models
+     */
     public List<ProductModel> getProductModels(String selection, String column) {
         List<ProductModel> lpm = new ArrayList<>();
 
@@ -54,6 +61,33 @@ public class TPDbAdapter {
 
         return lpm;
     }
+
+    /**
+     * Select from product table with selection arguments ordered
+     *
+     * @param selection   e.g. BRAND=?
+     * @param argColumn   Selection argument column
+     * @param orderColumn Column to order by
+     * @return List of product models
+     */
+    public List<ProductModel> getProductModels(String selection, String argColumn, String orderColumn) {
+        List<ProductModel> lpm = new ArrayList<>();
+
+        SQLiteDatabase db = tpDbHelper.getReadableDatabase();
+
+        String[] args = {argColumn};
+        Cursor cursor = db.query(TpDbHelper.TABLE_PRODUCT, pdColumns, selection, args, null, null, orderColumn);
+
+        if (cursor.getCount() > 0) {
+            while (cursor.moveToNext()) {
+                lpm.add(populateProductModel(cursor));
+            }
+        }
+        cursor.close();
+
+        return lpm;
+    }
+
 
     /**
      * Insert a product row
@@ -74,7 +108,7 @@ public class TPDbAdapter {
     }
 
     /**
-     * Get all data from product table
+     * Select all data from product table
      *
      * @return List of columns in record
      */

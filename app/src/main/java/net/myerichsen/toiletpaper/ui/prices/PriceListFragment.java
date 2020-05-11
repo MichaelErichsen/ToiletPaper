@@ -25,16 +25,11 @@ import net.myerichsen.toiletpaper.ui.prices.dummy.DummyContent.DummyItem;
  * Activities containing this fragment MUST implement the {@link OnListFragmentInteractionListener}
  * interface.
  */
-
-/**
- * TODO Display with suppliers, all prices and timestamp.
- */
 public class PriceListFragment extends Fragment {
-    private String itemNo;
-    private String brand;
-
     // TODO: Customize parameter argument names
     private static final String ARG_COLUMN_COUNT = "column-count";
+    private String itemNo;
+    private String brand;
     // TODO: Customize parameters
     private int mColumnCount = 4;
     private OnListFragmentInteractionListener mListener;
@@ -46,6 +41,10 @@ public class PriceListFragment extends Fragment {
      */
     public PriceListFragment() {
     }
+
+    /**
+     * TODO Display with suppliers, all prices and timestamp.
+     */
 
     // TODO: Customize parameter initialization
     @SuppressWarnings("unused")
