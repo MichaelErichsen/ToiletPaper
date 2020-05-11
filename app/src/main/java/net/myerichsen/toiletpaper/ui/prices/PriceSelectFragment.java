@@ -1,6 +1,5 @@
 package net.myerichsen.toiletpaper.ui.prices;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,13 +21,11 @@ import java.util.Objects;
  * Use the {@link PriceSelectFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-
-/**
- * TODO Select all product rows for the same item no and brand.
- */
 public class PriceSelectFragment extends Fragment {
     private TextInputEditText pItemNoEditText;
     private TextInputEditText pBrandEditText;
+    private Snackbar snackbar;
+    private View snackView;
 
     public PriceSelectFragment() {
         // Required empty public constructor
@@ -49,7 +46,8 @@ public class PriceSelectFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_price_select, container, false);
-        Context context = getContext();
+//        Context context = getContext();
+        snackView = requireActivity().findViewById(android.R.id.content);
 
         pItemNoEditText = root.findViewById(R.id.pItemNoEditText);
         pBrandEditText = root.findViewById(R.id.pBrandEditText);
@@ -64,7 +62,7 @@ public class PriceSelectFragment extends Fragment {
                                     Objects.requireNonNull(pBrandEditText.getText()).toString());
                     Navigation.findNavController(v).navigate(action);
                 } catch (Exception e) {
-                    Snackbar snackbar = Snackbar
+                    snackbar = Snackbar
                             .make(requireActivity().findViewById(android.R.id.content), Objects.requireNonNull(e.getMessage()), Snackbar.LENGTH_LONG);
                     snackbar.show();
                 }
@@ -76,10 +74,19 @@ public class PriceSelectFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 try {
-                    PriceSelectFragmentDirections.ActionNavPriceSelectToNavPriceGraph action =
-                            PriceSelectFragmentDirections.actionNavPriceSelectToNavPriceGraph((Objects.requireNonNull(pItemNoEditText.getText()).toString()),
-                                    Objects.requireNonNull(pBrandEditText.getText()).toString());
-                    Navigation.findNavController(v).navigate(action);
+                    String itemNo = Objects.requireNonNull(pItemNoEditText.getText()).toString();
+                    String brand = Objects.requireNonNull(pBrandEditText.getText()).toString();
+
+                    if (itemNo.equals("") && brand.equals("")) {
+                        snackbar = Snackbar
+                                .make(snackView, "Indtast varenummer eller varemærke", Snackbar.LENGTH_LONG);
+                        snackbar.show();
+                    } else {
+                        PriceSelectFragmentDirections.ActionNavPriceSelectToNavPriceGraph action =
+                                PriceSelectFragmentDirections.actionNavPriceSelectToNavPriceGraph((Objects.requireNonNull(pItemNoEditText.getText()).toString()),
+                                        Objects.requireNonNull(pBrandEditText.getText()).toString());
+                        Navigation.findNavController(v).navigate(action);
+                    }
                 } catch (Exception e) {
                     Snackbar snackbar = Snackbar
                             .make(requireActivity().findViewById(android.R.id.content), Objects.requireNonNull(e.getMessage()), Snackbar.LENGTH_LONG);
