@@ -77,7 +77,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
 
         if (count == 0) {
             Snackbar snackbar = Snackbar
-                    .make(snackView, "No data in table", Snackbar.LENGTH_LONG);
+                    .make(snackView, "Tabellen er tom", Snackbar.LENGTH_LONG);
             snackbar.show();
             return;
         }

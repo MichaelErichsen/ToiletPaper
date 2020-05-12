@@ -11,6 +11,7 @@ import net.myerichsen.toiletpaper.ui.suppliers.SupplierModel;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 /*
  * Copyright (c) 2020. Michael Erichsen. The program is distributed under the terms of the GNU Affero General Public License v3.0
@@ -506,6 +507,57 @@ public class TPDbAdapter {
                     0, (float) 41.26, 0, (float) 0.1217, 1, (float) 0.01523, 1,
                     "Rema Vejby", "Produceret i Sverige");
             tpHelper.insertData(pm);
+
+            /**
+             * Test data for graph
+             */
+            try {
+                pm = new ProductModel("test", "Lambi Classic Toilet Paper",
+                        3, 9, 255, 0, 125, 1, (float) 31.9,
+                        0, (float) 34.95, (float) 3.88, 1, (float) 0,
+                        0, (float) 41.26, 0, (float) 0.1217, 1, (float) 0.01523, 1,
+                        "Rema Vejby", "Produceret i Sverige");
+                tpHelper.insertData(pm);
+                TimeUnit.SECONDS.sleep(5);
+                pm = new ProductModel("test", "Lambi Classic Toilet Paper",
+                        3, 9, 255, 0, 125, 1, (float) 31.9,
+                        0, (float) 38, (float) 3.88, 1, (float) 0,
+                        0, (float) 41.26, 0, (float) 0.1217, 1, (float) 0.01523, 1,
+                        "Rema Vejby", "Produceret i Sverige");
+                tpHelper.insertData(pm);
+                TimeUnit.SECONDS.sleep(5);
+                pm = new ProductModel("test", "Lambi Classic Toilet Paper",
+                        3, 9, 255, 0, 125, 1, (float) 31.9,
+                        0, (float) 36, (float) 3.88, 1, (float) 0,
+                        0, (float) 41.26, 0, (float) 0.1217, 1, (float) 0.01523, 1,
+                        "Rema Vejby", "Produceret i Sverige");
+                tpHelper.insertData(pm);
+                TimeUnit.SECONDS.sleep(5);
+                pm = new ProductModel("test", "Lambi Classic Toilet Paper",
+                        3, 9, 255, 0, 125, 1, (float) 31.9,
+                        0, (float) 39, (float) 3.88, 1, (float) 0,
+                        0, (float) 41.26, 0, (float) 0.1217, 1, (float) 0.01523, 1,
+                        "Rema Vejby", "Produceret i Sverige");
+                tpHelper.insertData(pm);
+                TimeUnit.SECONDS.sleep(5);
+                pm = new ProductModel("test", "Lambi Classic Toilet Paper",
+                        3, 9, 255, 0, 125, 1, (float) 31.9,
+                        0, (float) 41, (float) 3.88, 1, (float) 0,
+                        0, (float) 41.26, 0, (float) 0.1217, 1, (float) 0.01523, 1,
+                        "Rema Vejby", "Produceret i Sverige");
+                tpHelper.insertData(pm);
+                TimeUnit.SECONDS.sleep(5);
+                pm = new ProductModel("test", "Lambi Classic Toilet Paper",
+                        3, 9, 255, 0, 125, 1, (float) 31.9,
+                        0, (float) 39.95, (float) 3.88, 1, (float) 0,
+                        0, (float) 41.26, 0, (float) 0.1217, 1, (float) 0.01523, 1,
+                        "Rema Vejby", "Produceret i Sverige");
+                tpHelper.insertData(pm);
+                TimeUnit.SECONDS.sleep(5);
+
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
 
         private void loadSuppliers(TPDbAdapter tpHelper) {
