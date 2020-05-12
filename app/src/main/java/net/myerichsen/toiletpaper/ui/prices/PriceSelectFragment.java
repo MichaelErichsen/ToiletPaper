@@ -19,6 +19,10 @@ import net.myerichsen.toiletpaper.R;
 
 import java.util.Objects;
 
+/*
+ * Copyright (c) 2020. Michael Erichsen. The program is distributed under the terms of the GNU Affero General Public License v3.0
+ */
+
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link PriceSelectFragment#newInstance} factory method to

@@ -31,6 +31,10 @@ import java.util.Objects;
 
 import static net.myerichsen.toiletpaper.ui.home.HomeFragment.BRAND;
 
+/*
+ * Copyright (c) 2020. Michael Erichsen. The program is distributed under the terms of the GNU Affero General Public License v3.0
+ */
+
 /**
  * A fragment representing a list af brands
  */
