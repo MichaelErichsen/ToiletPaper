@@ -70,7 +70,7 @@
     <fragment
         android:id="@+id/nav_compare_details"
         android:name="net.myerichsen.toiletpaper.ui.compare.CompareDetailsFragment"
-        android:label="Sorteret produktliste"
+        android:label="@string/label_sorted_product_list"
         tools:layout="@layout/fragment_compare_details">
         <argument
             android:name="sortKey"
@@ -116,7 +116,7 @@
     <fragment
         android:id="@+id/nav_supplier_details"
         android:name="net.myerichsen.toiletpaper.ui.suppliers.SupplierDetailsFragment"
-        android:label="Butiksdetaljer"
+        android:label="@string/label_supplier_details"
         tools:layout="@layout/fragment_supplier_details">
         <argument
             android:name="supplier"
@@ -131,7 +131,7 @@
     <fragment
         android:id="@+id/nav_price_graph"
         android:name="net.myerichsen.toiletpaper.ui.prices.PriceGraphFragment"
-        android:label="Prisudvikling, grafisk"
+        android:label="@string/label_prices_graph"
         tools:layout="@layout/fragment_price_graph">
         <argument
             android:name="itemNo"
@@ -143,7 +143,7 @@
     <fragment
         android:id="@+id/nav_price_select"
         android:name="net.myerichsen.toiletpaper.ui.prices.PriceSelectFragment"
-        android:label="Prisudvikling, valg vare"
+        android:label="@string/label_prices_select"
         tools:layout="@layout/fragment_price_select">
         <action
             android:id="@+id/action_nav_price_select_to_nav_prices_list"
@@ -155,7 +155,7 @@
     <fragment
         android:id="@+id/nav_prices_list"
         android:name="net.myerichsen.toiletpaper.ui.prices.PriceListFragment"
-        android:label="Prisudvikling"
+        android:label="@string/label_price_development"
         tools:layout="@layout/fragment_prices_list">
         <argument
             android:name="itemNo"
