@@ -1,7 +1,3 @@
-/*
- * Copyright (c) 2020. Michael Erichsen.
- */
-
 package net.myerichsen.toiletpaper;
 
 import android.annotation.SuppressLint;
@@ -91,47 +87,61 @@ public class MainActivity extends AppCompatActivity implements PriceListFragment
         }
 
         if (id == R.id.fragment_help) {
-            SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
-            float fontSize = Float.parseFloat(preferences.getString("fontsize", "24"));
-
-            final Dialog dialog = new Dialog(this);
-            dialog.setContentView(R.layout.dialog_help);
-            dialog.setTitle("@string/help");
-
-            TextView text = dialog.findViewById(R.id.HelpDialogTextView);
-            text.setTextSize(fontSize);
-
-            String s = getCallingFragmentLabel();
-            switch (Objects.requireNonNull(s)) {
-                case "Butikker":
-                    text.setText(getString(R.string.suppliers_help_text));
-                    break;
-                case "Om":
-                    text.setText(getString(R.string.about_help_text));
-                    break;
-                case "Produkter":
-                    text.setText(getString(R.string.products_help_text));
-                    break;
-                default:
-                    text.setText(getString(R.string.default_help_text, s));
-                    break;
-            }
-
-            Button dialogButton = dialog.findViewById(R.id.helpDialogButtonOK);
-            // if button is clicked, close the custom dialog
-            dialogButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    dialog.dismiss();
-                }
-            });
-
-            dialog.show();
+            showHelpDialog();
             return true;
-
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void showHelpDialog() {
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        float fontSize = Float.parseFloat(preferences.getString("fontsize", "24"));
+
+        final Dialog dialog = new Dialog(this);
+        dialog.setContentView(R.layout.dialog_help);
+        dialog.setTitle("@string/help");
+
+        TextView text = dialog.findViewById(R.id.HelpDialogTextView);
+        text.setTextSize(fontSize);
+
+        String s = getCallingFragmentLabel();
+        switch (Objects.requireNonNull(s)) {
+            case "Butikker":
+                text.setText(getString(R.string.suppliers_help_text));
+                break;
+            case "Om":
+                text.setText(getString(R.string.about_help_text));
+                break;
+            case "Produkter":
+                text.setText(getString(R.string.products_help_text));
+                break;
+            case "Prisudvikling":
+                text.setText(getString(R.string.price_list_help_text));
+                break;
+            case "Scan":
+            case "Fundne varemærker":
+            case "Sammenlign":
+            case "Sorteret produktliste":
+            case "Produktdetaljer":
+            case "Butiksdetaljer":
+            case "Prisudvikling, grafisk":
+            case "Prisudvikling, valg vare":
+            default:
+                text.setText(getString(R.string.default_help_text, s));
+                break;
+        }
+
+        Button dialogButton = dialog.findViewById(R.id.helpDialogButtonOK);
+        // if button is clicked, close the custom dialog
+        dialogButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
+        dialog.show();
     }
 
     @Override

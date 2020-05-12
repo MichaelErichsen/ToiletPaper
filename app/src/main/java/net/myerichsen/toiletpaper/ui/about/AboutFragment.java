@@ -1,7 +1,4 @@
 package net.myerichsen.toiletpaper.ui.about;
-/*
- * Copyright (c) 2020. Michael Erichsen.
- */
 
 import android.content.Context;
 import android.content.SharedPreferences;

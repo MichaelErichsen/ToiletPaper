@@ -10,7 +10,6 @@ import android.view.inputmethod.InputMethodManager;
 
 import androidx.fragment.app.Fragment;
 
-import com.jjoe64.graphview.DefaultLabelFormatter;
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.helper.DateAsXAxisLabelFormatter;
 import com.jjoe64.graphview.series.DataPoint;
@@ -21,9 +20,6 @@ import net.myerichsen.toiletpaper.TPDbAdapter;
 import net.myerichsen.toiletpaper.ui.home.HomeFragment;
 import net.myerichsen.toiletpaper.ui.products.ProductModel;
 
-import java.math.BigDecimal;
-import java.math.RoundingMode;
-import java.text.NumberFormat;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
@@ -54,7 +50,7 @@ public class PriceGraphFragment extends Fragment {
      * this fragment using the provided parameters.
      *
      * @param itemNo Iten number
-     * @param brand Brand
+     * @param brand  Brand
      * @return A new instance of the class
      */
     public static PriceGraphFragment newInstance(String itemNo, String brand) {
@@ -66,8 +62,16 @@ public class PriceGraphFragment extends Fragment {
         return fragment;
     }
 
+    private static void hideSoftKeyboard(Activity activity) {
+        if (activity.getCurrentFocus() == null) {
+            return;
+        }
+
+        InputMethodManager inputMethodManager = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
+        Objects.requireNonNull(inputMethodManager).hideSoftInputFromWindow(activity.getCurrentFocus().getWindowToken(), 0);
+    }
+
     /**
-     *
      * @param savedInstanceState The state of the saved instance
      */
     @Override
@@ -80,9 +84,8 @@ public class PriceGraphFragment extends Fragment {
     }
 
     /**
-     *
-     * @param inflater Inflater
-     * @param container Container
+     * @param inflater           Inflater
+     * @param container          Container
      * @param savedInstanceState The state of the saved instance
      * @return The view
      */
@@ -126,14 +129,5 @@ public class PriceGraphFragment extends Fragment {
         hideSoftKeyboard(requireActivity());
 
         return root;
-    }
-
-    private static void hideSoftKeyboard(Activity activity) {
-        if (activity.getCurrentFocus() == null) {
-            return;
-        }
-
-        InputMethodManager inputMethodManager = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
-        Objects.requireNonNull(inputMethodManager).hideSoftInputFromWindow(activity.getCurrentFocus().getWindowToken(), 0);
     }
 }

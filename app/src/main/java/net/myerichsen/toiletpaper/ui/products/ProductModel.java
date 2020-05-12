@@ -3,11 +3,6 @@ package net.myerichsen.toiletpaper.ui.products;
  * Copyright (c) 2020. Michael Erichsen. The program is distributed under the terms of the GNU Affero General Public License v3.0
  */
 
-import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.Locale;
-
 /**
  * Class to encapsulate all toilet paper product data.
  * Boolean values are stored as integers 0 (false) and 1 (true).

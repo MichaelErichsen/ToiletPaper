@@ -1,7 +1,3 @@
-/*
- * Copyright (c) 2020. Michael Erichsen.
- */
-
 package net.myerichsen.toiletpaper.ui.products;
 
 import android.content.Context;

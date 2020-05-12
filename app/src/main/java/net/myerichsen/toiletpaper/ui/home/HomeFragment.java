@@ -1,7 +1,4 @@
 package net.myerichsen.toiletpaper.ui.home;
-/*
- * Copyright (c) 2020. Michael Erichsen.
- */
 
 import android.app.Activity;
 import android.content.Context;
@@ -23,7 +20,6 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatImageButton;
