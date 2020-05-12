@@ -151,7 +151,10 @@
         Beregnede værdier markeres som sådan. Ved indtastning fjernes markeringen.
     </string>
     <string name="scan_help_text">Scan en stregkode eller QR-kode.\n
-        Telefonen vil bippe, og koden vil blive vist nedenfor</string>
+        Telefonen vil bippe, og koden vil blive vist nedenfor.\n
+        Koden indsættes i hovedbilledet, og der søges efter denne i databasen.
+    </string>
     <string name="brand_list_help_text">Oversigt over fundne varemærker.\nVed valg af en række
-        returneres denne til hovedbilledet</string>
+        returneres denne til hovedbilledet, og der søges efter denne i databasen.
+    </string>
 </resources>
