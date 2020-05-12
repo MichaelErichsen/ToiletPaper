@@ -123,7 +123,11 @@ public class MainActivity extends AppCompatActivity implements PriceListFragment
                 text.setText(getString(R.string.home_help_text));
                 break;
             case "Scan":
+                text.setText(getString(R.string.scan_help_text));
+                break;
             case "Fundne varemærker":
+                text.setText(getString(R.string.brand_list_help_text));
+                break;
             case "Sammenlign":
             case "Sorteret produktliste":
             case "Produktdetaljer":

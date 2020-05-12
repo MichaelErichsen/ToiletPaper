@@ -60,7 +60,7 @@
     <string name="menu_products">Produkter</string>
     <string name="menu_suppliers">Butikker</string>
     <string name="uri">URI</string>
-    <string name="scan_prompt">Scan en stregkode eller QR-kode. Telefonen vil bippe, og koden vil blive vist nedenfor.</string>
+    <string name="scan_prompt">Scan en stregkode eller QR-kode.</string>
     <string name="supplier">Butik</string>
     <string name="roll_price" tools:ignore="Typos">Pris pr. rulle</string>
     <string name="home_fragment_save_message">Produktet er gemt på telefonen</string>
@@ -150,4 +150,8 @@
         Der kan foretages opslag på Pricerunner med Pricerunnerknappen.\n
         Beregnede værdier markeres som sådan. Ved indtastning fjernes markeringen.
     </string>
+    <string name="scan_help_text">Scan en stregkode eller QR-kode.\n
+        Telefonen vil bippe, og koden vil blive vist nedenfor</string>
+    <string name="brand_list_help_text">Oversigt over fundne varemærker.\nVed valg af en række
+        returneres denne til hovedbilledet</string>
 </resources>
