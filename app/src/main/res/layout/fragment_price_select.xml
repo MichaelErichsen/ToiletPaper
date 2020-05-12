@@ -14,7 +14,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
-        android:text="Filtrer varenumre eller varemærker"
+        android:text="@string/filter_itemno_or_brand"
         android:textAlignment="viewStart"
         android:textSize="24sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -32,7 +32,7 @@
             android:id="@+id/pItemNoEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Varenummer" />
+            android:hint="@string/item_no" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -47,14 +47,14 @@
             android:id="@+id/pBrandEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Varemærke" />
+            android:hint="@string/brand" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <ImageButton
         android:id="@+id/priceSelectionBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:contentDescription="Vælg"
+        android:contentDescription="@string/select"
         android:src="@drawable/test_black_48dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/pBrandTextInputLayout" />
@@ -65,7 +65,7 @@
         android:layout_height="wrap_content"
         android:src="@drawable/graph_48"
         app:layout_constraintStart_toEndOf="@+id/priceSelectionBtn"
-        android:contentDescription="TODO"
+        android:contentDescription="@string/graph"
         app:layout_constraintTop_toBottomOf="@+id/pBrandTextInputLayout" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

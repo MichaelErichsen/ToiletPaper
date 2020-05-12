@@ -32,8 +32,6 @@
     <string name="action_supplier_list">Butiksliste</string>
     <string name="action_about">Om</string>
     <string name="test_button">Tryk her</string>
-    <string name="item_no">Varenummer</string>
-    <string name="brand">Varemærke</string>
     <string name="layers">Lag</string>
     <string name="package_rolls">Ruller pr. pakke</string>
     <string name="count">Antal</string>
@@ -136,4 +134,11 @@
         For hvert tidspunkt angives varenummer, varemærke, pris pr. pakke og timestamp.\n
         Detaljer for produktet vises ved klik på en række.
     </string>
+    <string name="price_development">Prisudvikling</string>
+    <string name="package_price_kr">Pris i kr. pr. pakke</string>
+    <string name="filter_itemno_or_brand">Filtrer varenumre eller varemærker</string>
+    <string name="item_no">Varenummer</string>
+    <string name="brand">Varemærke</string>
+    <string name="select">Vælg</string>
+    <string name="graph">Graf</string>
 </resources>

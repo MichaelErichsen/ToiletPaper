@@ -6,9 +6,7 @@ import net.myerichsen.toiletpaper.TPDbAdapter;
 import net.myerichsen.toiletpaper.ui.products.ProductModel;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Helper class for providing content for user interfaces created by
@@ -24,13 +22,13 @@ public class PriceModel {
     /**
      * A map of price items, by itemNo
      */
-    private static Map<String, PriceItem> ITEM_MAP;
+//    private static Map<String, PriceItem> ITEM_MAP;
 
 //    private static final int COUNT = 25;
 
     public PriceModel(Context context, String itemNo, String brand) {
         ITEMS = new ArrayList<>();
-        ITEM_MAP = new HashMap<>();
+//        ITEM_MAP = new HashMap<>();
 
         TPDbAdapter adapter = new TPDbAdapter(context);
 
@@ -49,7 +47,7 @@ public class PriceModel {
 
     private static void addItem(PriceItem item) {
         ITEMS.add(item);
-        ITEM_MAP.put(item.itemNo, item);
+//        ITEM_MAP.put(item.itemNo, item);
     }
 
     /**
