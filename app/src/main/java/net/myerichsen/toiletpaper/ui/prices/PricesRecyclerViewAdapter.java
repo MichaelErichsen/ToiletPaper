@@ -13,6 +13,10 @@ import net.myerichsen.toiletpaper.ui.prices.PriceModel.PriceItem;
 
 import java.util.List;
 
+/*
+ * Copyright (c) 2020. Michael Erichsen. The program is distributed under the terms of the GNU Affero General Public License v3.0
+ */
+
 /**
  * {@link RecyclerView.Adapter} that can display a {@link PriceModel.PriceItem} and makes a call to the
  * specified {@link OnListFragmentInteractionListener}.

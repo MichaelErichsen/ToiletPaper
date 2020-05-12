@@ -34,6 +34,10 @@ import java.io.IOException;
 
 import static net.myerichsen.toiletpaper.ui.home.HomeFragment.ITEM_NO;
 
+/*
+ * Copyright (c) 2020. Michael Erichsen. The program is distributed under the terms of the GNU Affero General Public License v3.0
+ */
+
 public class ScanFragment extends Fragment {
     private static final int REQUEST_CAMERA_PERMISSION = 201;
     private Context context;

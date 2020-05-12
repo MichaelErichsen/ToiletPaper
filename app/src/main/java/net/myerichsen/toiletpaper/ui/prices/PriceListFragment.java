@@ -22,6 +22,11 @@ import net.myerichsen.toiletpaper.ui.prices.PriceModel.PriceItem;
 
 import java.util.Objects;
 
+
+/*
+ * Copyright (c) 2020. Michael Erichsen. The program is distributed under the terms of the GNU Affero General Public License v3.0
+ */
+
 /**
  * A fragment representing a list of Items.
  * <p/>

@@ -15,6 +15,10 @@ import net.myerichsen.toiletpaper.ui.suppliers.SupplierModel;
 import java.util.ArrayList;
 import java.util.List;
 
+/*
+ * Copyright (c) 2020. Michael Erichsen. The program is distributed under the terms of the GNU Affero General Public License v3.0
+ */
+
 /**
  * Database helper for product and supplier tables
  */

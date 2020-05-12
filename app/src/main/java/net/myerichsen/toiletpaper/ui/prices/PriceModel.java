@@ -8,6 +8,10 @@ import net.myerichsen.toiletpaper.ui.products.ProductModel;
 import java.util.ArrayList;
 import java.util.List;
 
+/*
+ * Copyright (c) 2020. Michael Erichsen. The program is distributed under the terms of the GNU Affero General Public License v3.0
+ */
+
 /**
  * Helper class for providing content for user interfaces created by
  * Android template wizards.

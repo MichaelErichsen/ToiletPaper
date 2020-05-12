@@ -35,6 +35,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+/*
+ * Copyright (c) 2020. Michael Erichsen. The program is distributed under the terms of the GNU Affero General Public License v3.0
+ */
+
 public class CompareFragment extends Fragment {
     private String sortKey = "PAPER_WEIGHT";
     private String sortFilter = "ALL";
