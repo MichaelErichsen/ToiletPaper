@@ -32,8 +32,8 @@ public class PricesRecyclerViewAdapter extends RecyclerView.Adapter<PricesRecycl
      * calling the adapter's onBindViewHolder() method. That method uses the view holder's position
      * to determine what the contents should be, based on its list position.
      *
-     * @param items
-     * @param listener
+     * @param items List of price items
+     * @param listener The OnListFragmentInteractionListener
      */
     public PricesRecyclerViewAdapter(List<PriceItem> items, OnListFragmentInteractionListener listener) {
         mValues = items;
@@ -75,15 +75,15 @@ public class PricesRecyclerViewAdapter extends RecyclerView.Adapter<PricesRecycl
     /**
      * Each view holder is in charge of displaying a single item with a view.
      */
-    public class ViewHolder extends RecyclerView.ViewHolder {
-        public final View mView;
-        public final TextView mItemNo;
-        public final TextView mBrand;
-        public final TextView mPackagePrice;
-        public final TextView mTimeStamp;
-        public PriceModel.PriceItem mItem;
+    public static class ViewHolder extends RecyclerView.ViewHolder {
+        final View mView;
+        final TextView mItemNo;
+        final TextView mBrand;
+        final TextView mPackagePrice;
+        final TextView mTimeStamp;
+        PriceModel.PriceItem mItem;
 
-        public ViewHolder(View view) {
+        ViewHolder(View view) {
             super(view);
             mView = view;
             mItemNo = view.findViewById(R.id.plItemNo);

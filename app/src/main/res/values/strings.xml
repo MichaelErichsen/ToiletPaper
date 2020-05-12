@@ -24,17 +24,6 @@
         * Butiksliste\n
         * Om\n\n
     </string>
-    <string name="about_help_text">
-        Forklaring til programmet. Her findes også programmets version, hvis der skal
-        rapporteres fejl eller ønsker til udvidelse.</string>
-    <string name="products_help_text">Oversigt over kendte produkter.\n
-        Kolonnerne viser varemærke og varenummer samt \"UID\",
-        som er produktets entydige identifikation i databasen.\n
-        Detaljer for produktet vises ved klik på en række.</string>
-    <string name="suppliers_help_text">Oversigt over kendte butikker.\n
-        Kolonnerne viser butik og kæde. Kæde er medtaget for senere at kunne linke direkte
-        til kædernes egne produktbeskrivelser på nettet.\n
-        Detaljer for butikken vises ved klik på en række.</string>
     <string name="action_calculate">Beregn</string>
     <string name="action_save">Gem</string>
     <string name="action_suppliers">Søg hos butikken</string>
@@ -79,8 +68,8 @@
     <string name="home_fragment_save_message">Produktet er gemt på telefonen</string>
     <string name="compare">Sammenligning</string>
     <string name="menu_compare">Sammenlign</string>
-    <string name="menu_product_details">Detaljer</string>
-    <string name="menu_compare_details">Detaljer</string>
+    <string name="menu_product_details">Produktdetaljer</string>
+    <string name="menu_compare_details">Sammenligningsdetaljer</string>
     <string name="compare_filter">\n\nFiltrer butikker</string>
     <string name="compare_key">\n\nVælg sorteringsnøgle</string>
     <string name="title_fragment_compare">Sammenlign</string>
@@ -126,4 +115,25 @@
     <string name="OK">OK</string>
     <string name="default_help_text">Hjælp kaldt fra %1$s</string>
     <string name="fontsize_preference_summary">Skriftstørrelse </string>
+    <string name="label_sorted_product_list">Sorteret produktliste</string>
+    <string name="label_supplier_details">Butiksdetaljer</string>
+    <string name="label_prices_graph">Prisudvikling, grafisk</string>
+    <string name="label_prices_select">Prisudvikling, valg vare</string>
+    <string name="label_price_development">Prisudvikling</string>
+    <string name="about_help_text">
+        Forklaring til programmet. Her findes også programmets version, hvis der skal
+        rapporteres fejl eller ønsker til udvidelse.</string>
+    <string name="products_help_text">Oversigt over kendte produkter.\n
+        Kolonnerne viser varemærke og varenummer samt \"UID\",
+        som er produktets entydige identifikation i databasen.\n
+        Detaljer for produktet vises ved klik på en række.</string>
+    <string name="suppliers_help_text">Oversigt over kendte butikker.\n
+        Kolonnerne viser butik og kæde. Kæde er medtaget for senere at kunne linke direkte
+        til kædernes egne produktbeskrivelser på nettet.\n
+        Detaljer for butikken vises ved klik på en række.</string>
+    <string name="price_list_help_text">
+        Oversigt over prisudviklingen for dette produkt.\n
+        For hvert tidspunkt angives varenummer, varemærke, pris pr. pakke og timestamp.\n
+        Detaljer for produktet vises ved klik på en række.
+    </string>
 </resources>
