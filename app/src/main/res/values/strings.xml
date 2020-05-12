@@ -118,6 +118,13 @@
     <string name="label_prices_graph">Prisudvikling, grafisk</string>
     <string name="label_prices_select">Prisudvikling, valg vare</string>
     <string name="label_price_development">Prisudvikling</string>
+    <string name="price_development">Prisudvikling</string>
+    <string name="package_price_kr">Pris i kr. pr. pakke</string>
+    <string name="filter_itemno_or_brand">Filtrer varenumre eller varemærker</string>
+    <string name="item_no">Varenummer</string>
+    <string name="brand">Varemærke</string>
+    <string name="select">Vælg</string>
+    <string name="graph">Graf</string>
     <string name="about_help_text">
         Forklaring til programmet. Her findes også programmets version, hvis der skal
         rapporteres fejl eller ønsker til udvidelse.</string>
@@ -134,11 +141,13 @@
         For hvert tidspunkt angives varenummer, varemærke, pris pr. pakke og timestamp.\n
         Detaljer for produktet vises ved klik på en række.
     </string>
-    <string name="price_development">Prisudvikling</string>
-    <string name="package_price_kr">Pris i kr. pr. pakke</string>
-    <string name="filter_itemno_or_brand">Filtrer varenumre eller varemærker</string>
-    <string name="item_no">Varenummer</string>
-    <string name="brand">Varemærke</string>
-    <string name="select">Vælg</string>
-    <string name="graph">Graf</string>
+    <string name="home_help_text">
+        Hovedbillede for programmet.\n
+        Indtast alle kendte data og klik på beregn nederst på billedet.\n
+        Varenummer kan scannes. Det kan slås op i databasen.\n
+        Varemærke kan slås op i databasen.\n
+        De indtastede data gemmes med gemmeknappen nederst.\n
+        Der kan foretages opslag på Pricerunner med Pricerunnerknappen.\n
+        Beregnede værdier markeres som sådan. Ved indtastning fjernes markeringen.
+    </string>
 </resources>

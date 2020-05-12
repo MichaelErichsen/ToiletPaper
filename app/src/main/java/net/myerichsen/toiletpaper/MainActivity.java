@@ -119,6 +119,9 @@ public class MainActivity extends AppCompatActivity implements PriceListFragment
             case "Prisudvikling":
                 text.setText(getString(R.string.price_list_help_text));
                 break;
+            case "Toiletpapir":
+                text.setText(getString(R.string.home_help_text));
+                break;
             case "Scan":
             case "Fundne varemærker":
             case "Sammenlign":
