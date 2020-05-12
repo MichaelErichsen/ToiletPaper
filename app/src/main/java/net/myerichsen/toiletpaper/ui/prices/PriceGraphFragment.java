@@ -119,7 +119,7 @@ public class PriceGraphFragment extends Fragment {
         graph.getGridLabelRenderer().setNumHorizontalLabels(4); // only 4 because of the space
         graph.getGridLabelRenderer().setHumanRounding(false);
 
-        hideSoftKeyboard(getActivity());
+        hideSoftKeyboard(requireActivity());
 
         return root;
     }

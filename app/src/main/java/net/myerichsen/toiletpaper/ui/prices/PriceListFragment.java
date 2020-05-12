@@ -82,9 +82,9 @@ public class PriceListFragment extends Fragment {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
             PriceModel priceModel = new PriceModel(context, itemNo, brand);
-            recyclerView.setAdapter(new PricesRecyclerViewAdapter(priceModel.ITEMS, mListener));
+            recyclerView.setAdapter(new PricesRecyclerViewAdapter(PriceModel.ITEMS, mListener));
         }
-        hideSoftKeyboard(getActivity());
+        hideSoftKeyboard(requireActivity());
 
         return root;
     }

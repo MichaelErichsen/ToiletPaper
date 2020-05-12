@@ -62,7 +62,7 @@ public class MainActivity extends AppCompatActivity implements PriceListFragment
                 R.id.nav_products,
                 R.id.nav_suppliers,
                 R.id.nav_about)
-                .setDrawerLayout(drawer)
+                .setOpenableLayout(drawer)
                 .build();
         NavController navController = findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);

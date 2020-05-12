@@ -107,7 +107,7 @@ public class PriceSelectFragment extends Fragment {
     private void complain() {
         Activity activity = getActivity();
 
-        if (activity.getCurrentFocus() != null) {
+        if (Objects.requireNonNull(activity).getCurrentFocus() != null) {
             InputMethodManager inputMethodManager = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
             Objects.requireNonNull(inputMethodManager).hideSoftInputFromWindow(activity.getCurrentFocus().getWindowToken(), 0);
         }

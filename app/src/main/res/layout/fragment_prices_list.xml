@@ -10,4 +10,4 @@
     android:layout_marginRight="16dp"
     app:layoutManager="LinearLayoutManager"
     tools:context=".ui.prices.PriceListFragment"
-    tools:listitem="@layout/fragment_prices"></androidx.recyclerview.widget.RecyclerView>
+    tools:listitem="@layout/fragment_prices" />
