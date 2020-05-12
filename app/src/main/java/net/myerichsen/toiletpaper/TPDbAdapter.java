@@ -1,7 +1,4 @@
 package net.myerichsen.toiletpaper;
-/*
- * Copyright (c) 2020. Michael Erichsen.
- */
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -372,14 +369,14 @@ public class TPDbAdapter {
                 ITEM_NO + " TEXT, " +
                 BRAND + " TEXT, " +
                 TIME_STAMP + " TIMESTAMP DEFAULT CURRENT_TIMESTAMP);";
-//                TIME_STAMP + " TIMESTAMP DEFAULT (datetime('now','localtime')));";
+        //                TIME_STAMP + " TIMESTAMP DEFAULT (datetime('now','localtime')));";
 //                TIME_STAMP + " TEXT);";
         private static final String DROP_PRODUCT_TABLE = "DROP TABLE IF EXISTS " + TABLE_PRODUCT;
         private static final String CREATE_SUPPLIER_TABLE = "CREATE TABLE IF NOT EXISTS " + TABLE_SUPPLIER +
                 " (" + SUPPLIER + " TEXT PRIMARY KEY, " +
                 CHAIN + " TEXT, " +
                 TIME_STAMP + " TIMESTAMP DEFAULT CURRENT_TIMESTAMP);";
-//                TIME_STAMP + " TEXT);";
+        //                TIME_STAMP + " TEXT);";
         private static final String DROP_SUPPLIER_TABLE = "DROP TABLE IF EXISTS " + TABLE_SUPPLIER;
         private final Context context;
 
@@ -461,13 +458,6 @@ public class TPDbAdapter {
                     "Rema Vejby", "Produceret i Sverige");
             tpHelper.insertData(pm);
 
-            pm = new ProductModel("170190", "Lambi Classic Toilet Paper",
-                    3, 9, 255, 0, 125, 1, (float) 31.9,
-                    0, (float) 34.95, (float) 3.88, 1, (float) 0,
-                    0, (float) 41.26, 0, (float) 0.1217, 1, (float) 0.01523, 1,
-                    "Rema Vejby", "Produceret i Sverige");
-            tpHelper.insertData(pm);
-
             pm = new ProductModel("WW-166808", "Staples 29 m",
                     2, 8, 250, 96, 115, 0, (float) 28.75,
                     0, (float) 24.94, (float) 3.12, 1,
@@ -508,6 +498,13 @@ public class TPDbAdapter {
                     (float) 22, (float) 2.75, 1,
                     0, 0, (float) 29.06, 0, (float) 0.143979058, 1, (float) 0.017973856, 1,
                     "nemlig.com", "");
+            tpHelper.insertData(pm);
+
+            pm = new ProductModel("170190", "Lambi Classic Toilet Paper",
+                    3, 9, 255, 0, 125, 1, (float) 31.9,
+                    0, (float) 34.95, (float) 3.88, 1, (float) 0,
+                    0, (float) 41.26, 0, (float) 0.1217, 1, (float) 0.01523, 1,
+                    "Rema Vejby", "Produceret i Sverige");
             tpHelper.insertData(pm);
         }
 

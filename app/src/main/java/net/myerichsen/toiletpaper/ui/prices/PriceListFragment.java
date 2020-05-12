@@ -42,8 +42,6 @@ public class PriceListFragment extends Fragment {
     private OnListFragmentInteractionListener mListener;
     private Context context;
 
-    // TODO Add a listener to navigate to product details
-
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
@@ -51,6 +49,10 @@ public class PriceListFragment extends Fragment {
     public PriceListFragment() {
     }
 
+    /**
+     * @param columnCount Number og columns
+     * @return An instance of this class
+     */
     @SuppressWarnings("unused")
     public static PriceListFragment newInstance(int columnCount) {
         PriceListFragment fragment = new PriceListFragment();
@@ -58,6 +60,15 @@ public class PriceListFragment extends Fragment {
         args.putInt(ARG_COLUMN_COUNT, columnCount);
         fragment.setArguments(args);
         return fragment;
+    }
+
+    private static void hideSoftKeyboard(Activity activity) {
+        if (activity.getCurrentFocus() == null) {
+            return;
+        }
+
+        InputMethodManager inputMethodManager = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
+        Objects.requireNonNull(inputMethodManager).hideSoftInputFromWindow(activity.getCurrentFocus().getWindowToken(), 0);
     }
 
     @Override
@@ -92,15 +103,6 @@ public class PriceListFragment extends Fragment {
         hideSoftKeyboard(requireActivity());
 
         return root;
-    }
-
-    private static void hideSoftKeyboard(Activity activity) {
-        if (activity.getCurrentFocus() == null) {
-            return;
-        }
-
-        InputMethodManager inputMethodManager = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
-        Objects.requireNonNull(inputMethodManager).hideSoftInputFromWindow(activity.getCurrentFocus().getWindowToken(), 0);
     }
 
     @Override

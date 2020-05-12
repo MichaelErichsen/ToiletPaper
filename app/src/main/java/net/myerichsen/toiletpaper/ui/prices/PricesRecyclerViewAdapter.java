@@ -25,10 +25,6 @@ public class PricesRecyclerViewAdapter extends RecyclerView.Adapter<PricesRecycl
     private final List<PriceModel.PriceItem> mValues;
     private final OnListFragmentInteractionListener mListener;
 
-    public interface OnItemClickListener {
-        void onItemClick(PriceItem item);
-    }
-
     /**
      * The view holder objects are managed by an adapter, which you create by extending
      * RecyclerView.Adapter. The adapter creates view holders as needed. The adapter also binds the
@@ -74,6 +70,10 @@ public class PricesRecyclerViewAdapter extends RecyclerView.Adapter<PricesRecycl
     @Override
     public int getItemCount() {
         return mValues.size();
+    }
+
+    public interface OnItemClickListener {
+        void onItemClick(PriceItem item);
     }
 
     /**
