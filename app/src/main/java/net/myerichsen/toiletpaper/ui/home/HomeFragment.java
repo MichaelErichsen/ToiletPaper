@@ -18,7 +18,6 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.EditText;
 import android.widget.Spinner;
 
 import androidx.annotation.NonNull;
@@ -54,29 +53,29 @@ public class HomeFragment extends Fragment {
     private Snackbar snackbar;
     private View snackView;
 
-    private EditText itemNoEditText;
-    private EditText brandEditText;
+    private TextInputEditText itemNoEditText;
+    private TextInputEditText brandEditText;
     private Spinner layersSpinner;
-    private EditText packageRollsEditText;
-    private EditText rollSheetsEditText;
-    private EditText sheetWidthEditText;
-    private EditText sheetLengthEditText;
+    private TextInputEditText packageRollsEditText;
+    private TextInputEditText rollSheetsEditText;
+    private TextInputEditText sheetWidthEditText;
+    private TextInputEditText sheetLengthEditText;
     private CheckBox sheetLengthCheckBox;
-    private EditText rollLengthEditText;
+    private TextInputEditText rollLengthEditText;
     private CheckBox rollLengthCheckBox;
-    private EditText packagePriceEditText;
-    private EditText rollPriceEditText;
+    private TextInputEditText packagePriceEditText;
+    private TextInputEditText rollPriceEditText;
     private CheckBox rollPriceCheckBox;
-    private EditText paperWeightEditText;
+    private TextInputEditText paperWeightEditText;
     private CheckBox paperWeightCheckBox;
-    private EditText kiloPriceEditText;
+    private TextInputEditText kiloPriceEditText;
     private CheckBox kiloPriceCheckBox;
-    private EditText meterPriceEditText;
+    private TextInputEditText meterPriceEditText;
     private CheckBox meterPriceCheckBox;
-    private EditText sheetPriceEditText;
+    private TextInputEditText sheetPriceEditText;
     private CheckBox sheetPriceCheckBox;
     private Spinner suppliersSpinner;
-    private EditText commentEditText;
+    private TextInputEditText commentEditText;
     private ProductModel pm;
     private String brand;
 
@@ -94,11 +93,12 @@ public class HomeFragment extends Fragment {
         View root = inflater.inflate(R.layout.fragment_home, container, false);
         activity = getActivity();
         Context context = getContext();
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(Objects.requireNonNull(context));
-        float fontSize = Float.parseFloat(preferences.getString("fontsize", "24"));
-
         snackView = requireActivity().findViewById(android.R.id.content);
 
+        // Set font sizes
+
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(Objects.requireNonNull(context));
+        float fontSize = Float.parseFloat(preferences.getString("fontsize", "24"));
         ((TextInputEditText) root.findViewById(R.id.brandEditText)).setTextSize(fontSize);
         ((TextInputEditText) root.findViewById(R.id.commentEditText)).setTextSize(fontSize);
         ((TextInputEditText) root.findViewById(R.id.itemNoEditText)).setTextSize(fontSize);
@@ -494,7 +494,7 @@ public class HomeFragment extends Fragment {
         return 0;
     }
 
-    private int getIntFromLayout(EditText et) {
+    private int getIntFromLayout(TextInputEditText et) {
         String s = et.getText().toString();
 
         if (s.equals("")) {
@@ -508,7 +508,7 @@ public class HomeFragment extends Fragment {
         return (cb.isChecked() ? 1 : 0);
     }
 
-    private Float getFloatFromLayout(EditText et) {
+    private Float getFloatFromLayout(TextInputEditText et) {
         String s = et.getText().toString();
 
         if (s.equals("")) {
@@ -522,7 +522,7 @@ public class HomeFragment extends Fragment {
         return Integer.parseInt((String) spinner.getSelectedItem());
     }
 
-    private String getStringFromLayout(EditText et) {
+    private String getStringFromLayout(TextInputEditText et) {
         return et.getText().toString();
     }
 
@@ -542,7 +542,7 @@ public class HomeFragment extends Fragment {
             pm.setSheetWidth(getIntFromLayout(sheetWidthEditText));
             pm.setSheetLength(getIntFromLayout(sheetLengthEditText));
             pm.setSheetLength_c(getIntFromLayout(sheetLengthCheckBox));
-            pm.setRollLength(getIntFromLayout(rollLengthEditText));
+            pm.setRollLength(getFloatFromLayout(rollLengthEditText));
             pm.setRollLength_c(getIntFromLayout(rollLengthCheckBox));
             pm.setPackagePrice(getFloatFromLayout(packagePriceEditText));
             pm.setRollPrice(getFloatFromLayout(rollPriceEditText));
@@ -657,27 +657,39 @@ public class HomeFragment extends Fragment {
     // TODO Input: g per rulle
     private boolean calculate() {
         // Sheet length = roll length / sheets pet roll (OK)
-        boolean fSheetLength = false;
+        boolean flag1 = false;
         try {
-            fSheetLength = divide(rollLengthEditText, rollLengthCheckBox, rollSheetsEditText, null,
+            flag1 = divide(rollLengthEditText, rollLengthCheckBox, rollSheetsEditText, null,
                     sheetLengthEditText, sheetLengthCheckBox, 1000);
         } catch (Exception ignored) {
         }
+        if (!flag1) {
+            sheetLengthEditText.setText("0");
+            sheetLengthCheckBox.setChecked(false);
+        }
 
         // Roll length = sheet length * sheets per roll (OK)
-        boolean fRollLength = false;
+        boolean flag2 = false;
         try {
-            fRollLength = multiply(sheetLengthEditText, sheetLengthCheckBox, rollSheetsEditText, null,
+            flag2 = multiply(sheetLengthEditText, sheetLengthCheckBox, rollSheetsEditText, null,
                     rollLengthEditText, rollLengthCheckBox, 1000);
         } catch (Exception ignored) {
         }
+        if (!flag2) {
+            rollLengthEditText.setText("0.0");
+            rollLengthCheckBox.setChecked(false);
+        }
 
         // Price per roll = price per package / rolls per package (OK)
-        boolean fRollPrice = false;
+        boolean flag3 = false;
         try {
-            fRollPrice = divide(packagePriceEditText, null, packageRollsEditText, null,
+            flag3 = divide(packagePriceEditText, null, packageRollsEditText, null,
                     rollPriceEditText, rollPriceCheckBox, 1);
         } catch (Exception ignored) {
+        }
+        if (!flag3) {
+            rollPriceEditText.setText("0.0");
+            rollPriceCheckBox.setChecked(false);
         }
 
         // TODO Paper weight (g per m2) ???
@@ -686,42 +698,48 @@ public class HomeFragment extends Fragment {
 //            boolean fKiloPrice = multiply(sheetLengthEditText, sheetLengthCheckBox, rollSheetsEditText, null, rollLengthEditText, rollLengthCheckBox, 100);
 
         // TODO Price per meter = price per package / rolls per package / roll length
-        boolean fMeterPrice = false;
+        boolean flag4 = false;
         try {
-            fMeterPrice = divide(packagePriceEditText, null,
+            flag4 = divide(packagePriceEditText, null,
                     packageRollsEditText, null,
                     rollLengthEditText, rollLengthCheckBox,
                     meterPriceEditText, meterPriceCheckBox, 1);
         } catch (Exception ignored) {
         }
+        if (!flag4) {
+            meterPriceEditText.setText("0.0");
+            meterPriceCheckBox.setChecked(false);
+        }
 
         // TODO Price per sheet = price per package / rolls pr package / sheets per roll
-        boolean fSheetPrice = false;
+        boolean flag5 = false;
         try {
-            fSheetPrice = divide(packagePriceEditText, null, packageRollsEditText, null,
+            flag5 = divide(packagePriceEditText, null, packageRollsEditText, null,
                     rollSheetsEditText, null, rollLengthEditText, rollLengthCheckBox, 1);
         } catch (Exception ignored) {
         }
+        if (!flag5) {
+            rollLengthEditText.setText("0.0");
+            rollLengthCheckBox.setChecked(false);
+        }
 
-        return fMeterPrice | fRollLength | fRollPrice | fSheetLength | fSheetPrice;
-
-//        return fKiloPrice | fMeterPrice | fPaperWeight | fRollLength | fRollPrice | fSheetLength | fSheetPrice;
+        return flag1 | flag2 | flag3 | flag4 | flag5;
     }
 
-    private boolean multiply(EditText multiplicand, CheckBox cb1, EditText multiplier, CheckBox cb2, EditText product, CheckBox cb3, int precision) {
+    private boolean multiply(TextInputEditText multiplicand, CheckBox cb1, TextInputEditText multiplier, CheckBox cb2, TextInputEditText product, CheckBox cb3, int precision) {
         String s1, s2;
         String s3;
 
         // First test if calculated
-        if ((cb1 != null) && (cb1.isSelected())) {
+        if ((cb1 != null) && (cb1.isChecked())) {
             return false;
         }
-        if ((cb2 != null) && (cb2.isSelected())) {
+        if ((cb2 != null) && (cb2.isChecked())) {
             return false;
         }
 
 
-        if ((cb3 != null) && !(cb3.isSelected())) {
+        if ((cb3 != null) && !(cb3.isChecked())) {
             s3 = product.getText().toString();
 
             if ((!s3.isEmpty()) && (Integer.parseInt(s3) > 0)) {
@@ -746,34 +764,37 @@ public class HomeFragment extends Fragment {
         return true;
     }
 
-    private boolean divide(EditText dividend, CheckBox cb1, EditText divisor, CheckBox cb2, EditText quotient, CheckBox cb3, int precision) {
+    private boolean divide(TextInputEditText dividend, CheckBox cb1, TextInputEditText divisor, CheckBox cb2, TextInputEditText quotient, CheckBox cb3, int precision) {
         String s1, s2;
         String s3;
 
         // First test if calculated
-        if ((cb1 != null) && (cb1.isSelected())) {
+        if ((cb1 != null) && (cb1.isChecked())) {
             return false;
         }
-        if ((cb2 != null) && (cb2.isSelected())) {
+        if ((cb2 != null) && (cb2.isChecked())) {
             return false;
         }
 
+        // If directly input cb3 is not selected amd quotient is > 0
+        // First time cb3 is not selected and quotient is 0
+        // Next times cb3 is selected and quotient in > 0
 
-        if ((cb3 != null) && !(cb3.isSelected())) {
+        if ((cb3 != null) && !(cb3.isChecked())) {
             s3 = quotient.getText().toString();
 
-            if ((!s3.isEmpty()) && (Integer.parseInt(s3) > 0)) {
+            if ((!s3.isEmpty()) && (Float.parseFloat(s3) > 0)) {
                 return false;
             }
         }
 
         // Then test for zero values
         s1 = dividend.getText().toString();
-        if ((s1.isEmpty()) || (s1.equals("0"))) {
+        if ((s1.isEmpty()) || (s1.equals("0") || (s1.equals("0.0")))) {
             return false;
         }
         s2 = divisor.getText().toString();
-        if ((s2.isEmpty()) || (s2.equals("0"))) {
+        if ((s2.isEmpty()) || (s2.equals("0") || (s2.equals("0.0")))) {
             return false;
         }
 
@@ -784,41 +805,41 @@ public class HomeFragment extends Fragment {
         return true;
     }
 
-    private boolean divide(EditText dividend, CheckBox cb1, EditText divisor, CheckBox cb2,
-                           EditText divisor2, CheckBox cb3,
-                           EditText quotient, CheckBox cb4, int precision) {
+    private boolean divide(TextInputEditText dividend, CheckBox cb1, TextInputEditText divisor, CheckBox cb2,
+                           TextInputEditText divisor2, CheckBox cb3,
+                           TextInputEditText quotient, CheckBox cb4, int precision) {
         String s1, s2, s3, s4;
 
         // First test if calculated
-        if ((cb1 != null) && (cb1.isSelected())) {
+        if ((cb1 != null) && (cb1.isChecked())) {
             return false;
         }
-        if ((cb2 != null) && (cb2.isSelected())) {
+        if ((cb2 != null) && (cb2.isChecked())) {
             return false;
         }
-        if ((cb3 != null) && (cb3.isSelected())) {
+        if ((cb3 != null) && (cb3.isChecked())) {
             return false;
         }
 
-        if ((cb4 != null) && !(cb4.isSelected())) {
+        if ((cb4 != null) && !(cb4.isChecked())) {
             s4 = quotient.getText().toString();
 
-            if ((!s4.isEmpty()) && (Integer.parseInt(s4) > 0)) {
+            if ((!s4.isEmpty()) && (Float.parseFloat(s4) > 0)) {
                 return false;
             }
         }
 
         // Then test for zero values
         s1 = dividend.getText().toString();
-        if ((s1.isEmpty()) || (s1.equals("0"))) {
+        if ((s1.isEmpty()) || (s1.equals("0") || (s1.equals("0.0")))) {
             return false;
         }
         s2 = divisor.getText().toString();
-        if ((s2.isEmpty()) || (s2.equals("0"))) {
+        if ((s2.isEmpty()) || (s2.equals("0") || (s2.equals("0.0")))) {
             return false;
         }
         s3 = divisor2.getText().toString();
-        if ((s3.isEmpty()) || (s3.equals("0"))) {
+        if ((s3.isEmpty()) || (s3.equals("0") || (s3.equals("0.0")))) {
             return false;
         }
 
