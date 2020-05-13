@@ -110,8 +110,23 @@ public class MainActivity extends AppCompatActivity implements PriceListFragment
             case "Butikker":
                 text.setText(getString(R.string.suppliers_help_text));
                 break;
+            case "Butiksdetaljer":
+                text.setText(getString(R.string.supplier_details_home_help_text));
+                break;
+            case "Fundne varemærker":
+                text.setText(getString(R.string.brand_list_help_text));
+                break;
             case "Om":
                 text.setText(getString(R.string.about_help_text));
+                break;
+            case "Prisudvikling, grafisk":
+                text.setText(getString(R.string.prices_graph_help_text));
+                break;
+            case "Prisudvikling, valg vare":
+                text.setText(getString(R.string.prices_select_help_text));
+                break;
+            case "Produktdetaljer":
+                text.setText(getString(R.string.product_details_help_text));
                 break;
             case "Produkter":
                 text.setText(getString(R.string.products_help_text));
@@ -119,21 +134,18 @@ public class MainActivity extends AppCompatActivity implements PriceListFragment
             case "Prisudvikling":
                 text.setText(getString(R.string.price_list_help_text));
                 break;
-            case "Toiletpapir":
-                text.setText(getString(R.string.home_help_text));
+            case "Sammenlign":
+                text.setText(getString(R.string.compare_help_text));
                 break;
             case "Scan":
                 text.setText(getString(R.string.scan_help_text));
                 break;
-            case "Fundne varemærker":
-                text.setText(getString(R.string.brand_list_help_text));
-                break;
-            case "Sammenlign":
             case "Sorteret produktliste":
-            case "Produktdetaljer":
-            case "Butiksdetaljer":
-            case "Prisudvikling, grafisk":
-            case "Prisudvikling, valg vare":
+                text.setText(getString(R.string.sorted_product_list_help_text));
+                break;
+            case "Toiletpapir":
+                text.setText(getString(R.string.home_help_text));
+                break;
             default:
                 text.setText(getString(R.string.default_help_text, s));
                 break;

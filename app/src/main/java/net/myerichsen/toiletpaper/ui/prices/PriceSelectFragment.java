@@ -118,7 +118,5 @@ public class PriceSelectFragment extends Fragment {
         snackbar = Snackbar
                 .make(snackView, "Indtast varenummer eller varemærke", Snackbar.LENGTH_LONG);
         snackbar.show();
-
     }
-
 }

@@ -508,9 +508,8 @@ public class TPDbAdapter {
                     "Rema Vejby", "Produceret i Sverige");
             tpHelper.insertData(pm);
 
-            /**
-             * Test data for graph
-             */
+            //             * Test data for graph
+
             try {
                 pm = new ProductModel("test", "Lambi Classic Toilet Paper",
                         3, 9, 255, 0, 125, 1, (float) 31.9,

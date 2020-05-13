@@ -54,7 +54,7 @@
     <string name="about_heading">\nInspiration, kilder og kodestumper er planket fra\n\n</string>
     <string name="scan">Scan</string>
     <string name="search">Søg</string>
-    <string name="uid">UID</string>
+    <!--    <string name="uid">UID</string>-->
     <string name="menu_pd">Produktdata</string>
     <string name="meter_price">Pris pr. meter</string>
     <string name="menu_products">Produkter</string>
@@ -128,11 +128,13 @@
     <string name="about_help_text">
         Forklaring til programmet. Her findes også programmets version, hvis der skal
         rapporteres fejl eller ønsker til udvidelse.</string>
-    <string name="products_help_text">Oversigt over kendte produkter.\n
+    <string name="products_help_text">
+        Oversigt over kendte produkter.\n
         Kolonnerne viser varemærke og varenummer samt \"UID\",
         som er produktets entydige identifikation i databasen.\n
         Detaljer for produktet vises ved klik på en række.</string>
-    <string name="suppliers_help_text">Oversigt over kendte butikker.\n
+    <string name="suppliers_help_text">
+        Oversigt over kendte butikker.\n
         Kolonnerne viser butik og kæde. Kæde er medtaget for senere at kunne linke direkte
         til kædernes egne produktbeskrivelser på nettet.\n
         Detaljer for butikken vises ved klik på en række.</string>
@@ -156,5 +158,38 @@
     </string>
     <string name="brand_list_help_text">Oversigt over fundne varemærker.\nVed valg af en række
         returneres denne til hovedbilledet, og der søges efter denne i databasen.
+    </string>
+    <string name="supplier_details_home_help_text">
+        Detaljer for en butik.\n
+        Herfra kan en ny butik oprettes i databasen, eller den viste kan slettes.\n
+        Bemærk, at oversigtsbilledet skal genopfriskes, for at ændringen slår igennem.
+    </string>
+    <string name="prices_graph_help_text">
+        Prisudvikling, grafisk.\n
+        Grafen viser prisudviklingen med dato som X-akse og beløb i kr. pr. pakke som Y-akse.
+    </string>
+    <string name="prices_select_help_text">
+        Valgbilede for prisudvikling.\n
+        Indtast enten et varenummer eller et varemærke.\
+        Klik vil vise prisudviklingen, enten som tabel eller som graf.\n
+        Varenummer "test" kan bruges til at vise testdata.
+    </string>
+    <string name="product_details_help_text">
+        Produktdetaljer.\n
+        Alle værdier for det valgte produkt.\n
+        Herfra kan et produkt slettes fra databasen. Bemærk, at løbenummeret er entydogt nøglefelt.\n
+        Bemærk, at oversigtsbilledet skal genopfriskes, for at ændringen slår igennem.
+    </string>
+    <string name="sorted_product_list_help_text">
+        Sorteret produktliste.\n
+        Alle produkter i databasen, filtreret med det valgte butiksfilter, og sorteret efter den
+        valgte sorteringsnøgle.\n
+         Detaljer for produktet vises ved klik på en række.
+    </string>
+    <string name="compare_help_text">
+        Sammenlign.\n
+        Butikker kan filtreres med filteringsnøglen øverst.\n
+        Sorteringsmøgle vælges nedenfor.\n
+        Klik på¨den grønne linie nederst for at se den sorterede liste.
     </string>
 </resources>

@@ -58,7 +58,7 @@
             tableRow.setPadding(2, 2, 2, 2);
             tableRow.addView(addCell("Varemærke"));
             tableRow.addView(addCell("Varenummer"));
-            tableRow.addView(addCell("UID"));
+            tableRow.addView(addCell("Løbenr."));
             tableLayout.addView(tableRow);
 
             List<ProductModel> lpm;
