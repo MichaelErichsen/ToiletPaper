@@ -130,7 +130,7 @@
         rapporteres fejl eller ønsker til udvidelse.</string>
     <string name="products_help_text">
         Oversigt over kendte produkter.\n
-        Kolonnerne viser varemærke og varenummer samt \"UID\",
+        Kolonnerne viser varemærke og varenummer samt løbenummer,
         som er produktets entydige identifikation i databasen.\n
         Detaljer for produktet vises ved klik på en række.</string>
     <string name="suppliers_help_text">
