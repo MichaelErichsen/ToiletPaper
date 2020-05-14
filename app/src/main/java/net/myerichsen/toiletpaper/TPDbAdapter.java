@@ -238,9 +238,9 @@ public class TPDbAdapter {
         pm.setRollSheets(cursor.getInt(cursor.getColumnIndex(TpDbHelper.ROLL_SHEETS)));
         pm.setSheetWidth(cursor.getInt(cursor.getColumnIndex(TpDbHelper.SHEET_WIDTH)));
         pm.setSheetLength(cursor.getInt(cursor.getColumnIndex(TpDbHelper.SHEET_LENGTH)));
-        pm.setSheetLength_c(cursor.getInt(cursor.getColumnIndex(TpDbHelper.ROLL_LENGTH_C)));
+        pm.setSheetLength_c(cursor.getInt(cursor.getColumnIndex(TpDbHelper.SHEET_LENGTH_C)));
         pm.setRollLength(cursor.getInt(cursor.getColumnIndex(TpDbHelper.ROLL_LENGTH)));
-        pm.setRollLength_c(cursor.getInt(cursor.getColumnIndex(TpDbHelper.SHEET_LENGTH_C)));
+        pm.setRollLength_c(cursor.getInt(cursor.getColumnIndex(TpDbHelper.ROLL_LENGTH_C)));
         pm.setPackagePrice(cursor.getFloat(cursor.getColumnIndex(TpDbHelper.PACKAGE_PRICE)));
         pm.setRollPrice(cursor.getFloat(cursor.getColumnIndex(TpDbHelper.ROLL_PRICE)));
         pm.setRollPrice_c(cursor.getInt(cursor.getColumnIndex(TpDbHelper.ROLL_PRICE_C)));
