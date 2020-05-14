@@ -177,8 +177,8 @@
     <string name="product_details_help_text">
         Produktdetaljer.\n
         Alle værdier for det valgte produkt.\n
-        Herfra kan et produkt slettes fra databasen. Bemærk, at løbenummeret er entydogt nøglefelt.\n
-        Bemærk, at oversigtsbilledet skal genopfriskes, for at ændringen slår igennem.
+        Herfra kan et produkt slettes fra databasen. Bemærk, at løbenummeret er entydigt nøglefelt i
+        databasen, men ikke relaterer til produktet.
     </string>
     <string name="sorted_product_list_help_text">
         Sorteret produktliste.\n
