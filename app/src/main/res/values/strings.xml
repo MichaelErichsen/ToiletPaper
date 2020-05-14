@@ -192,4 +192,7 @@
         Sorteringsmøgle vælges nedenfor.\n
         Klik på¨den grønne linie nederst for at se den sorterede liste.
     </string>
+    <string name="g_per_roll">g pr. rulle</string>
+    <string name="roll_weight">Rullevægt</string>
+    <string name="please_be_a_patient">Vent venligst, men data indsættes</string>
 </resources>

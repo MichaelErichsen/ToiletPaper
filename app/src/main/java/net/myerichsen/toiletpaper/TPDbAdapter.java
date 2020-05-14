@@ -26,7 +26,9 @@ public class TPDbAdapter {
             TpDbHelper.ROLL_SHEETS, TpDbHelper.SHEET_WIDTH, TpDbHelper.SHEET_LENGTH,
             TpDbHelper.SHEET_LENGTH_C, TpDbHelper.ROLL_LENGTH, TpDbHelper.ROLL_LENGTH_C,
             TpDbHelper.PACKAGE_PRICE, TpDbHelper.ROLL_PRICE, TpDbHelper.ROLL_PRICE_C,
-            TpDbHelper.PAPER_WEIGHT, TpDbHelper.PAPER_WEIGHT_C, TpDbHelper.KILO_PRICE,
+            TpDbHelper.PAPER_WEIGHT, TpDbHelper.PAPER_WEIGHT_C,
+            TpDbHelper.ROLL_WEIGHT, TpDbHelper.ROLL_WEIGHT_C,
+            TpDbHelper.KILO_PRICE,
             TpDbHelper.KILO_PRICE_C, TpDbHelper.METER_PRICE, TpDbHelper.METER_PRICE_C,
             TpDbHelper.SHEET_PRICE, TpDbHelper.SHEET_PRICE_C, TpDbHelper.SUPPLIER,
             TpDbHelper.COMMENTS, TpDbHelper.ITEM_NO, TpDbHelper.BRAND,
@@ -192,6 +194,8 @@ public class TPDbAdapter {
         contentValues.put(TpDbHelper.ROLL_PRICE_C, pm.getRollPrice_c());
         contentValues.put(TpDbHelper.PAPER_WEIGHT, pm.getPaperWeight());
         contentValues.put(TpDbHelper.PAPER_WEIGHT_C, pm.getPaperWeight_c());
+        contentValues.put(TpDbHelper.ROLL_WEIGHT, pm.getRollWeight());
+        contentValues.put(TpDbHelper.ROLL_WEIGHT_C, pm.getRollWeight_c());
         contentValues.put(TpDbHelper.KILO_PRICE, pm.getKiloPrice());
         contentValues.put(TpDbHelper.KILO_PRICE_C, pm.getKiloPrice_c());
         contentValues.put(TpDbHelper.METER_PRICE, pm.getMeterPrice());
@@ -242,6 +246,8 @@ public class TPDbAdapter {
         pm.setRollPrice_c(cursor.getInt(cursor.getColumnIndex(TpDbHelper.ROLL_PRICE_C)));
         pm.setPaperWeight(cursor.getFloat(cursor.getColumnIndex(TpDbHelper.PAPER_WEIGHT)));
         pm.setPaperWeight_c(cursor.getInt(cursor.getColumnIndex(TpDbHelper.PAPER_WEIGHT_C)));
+        pm.setRollWeight(cursor.getFloat(cursor.getColumnIndex(TpDbHelper.ROLL_WEIGHT)));
+        pm.setRollWeight_c(cursor.getInt(cursor.getColumnIndex(TpDbHelper.ROLL_WEIGHT_C)));
         pm.setKiloPrice(cursor.getFloat(cursor.getColumnIndex(TpDbHelper.KILO_PRICE)));
         pm.setKiloPrice_c(cursor.getInt(cursor.getColumnIndex(TpDbHelper.KILO_PRICE_C)));
         pm.setMeterPrice(cursor.getFloat(cursor.getColumnIndex(TpDbHelper.METER_PRICE)));
@@ -330,6 +336,8 @@ public class TPDbAdapter {
         private static final String ROLL_PRICE_C = "ROLL_PRICE_C";
         private static final String PAPER_WEIGHT = "PAPER_WEIGHT";
         private static final String PAPER_WEIGHT_C = "PAPER_WEIGHT_C";
+        private static final String ROLL_WEIGHT = "ROLL_WEIGHT";
+        private static final String ROLL_WEIGHT_C = "ROLL_WEIGHT_C";
         private static final String KILO_PRICE = "KILO_PRICE";
         private static final String KILO_PRICE_C = "KILO_PRICE_C";
         private static final String METER_PRICE = "METER_PRICE";
@@ -343,7 +351,7 @@ public class TPDbAdapter {
         private static final String TIME_STAMP = "TIME_STAMP";
         private static final String TABLE_SUPPLIER = "TABLE_SUPPLIER";
         private static final String CHAIN = "CHAIN";
-        private static final int DATABASE_Version = 3;    // Database Version
+        private static final int DATABASE_Version = 4;    // Database Version
         private static final String CREATE_PRODUCT_TABLE = "CREATE TABLE IF NOT EXISTS " + TABLE_PRODUCT +
                 " (" + UID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 LAYERS + " INTEGER, " +
@@ -359,6 +367,8 @@ public class TPDbAdapter {
                 ROLL_PRICE_C + " INTEGER, " +
                 PAPER_WEIGHT + " NUMERIC, " +
                 PAPER_WEIGHT_C + " INTEGER, " +
+                ROLL_WEIGHT + " NUMERIC, " +
+                ROLL_WEIGHT_C + " INTEGER, " +
                 KILO_PRICE + " NUMERIC, " +
                 KILO_PRICE_C + " INTEGER, " +
                 METER_PRICE + " NUMERIC, " +
@@ -441,20 +451,28 @@ public class TPDbAdapter {
             pm = new ProductModel("5700384289095", "Irma Tusindfryd Toiletpapir",
                     3, 8, 233, 97, 125, 0, (float) 29.1,
                     0, 41, (float) 5.125, 1, 48,
-                    0, (float) 31.64, 0, (float) 0.1761, 1, (float) 0.022, 1,
+                    0, 0, 0, (float) 31.64, 0, (float) 0.1761, 1, (float) 0.022, 1,
                     "Kvickly Helsinge", "Produceret i Sverige");
             tpHelper.insertData(pm);
 
             pm = new ProductModel("7311041080306", "First Price Toiletpapir 2-lags",
-                    2, 8, 220, 96, 125, 1, (float) 27.5,
-                    0, (float) 15.95, (float) 1.99, 1, 36,
-                    0, 0, 0, (float) 0.0725, 1, (float) 0.009, 1,
+                    2, 8, 220,
+                    96,
+                    125, 1,
+                    (float) 27.5, 0,
+                    0,
+                    (float) 15.95, 0,
+                    (float) 1.99, 1,
+                    0, 0,
+                    36, 0,
+                    (float) 0.0725, 1,
+                    (float) 0.009, 1,
                     "Spar Vejby Strand", "Produceret i Litauen");
             tpHelper.insertData(pm);
 
             pm = new ProductModel("5705830002242", "REMA 1000 Toiletpapir",
                     2, 8, 282, 97, 125, 0, (float) 35.25,
-                    0, (float) 9.75, (float) 1.21875, 1, (float) 32.6,
+                    0, (float) 9.75, (float) 1.21875, 1, (float) 32.6, 0, 0,
                     0, (float) 10.93, 0, (float) 0.0346, 1, (float) 0.004322, 1,
                     "Rema Vejby", "Produceret i Sverige");
             tpHelper.insertData(pm);
@@ -462,48 +480,48 @@ public class TPDbAdapter {
             pm = new ProductModel("WW-166808", "Staples 29 m",
                     2, 8, 250, 96, 115, 0, (float) 28.75,
                     0, (float) 24.94, (float) 3.12, 1,
-                    (float) 16.50, 0, (float) 188.94, 0, (float) 0.10843, 1, (float) 0.1247, 1,
+                    (float) 16.50, 0, 0, 0, (float) 188.94, 0, (float) 0.10843, 1, (float) 0.1247, 1,
                     "Staples", "Online");
             tpHelper.insertData(pm);
 
             pm = new ProductModel("WW-114649", "Tork Advanced Extra Soft T4",
                     3, 42, 248, 94, 140, 1, (float) 34.70, 0,
                     (float) 386.85, (float) 9.21, 1,
-                    0, 0, 0, 0, (float) 0.26544, 1, (float) 0.03714, 1,
+                    0, 0, 0, 0, 0, 0, (float) 0.26544, 1, (float) 0.03714, 1,
                     "Staples", "Online");
             tpHelper.insertData(pm);
 
             pm = new ProductModel("WW-101012", "Scott® Performance 350",
                     3, 36, 350, 95, 125, 0, (float) 43.75, 0,
                     (float) 589, (float) 9.21, 1,
-                    0, 0, 0, 0, (float) 0.46746, 1, (float) 0.48433, 1,
+                    0, 0, 0, 0, 0, 0, (float) 0.46746, 1, (float) 0.48433, 1,
                     "Staples", "Online");
             tpHelper.insertData(pm);
 
             pm = new ProductModel("?", "Nemlig Plus",
                     3, 8, 200, 96, 125, 1, (float) 25, 0,
                     (float) 20.40, (float) 2.55, 1,
-                    45, 0, (float) 23.61, 1, (float) 0.102, 1, (float) 0.01275, 1,
+                    45, 0, 0, 0, (float) 23.61, 1, (float) 0.102, 1, (float) 0.01275, 1,
                     "nemlig.com", "Litauen");
             tpHelper.insertData(pm);
 
             pm = new ProductModel("?", "Nemlig Basic",
                     2, 8, 220, 96, 125, 1, (float) 27.5, 0,
                     (float) 9.2, (float) 1.15, 1,
-                    36, 0, (float) 12.11, 0, (float) 0.041818182, 1, (float) 0.005227273, 1,
+                    36, 0, 0, 0, (float) 12.11, 0, (float) 0.041818182, 1, (float) 0.005227273, 1,
                     "nemlig.com", "Litauen");
             tpHelper.insertData(pm);
 
             pm = new ProductModel("?", "Lotus Comfort",
                     3, 8, 155, 98, 125, 0, (float) 19.1, 0,
-                    (float) 22, (float) 2.75, 1,
+                    (float) 22, (float) 2.75, 1, 0, 0,
                     0, 0, (float) 29.06, 0, (float) 0.143979058, 1, (float) 0.017973856, 1,
                     "nemlig.com", "");
             tpHelper.insertData(pm);
 
             pm = new ProductModel("170190", "Lambi Classic Toilet Paper",
                     3, 9, 255, 0, 125, 1, (float) 31.9,
-                    0, (float) 34.95, (float) 3.88, 1, (float) 0,
+                    0, (float) 34.95, (float) 3.88, 1, (float) 0, 0, 0,
                     0, (float) 41.26, 0, (float) 0.1217, 1, (float) 0.01523, 1,
                     "Rema Vejby", "Produceret i Sverige");
             tpHelper.insertData(pm);
@@ -513,42 +531,42 @@ public class TPDbAdapter {
             try {
                 pm = new ProductModel("test", "Lambi Classic Toilet Paper",
                         3, 9, 255, 0, 125, 1, (float) 31.9,
-                        0, (float) 34.95, (float) 3.88, 1, (float) 0,
+                        0, (float) 34.95, (float) 3.88, 1, (float) 0, 0, 0,
                         0, (float) 41.26, 0, (float) 0.1217, 1, (float) 0.01523, 1,
                         "Rema Vejby", "Produceret i Sverige");
                 tpHelper.insertData(pm);
                 TimeUnit.SECONDS.sleep(5);
                 pm = new ProductModel("test", "Lambi Classic Toilet Paper",
                         3, 9, 255, 0, 125, 1, (float) 31.9,
-                        0, (float) 38, (float) 3.88, 1, (float) 0,
+                        0, (float) 38, (float) 3.88, 1, (float) 0, 0, 0,
                         0, (float) 41.26, 0, (float) 0.1217, 1, (float) 0.01523, 1,
                         "Rema Vejby", "Produceret i Sverige");
                 tpHelper.insertData(pm);
                 TimeUnit.SECONDS.sleep(5);
                 pm = new ProductModel("test", "Lambi Classic Toilet Paper",
                         3, 9, 255, 0, 125, 1, (float) 31.9,
-                        0, (float) 36, (float) 3.88, 1, (float) 0,
+                        0, (float) 36, (float) 3.88, 1, (float) 0, 0, 0,
                         0, (float) 41.26, 0, (float) 0.1217, 1, (float) 0.01523, 1,
                         "Rema Vejby", "Produceret i Sverige");
                 tpHelper.insertData(pm);
                 TimeUnit.SECONDS.sleep(5);
                 pm = new ProductModel("test", "Lambi Classic Toilet Paper",
                         3, 9, 255, 0, 125, 1, (float) 31.9,
-                        0, (float) 39, (float) 3.88, 1, (float) 0,
+                        0, (float) 39, (float) 3.88, 1, (float) 0, 0, 0,
                         0, (float) 41.26, 0, (float) 0.1217, 1, (float) 0.01523, 1,
                         "Rema Vejby", "Produceret i Sverige");
                 tpHelper.insertData(pm);
                 TimeUnit.SECONDS.sleep(5);
                 pm = new ProductModel("test", "Lambi Classic Toilet Paper",
                         3, 9, 255, 0, 125, 1, (float) 31.9,
-                        0, (float) 41, (float) 3.88, 1, (float) 0,
+                        0, (float) 41, (float) 3.88, 1, (float) 0, 0, 0,
                         0, (float) 41.26, 0, (float) 0.1217, 1, (float) 0.01523, 1,
                         "Rema Vejby", "Produceret i Sverige");
                 tpHelper.insertData(pm);
                 TimeUnit.SECONDS.sleep(5);
                 pm = new ProductModel("test", "Lambi Classic Toilet Paper",
                         3, 9, 255, 0, 125, 1, (float) 31.9,
-                        0, (float) 39.95, (float) 3.88, 1, (float) 0,
+                        0, (float) 39.95, (float) 3.88, 1, (float) 0, 0, 0,
                         0, (float) 41.26, 0, (float) 0.1217, 1, (float) 0.01523, 1,
                         "Rema Vejby", "Produceret i Sverige");
                 tpHelper.insertData(pm);

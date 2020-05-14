@@ -109,6 +109,9 @@ public class SettingsFragment extends PreferenceFragmentCompat {
             @Override
             public boolean onPreferenceClick(Preference preference) {
                 try {
+                    snackbar = Snackbar
+                            .make(snackView, R.string.please_be_a_patient, Snackbar.LENGTH_LONG);
+                    snackbar.show();
                     adapter.doInitialLoad();
                     snackbar = Snackbar
                             .make(snackView, R.string.initial_load_done, Snackbar.LENGTH_LONG);

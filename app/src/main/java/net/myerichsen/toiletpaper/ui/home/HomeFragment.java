@@ -68,6 +68,8 @@ public class HomeFragment extends Fragment {
     private CheckBox rollPriceCheckBox;
     private TextInputEditText paperWeightEditText;
     private CheckBox paperWeightCheckBox;
+    private TextInputEditText rollWeightEditText;
+    private CheckBox rollWeightCheckBox;
     private TextInputEditText kiloPriceEditText;
     private CheckBox kiloPriceCheckBox;
     private TextInputEditText meterPriceEditText;
@@ -102,23 +104,25 @@ public class HomeFragment extends Fragment {
         ((TextInputEditText) root.findViewById(R.id.brandEditText)).setTextSize(fontSize);
         ((TextInputEditText) root.findViewById(R.id.commentEditText)).setTextSize(fontSize);
         ((TextInputEditText) root.findViewById(R.id.itemNoEditText)).setTextSize(fontSize);
-        ((Button) root.findViewById(R.id.kiloPriceCheckBox)).setTextSize(fontSize);
         ((TextInputEditText) root.findViewById(R.id.kiloPriceEditText)).setTextSize(fontSize);
-        ((Button) root.findViewById(R.id.meterPriceCheckBox)).setTextSize(fontSize);
+        ((Button) root.findViewById(R.id.kiloPriceCheckBox)).setTextSize(fontSize);
         ((TextInputEditText) root.findViewById(R.id.meterPriceEditText)).setTextSize(fontSize);
+        ((Button) root.findViewById(R.id.meterPriceCheckBox)).setTextSize(fontSize);
         ((TextInputEditText) root.findViewById(R.id.packagePriceEditText)).setTextSize(fontSize);
         ((TextInputEditText) root.findViewById(R.id.packageRollsEditText)).setTextSize(fontSize);
-        ((Button) root.findViewById(R.id.paperWeightCheckBox)).setTextSize(fontSize);
         ((TextInputEditText) root.findViewById(R.id.paperWeightEditText)).setTextSize(fontSize);
-        ((Button) root.findViewById(R.id.rollLengthCheckBox)).setTextSize(fontSize);
+        ((Button) root.findViewById(R.id.paperWeightCheckBox)).setTextSize(fontSize);
+        ((TextInputEditText) root.findViewById(R.id.rollWeightEditText)).setTextSize(fontSize);
+        ((Button) root.findViewById(R.id.rollWeightCheckBox)).setTextSize(fontSize);
         ((TextInputEditText) root.findViewById(R.id.rollLengthEditText)).setTextSize(fontSize);
-        ((Button) root.findViewById(R.id.rollPriceCheckBox)).setTextSize(fontSize);
+        ((Button) root.findViewById(R.id.rollLengthCheckBox)).setTextSize(fontSize);
         ((TextInputEditText) root.findViewById(R.id.rollPriceEditText)).setTextSize(fontSize);
+        ((Button) root.findViewById(R.id.rollPriceCheckBox)).setTextSize(fontSize);
         ((TextInputEditText) root.findViewById(R.id.rollSheetsEditText)).setTextSize(fontSize);
-        ((Button) root.findViewById(R.id.sheetLengthCheckBox)).setTextSize(fontSize);
         ((TextInputEditText) root.findViewById(R.id.sheetLengthEditText)).setTextSize(fontSize);
-        ((Button) root.findViewById(R.id.sheetPriceCheckBox)).setTextSize(fontSize);
+        ((Button) root.findViewById(R.id.sheetLengthCheckBox)).setTextSize(fontSize);
         ((TextInputEditText) root.findViewById(R.id.sheetPriceEditText)).setTextSize(fontSize);
+        ((Button) root.findViewById(R.id.sheetPriceCheckBox)).setTextSize(fontSize);
         ((TextInputEditText) root.findViewById(R.id.sheetWidthEditText)).setTextSize(fontSize);
 
         adapter = new TPDbAdapter(context);
@@ -218,7 +222,25 @@ public class HomeFragment extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                kiloPriceCheckBox.setChecked(false);
+                paperWeightCheckBox.setChecked(false);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+            }
+        });
+
+        // roll weight
+        rollWeightEditText = root.findViewById(R.id.rollWeightEditText);
+        rollWeightCheckBox = root.findViewById(R.id.rollWeightCheckBox);
+        rollWeightEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                rollWeightCheckBox.setChecked(false);
             }
 
             @Override
@@ -549,6 +571,8 @@ public class HomeFragment extends Fragment {
             pm.setRollPrice_c(getIntFromLayout(rollPriceCheckBox));
             pm.setPaperWeight(getFloatFromLayout(paperWeightEditText));
             pm.setPaperWeight_c(getIntFromLayout(paperWeightCheckBox));
+            pm.setRollWeight(getFloatFromLayout(rollWeightEditText));
+            pm.setRollWeight_c(getIntFromLayout(rollWeightCheckBox));
             pm.setKiloPrice(getFloatFromLayout(kiloPriceEditText));
             pm.setKiloPrice_c(getIntFromLayout(kiloPriceCheckBox));
             pm.setMeterPrice(getFloatFromLayout(meterPriceEditText));
@@ -654,8 +678,20 @@ public class HomeFragment extends Fragment {
     /**
      * Calculate all calculable fields
      */
-    // TODO Input: g per rulle
     private boolean calculate() {
+
+        /**
+         * For 170190:
+         * Sheet length changed from 125/unchecked to 0/unchecked
+         * Roll length changed from 31.0/checked to 0.015228759/checked
+         * Price per meter changed from 0.1217/checked to 0.0/unhecked
+         *
+         * For WW-101012:
+         * Sheet length the same error
+         * Roll length from 43.0/unchecked to 0.04674603/checked
+         * Price per roll from 9.21/checked to 16.36111/checked
+         */
+
         // Sheet length = roll length / sheets pet roll (OK)
         boolean flag1 = false;
         try {
