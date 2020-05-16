@@ -1,2 +1,6 @@
+/*
+ * Copyright (c) 2020. Michael Erichsen.
+ */
+
 rootProject.name='ToiletPaper'
 include ':app'

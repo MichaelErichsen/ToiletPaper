@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright (c) 2020. Michael Erichsen.
+  -->
+
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <SwitchPreferenceCompat
+        android:id="@+id/advanced_screen_preference"
+        android:key="advancedscreen"
+        android:summary="Korte eller lange skærmbilleder"
+        app:title="Avanceret inddataformat" />
+
+    <Preference
+        android:id="@+id/initial_load_preference"
+        android:key="initialload"
+        android:summary="Et antal produkter og butikker"
+        app:title="Indsæt præfabrikerede data" />
+
+    <DropDownPreference
+        android:id="@+id/font_size_preference"
+        android:defaultValue="24"
+        android:entries="@array/pref_font_options"
+        android:entryValues="@array/pref_font_values"
+        android:key="fontsize"
+        android:summary="Vælg skriftstørrelse for alle skærmbilleder"
+        app:title="Skriftstørrelse" />
+
+    <DropDownPreference
+        android:id="@+id/default_supplier_preference"
+        android:key="defaultsupplier"
+        android:summary="Vælg foretrukken butik fra databasen"
+        app:title="Foretrukken butik" />
+</PreferenceScreen>
+

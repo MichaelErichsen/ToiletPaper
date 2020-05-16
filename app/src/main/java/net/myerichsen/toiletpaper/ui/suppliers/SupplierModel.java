@@ -1,7 +1,9 @@
 package net.myerichsen.toiletpaper.ui.suppliers;
+/*
+ * Copyright (c) 2020. Michael Erichsen.
+ */
 
 import java.text.SimpleDateFormat;
-import java.util.Date;
 
 /**
  * Class to encapsulate all toilet paper supplier data
@@ -17,21 +19,18 @@ public class SupplierModel {
     public SupplierModel() {
         Long tsLong = System.currentTimeMillis();
         SimpleDateFormat s = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss");
-        timestamp = s.format(new Date());
+        timestamp = s.format(tsLong);
     }
 
     /**
      * Constructor
-     *
-     * @param supplier
-     * @param chain
      */
     public SupplierModel(String supplier, String chain) {
         this.supplier = supplier;
         this.chain = chain;
         Long tsLong = System.currentTimeMillis();
         SimpleDateFormat s = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss");
-        timestamp = s.format(new Date());
+        timestamp = s.format(tsLong);
     }
 
     public String getSupplier() {

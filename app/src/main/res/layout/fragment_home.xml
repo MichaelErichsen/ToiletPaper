@@ -1,27 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<!--
+  ~ Copyright (c) 2020. Michael Erichsen.
+  -->
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.home.HomeFragment">
 
-    <ScrollView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/itemNoTextInputLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="@string/item_no"
+                android:importantForAutofill="no">
 
                 <EditText
                     android:id="@+id/itemNoEditText"
@@ -30,29 +36,39 @@
                     android:layout_weight="1"
                     android:ems="10"
                     android:hint="@string/item_no"
+                    android:importantForAutofill="no"
                     android:inputType="text" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-                <ImageButton
-                    android:id="@+id/scanBtn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:contentDescription="@string/scan"
-                    app:srcCompat="@drawable/baseline_scanner_black_24dp" />
+            <ImageButton
+                android:id="@+id/scanBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:contentDescription="@string/scan"
+                app:srcCompat="@drawable/baseline_scanner_black_24dp" />
 
-                <ImageButton
-                    android:id="@+id/searchItemNoBtn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:contentDescription="@string/search"
-                    app:srcCompat="@drawable/baseline_search_black_24dp" />
-            </LinearLayout>
+            <ImageButton
+                android:id="@+id/searchItemNoBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:contentDescription="@string/search"
+                app:srcCompat="@drawable/baseline_search_black_24dp" />
+        </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/brandTextInputLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="@string/brand"
+                android:importantForAutofill="no">
 
                 <EditText
                     android:id="@+id/brandEditText"
@@ -61,49 +77,55 @@
                     android:layout_weight="1"
                     android:ems="10"
                     android:hint="@string/brand"
+                    android:importantForAutofill="no"
                     android:inputType="text" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-                <ImageButton
-                    android:id="@+id/searchBrandBtn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:contentDescription="@string/search"
-                    app:srcCompat="@drawable/baseline_search_black_24dp" />
+            <ImageButton
+                android:id="@+id/searchBrandBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:contentDescription="@string/search"
+                app:srcCompat="@drawable/baseline_search_black_24dp" />
 
-            </LinearLayout>
+        </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
 
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/layers"
-                    android:textSize="14sp" />
+            <TextView
+                android:id="@+id/layersSpinnerTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/layers"
+                android:textSize="14sp" />
 
-                <Spinner
-                    android:id="@+id/layersSpinner"
-                    style="@android:style/Widget.Spinner"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:spinnerMode="dropdown" />
+            <Spinner
+                android:id="@+id/layersSpinner"
+                style="@android:style/Widget.Spinner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:spinnerMode="dropdown" />
 
-            </LinearLayout>
+        </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:baselineAligned="false"
+            android:orientation="horizontal">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/package_rolls" />
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/packageRollsTextInputLayout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="@string/package_rolls"
+                android:importantForAutofill="no">
 
                 <EditText
                     android:id="@+id/packageRollsEditText"
@@ -112,20 +134,25 @@
                     android:layout_weight="1"
                     android:ems="10"
                     android:hint="@string/count"
+                    android:importantForAutofill="no"
                     android:inputType="number" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-            </LinearLayout>
+        </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:baselineAligned="false"
+            android:orientation="horizontal">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/roll_sheets" />
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/rollSheetsTextInputLayout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="@string/roll_sheets"
+                android:importantForAutofill="no">
 
                 <EditText
                     android:id="@+id/rollSheetsEditText"
@@ -134,19 +161,25 @@
                     android:layout_weight="1"
                     android:ems="10"
                     android:hint="@string/count"
+                    android:importantForAutofill="no"
                     android:inputType="number" />
-            </LinearLayout>
+            </com.google.android.material.textfield.TextInputLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
+        </LinearLayout>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/sheet_width" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:baselineAligned="false"
+            android:orientation="horizontal">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/sheetWidthTextInputLayout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="@string/sheet_width"
+                android:importantForAutofill="no">
 
                 <EditText
                     android:id="@+id/sheetWidthEditText"
@@ -155,20 +188,24 @@
                     android:layout_weight="1"
                     android:ems="10"
                     android:hint="@string/mm"
+                    android:importantForAutofill="no"
                     android:inputType="number" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-            </LinearLayout>
+        </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/sheet_length" />
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/sheetLengthTextInputLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="@string/sheet_length"
+                android:importantForAutofill="no">
 
                 <EditText
                     android:id="@+id/sheetLengthEditText"
@@ -177,28 +214,32 @@
                     android:layout_weight="1"
                     android:ems="10"
                     android:hint="@string/mm"
+                    android:importantForAutofill="no"
                     android:inputType="number" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-                <CheckBox
-                    android:id="@+id/sheetLengthCheckBox"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:clickable="false"
-                    android:focusable="false"
-                    android:text="@string/calculated" />
-            </LinearLayout>
+            <CheckBox
+                android:id="@+id/sheetLengthCheckBox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:clickable="false"
+                android:focusable="false"
+                android:text="@string/calculated" />
+        </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/roll_length" />
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/rollLengthTextInputLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="@string/roll_length"
+                android:importantForAutofill="no">
 
                 <EditText
                     android:id="@+id/rollLengthEditText"
@@ -207,29 +248,34 @@
                     android:layout_weight="1"
                     android:ems="10"
                     android:hint="@string/m"
+                    android:importantForAutofill="no"
                     android:inputType="number" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-                <CheckBox
-                    android:id="@+id/rollLengthCheckBox"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:clickable="false"
-                    android:focusable="false"
-                    android:text="@string/calculated" />
+            <CheckBox
+                android:id="@+id/rollLengthCheckBox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:clickable="false"
+                android:focusable="false"
+                android:text="@string/calculated" />
 
-            </LinearLayout>
+        </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:baselineAligned="false"
+            android:orientation="horizontal">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/package_price" />
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/packagePriceTextInputLayout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="@string/package_price"
+                android:importantForAutofill="no">
 
                 <EditText
                     android:id="@+id/packagePriceEditText"
@@ -238,20 +284,24 @@
                     android:layout_weight="1"
                     android:ems="10"
                     android:hint="@string/kr"
+                    android:importantForAutofill="no"
                     android:inputType="numberDecimal" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-            </LinearLayout>
+        </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/roll_price" />
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/rollPriceTextInputLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="@string/roll_price"
+                android:importantForAutofill="no">
 
                 <EditText
                     android:id="@+id/rollPriceEditText"
@@ -260,224 +310,243 @@
                     android:layout_weight="1"
                     android:ems="10"
                     android:hint="@string/kr"
+                    android:importantForAutofill="no"
                     android:inputType="numberDecimal" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-                <CheckBox
-                    android:id="@+id/rollPriceCheckBox"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:clickable="false"
-                    android:focusable="false"
-                    android:text="@string/calculated" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+            <CheckBox
+                android:id="@+id/rollPriceCheckBox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:orientation="horizontal">
+                android:clickable="false"
+                android:focusable="false"
+                android:text="@string/calculated" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/paper_weight" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/paperWeightTextInputLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="@string/paper_weight"
+                android:importantForAutofill="no">
 
                 <EditText
                     android:id="@+id/paperWeightEditText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:ems="10"
                     android:hint="@string/gm2"
-                    android:inputType="number" />
+                    android:importantForAutofill="no"
+                    android:inputType="numberDecimal" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-                <CheckBox
-                    android:id="@+id/paperWeightCheckBox"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:clickable="false"
-                    android:focusable="false"
-                    android:text="@string/calculated" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+            <CheckBox
+                android:id="@+id/paperWeightCheckBox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:orientation="horizontal">
+                android:clickable="false"
+                android:focusable="false"
+                android:text="@string/calculated" />
+        </LinearLayout>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/kilo_price" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/kiloPriceTextInputLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="@string/kilo_price"
+                android:importantForAutofill="no">
 
                 <EditText
                     android:id="@+id/kiloPriceEditText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:ems="10"
                     android:hint="@string/kr"
-                    android:inputType="number" />
+                    android:importantForAutofill="no"
+                    android:inputType="numberDecimal" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-                <CheckBox
-                    android:id="@+id/kiloPriceCheckBox"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:clickable="false"
-                    android:focusable="false"
-                    android:text="@string/calculated" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+            <CheckBox
+                android:id="@+id/kiloPriceCheckBox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:orientation="horizontal">
+                android:clickable="false"
+                android:focusable="false"
+                android:text="@string/calculated" />
+        </LinearLayout>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/meter_price" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/meterPriceTextInputLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="@string/meter_price"
+                android:importantForAutofill="no">
 
                 <EditText
                     android:id="@+id/meterPriceEditText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:ems="10"
                     android:hint="@string/kr"
-                    android:inputType="number" />
+                    android:importantForAutofill="no"
+                    android:inputType="numberDecimal" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-                <CheckBox
-                    android:id="@+id/meterPriceCheckBox"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:clickable="false"
-                    android:focusable="false"
-                    android:text="@string/calculated" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+            <CheckBox
+                android:id="@+id/meterPriceCheckBox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:orientation="horizontal">
+                android:clickable="false"
+                android:focusable="false"
+                android:text="@string/calculated" />
+        </LinearLayout>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/kilo_price" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/sheetPriceTextInputLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="@string/sheetPrice"
+                android:importantForAutofill="no">
 
                 <EditText
                     android:id="@+id/sheetPriceEditText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:ems="10"
                     android:hint="@string/kr"
-                    android:inputType="number" />
+                    android:importantForAutofill="no"
+                    android:inputType="numberDecimal" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-                <CheckBox
-                    android:id="@+id/sheetPriceCheckBox"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:clickable="false"
-                    android:focusable="false"
-                    android:text="@string/calculated" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/supplier"
-                    android:textSize="14sp" />
-
-                <Spinner
-                    android:id="@+id/suppliersSpinner"
-                    style="@android:style/Widget.Spinner"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:spinnerMode="dropdown" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+            <CheckBox
+                android:id="@+id/sheetPriceCheckBox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:orientation="horizontal">
+                android:clickable="false"
+                android:focusable="false"
+                android:text="@string/calculated" />
+        </LinearLayout>
 
-                <TextView
-                    android:id="@+id/commentTextViev"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/comment" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/suppliersSpinnerTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/supplier"
+                android:textSize="14sp" />
+
+            <Spinner
+                android:id="@+id/suppliersSpinner"
+                style="@android:style/Widget.Spinner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:spinnerMode="dropdown" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:baselineAligned="false"
+            android:orientation="horizontal">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/commentTextInputLayout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="@string/comment"
+                android:importantForAutofill="no">
 
                 <EditText
                     android:id="@+id/commentEditText"
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:ems="10"
+                    android:gravity="top|start"
                     android:hint="@string/comment"
-                    android:inputType="text" />
-            </LinearLayout>
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:ems="10"
-                    android:gravity="start|top" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
-
-                <ImageButton
-                    android:id="@+id/calculateBtn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:contentDescription="@string/calculate"
-                    android:src="@drawable/calculator" />
-
-                <ImageButton
-                    android:id="@+id/saveBtn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:contentDescription="@string/save"
-                    android:src="@drawable/baseline_save_black_48dp" />
-
-                <ImageButton
-                    android:id="@+id/pricerunnerBtn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:contentDescription="@string/pricerunner"
-                    android:src="@drawable/pricerunner_48dp" />
-            </LinearLayout>
-
-
+                    android:importantForAutofill="no"
+                    android:inputType="textMultiLine" />
+            </com.google.android.material.textfield.TextInputLayout>
         </LinearLayout>
-    </ScrollView>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+        <LinearLayout
+            android:id="@+id/buttonLinearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/calculateBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:contentDescription="@string/action_calculate"
+                android:src="@drawable/calculator" />
+
+            <ImageButton
+                android:id="@+id/saveBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:contentDescription="@string/action_save"
+                android:src="@drawable/baseline_save_black_48dp" />
+
+            <ImageButton
+                android:id="@+id/pricerunnerBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:contentDescription="@string/action_pricerunner"
+                android:src="@drawable/pricerunner_48dp" />
+        </LinearLayout>
+
+
+    </LinearLayout>
+</ScrollView>

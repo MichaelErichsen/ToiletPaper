@@ -1,8 +1,7 @@
+package net.myerichsen.toiletpaper.ui.products;
 /*
  * Copyright (c) 2020. Michael Erichsen.
  */
-
-package net.myerichsen.toiletpaper.ui.products;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -22,7 +21,7 @@ public class ProductModel {
     private float rollLength = 0;
     private int rollLength_c = 0;
     private float packagePrice = 0;
-    private int packagePrice_c = 0;
+    //    private int packagePrice_c = 0;
     private float rollPrice = 0;
     private int rollPrice_c = 0;
     private float paperWeight = 0;
@@ -45,40 +44,12 @@ public class ProductModel {
     public ProductModel() {
         Long tsLong = System.currentTimeMillis();
         SimpleDateFormat s = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss");
-        timestamp = s.format(new Date());
+        timestamp = s.format(tsLong);
     }
 
-    /**
-     * Constructor
-     *
-     * @param itemNo
-     * @param brand
-     * @param layers
-     * @param packageRolls
-     * @param rollSheets
-     * @param sheetWidth
-     * @param sheetLength
-     * @param sheetLength_c
-     * @param rollLength
-     * @param rollLength_c
-     * @param packagePrice
-     * @param packagePrice_c
-     * @param rollPrice
-     * @param rollPrice_c
-     * @param paperWeight
-     * @param paperWeight_c
-     * @param kiloPrice
-     * @param kiloPrice_c
-     * @param meterPrice
-     * @param meterPrice_c
-     * @param sheetPrice
-     * @param sheetPrice_c
-     * @param supplier
-     * @param comments
-     */
     public ProductModel(String itemNo, String brand, int layers, int packageRolls, int rollSheets, int sheetWidth,
                         int sheetLength, int sheetLength_c, float rollLength, int rollLength_c,
-                        float packagePrice, int packagePrice_c, float rollPrice, int rollPrice_c,
+                        float packagePrice, float rollPrice, int rollPrice_c,
                         float paperWeight, int paperWeight_c, float kiloPrice, int kiloPrice_c,
                         float meterPrice, int meterPrice_c, float sheetPrice, int sheetPrice_c,
                         String supplier, String comments) {
@@ -91,7 +62,7 @@ public class ProductModel {
         this.rollLength = rollLength;
         this.rollLength_c = rollLength_c;
         this.packagePrice = packagePrice;
-        this.packagePrice_c = packagePrice_c;
+//        this.packagePrice_c = packagePrice_c;
         this.rollPrice = rollPrice;
         this.rollPrice_c = rollPrice_c;
         this.paperWeight = paperWeight;
@@ -191,13 +162,13 @@ public class ProductModel {
         this.packagePrice = packagePrice;
     }
 
-    public int getPackagePrice_c() {
-        return packagePrice_c;
-    }
+//    public int getPackagePrice_c() {
+//        return packagePrice_c;
+//    }
 
-    public void setPackagePrice_c(int packagePrice_c) {
-        this.packagePrice_c = packagePrice_c;
-    }
+//    public void setPackagePrice_c(int packagePrice_c) {
+//        this.packagePrice_c = packagePrice_c;
+//    }
 
     public float getRollPrice() {
         return rollPrice;

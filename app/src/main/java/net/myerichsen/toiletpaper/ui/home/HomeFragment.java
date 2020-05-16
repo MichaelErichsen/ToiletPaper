@@ -1,5 +1,9 @@
 package net.myerichsen.toiletpaper.ui.home;
+/*
+ * Copyright (c) 2020. Michael Erichsen.
+ */
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -12,8 +16,10 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -22,12 +28,14 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatImageButton;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentResultListener;
+import androidx.navigation.NavDirections;
+import androidx.navigation.Navigation;
+import androidx.preference.PreferenceManager;
 
 import com.google.android.material.snackbar.Snackbar;
 
-import net.myerichsen.toiletpaper.BrandActivity;
 import net.myerichsen.toiletpaper.R;
-import net.myerichsen.toiletpaper.ScanActivity;
 import net.myerichsen.toiletpaper.TPDbAdapter;
 import net.myerichsen.toiletpaper.ui.products.ProductModel;
 import net.myerichsen.toiletpaper.ui.suppliers.SupplierModel;
@@ -36,18 +44,17 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-import static android.app.Activity.RESULT_OK;
-
 public class HomeFragment extends Fragment {
-    private final static int REQUEST_CODE_1 = 1;
-    private final static int REQUEST_CODE_2 = 2;
+    public static final String BRAND = "brand";
+    public static final String ITEM_NO = "itemNo";
 
     private TPDbAdapter adapter;
+    private Activity activity;
+    private Snackbar snackbar;
+    private View snackView;
 
     private EditText itemNoEditText;
-    private AppCompatImageButton searchItemNoBtn;
     private EditText brandEditText;
-    private AppCompatImageButton searchBrandBtn;
     private Spinner layersSpinner;
     private EditText packageRollsEditText;
     private EditText rollSheetsEditText;
@@ -72,12 +79,46 @@ public class HomeFragment extends Fragment {
     private ProductModel pm;
     private String brand;
 
+    private static void hideSoftKeyboard(Activity activity) {
+        if (activity.getCurrentFocus() == null) {
+            return;
+        }
+
+        InputMethodManager inputMethodManager = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
+        Objects.requireNonNull(inputMethodManager).hideSoftInputFromWindow(activity.getCurrentFocus().getWindowToken(), 0);
+    }
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_home, container, false);
+        activity = getActivity();
         Context context = getContext();
-        SharedPreferences sharedPref = context.getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE);
-        boolean advancedInputKey = sharedPref.getBoolean(getString(R.string.advanced_input_key), false);
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(Objects.requireNonNull(context));
+        float fontSize = Float.parseFloat(preferences.getString("fontsize", "24"));
+
+        snackView = requireActivity().findViewById(android.R.id.content);
+
+        ((TextView) root.findViewById(R.id.brandEditText)).setTextSize(fontSize);
+        ((TextView) root.findViewById(R.id.commentEditText)).setTextSize(fontSize);
+        ((TextView) root.findViewById(R.id.itemNoEditText)).setTextSize(fontSize);
+        ((TextView) root.findViewById(R.id.kiloPriceCheckBox)).setTextSize(fontSize);
+        ((TextView) root.findViewById(R.id.kiloPriceEditText)).setTextSize(fontSize);
+        ((TextView) root.findViewById(R.id.meterPriceCheckBox)).setTextSize(fontSize);
+        ((TextView) root.findViewById(R.id.meterPriceEditText)).setTextSize(fontSize);
+        ((TextView) root.findViewById(R.id.packagePriceEditText)).setTextSize(fontSize);
+        ((TextView) root.findViewById(R.id.packageRollsEditText)).setTextSize(fontSize);
+        ((TextView) root.findViewById(R.id.paperWeightCheckBox)).setTextSize(fontSize);
+        ((TextView) root.findViewById(R.id.paperWeightEditText)).setTextSize(fontSize);
+        ((TextView) root.findViewById(R.id.rollLengthCheckBox)).setTextSize(fontSize);
+        ((TextView) root.findViewById(R.id.rollLengthEditText)).setTextSize(fontSize);
+        ((TextView) root.findViewById(R.id.rollPriceCheckBox)).setTextSize(fontSize);
+        ((TextView) root.findViewById(R.id.rollPriceEditText)).setTextSize(fontSize);
+        ((TextView) root.findViewById(R.id.rollSheetsEditText)).setTextSize(fontSize);
+        ((Button) root.findViewById(R.id.sheetLengthCheckBox)).setTextSize(fontSize);
+        ((TextView) root.findViewById(R.id.sheetLengthEditText)).setTextSize(fontSize);
+        ((TextView) root.findViewById(R.id.sheetPriceCheckBox)).setTextSize(fontSize);
+        ((TextView) root.findViewById(R.id.sheetPriceEditText)).setTextSize(fontSize);
+        ((TextView) root.findViewById(R.id.sheetWidthEditText)).setTextSize(fontSize);
 
         adapter = new TPDbAdapter(context);
         pm = new ProductModel();
@@ -98,16 +139,7 @@ public class HomeFragment extends Fragment {
         ArrayAdapter<String> layerArrayAdapter = new ArrayAdapter<>(Objects.requireNonNull(context), android.R.layout.simple_spinner_item, layerArrayList);
         layerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         layersSpinner.setAdapter(layerArrayAdapter);
-        layersSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-            }
-        });
+        layersSpinner.setOnItemSelectedListener(getSpinnerListener());
 
         // Package rolls
         packageRollsEditText = root.findViewById(R.id.packageRollsEditText);
@@ -254,6 +286,7 @@ public class HomeFragment extends Fragment {
         ArrayList<String> supplierArrayList = new ArrayList<>();
 
         boolean goOn = true;
+        int spinnerIndex = 0;
 
         try {
             lsm = adapter.getSupplierModels();
@@ -266,75 +299,37 @@ public class HomeFragment extends Fragment {
         }
 
         if (goOn) {
+            String item;
+            String defaultSupplier = preferences.getString("defaultsupplier", "");
+
             for (int i = 0; i < lsm.size(); i++) {
-                supplierArrayList.add(lsm.get(i).getSupplier());
+                item = lsm.get(i).getSupplier();
+                supplierArrayList.add(item);
+
+                if (item.equals(defaultSupplier)) {
+                    spinnerIndex = i;
+                }
             }
         }
 
         ArrayAdapter<String> supplierArrayAdapter = new ArrayAdapter<>(context, android.R.layout.simple_spinner_item, supplierArrayList);
         supplierArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         suppliersSpinner.setAdapter(supplierArrayAdapter);
-        suppliersSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-            }
-        });
+        suppliersSpinner.setSelection(spinnerIndex);
+        suppliersSpinner.setOnItemSelectedListener(getSpinnerListener());
 
         // Comments
-
-        TextView commentTextView = root.findViewById(R.id.commentTextViev);
-        commentTextView.setVisibility(advancedInputKey ? View.VISIBLE : View.INVISIBLE);
         commentEditText = root.findViewById(R.id.commentEditText);
-        commentEditText.setVisibility(advancedInputKey ? View.VISIBLE : View.INVISIBLE);
 
         // Buttons
         AppCompatImageButton calculateBtn = root.findViewById(R.id.calculateBtn);
-        calculateBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String message = "Intet blev beregnet";
-                boolean rc = calculate();
-                if (rc) {
-                    message = "Beregninger lykkedes";
-                }
-                Snackbar snackbar = Snackbar
-                        .make(requireActivity().findViewById(android.R.id.content), message, Snackbar.LENGTH_LONG);
-                snackbar.show();
-            }
-        });
+        calculateBtn.setOnClickListener(calculateBtnOnClickListener());
 
         AppCompatImageButton saveBtn = root.findViewById(R.id.saveBtn);
-        saveBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String message;
-
-                try {
-                    pm = populateProductModelFromLayout();
-                    adapter.insertData(pm);
-                    message = getString(R.string.home_fragment_save_message);
-                } catch (Exception e) {
-                    message = e.getMessage();
-                }
-                Snackbar snackbar = Snackbar
-                        .make(requireActivity().findViewById(android.R.id.content), Objects.requireNonNull(message), Snackbar.LENGTH_LONG);
-                snackbar.show();
-            }
-        });
+        saveBtn.setOnClickListener(saveBtnOnClickListener());
 
         AppCompatImageButton pricerunnerBtn = root.findViewById(R.id.pricerunnerBtn);
-        pricerunnerBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.pricerunner.dk/results?q=toiletpapir"));
-                startActivity(browserIntent);
-            }
-        });
+        pricerunnerBtn.setOnClickListener(priceRunnerOnClickListener());
 
         AppCompatImageButton scanBtn = root.findViewById(R.id.scanBtn);
         scanBtn.setOnClickListener(scanBtnOnClickListener());
@@ -348,14 +343,62 @@ public class HomeFragment extends Fragment {
         return root;
     }
 
-    private View.OnClickListener scanBtnOnClickListener() {
+    private AdapterView.OnItemSelectedListener getSpinnerListener() {
+        return new AdapterView.OnItemSelectedListener() {
+
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        };
+    }
+
+    private View.OnClickListener calculateBtnOnClickListener() {
         return new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int requestCode = RESULT_OK;
-                Intent scanIntent = new Intent(getContext(), ScanActivity.class);
-                scanIntent.putExtra("net.myerichsen.toiletpaper.ITEMNO", "");
-                startActivityForResult(scanIntent, REQUEST_CODE_1);
+                hideSoftKeyboard(activity);
+                String message = getString(R.string.calculation_failed);
+                if (calculate()) {
+                    message = getString(R.string.calculation_suceeded);
+                }
+                snackbar = Snackbar
+                        .make(snackView, message, Snackbar.LENGTH_LONG);
+                snackbar.show();
+            }
+        };
+    }
+
+    private View.OnClickListener priceRunnerOnClickListener() {
+        return new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.pricerunner.dk/results?q=toiletpapir"));
+                startActivity(browserIntent);
+            }
+        };
+    }
+
+    private View.OnClickListener saveBtnOnClickListener() {
+        return new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                hideSoftKeyboard(activity);
+
+                try {
+                    pm = populateProductModelFromLayout();
+                    adapter.insertData(pm);
+                    snackbar = Snackbar
+                            .make(snackView, Objects.requireNonNull(getString(R.string.home_fragment_save_message)), Snackbar.LENGTH_LONG);
+                    snackbar.show();
+                } catch (Exception e) {
+                    snackbar = Snackbar
+                            .make(snackView, Objects.requireNonNull(e.getMessage()), Snackbar.LENGTH_LONG);
+                    snackbar.show();
+                }
             }
         };
     }
@@ -363,47 +406,50 @@ public class HomeFragment extends Fragment {
     private View.OnClickListener searchItemNoBtnOnclickListener() {
         return new View.OnClickListener() {
             public void onClick(View v) {
-                try {
-                    List<ProductModel> lpm = adapter.getProductModels("ITEM_NO=?", itemNoEditText.getText().toString());
-                    if (lpm.size() > 0) {
-                        populateLayoutFromProductModel(lpm.get(0));
-                    } else {
-                        Snackbar snackbar = Snackbar
-                                .make(requireActivity().findViewById(android.R.id.content), "Varenummer ikke fundet", Snackbar.LENGTH_LONG);
-                        snackbar.show();
-                    }
-
-                } catch (Exception e) {
-                    Snackbar snackbar = Snackbar
-                            .make(requireActivity().findViewById(android.R.id.content), e.getMessage(), Snackbar.LENGTH_LONG);
+                hideSoftKeyboard(activity);
+                List<ProductModel> lpm = adapter.getProductModels("ITEM_NO=?", itemNoEditText.getText().toString());
+                if (lpm.size() == 0) {
+                    snackbar = Snackbar
+                            .make(snackView,
+                                    R.string.itemno_not_found, Snackbar.LENGTH_LONG);
                     snackbar.show();
+                    return;
                 }
+
+                populateLayoutFromProductModel(lpm.get(0));
             }
         };
     }
 
-    /**
-     * Brand search button on click listener
-     *
-     * @return The listener
-     */
     private View.OnClickListener searchBrandBtnOnclickListener() {
         return new View.OnClickListener() {
             public void onClick(View v) {
+                hideSoftKeyboard(activity);
                 brand = brandEditText.getText().toString();
                 if (brand.equals("")) {
-                    Snackbar snackbar = Snackbar
-                            .make(requireActivity().findViewById(android.R.id.content),
+                    snackbar = Snackbar
+                            .make(snackView,
                                     R.string.enter_brand_prompt, Snackbar.LENGTH_LONG);
                     snackbar.show();
                 } else {
-                    Intent brandIntent = new Intent(getContext(), BrandActivity.class);
-                    brandIntent.putExtra("net.myerichsen.toiletpaper.BRAND", brand);
-                    startActivityForResult(brandIntent, REQUEST_CODE_2);
+                    HomeFragmentDirections.ActionNavHomeToNavBrand action =
+                            HomeFragmentDirections.actionNavHomeToNavBrand(brand);
+                    Navigation.findNavController(v).navigate(action);
                 }
             }
         };
     }
+
+    private View.OnClickListener scanBtnOnClickListener() {
+        return new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                NavDirections action = HomeFragmentDirections.actionNavHomeToNavScan();
+                Navigation.findNavController(v).navigate(action);
+            }
+        };
+    }
+
 
     private void populateLayoutFromProductModel(ProductModel pm) {
         try {
@@ -431,19 +477,12 @@ public class HomeFragment extends Fragment {
             itemNoEditText.setText(pm.getItemNo());
             brandEditText.setText(pm.getBrand());
         } catch (Exception e) {
-            Snackbar snackbar = Snackbar
-                    .make(requireActivity().findViewById(android.R.id.content), Objects.requireNonNull(e.getMessage()), Snackbar.LENGTH_LONG);
+            snackbar = Snackbar
+                    .make(snackView, Objects.requireNonNull(e.getMessage()), Snackbar.LENGTH_LONG);
             snackbar.show();
         }
     }
 
-    /**
-     * Spinner utility function
-     *
-     * @param spinner  A spinner
-     * @param myString Strint to find in spinner
-     * @return Index of string in spinner
-     */
     private int getIndex(Spinner spinner, String myString) {
         for (int i = 0; i < spinner.getCount(); i++) {
             if (spinner.getItemAtPosition(i).toString().equalsIgnoreCase(myString)) {
@@ -518,8 +557,8 @@ public class HomeFragment extends Fragment {
             pm.setSupplier(getStringFromLayout(suppliersSpinner));
             pm.setComments(getStringFromLayout(commentEditText));
         } catch (Exception e) {
-            Snackbar snackbar = Snackbar
-                    .make(requireActivity().findViewById(android.R.id.content), Objects.requireNonNull(e.getMessage()), Snackbar.LENGTH_LONG);
+            snackbar = Snackbar
+                    .make(snackView, Objects.requireNonNull(e.getMessage()), Snackbar.LENGTH_LONG);
             snackbar.show();
         }
 
@@ -531,6 +570,79 @@ public class HomeFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
+
+        getParentFragmentManager().setFragmentResultListener("itemNoRequestKey", this,
+                itemNoFragmentResultListener());
+        getParentFragmentManager().setFragmentResultListener("brandRequestKey", this,
+                brandFragmentResultListener());
+    }
+
+    private FragmentResultListener itemNoFragmentResultListener() {
+        return new FragmentResultListener() {
+
+            /**
+             * Callback used to handle results passed between fragments.
+             *
+             * @param itemNoRequestKey key used to store the result
+             * @param bundle result passed to the callback
+             */
+            @Override
+            public void onFragmentResult(@NonNull String itemNoRequestKey, @NonNull Bundle bundle) {
+                String result = bundle.getString(ITEM_NO);
+
+                try {
+                    List<ProductModel> lpm = adapter.getProductModels("ITEM_NO=?", result);
+
+                    if (lpm.size() == 0) {
+                        itemNoEditText.setText(result);
+                        populateLayoutFromProductModel(new ProductModel());
+                        snackbar = Snackbar
+                                .make(snackView,
+                                        R.string.itemno_not_found, Snackbar.LENGTH_LONG);
+                        snackbar.show();
+                    } else {
+                        populateLayoutFromProductModel(lpm.get(0));
+                    }
+                } catch (Exception e) {
+                    snackbar = Snackbar
+                            .make(snackView, Objects.requireNonNull(e.getMessage()), Snackbar.LENGTH_LONG);
+                    snackbar.show();
+                }
+            }
+        };
+    }
+
+    private FragmentResultListener brandFragmentResultListener() {
+        return new FragmentResultListener() {
+
+            /**
+             * Callback used to handle results passed between fragments.
+             *
+             * @param brandRequestKey key used to store the result
+             * @param bundle result passed to the callback
+             */
+            @Override
+            public void onFragmentResult(@NonNull String brandRequestKey, @NonNull Bundle bundle) {
+                String result = bundle.getString(BRAND);
+
+                try {
+                    List<ProductModel> lpm = adapter.getProductModels("BRAND=?", result);
+
+                    if (lpm.size() == 0) {
+                        snackbar = Snackbar
+                                .make(snackView,
+                                        R.string.brand_not_found, Snackbar.LENGTH_LONG);
+                        snackbar.show();
+                    } else {
+                        populateLayoutFromProductModel(lpm.get(0));
+                    }
+                } catch (Exception e) {
+                    snackbar = Snackbar
+                            .make(snackView, Objects.requireNonNull(e.getMessage()), Snackbar.LENGTH_LONG);
+                    snackbar.show();
+                }
+            }
+        };
     }
 
     @Override
@@ -541,35 +653,58 @@ public class HomeFragment extends Fragment {
     /**
      * Calculate all calculable fields
      */
-    // TODO Reconsider what and how to calculate
+    // TODO Input: g per rulle
     private boolean calculate() {
+        // Sheet length = roll length / sheets pet roll (OK)
+        boolean fSheetLength = false;
         try {
-            boolean fSheetLength = divide(rollLengthEditText, rollLengthCheckBox, rollSheetsEditText, null, sheetLengthEditText, sheetLengthCheckBox);
-
-            boolean fRollLength = multiply(sheetLengthEditText, sheetLengthCheckBox, rollSheetsEditText, null, rollLengthEditText, rollLengthCheckBox, 100);
-
-            boolean fRollPrice = divide(packagePriceEditText, null, rollSheetsEditText, null, rollPriceEditText, rollPriceCheckBox);
-
-            // Kilo price
-            boolean fKiloPrice = multiply(sheetLengthEditText, sheetLengthCheckBox, rollSheetsEditText, null, rollLengthEditText, rollLengthCheckBox, 100);
-
-            // Meter price: package price / sheet length
-            boolean fMeterPrice = divide(packagePriceEditText, null, sheetLengthEditText, sheetLengthCheckBox, meterPriceEditText, meterPriceCheckBox);
-
-            // Sheet price: package price / rolls pr package / sheets per roll
-//            EditText dummy = new EditText(context);
-//            CheckBox dummyC = new CheckBox(context);
-//            dummyC.setChecked(false);
-//            boolean fSheetPrice1 = divide(packagePriceEditText, null, packageRollsEditText, null, dummy, dummyC);
-//            boolean fSheetPrice = divide(dummy, dummyC, rollSheetsEditText, null, rollLengthEditText, rollLengthCheckBox);
-
-            return fKiloPrice | fMeterPrice | fRollLength | fRollPrice | fSheetLength;
-        } catch (Exception e) {
-            Snackbar snackbar = Snackbar
-                    .make(requireActivity().findViewById(android.R.id.content), Objects.requireNonNull(e.getMessage()), Snackbar.LENGTH_LONG);
-            snackbar.show();
+            fSheetLength = divide(rollLengthEditText, rollLengthCheckBox, rollSheetsEditText, null,
+                    sheetLengthEditText, sheetLengthCheckBox, 1000);
+        } catch (Exception ignored) {
         }
-        return false;
+
+        // Roll length = sheet length * sheets per roll (OK)
+        boolean fRollLength = false;
+        try {
+            fRollLength = multiply(sheetLengthEditText, sheetLengthCheckBox, rollSheetsEditText, null,
+                    rollLengthEditText, rollLengthCheckBox, 1000);
+        } catch (Exception ignored) {
+        }
+
+        // Price per roll = price per package / rolls per package (OK)
+        boolean fRollPrice = false;
+        try {
+            fRollPrice = divide(packagePriceEditText, null, packageRollsEditText, null,
+                    rollPriceEditText, rollPriceCheckBox, 1);
+        } catch (Exception ignored) {
+        }
+
+        // TODO Paper weight (g per m2) ???
+
+        // TODO Kilo price ???
+//            boolean fKiloPrice = multiply(sheetLengthEditText, sheetLengthCheckBox, rollSheetsEditText, null, rollLengthEditText, rollLengthCheckBox, 100);
+
+        // TODO Price per meter = price per package / rolls per package / roll length
+        boolean fMeterPrice = false;
+        try {
+            fMeterPrice = divide(packagePriceEditText, null,
+                    packageRollsEditText, null,
+                    rollLengthEditText, rollLengthCheckBox,
+                    meterPriceEditText, meterPriceCheckBox, 1);
+        } catch (Exception ignored) {
+        }
+
+        // TODO Price per sheet = price per package / rolls pr package / sheets per roll
+        boolean fSheetPrice = false;
+        try {
+            fSheetPrice = divide(packagePriceEditText, null, packageRollsEditText, null,
+                    rollSheetsEditText, null, rollLengthEditText, rollLengthCheckBox, 1);
+        } catch (Exception ignored) {
+        }
+
+        return fMeterPrice | fRollLength | fRollPrice | fSheetLength | fSheetPrice;
+
+//        return fKiloPrice | fMeterPrice | fPaperWeight | fRollLength | fRollPrice | fSheetLength | fSheetPrice;
     }
 
     private boolean multiply(EditText multiplicand, CheckBox cb1, EditText multiplier, CheckBox cb2, EditText product, CheckBox cb3, int precision) {
@@ -588,7 +723,7 @@ public class HomeFragment extends Fragment {
         if ((cb3 != null) && !(cb3.isSelected())) {
             s3 = product.getText().toString();
 
-            if ((!s3.isEmpty()) && (Integer.getInteger(s3) > 0)) {
+            if ((!s3.isEmpty()) && (Integer.parseInt(s3) > 0)) {
                 return false;
             }
         }
@@ -610,7 +745,7 @@ public class HomeFragment extends Fragment {
         return true;
     }
 
-    private boolean divide(EditText dividend, CheckBox cb1, EditText divisor, CheckBox cb2, EditText quotient, CheckBox cb3) {
+    private boolean divide(EditText dividend, CheckBox cb1, EditText divisor, CheckBox cb2, EditText quotient, CheckBox cb3, int precision) {
         String s1, s2;
         String s3;
 
@@ -626,7 +761,7 @@ public class HomeFragment extends Fragment {
         if ((cb3 != null) && !(cb3.isSelected())) {
             s3 = quotient.getText().toString();
 
-            if ((!s3.isEmpty()) && (Integer.getInteger(s3) > 0)) {
+            if ((!s3.isEmpty()) && (Integer.parseInt(s3) > 0)) {
                 return false;
             }
         }
@@ -642,64 +777,54 @@ public class HomeFragment extends Fragment {
         }
 
         // Now do the calculation
-        float i3 = Float.parseFloat(s1) / Float.parseFloat(s2);
+        float i3 = Float.parseFloat(s1) * precision / Float.parseFloat(s2);
         quotient.setText(String.valueOf(i3));
         Objects.requireNonNull(cb3).setChecked(true);
         return true;
     }
 
-    // This method is invoked when target activity return result data back.
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent dataIntent) {
-        super.onActivityResult(requestCode, resultCode, dataIntent);
-        String messageReturn;
+    private boolean divide(EditText dividend, CheckBox cb1, EditText divisor, CheckBox cb2,
+                           EditText divisor2, CheckBox cb3,
+                           EditText quotient, CheckBox cb4, int precision) {
+        String s1, s2, s3, s4;
 
-        // The returned result data is identified by requestCode.
-        // The request code is specified in startActivityForResult(intent, REQUEST_CODE_1); method.
-        switch (requestCode) {
-            // This request code is set by startActivityForResult(intent, REQUEST_CODE_1) method.
-            case REQUEST_CODE_1:
-                messageReturn = dataIntent.getStringExtra("net.myerichsen.toiletpaper.ITEMNO");
-
-                if (resultCode == RESULT_OK) {
-
-                    List<ProductModel> lpm = adapter.getProductModels("ITEM_NO=?", messageReturn);
-
-                    if (lpm.size() > 0) {
-                        populateLayoutFromProductModel(lpm.get(0));
-                    } else {
-                        populateLayoutFromProductModel(new ProductModel());
-                    }
-                } else {
-                    Snackbar snackbar = Snackbar
-                            .make(requireActivity().findViewById(android.R.id.content), messageReturn, Snackbar.LENGTH_LONG);
-                    snackbar.show();
-                }
-                break;
-
-            // This request code is set by startActivityForResult(intent, REQUEST_CODE_2) method.
-            case REQUEST_CODE_2:
-                messageReturn = dataIntent.getStringExtra("net.myerichsen.toiletpaper.BRAND");
-
-                if (resultCode == RESULT_OK) {
-                    List<ProductModel> lpm = adapter.getProductModels("BRAND=?", messageReturn);
-                    populateLayoutFromProductModel(lpm.get(0));
-                } else {
-                    Snackbar snackbar = Snackbar
-                            .make(requireActivity().findViewById(android.R.id.content), messageReturn, Snackbar.LENGTH_LONG);
-                    snackbar.show();
-                }
-                break;
+        // First test if calculated
+        if ((cb1 != null) && (cb1.isSelected())) {
+            return false;
         }
-    }
+        if ((cb2 != null) && (cb2.isSelected())) {
+            return false;
+        }
+        if ((cb3 != null) && (cb3.isSelected())) {
+            return false;
+        }
 
-// --Commented out by Inspection START (26-04-2020 10:36):
-//    public void addProduct(View view) {
-//        ProductModel pm = new ProductModel();
-//        adapter.insertData(pm);
-//        Snackbar snackbar = Snackbar
-//                .make(requireActivity().findViewById(android.R.id.content), R.string.product_added, Snackbar.LENGTH_LONG);
-//        snackbar.show();
-//    }
-// --Commented out by Inspection STOP (26-04-2020 10:36)
+        if ((cb4 != null) && !(cb4.isSelected())) {
+            s4 = quotient.getText().toString();
+
+            if ((!s4.isEmpty()) && (Integer.parseInt(s4) > 0)) {
+                return false;
+            }
+        }
+
+        // Then test for zero values
+        s1 = dividend.getText().toString();
+        if ((s1.isEmpty()) || (s1.equals("0"))) {
+            return false;
+        }
+        s2 = divisor.getText().toString();
+        if ((s2.isEmpty()) || (s2.equals("0"))) {
+            return false;
+        }
+        s3 = divisor2.getText().toString();
+        if ((s3.isEmpty()) || (s3.equals("0"))) {
+            return false;
+        }
+
+        // Now do the calculation
+        float fq = Float.parseFloat(s1) * precision / Float.parseFloat(s2) / Float.parseFloat(s3);
+        quotient.setText(String.valueOf(fq));
+        Objects.requireNonNull(cb4).setChecked(true);
+        return true;
+    }
 }
