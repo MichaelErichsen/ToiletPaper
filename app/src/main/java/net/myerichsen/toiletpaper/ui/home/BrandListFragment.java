@@ -7,8 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.LinearLayout;
-import android.widget.TableRow;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -37,7 +35,7 @@ import static net.myerichsen.toiletpaper.ui.home.HomeFragment.BRAND;
  */
 public class BrandListFragment extends Fragment {
     private static final String ARG_COLUMN_COUNT = "column-count";
-//    private final TableRow.LayoutParams llp = new TableRow.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+    //    private final TableRow.LayoutParams llp = new TableRow.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
     private int mColumnCount = 2;
     private OnListFragmentInteractionListener fbListener;
     private Context context;

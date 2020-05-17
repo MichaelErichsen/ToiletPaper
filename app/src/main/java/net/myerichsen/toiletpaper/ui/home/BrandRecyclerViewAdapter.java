@@ -18,11 +18,11 @@ import java.util.List;
  */
 
 /**
- * {@link RecyclerView.Adapter} that can display a {@link BrandModel.BrandItem} and makes a call to the
+ * {@link RecyclerView.Adapter} that can display a {@link BrandItem} and makes a call to the
  * specified {@link OnListFragmentInteractionListener}.
  */
 public class BrandRecyclerViewAdapter extends RecyclerView.Adapter<BrandRecyclerViewAdapter.ViewHolder> {
-    private final List<BrandModel.BrandItem> fbValues;
+    private final List<BrandItem> fbValues;
     private final OnListFragmentInteractionListener fbListener;
 
     /**
@@ -35,7 +35,7 @@ public class BrandRecyclerViewAdapter extends RecyclerView.Adapter<BrandRecycler
      * @param items    List of brand items
      * @param listener The OnListFragmentInteractionListener
      */
-    public BrandRecyclerViewAdapter(List<BrandModel.BrandItem> items, OnListFragmentInteractionListener listener) {
+    public BrandRecyclerViewAdapter(List<BrandItem> items, OnListFragmentInteractionListener listener) {
         fbValues = items;
         fbListener = listener;
     }
