@@ -1,7 +1,3 @@
-/*
- * Copyright (c) 2020. Michael Erichsen.
- */
-
 package net.myerichsen.toiletpaper;
 
 import android.annotation.SuppressLint;
@@ -30,6 +26,12 @@ import androidx.preference.PreferenceManager;
 
 import com.google.android.material.navigation.NavigationView;
 
+import net.myerichsen.toiletpaper.ui.home.BrandListFragment;
+import net.myerichsen.toiletpaper.ui.home.BrandListFragmentDirections;
+import net.myerichsen.toiletpaper.ui.home.BrandModel;
+import net.myerichsen.toiletpaper.ui.home.ItemNoListFragment;
+import net.myerichsen.toiletpaper.ui.home.ItemNoListFragmentDirections;
+import net.myerichsen.toiletpaper.ui.home.ItemNoModel;
 import net.myerichsen.toiletpaper.ui.prices.PriceListFragment;
 import net.myerichsen.toiletpaper.ui.prices.PriceListFragmentDirections;
 import net.myerichsen.toiletpaper.ui.prices.PriceModel;
@@ -41,7 +43,12 @@ import java.util.Objects;
 
 import static androidx.navigation.Navigation.findNavController;
 
-public class MainActivity extends AppCompatActivity implements PriceListFragment.OnListFragmentInteractionListener {
+/*
+ * Copyright (c) 2020. Michael Erichsen. The program is distributed under the terms of the GNU Affero General Public License v3.0
+ */
+
+public class MainActivity extends AppCompatActivity implements PriceListFragment.OnListFragmentInteractionListener,
+        ItemNoListFragment.OnListFragmentInteractionListener, BrandListFragment.OnListFragmentInteractionListener {
     private AppBarConfiguration mAppBarConfiguration;
 
     @Override
@@ -62,7 +69,7 @@ public class MainActivity extends AppCompatActivity implements PriceListFragment
                 R.id.nav_products,
                 R.id.nav_suppliers,
                 R.id.nav_about)
-                .setDrawerLayout(drawer)
+                .setOpenableLayout(drawer)
                 .build();
         NavController navController = findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
@@ -87,47 +94,80 @@ public class MainActivity extends AppCompatActivity implements PriceListFragment
         }
 
         if (id == R.id.fragment_help) {
-            SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
-            float fontSize = Float.parseFloat(preferences.getString("fontsize", "24"));
-
-            final Dialog dialog = new Dialog(this);
-            dialog.setContentView(R.layout.dialog_help);
-            dialog.setTitle("@string/help");
-
-            TextView text = dialog.findViewById(R.id.HelpDialogTextView);
-            text.setTextSize(fontSize);
-
-            String s = getCallingFragmentLabel();
-            switch (Objects.requireNonNull(s)) {
-                case "Butikker":
-                    text.setText(getString(R.string.suppliers_help_text));
-                    break;
-                case "Om":
-                    text.setText(getString(R.string.about_help_text));
-                    break;
-                case "Produkter":
-                    text.setText(getString(R.string.products_help_text));
-                    break;
-                default:
-                    text.setText(getString(R.string.default_help_text, s));
-                    break;
-            }
-
-            Button dialogButton = dialog.findViewById(R.id.helpDialogButtonOK);
-            // if button is clicked, close the custom dialog
-            dialogButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    dialog.dismiss();
-                }
-            });
-
-            dialog.show();
+            showHelpDialog();
             return true;
-
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void showHelpDialog() {
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        float fontSize = Float.parseFloat(preferences.getString("fontsize", "24"));
+
+        final Dialog dialog = new Dialog(this);
+        dialog.setContentView(R.layout.dialog_help);
+        dialog.setTitle("@string/help");
+
+        TextView text = dialog.findViewById(R.id.HelpDialogTextView);
+        text.setTextSize(fontSize);
+
+        String s = getCallingFragmentLabel();
+        switch (Objects.requireNonNull(s)) {
+            case "Butikker":
+                text.setText(getString(R.string.suppliers_help_text));
+                break;
+            case "Butiksdetaljer":
+                text.setText(getString(R.string.supplier_details_home_help_text));
+                break;
+            case "Fundne varemærker":
+                text.setText(getString(R.string.brand_list_help_text));
+                break;
+            case "Om":
+                text.setText(getString(R.string.about_help_text));
+                break;
+            case "Prisudvikling, grafisk":
+                text.setText(getString(R.string.prices_graph_help_text));
+                break;
+            case "Prisudvikling, valg vare":
+                text.setText(getString(R.string.prices_select_help_text));
+                break;
+            case "Produktdetaljer":
+                text.setText(getString(R.string.product_details_help_text));
+                break;
+            case "Produkter":
+                text.setText(getString(R.string.products_help_text));
+                break;
+            case "Prisudvikling":
+                text.setText(getString(R.string.price_list_help_text));
+                break;
+            case "Sammenlign":
+                text.setText(getString(R.string.compare_help_text));
+                break;
+            case "Scan":
+                text.setText(getString(R.string.scan_help_text));
+                break;
+            case "Sorteret produktliste":
+                text.setText(getString(R.string.sorted_product_list_help_text));
+                break;
+            case "Toiletpapir":
+                text.setText(getString(R.string.home_help_text));
+                break;
+            default:
+                text.setText(getString(R.string.default_help_text, s));
+                break;
+        }
+
+        Button dialogButton = dialog.findViewById(R.id.helpDialogButtonOK);
+        // if button is clicked, close the custom dialog
+        dialogButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
+        dialog.show();
     }
 
     @Override
@@ -158,16 +198,25 @@ public class MainActivity extends AppCompatActivity implements PriceListFragment
         return null;
     }
 
-    /**
-     * Must be implemented for price list fragment
-     *
-     * @param item a price item
-     */
     @Override
     public void onListFragmentInteraction(PriceModel.PriceItem item) {
         int uid = item.uid;
         PriceListFragmentDirections.ActionNavPricesListToNavProductDetails action =
                 PriceListFragmentDirections.actionNavPricesListToNavProductDetails(uid);
         Navigation.findNavController(this, R.id.nav_host_fragment).navigate(action);
+    }
+
+    @Override
+    public void onListFragmentInteraction(BrandModel.BrandItem item) {
+        int uid = item.uid;
+        BrandListFragmentDirections.ActionNavBrandToNavProductDetails action =
+                BrandListFragmentDirections.actionNavBrandToNavProductDetails(uid);
+    }
+
+    @Override
+    public void onListFragmentInteraction(ItemNoModel.ItemNoItem item) {
+        int uid = item.uid;
+        ItemNoListFragmentDirections.ActionNavItemNoToNavProductDetails action =
+                ItemNoListFragmentDirections.actionNavItemNoToNavProductDetails(uid);
     }
 }

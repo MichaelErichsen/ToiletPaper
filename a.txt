@@ -1,0 +1,298 @@
+commit 52a8377b181290d917c76b78470eef2a5c52b4fe
+Author: michael <michael.erichsen@xact.dk>
+Date:   Sat May 16 12:58:39 2020 +0200
+
+    ToiletPaper-24 Add search to price select screen
+
+commit 8efb6261f28b65af327fa0b281799cfc7987323c
+Author: michael <michael.erichsen@xact.dk>
+Date:   Fri May 15 11:18:28 2020 +0200
+
+    ToiletPaper-24 Add search to price select screen
+
+commit 9516248a76dbb0df9ae20220b6cf7c5a17466010
+Author: michael <michael.erichsen@xact.dk>
+Date:   Thu May 14 19:07:48 2020 +0200
+
+    ToiletPaper-21 Add a splash screen
+
+commit 6d03c86df9850daa7fe2c484d79e3197415e9538
+Author: michael <michael.erichsen@xact.dk>
+Date:   Thu May 14 15:41:51 2020 +0200
+
+    ToiletPaper-22 Roll length calculation error
+
+commit 252462c40c83efa7e0fe2b86a80e38aa05ad5be3
+Author: michael <michael.erichsen@xact.dk>
+Date:   Thu May 14 10:58:51 2020 +0200
+
+    ToiletPaper-22 Roll length calculation error
+
+commit 020dfa5bab3143bec071b6ee332a9883dd35432a
+Author: michael <michael.erichsen@xact.dk>
+Date:   Thu May 14 08:55:57 2020 +0200
+
+    ToiletPaper-23 Product details
+
+commit beae817076f341c833f405eb4ef39974d88de83b
+Author: michael <michael.erichsen@xact.dk>
+Date:   Wed May 13 18:02:50 2020 +0200
+
+    ToiletPaper-20 Input data in home screen
+
+commit 0627f6388e6437a15fed654797567f7bb188c99f
+Author: michael <michael.erichsen@xact.dk>
+Date:   Wed May 13 17:57:33 2020 +0200
+
+    Small visual improvement to price graph
+
+commit 0ed6066f4c3d63e88ba0526e61e967e2c19f9193
+Author: michael <michael.erichsen@xact.dk>
+Date:   Wed May 13 17:52:45 2020 +0200
+
+    ToiletPaper-20 Input data in home screen
+
+commit dc627fe0b363b37046fb1143b39f57fb5973ada4
+Author: michael <michael.erichsen@xact.dk>
+Date:   Wed May 13 13:34:43 2020 +0200
+
+    ToiletPaper-19 UID
+
+commit 79a7d6ec4d39ad5bd5e6f66db7fd753b8694874c
+Author: michael <michael.erichsen@xact.dk>
+Date:   Wed May 13 11:25:14 2020 +0200
+
+    ToiletPaper-14 More help dialogs
+
+commit d57c2e95984c2cdd092d70b95009cff1fdb9ce0d
+Author: michael <michael.erichsen@xact.dk>
+Date:   Tue May 12 23:43:47 2020 +0200
+
+    ToiletPaper-14 More help dialogs
+
+commit a73c02f9c10c446a46931cbbc04000d1f4e579d1
+Author: michael <michael.erichsen@xact.dk>
+Date:   Tue May 12 23:40:11 2020 +0200
+
+    ToiletPaper-14 More help dialogs
+
+commit 773398353b75314f02d8e323cb0c66bd53b974d2
+Author: michael <michael.erichsen@xact.dk>
+Date:   Tue May 12 23:32:47 2020 +0200
+
+    ToiletPaper-14 More help dialogs
+
+commit aff548176b9b6a2b7d083fe7ab833f47d1a6e4c3
+Merge: 8f7bc31 f371ee7
+Author: michael <michael.erichsen@xact.dk>
+Date:   Tue May 12 22:32:49 2020 +0200
+
+    Merge remote-tracking branch 'origin/Branch3' into Branch3
+
+commit 8f7bc3168a29058fe003abd361fc733049d41508
+Author: michael <michael.erichsen@xact.dk>
+Date:   Tue May 12 22:31:49 2020 +0200
+
+    ToiletPaper-13 More test data
+
+commit f371ee772e294d772b6daeef62cacde01c3d10e5
+Merge: 2c06d97 c26c10d
+Author: michael <michael.erichsen@xact.dk>
+Date:   Tue May 12 20:51:33 2020 +0200
+
+    Merge branch 'Branch3' of https://github.com/MichaelErichsen/ToiletPaper into Branch3
+
+commit c26c10d92937d4c4ccae911d9f1fcafb862d9002
+Merge: bbe1649 9228df1
+Author: michael <michael.erichsen@xact.dk>
+Date:   Tue May 12 20:45:16 2020 +0200
+
+    Merge branch 'Branch3' of https://github.com/MichaelErichsen/ToiletPaper into Branch3
+
+commit 2c06d978a65db6d732314ced824e764b934ade1e
+Merge: bbe1649 9228df1
+Author: michael <michael.erichsen@xact.dk>
+Date:   Tue May 12 20:40:23 2020 +0200
+
+    Merge branch 'Branch3' of https://github.com/MichaelErichsen/ToiletPaper
+
+commit bbe1649e6347c9b20837f5ee9ed3b1a83d8be833
+Author: michael <michael.erichsen@xact.dk>
+Date:   Tue May 12 20:27:09 2020 +0200
+
+    Cleanup branches
+
+commit 67bc7641ec6bf27833b6ef65fab0420eb7c1967e
+Author: Michael Erichsen <michael@myerichsen.net>
+Date:   Tue May 12 20:06:05 2020 +0200
+
+    Create LICENSE
+
+commit dec69a65e9b6b1373a83dbe5bb80ee91e90f2e6c
+Author: michael <michael.erichsen@xact.dk>
+Date:   Tue May 12 20:16:24 2020 +0200
+
+    ToiletPaper-16 Settings fragment crash. Also copyright is updated to AGPL
+
+commit 73ad8dc85eb2a1649d9411bfafc1db077f8e0c4a
+Author: michael <michael.erichsen@xact.dk>
+Date:   Tue May 12 11:12:18 2020 +0200
+
+    ToiletPaper-15 setDrawerLayout is deprecated
+
+commit 2db15f7deb7f86bd88f4232f0311aa6c4c272e6a
+Author: michael <michael.erichsen@xact.dk>
+Date:   Tue May 12 10:51:08 2020 +0200
+
+    ToiletPaper-12 Price list fragment
+
+commit cd562bde2f37dee4f2f9dba554dd6fa0e35d97e9
+Author: michael <michael.erichsen@xact.dk>
+Date:   Tue May 12 10:48:35 2020 +0200
+
+    ToiletPaper-12 Price list fragment
+
+commit 1bfb5eb4a63ce32b1a3cee7555dff274b3ab03f4
+Author: michael <michael.erichsen@xact.dk>
+Date:   Mon May 11 22:37:57 2020 +0200
+
+    ToiletPaper-4 Change database field names to Danish in table screens
+
+commit 08e5cbb44411daa220561bf85d162c3610313b30
+Author: michael <michael.erichsen@xact.dk>
+Date:   Mon May 11 21:06:23 2020 +0200
+
+    ToiletPaper-11 Bug in price graph fragment
+
+commit 5acba728e6b9a7976e4f5ba4dcf2b5e75995c1a0
+Author: michael <michael.erichsen@xact.dk>
+Date:   Mon May 11 18:04:28 2020 +0200
+
+    ToiletPaper-8 Create a fragment to compare prices historically for the same product. Graph added
+
+commit 2316b97eaa8fb9f50a6c49ca04083cdd8e5aa43d
+Author: michael <michael.erichsen@xact.dk>
+Date:   Mon May 11 10:54:06 2020 +0200
+
+    ToiletPaper-8 Create a fragment to compare prices historically for the same product. Graph added
+
+commit 83b8e68325812efa746753f05ceac4e938ef534e
+Author: michael <michael.erichsen@xact.dk>
+Date:   Sun May 10 22:26:04 2020 +0200
+
+    ToiletPaper-8 Create a fragment to compare prices historically for the same product
+
+commit f1f590e003b78d23b950d347beffc418ec680abc
+Author: michael <michael.erichsen@xact.dk>
+Date:   Sun May 10 22:14:44 2020 +0200
+
+    ToiletPaper-8 Create a fragment to compare prices historically for the same product
+
+commit 0ec220b9db45ffcbd6f484a3bc4480945f7c5242
+Author: michael <michael.erichsen@xact.dk>
+Date:   Sun May 10 19:32:18 2020 +0200
+
+    ToiletPaper-8 Create a fragment to compare prices historically for the same product
+
+commit 2388ad9dcdda27ab3e2066b8cc6cf4641a645c47
+Author: michael <michael.erichsen@xact.dk>
+Date:   Sun May 10 17:36:15 2020 +0200
+
+    ToiletPaper-9 Add a default supplier preference
+
+commit 9228df1679a7b79657467a741d4f2375c2d444fa
+Author: michael <michael.erichsen@xact.dk>
+Date:   Tue May 12 20:27:09 2020 +0200
+
+    Cleanup branches
+
+commit 72de555e2eaac5f7f86799138ee5bc38534c730c
+Merge: 97d74d5 0dd48ed
+Author: michael <michael.erichsen@xact.dk>
+Date:   Tue May 12 20:17:15 2020 +0200
+
+    Merge remote-tracking branch 'origin/Branch3' into Branch3
+
+commit 97d74d57aa42570d36f22af00c76e53ee51068d8
+Author: michael <michael.erichsen@xact.dk>
+Date:   Tue May 12 20:16:24 2020 +0200
+
+    ToiletPaper-16 Settings fragment crash. Also copyright is updated to AGPL
+
+commit 0dd48edec8942ce1b6407b3425e580ddfb4a0e7e
+Author: Michael Erichsen <michael@myerichsen.net>
+Date:   Tue May 12 20:06:05 2020 +0200
+
+    Create LICENSE
+
+commit 0e2f69e94210ef9c0338c0bf646011a0b3de7e6c
+Author: michael <michael.erichsen@xact.dk>
+Date:   Tue May 12 11:12:18 2020 +0200
+
+    ToiletPaper-15 setDrawerLayout is deprecated
+
+commit e1b40f4291b69921377dde357d85a712c7ab724c
+Author: michael <michael.erichsen@xact.dk>
+Date:   Tue May 12 10:51:08 2020 +0200
+
+    ToiletPaper-12 Price list fragment
+
+commit 09d02f61a601e45f4281edcc88d60d1586e17868
+Author: michael <michael.erichsen@xact.dk>
+Date:   Tue May 12 10:48:35 2020 +0200
+
+    ToiletPaper-12 Price list fragment
+
+commit 5f9aaefe2ad5cb3aadae027887367b6153e84e1a
+Author: michael <michael.erichsen@xact.dk>
+Date:   Mon May 11 22:37:57 2020 +0200
+
+    ToiletPaper-4 Change database field names to Danish in table screens
+
+commit 7c0c8192607563a1cb98d6e9f6c35eae5b272389
+Author: michael <michael.erichsen@xact.dk>
+Date:   Mon May 11 21:06:23 2020 +0200
+
+    ToiletPaper-11 Bug in price graph fragment
+
+commit c009c9002d6e72c799bfecd0f1e4c92047ff4e4c
+Author: michael <michael.erichsen@xact.dk>
+Date:   Mon May 11 18:04:28 2020 +0200
+
+    ToiletPaper-8 Create a fragment to compare prices historically for the same product. Graph added
+
+commit b69705ca98500027d16e08016b4de0ff2fb54eb0
+Author: michael <michael.erichsen@xact.dk>
+Date:   Mon May 11 10:54:06 2020 +0200
+
+    ToiletPaper-8 Create a fragment to compare prices historically for the same product. Graph added
+
+commit 853956647ee55b7089eea7f3ae3cf0a94369eb31
+Author: michael <michael.erichsen@xact.dk>
+Date:   Sun May 10 22:26:04 2020 +0200
+
+    ToiletPaper-8 Create a fragment to compare prices historically for the same product
+
+commit 1cd9368b9a12866203bcfb1b6edde73146f696cc
+Author: michael <michael.erichsen@xact.dk>
+Date:   Sun May 10 22:14:44 2020 +0200
+
+    ToiletPaper-8 Create a fragment to compare prices historically for the same product
+
+commit 6cfaf9e38988a432f4eea786d0e0c5b605c5fc2d
+Author: michael <michael.erichsen@xact.dk>
+Date:   Sun May 10 19:32:18 2020 +0200
+
+    ToiletPaper-8 Create a fragment to compare prices historically for the same product
+
+commit c0a323d14792f81459ad742e707b6435e9df468e
+Author: michael <michael.erichsen@xact.dk>
+Date:   Sun May 10 17:36:15 2020 +0200
+
+    ToiletPaper-9 Add a default supplier preference
+
+commit bedce08c2b9db2c70456f6e71b07d4d758c2287a
+Author: michael <michael.erichsen@xact.dk>
+Date:   Sun May 10 17:12:53 2020 +0200
+
+    ToiletPaper-9 Add a default supplier preference

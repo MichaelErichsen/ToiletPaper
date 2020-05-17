@@ -19,6 +19,10 @@ import net.myerichsen.toiletpaper.R;
 
 import java.util.Objects;
 
+/*
+ * Copyright (c) 2020. Michael Erichsen. The program is distributed under the terms of the GNU Affero General Public License v3.0
+ */
+
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link PriceSelectFragment#newInstance} factory method to
@@ -107,14 +111,12 @@ public class PriceSelectFragment extends Fragment {
     private void complain() {
         Activity activity = getActivity();
 
-        if (activity.getCurrentFocus() != null) {
+        if (Objects.requireNonNull(activity).getCurrentFocus() != null) {
             InputMethodManager inputMethodManager = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
             Objects.requireNonNull(inputMethodManager).hideSoftInputFromWindow(activity.getCurrentFocus().getWindowToken(), 0);
         }
         snackbar = Snackbar
                 .make(snackView, "Indtast varenummer eller varemærke", Snackbar.LENGTH_LONG);
         snackbar.show();
-
     }
-
 }

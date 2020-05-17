@@ -1,7 +1,4 @@
 package net.myerichsen.toiletpaper.ui.settings;
-/*
- * Copyright (c) 2020. Michael Erichsen.
- */
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -21,6 +18,10 @@ import net.myerichsen.toiletpaper.ui.suppliers.SupplierModel;
 
 import java.util.List;
 import java.util.Objects;
+
+/*
+ * Copyright (c) 2020. Michael Erichsen. The program is distributed under the terms of the GNU Affero General Public License v3.0
+ */
 
 public class SettingsFragment extends PreferenceFragmentCompat {
     private Snackbar snackbar;
@@ -76,7 +77,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
 
         if (count == 0) {
             Snackbar snackbar = Snackbar
-                    .make(snackView, "No data in table", Snackbar.LENGTH_LONG);
+                    .make(snackView, "Tabellen er tom", Snackbar.LENGTH_LONG);
             snackbar.show();
             return;
         }
@@ -108,6 +109,9 @@ public class SettingsFragment extends PreferenceFragmentCompat {
             @Override
             public boolean onPreferenceClick(Preference preference) {
                 try {
+                    snackbar = Snackbar
+                            .make(snackView, R.string.please_be_a_patient, Snackbar.LENGTH_LONG);
+                    snackbar.show();
                     adapter.doInitialLoad();
                     snackbar = Snackbar
                             .make(snackView, R.string.initial_load_done, Snackbar.LENGTH_LONG);

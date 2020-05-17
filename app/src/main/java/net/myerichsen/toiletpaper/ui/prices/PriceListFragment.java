@@ -22,6 +22,11 @@ import net.myerichsen.toiletpaper.ui.prices.PriceModel.PriceItem;
 
 import java.util.Objects;
 
+
+/*
+ * Copyright (c) 2020. Michael Erichsen. The program is distributed under the terms of the GNU Affero General Public License v3.0
+ */
+
 /**
  * A fragment representing a list of Items.
  * <p/>
@@ -33,11 +38,9 @@ public class PriceListFragment extends Fragment {
     private String itemNo;
     private String brand;
 
-    private int mColumnCount = 4;
+    private int mColumnCount = 2;
     private OnListFragmentInteractionListener mListener;
     private Context context;
-
-    // TODO Add a listener to navigate to product details
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -46,6 +49,10 @@ public class PriceListFragment extends Fragment {
     public PriceListFragment() {
     }
 
+    /**
+     * @param columnCount Number og columns
+     * @return An instance of this class
+     */
     @SuppressWarnings("unused")
     public static PriceListFragment newInstance(int columnCount) {
         PriceListFragment fragment = new PriceListFragment();
@@ -53,6 +60,15 @@ public class PriceListFragment extends Fragment {
         args.putInt(ARG_COLUMN_COUNT, columnCount);
         fragment.setArguments(args);
         return fragment;
+    }
+
+    private static void hideSoftKeyboard(Activity activity) {
+        if (activity.getCurrentFocus() == null) {
+            return;
+        }
+
+        InputMethodManager inputMethodManager = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
+        Objects.requireNonNull(inputMethodManager).hideSoftInputFromWindow(activity.getCurrentFocus().getWindowToken(), 0);
     }
 
     @Override
@@ -82,20 +98,11 @@ public class PriceListFragment extends Fragment {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
             PriceModel priceModel = new PriceModel(context, itemNo, brand);
-            recyclerView.setAdapter(new PricesRecyclerViewAdapter(priceModel.ITEMS, mListener));
+            recyclerView.setAdapter(new PriceRecyclerViewAdapter(PriceModel.ITEMS, mListener));
         }
-        hideSoftKeyboard(getActivity());
+        hideSoftKeyboard(requireActivity());
 
         return root;
-    }
-
-    private static void hideSoftKeyboard(Activity activity) {
-        if (activity.getCurrentFocus() == null) {
-            return;
-        }
-
-        InputMethodManager inputMethodManager = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
-        Objects.requireNonNull(inputMethodManager).hideSoftInputFromWindow(activity.getCurrentFocus().getWindowToken(), 0);
     }
 
     @Override

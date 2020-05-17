@@ -1,7 +1,3 @@
-/*
- * Copyright (c) 2020. Michael Erichsen.
- */
-
 package net.myerichsen.toiletpaper.ui.compare;
 
 import android.content.Context;
@@ -34,6 +30,10 @@ import net.myerichsen.toiletpaper.ui.suppliers.SupplierModel;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+
+/*
+ * Copyright (c) 2020. Michael Erichsen. The program is distributed under the terms of the GNU Affero General Public License v3.0
+ */
 
 public class CompareFragment extends Fragment {
     private String sortKey = "PAPER_WEIGHT";
@@ -82,7 +82,7 @@ public class CompareFragment extends Fragment {
 
         if ((goOn) && (lsd.size() == 0)) {
             Snackbar snackbar = Snackbar
-                    .make(snackView, "No data in table", Snackbar.LENGTH_LONG);
+                    .make(snackView, "Tabellen er tom", Snackbar.LENGTH_LONG);
             snackbar.show();
             goOn = false;
         }

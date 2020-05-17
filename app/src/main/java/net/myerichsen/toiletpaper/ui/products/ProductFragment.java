@@ -1,7 +1,3 @@
-    /*
-     * Copyright (c) 2020. Michael Erichsen.
-     */
-
     package net.myerichsen.toiletpaper.ui.products;
 
     import android.content.Context;
@@ -29,7 +25,11 @@
     import java.util.List;
     import java.util.Objects;
 
-    /**
+    /*
+ * Copyright (c) 2020. Michael Erichsen. The program is distributed under the terms of the GNU Affero General Public License v3.0
+ */
+
+/**
      * Display a list of Products
      */
     public class ProductFragment extends Fragment {
@@ -58,7 +58,7 @@
             tableRow.setPadding(2, 2, 2, 2);
             tableRow.addView(addCell("Varemærke"));
             tableRow.addView(addCell("Varenummer"));
-            tableRow.addView(addCell("UID"));
+            tableRow.addView(addCell("Løbenr."));
             tableLayout.addView(tableRow);
 
             List<ProductModel> lpm;
@@ -73,7 +73,7 @@
 
             if (lpm.size() == 0) {
                 Snackbar snackbar = Snackbar
-                        .make(snackView, "No data in table", Snackbar.LENGTH_LONG);
+                        .make(snackView, "Tabellen er tom", Snackbar.LENGTH_LONG);
                 snackbar.show();
                 return;
             }

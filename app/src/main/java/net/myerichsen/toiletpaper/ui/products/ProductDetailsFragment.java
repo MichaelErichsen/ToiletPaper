@@ -1,7 +1,3 @@
-/*
- * Copyright (c) 2020. Michael Erichsen.
- */
-
 package net.myerichsen.toiletpaper.ui.products;
 
 import android.content.Context;
@@ -28,6 +24,10 @@ import net.myerichsen.toiletpaper.TPDbAdapter;
 
 import java.util.List;
 import java.util.Objects;
+
+/*
+ * Copyright (c) 2020. Michael Erichsen. The program is distributed under the terms of the GNU Affero General Public License v3.0
+ */
 
 /**
  * Display and maintain product details
@@ -126,6 +126,7 @@ public class ProductDetailsFragment extends Fragment {
         addTableRow(productDetailTableLayout, "Pakkepris", pm.getPackagePrice());
         addTableRow(productDetailTableLayout, "Rullepris", pm.getRollPrice());
         addTableRow(productDetailTableLayout, "Papirvægt", pm.getPaperWeight());
+        addTableRow(productDetailTableLayout, "Rullevægt", pm.getRollWeight());
         addTableRow(productDetailTableLayout, "Kilopris", pm.getKiloPrice());
         addTableRow(productDetailTableLayout, "Meterpris", pm.getMeterPrice());
         addTableRow(productDetailTableLayout, "Arkpris", pm.getSheetPrice());

@@ -1,7 +1,4 @@
 package net.myerichsen.toiletpaper.ui.about;
-/*
- * Copyright (c) 2020. Michael Erichsen.
- */
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -22,6 +19,10 @@ import net.myerichsen.toiletpaper.BuildConfig;
 import net.myerichsen.toiletpaper.R;
 
 import java.util.Objects;
+
+/*
+ * Copyright (c) 2020. Michael Erichsen. The program is distributed under the terms of the GNU Affero General Public License v3.0
+ */
 
 /**
  * About fragment.
@@ -70,6 +71,7 @@ public class AboutFragment extends Fragment {
         textView7.setTextSize(fontSize);
         ((TextView) root.findViewById(R.id.ftsTextView)).setTextSize(fontSize);
 
+        // TODO Also handle graphTextView
         return root;
     }
 

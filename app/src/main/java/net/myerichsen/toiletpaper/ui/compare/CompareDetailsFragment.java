@@ -1,7 +1,4 @@
 package net.myerichsen.toiletpaper.ui.compare;
-/*
- * Copyright (c) 2020. Michael Erichsen.
- */
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -28,6 +25,10 @@ import net.myerichsen.toiletpaper.ui.products.ProductModel;
 
 import java.util.List;
 import java.util.Objects;
+
+/*
+ * Copyright (c) 2020. Michael Erichsen. The program is distributed under the terms of the GNU Affero General Public License v3.0
+ */
 
 /**
  * Display a sorted product list for compare
