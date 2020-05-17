@@ -78,16 +78,14 @@
                 return;
             }
 
-            for (int i = 0; i < lpm.size(); i++) {
-                ProductModel pd = lpm.get(i);
-
+            for (ProductModel pm : lpm) {
                 tableRow = new TableRow(context);
                 tableRow.setBackgroundColor(Color.BLACK);
                 tableRow.setPadding(2, 2, 2, 2); //Border between rows
 
-                tableRow.addView(addCell(pd.getBrand()));
-                tableRow.addView(addCell(pd.getItemNo()));
-                tableRow.addView(addCell(Integer.toString(pd.getUid())));
+                tableRow.addView(addCell(pm.getBrand()));
+                tableRow.addView(addCell(pm.getItemNo()));
+                tableRow.addView(addCell(Integer.toString(pm.getUid())));
                 tableRow.setClickable(true);
                 tableRow.setOnClickListener(tableRowOnclickListener());
                 tableLayout.addView(tableRow);

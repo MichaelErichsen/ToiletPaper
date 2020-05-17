@@ -1,23 +1,26 @@
-/*
- * Copyright (c) 2020. Michael Erichsen.
- */
+package net.myerichsen.toiletpaper.ui.prices;
 
-package net.myerichsen.toiletpaper.ui.pricedevelopment;
-
+import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import net.myerichsen.toiletpaper.R;
-import net.myerichsen.toiletpaper.ui.pricedevelopment.dummy.DummyContent;
-import net.myerichsen.toiletpaper.ui.pricedevelopment.dummy.DummyContent.DummyItem;
+import net.myerichsen.toiletpaper.TPDbAdapter;
+import net.myerichsen.toiletpaper.ui.home.HomeFragment;
+import net.myerichsen.toiletpaper.ui.prices.PriceModel.PriceItem;
+
+import java.util.Objects;
 
 /**
  * A fragment representing a list of Items.
@@ -25,25 +28,27 @@ import net.myerichsen.toiletpaper.ui.pricedevelopment.dummy.DummyContent.DummyIt
  * Activities containing this fragment MUST implement the {@link OnListFragmentInteractionListener}
  * interface.
  */
-public class PriceFragment extends Fragment {
-
-    // TODO: Customize parameter argument names
+public class PriceListFragment extends Fragment {
     private static final String ARG_COLUMN_COUNT = "column-count";
-    // TODO: Customize parameters
+    private String itemNo;
+    private String brand;
+
     private int mColumnCount = 4;
     private OnListFragmentInteractionListener mListener;
+    private Context context;
+
+    // TODO Add a listener to navigate to product details
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
      */
-    public PriceFragment() {
+    public PriceListFragment() {
     }
 
-    // TODO: Customize parameter initialization
     @SuppressWarnings("unused")
-    public static PriceFragment newInstance(int columnCount) {
-        PriceFragment fragment = new PriceFragment();
+    public static PriceListFragment newInstance(int columnCount) {
+        PriceListFragment fragment = new PriceListFragment();
         Bundle args = new Bundle();
         args.putInt(ARG_COLUMN_COUNT, columnCount);
         fragment.setArguments(args);
@@ -56,28 +61,54 @@ public class PriceFragment extends Fragment {
 
         if (getArguments() != null) {
             mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
+            itemNo = getArguments().getString(HomeFragment.ITEM_NO);
+            brand = getArguments().getString(HomeFragment.BRAND);
         }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_price_list, container, false);
+        View root = inflater.inflate(R.layout.fragment_prices_list, container, false);
+        context = getContext();
 
         // Set the adapter
-        if (view instanceof RecyclerView) {
-            Context context = view.getContext();
-            RecyclerView recyclerView = (RecyclerView) view;
+        if (root instanceof RecyclerView) {
+            RecyclerView recyclerView = (RecyclerView) root;
+
             if (mColumnCount <= 1) {
                 recyclerView.setLayoutManager(new LinearLayoutManager(context));
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-            recyclerView.setAdapter(new MyPriceRecyclerViewAdapter(DummyContent.ITEMS, mListener));
+            PriceModel priceModel = new PriceModel(context, itemNo, brand);
+            recyclerView.setAdapter(new PricesRecyclerViewAdapter(priceModel.ITEMS, mListener));
         }
-        return view;
+        hideSoftKeyboard(getActivity());
+
+        return root;
     }
 
+    private static void hideSoftKeyboard(Activity activity) {
+        if (activity.getCurrentFocus() == null) {
+            return;
+        }
+
+        InputMethodManager inputMethodManager = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
+        Objects.requireNonNull(inputMethodManager).hideSoftInputFromWindow(activity.getCurrentFocus().getWindowToken(), 0);
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        TPDbAdapter adapter = new TPDbAdapter(context);
+
+        if (getArguments() != null) {
+            itemNo = getArguments().getString(HomeFragment.ITEM_NO);
+            brand = getArguments().getString(HomeFragment.BRAND);
+        }
+    }
 
     @Override
     public void onAttach(Context context) {
@@ -107,7 +138,6 @@ public class PriceFragment extends Fragment {
      * >Communicating with Other Fragments</a> for more information.
      */
     public interface OnListFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onListFragmentInteraction(DummyItem item);
+        void onListFragmentInteraction(PriceItem item);
     }
 }

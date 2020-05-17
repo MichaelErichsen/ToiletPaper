@@ -37,6 +37,13 @@ public class TPDbAdapter {
         tpDbHelper = new TpDbHelper(context);
     }
 
+    /**
+     * Select from product table with selection arguments
+     *
+     * @param selection e.g. BRAND=?
+     * @param column    Selection argument column
+     * @return List of product models
+     */
     public List<ProductModel> getProductModels(String selection, String column) {
         List<ProductModel> lpm = new ArrayList<>();
 
@@ -54,6 +61,33 @@ public class TPDbAdapter {
 
         return lpm;
     }
+
+    /**
+     * Select from product table with selection arguments ordered
+     *
+     * @param selection   e.g. BRAND=?
+     * @param argColumn   Selection argument column
+     * @param orderColumn Column to order by
+     * @return List of product models
+     */
+    public List<ProductModel> getProductModels(String selection, String argColumn, String orderColumn) {
+        List<ProductModel> lpm = new ArrayList<>();
+
+        SQLiteDatabase db = tpDbHelper.getReadableDatabase();
+
+        String[] args = {argColumn};
+        Cursor cursor = db.query(TpDbHelper.TABLE_PRODUCT, pdColumns, selection, args, null, null, orderColumn);
+
+        if (cursor.getCount() > 0) {
+            while (cursor.moveToNext()) {
+                lpm.add(populateProductModel(cursor));
+            }
+        }
+        cursor.close();
+
+        return lpm;
+    }
+
 
     /**
      * Insert a product row
@@ -74,7 +108,7 @@ public class TPDbAdapter {
     }
 
     /**
-     * Get all data from product table
+     * Select all data from product table
      *
      * @return List of columns in record
      */
@@ -131,7 +165,7 @@ public class TPDbAdapter {
         ContentValues contentValues = new ContentValues();
         contentValues.put(TpDbHelper.SUPPLIER, sm.getSupplier());
         contentValues.put(TpDbHelper.CHAIN, sm.getChain());
-        contentValues.put(TpDbHelper.TIME_STAMP, sm.getTimestamp());
+//        contentValues.put(TpDbHelper.TIME_STAMP, sm.getTimestamp());
         return contentValues;
     }
 
@@ -166,7 +200,7 @@ public class TPDbAdapter {
         contentValues.put(TpDbHelper.COMMENTS, pm.getComments());
         contentValues.put(TpDbHelper.ITEM_NO, pm.getItemNo());
         contentValues.put(TpDbHelper.BRAND, pm.getBrand());
-        contentValues.put(TpDbHelper.TIME_STAMP, pm.getTimestamp());
+//        contentValues.put(TpDbHelper.TIME_STAMP, pm.getTimestamp());
         return contentValues;
     }
 
@@ -333,12 +367,15 @@ public class TPDbAdapter {
                 COMMENTS + " TEXT, " +
                 ITEM_NO + " TEXT, " +
                 BRAND + " TEXT, " +
-                TIME_STAMP + " TEXT);";
+                TIME_STAMP + " TIMESTAMP DEFAULT CURRENT_TIMESTAMP);";
+//                TIME_STAMP + " TIMESTAMP DEFAULT (datetime('now','localtime')));";
+//                TIME_STAMP + " TEXT);";
         private static final String DROP_PRODUCT_TABLE = "DROP TABLE IF EXISTS " + TABLE_PRODUCT;
         private static final String CREATE_SUPPLIER_TABLE = "CREATE TABLE IF NOT EXISTS " + TABLE_SUPPLIER +
                 " (" + SUPPLIER + " TEXT PRIMARY KEY, " +
                 CHAIN + " TEXT, " +
-                TIME_STAMP + " TEXT);";
+                TIME_STAMP + " TIMESTAMP DEFAULT CURRENT_TIMESTAMP);";
+//                TIME_STAMP + " TEXT);";
         private static final String DROP_SUPPLIER_TABLE = "DROP TABLE IF EXISTS " + TABLE_SUPPLIER;
         private final Context context;
 

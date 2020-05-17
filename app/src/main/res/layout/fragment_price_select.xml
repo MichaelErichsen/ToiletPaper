@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright (c) 2020. Michael Erichsen.
+  -->
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fragmentPriceConstraintLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.prices.PriceSelectFragment">
+
+    <TextView
+        android:id="@+id/priceSelectPrompt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:text="Filtrer varenumre eller varemærker"
+        android:textAlignment="viewStart"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/pItemNoTextInputLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/priceSelectPrompt">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/pItemNoEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Varenummer" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/pBrandTextInputLayout"
+        android:layout_width="409dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pItemNoTextInputLayout">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/pBrandEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Varemærke" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <ImageButton
+        android:id="@+id/priceSelectionBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="Vælg"
+        android:src="@drawable/test_black_48dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pBrandTextInputLayout" />
+
+    <ImageButton
+        android:id="@+id/graphSelectionBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/graph_48"
+        app:layout_constraintStart_toEndOf="@+id/priceSelectionBtn"
+        app:layout_constraintTop_toBottomOf="@+id/pBrandTextInputLayout" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

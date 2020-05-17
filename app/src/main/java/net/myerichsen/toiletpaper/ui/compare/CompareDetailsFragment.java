@@ -1,9 +1,7 @@
+package net.myerichsen.toiletpaper.ui.compare;
 /*
  * Copyright (c) 2020. Michael Erichsen.
  */
-
-package net.myerichsen.toiletpaper.ui.compare;
-
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -95,7 +93,27 @@ public class CompareDetailsFragment extends Fragment {
         TableRow tableRow = new TableRow(context);
         tableRow.setBackgroundColor(Color.BLACK);
         tableRow.setPadding(2, 2, 2, 2);
-        tableRow.addView(addCell(sortKey));
+
+        String s;
+        switch (sortKey) {
+            case "PAPER_WEIGHT":
+                s = "Papirvægt";
+                break;
+            case "KILO_PRICE":
+                s = "Kilopris";
+                break;
+            case "METER_PRICE":
+                s = "Meterpris";
+                break;
+            case "SHEET_PRICE":
+                s = "Arkpris";
+                break;
+            default:
+                s = "?";
+                break;
+        }
+
+        tableRow.addView(addCell(s));
         tableRow.addView(addCell(getString(R.string.brand)));
         tableRow.addView(addCell(getString(R.string.item_no)));
         tableRow.addView(addCell("Uid"));
@@ -123,9 +141,7 @@ public class CompareDetailsFragment extends Fragment {
             return;
         }
 
-        for (int i = 0; i < lpd.size(); i++) {
-            ProductModel pd = lpd.get(i);
-
+        for (ProductModel pd : lpd) {
             tableRow = new TableRow(context);
             tableRow.setBackgroundColor(Color.BLACK);
             tableRow.setPadding(2, 2, 2, 2); //Border between rows

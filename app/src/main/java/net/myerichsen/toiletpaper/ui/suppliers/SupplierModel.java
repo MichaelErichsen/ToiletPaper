@@ -4,6 +4,9 @@ package net.myerichsen.toiletpaper.ui.suppliers;
  */
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Locale;
 
 /**
  * Class to encapsulate all toilet paper supplier data
@@ -17,9 +20,9 @@ public class SupplierModel {
      * no-arg constructor
      */
     public SupplierModel() {
-        Long tsLong = System.currentTimeMillis();
-        SimpleDateFormat s = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss");
-        timestamp = s.format(tsLong);
+//        timestamp =
+//                LocalDateTime.now()
+//                        .format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss"));
     }
 
     /**
@@ -28,9 +31,9 @@ public class SupplierModel {
     public SupplierModel(String supplier, String chain) {
         this.supplier = supplier;
         this.chain = chain;
-        Long tsLong = System.currentTimeMillis();
-        SimpleDateFormat s = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss");
-        timestamp = s.format(tsLong);
+//        timestamp =
+//                LocalDateTime.now()
+//                        .format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss"));
     }
 
     public String getSupplier() {

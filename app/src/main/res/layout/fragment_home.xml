@@ -22,14 +22,14 @@
             android:orientation="horizontal">
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/itemNoTextInputLayout"
+                android:id="@+id/pItemNoTextInputLayout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:hint="@string/item_no"
                 android:importantForAutofill="no">
 
-                <EditText
+                <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/itemNoEditText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -70,7 +70,7 @@
                 android:hint="@string/brand"
                 android:importantForAutofill="no">
 
-                <EditText
+                <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/brandEditText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -127,7 +127,7 @@
                 android:hint="@string/package_rolls"
                 android:importantForAutofill="no">
 
-                <EditText
+                <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/packageRollsEditText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -154,7 +154,7 @@
                 android:hint="@string/roll_sheets"
                 android:importantForAutofill="no">
 
-                <EditText
+                <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/rollSheetsEditText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -181,7 +181,7 @@
                 android:hint="@string/sheet_width"
                 android:importantForAutofill="no">
 
-                <EditText
+                <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/sheetWidthEditText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -207,7 +207,7 @@
                 android:hint="@string/sheet_length"
                 android:importantForAutofill="no">
 
-                <EditText
+                <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/sheetLengthEditText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -241,7 +241,7 @@
                 android:hint="@string/roll_length"
                 android:importantForAutofill="no">
 
-                <EditText
+                <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/rollLengthEditText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -277,7 +277,7 @@
                 android:hint="@string/package_price"
                 android:importantForAutofill="no">
 
-                <EditText
+                <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/packagePriceEditText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -303,7 +303,7 @@
                 android:hint="@string/roll_price"
                 android:importantForAutofill="no">
 
-                <EditText
+                <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/rollPriceEditText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -339,7 +339,7 @@
                 android:hint="@string/paper_weight"
                 android:importantForAutofill="no">
 
-                <EditText
+                <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/paperWeightEditText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -374,7 +374,7 @@
                 android:hint="@string/kilo_price"
                 android:importantForAutofill="no">
 
-                <EditText
+                <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/kiloPriceEditText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -409,7 +409,7 @@
                 android:hint="@string/meter_price"
                 android:importantForAutofill="no">
 
-                <EditText
+                <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/meterPriceEditText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -444,7 +444,7 @@
                 android:hint="@string/sheetPrice"
                 android:importantForAutofill="no">
 
-                <EditText
+                <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/sheetPriceEditText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -502,7 +502,7 @@
                 android:hint="@string/comment"
                 android:importantForAutofill="no">
 
-                <EditText
+                <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/commentEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -546,7 +546,5 @@
                 android:contentDescription="@string/action_pricerunner"
                 android:src="@drawable/pricerunner_48dp" />
         </LinearLayout>
-
-
     </LinearLayout>
 </ScrollView>

@@ -4,7 +4,9 @@ package net.myerichsen.toiletpaper.ui.products;
  */
 
 import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Locale;
 
 /**
  * Class to encapsulate all toilet paper product data.
@@ -21,7 +23,6 @@ public class ProductModel {
     private float rollLength = 0;
     private int rollLength_c = 0;
     private float packagePrice = 0;
-    //    private int packagePrice_c = 0;
     private float rollPrice = 0;
     private int rollPrice_c = 0;
     private float paperWeight = 0;
@@ -42,9 +43,9 @@ public class ProductModel {
      * No arg constructor
      */
     public ProductModel() {
-        Long tsLong = System.currentTimeMillis();
-        SimpleDateFormat s = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss");
-        timestamp = s.format(tsLong);
+//        timestamp =
+//                LocalDateTime.now()
+//                        .format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss"));
     }
 
     public ProductModel(String itemNo, String brand, int layers, int packageRolls, int rollSheets, int sheetWidth,
@@ -62,7 +63,6 @@ public class ProductModel {
         this.rollLength = rollLength;
         this.rollLength_c = rollLength_c;
         this.packagePrice = packagePrice;
-//        this.packagePrice_c = packagePrice_c;
         this.rollPrice = rollPrice;
         this.rollPrice_c = rollPrice_c;
         this.paperWeight = paperWeight;
@@ -77,9 +77,9 @@ public class ProductModel {
         this.comments = comments;
         this.itemNo = itemNo;
         this.brand = brand;
-        Long tsLong = System.currentTimeMillis();
-        SimpleDateFormat s = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss");
-        this.timestamp = s.format(new Date());
+//        timestamp =
+//                LocalDateTime.now()
+//                        .format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss"));
     }
 
     public int getUid() {
@@ -161,14 +161,6 @@ public class ProductModel {
     public void setPackagePrice(float packagePrice) {
         this.packagePrice = packagePrice;
     }
-
-//    public int getPackagePrice_c() {
-//        return packagePrice_c;
-//    }
-
-//    public void setPackagePrice_c(int packagePrice_c) {
-//        this.packagePrice_c = packagePrice_c;
-//    }
 
     public float getRollPrice() {
         return rollPrice;
