@@ -14,7 +14,9 @@ import net.myerichsen.toiletpaper.ui.home.ItemNoModel.ItemNoItem;
 import java.util.List;
 
 /*
- * Copyright (c) 2020. Michael Erichsen. The program is distributed under the terms of the GNU Affero General Public License v3.0
+ * Copyright (c) 2020. Michael Erichsen.
+ *
+ * The program is distributed under the terms of the GNU Affero General Public License v3.0
  */
 
 /**
@@ -69,7 +71,6 @@ public class ItemNoRecyclerViewAdapter extends RecyclerView.Adapter<ItemNoRecycl
 
     @Override
     public int getItemCount() {
-        // FIXME java.lang.NullPointerException: Attempt to invoke interface method 'int java.util.List.size()' on a null object reference
         return fiValues.size();
     }
 
@@ -89,7 +90,7 @@ public class ItemNoRecyclerViewAdapter extends RecyclerView.Adapter<ItemNoRecycl
         final TextView fiTimeStamp;
         ItemNoItem fiItem;
 
-        public ViewHolder(View view) {
+        ViewHolder(View view) {
             super(view);
             fiView = view;
             fiItemNo = view.findViewById(R.id.fiItemNo);

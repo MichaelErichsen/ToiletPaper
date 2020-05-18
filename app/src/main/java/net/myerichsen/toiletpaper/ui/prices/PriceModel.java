@@ -9,7 +9,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /*
- * Copyright (c) 2020. Michael Erichsen. The program is distributed under the terms of the GNU Affero General Public License v3.0
+ * Copyright (c) 2020. Michael Erichsen.
+ *
+ * The program is distributed under the terms of the GNU Affero General Public License v3.0
  */
 
 /**
@@ -21,7 +23,7 @@ public class PriceModel {
     /**
      * An array of price items.
      */
-    public static List<PriceItem> ITEMS;
+    public List<PriceItem> ITEMS;
 
     public PriceModel(Context context, String itemNo, String brand) {
         ITEMS = new ArrayList<>();
@@ -41,7 +43,7 @@ public class PriceModel {
         }
     }
 
-    private static void addItem(PriceItem item) {
+    private void addItem(PriceItem item) {
         ITEMS.add(item);
     }
 
