@@ -24,7 +24,6 @@ public class ItemNoModel {
      * An array of ItemNo items.
      */
     public List<ItemNoItem> ITEMS;
-//    public static List<ItemNoItem> ITEMS;
 
     public ItemNoModel(Context context, String itemNo) {
         ITEMS = new ArrayList<>();
@@ -41,13 +40,16 @@ public class ItemNoModel {
             lpm = adapter.getProductModels("ITEM_NO LIKE ?", itemNo, "TIME_STAMP");
         } else return;
 
+        if (lpm.size() == 0) {
+            return;
+        }
+
         for (ProductModel pm : lpm) {
             addItem(new ItemNoItem(pm.getItemNo(),
                     pm.getBrand(), pm.getSupplier(),
                     pm.getTimestamp(), pm.getUid()));
         }
     }
-
 
     private void addItem(ItemNoItem item) {
         ITEMS.add(item);

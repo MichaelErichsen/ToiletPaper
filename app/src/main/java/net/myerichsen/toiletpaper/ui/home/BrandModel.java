@@ -41,13 +41,16 @@ public class BrandModel {
             lpm = adapter.getProductModels("BRAND LIKE ?", brand, "TIME_STAMP");
         } else return;
 
+        if (lpm.size() == 0) {
+            return;
+        }
+
         for (ProductModel pm : lpm) {
             addItem(new BrandItem(pm.getItemNo(),
                     pm.getBrand(), pm.getSupplier(),
                     pm.getTimestamp(), pm.getUid()));
         }
     }
-
 
     private void addItem(BrandItem item) {
         ITEMS.add(item);

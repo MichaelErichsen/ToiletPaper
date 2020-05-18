@@ -15,10 +15,14 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.snackbar.Snackbar;
+
 import net.myerichsen.toiletpaper.R;
 import net.myerichsen.toiletpaper.ui.home.ItemNoModel.ItemNoItem;
 
 import java.util.Objects;
+
+import static net.myerichsen.toiletpaper.ui.home.HomeFragment.ITEM_NO;
 
 /*
  * Copyright (c) 2020. Michael Erichsen.
@@ -35,6 +39,7 @@ import java.util.Objects;
 public class ItemNoListFragment extends Fragment {
     private static final String ARG_COLUMN_COUNT = "column-count";
     private String itemNo;
+    private Snackbar snackbar;
 
     private int mColumnCount = 2;
     private OnListFragmentInteractionListener fiListener;
@@ -94,6 +99,20 @@ public class ItemNoListFragment extends Fragment {
             }
 
             ItemNoModel itemNoModel = new ItemNoModel(context, itemNo);
+            if (itemNoModel.ITEMS.size() == 0) {
+                snackbar = Snackbar
+                        .make(snackView,
+                                R.string.itemno_not_found, Snackbar.LENGTH_LONG);
+                snackbar.show();
+                requireActivity().onBackPressed();
+                return null;
+            } else if (itemNoModel.ITEMS.size() == 1) {
+                Bundle result = new Bundle();
+                result.putString(ITEM_NO, itemNoModel.ITEMS.get(0).itemNo);
+                getActivity().getSupportFragmentManager().setFragmentResult("itemNoRequestKey", result);
+                requireActivity().onBackPressed();
+                return null;
+            }
             recyclerView.setAdapter(new ItemNoRecyclerViewAdapter(itemNoModel.ITEMS, fiListener));
         }
         hideSoftKeyboard(requireActivity());

@@ -74,11 +74,6 @@ public class ItemNoRecyclerViewAdapter extends RecyclerView.Adapter<ItemNoRecycl
         return fiValues.size();
     }
 
-
-//    public interface OnItemClickListener {
-//        void onItemClick(ItemNoItem item);
-//    }
-
     /**
      * Each view holder is in charge of displaying a single item with a view.
      */
@@ -97,7 +92,6 @@ public class ItemNoRecyclerViewAdapter extends RecyclerView.Adapter<ItemNoRecycl
             fiBrand = view.findViewById(R.id.fiBrand);
             fiSupplier = view.findViewById(R.id.fiSupplier);
             fiTimeStamp = view.findViewById(R.id.fiTimeStamp);
-
         }
 
         @Override

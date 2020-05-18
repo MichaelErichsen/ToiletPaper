@@ -125,6 +125,9 @@ public class MainActivity extends AppCompatActivity implements PriceListFragment
             case "Fundne varemærker":
                 text.setText(getString(R.string.brand_list_help_text));
                 break;
+            case "Fundne varenumre":
+                text.setText(getString(R.string.item_no_list_help_text));
+                break;
             case "Om":
                 text.setText(getString(R.string.about_help_text));
                 break;
@@ -204,7 +207,6 @@ public class MainActivity extends AppCompatActivity implements PriceListFragment
     public void onListFragmentInteraction(ItemNoModel.ItemNoItem item) {
         Bundle result = new Bundle();
         result.putString(ITEM_NO, item.itemNo);
-        FragmentManager f = getSupportFragmentManager();
         getSupportFragmentManager().setFragmentResult("itemNoRequestKey", result);
         onBackPressed();
     }

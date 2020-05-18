@@ -71,13 +71,8 @@ public class BrandRecyclerViewAdapter extends RecyclerView.Adapter<BrandRecycler
 
     @Override
     public int getItemCount() {
-        // FIXME     java.lang.NullPointerException: Attempt to invoke interface method 'int java.util.List.size()' on a null object reference
         return fbValues.size();
     }
-
-//    public interface OnItemClickListener {
-//        void onItemClick(BrandItem item);
-//    }
 
     /**
      * Each view holder is in charge of displaying a single item with a view.

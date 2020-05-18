@@ -15,6 +15,8 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.snackbar.Snackbar;
+
 import net.myerichsen.toiletpaper.R;
 import net.myerichsen.toiletpaper.ui.home.BrandModel.BrandItem;
 
@@ -37,6 +39,7 @@ import static net.myerichsen.toiletpaper.ui.home.HomeFragment.BRAND;
 public class BrandListFragment extends Fragment {
     private static final String ARG_COLUMN_COUNT = "column-count";
     private String brand;
+    private Snackbar snackbar;
 
     private int mColumnCount = 2;
     private OnListFragmentInteractionListener fbListener;
@@ -96,6 +99,20 @@ public class BrandListFragment extends Fragment {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
             BrandModel brandModel = new BrandModel(context, brand);
+            if (brandModel.ITEMS.size() == 0) {
+                snackbar = Snackbar
+                        .make(snackView,
+                                R.string.brand_not_found, Snackbar.LENGTH_LONG);
+                snackbar.show();
+                requireActivity().onBackPressed();
+                return null;
+            } else if (brandModel.ITEMS.size() == 1) {
+                Bundle result = new Bundle();
+                result.putString(BRAND, brandModel.ITEMS.get(0).brand);
+                getActivity().getSupportFragmentManager().setFragmentResult("brandRequestKey", result);
+                requireActivity().onBackPressed();
+                return null;
+            }
             recyclerView.setAdapter(new BrandRecyclerViewAdapter(brandModel.ITEMS, fbListener));
         }
         hideSoftKeyboard(requireActivity());

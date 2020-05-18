@@ -157,7 +157,7 @@ public class ScanFragment extends Fragment {
                             Bundle result = new Bundle();
                             result.putString(ITEM_NO, barcodeData);
                             try {
-                                getParentFragmentManager().setFragmentResult("itemNoRequestKey", result);
+                                getActivity().getSupportFragmentManager().setFragmentResult("itemNoRequestKey", result);
                                 requireActivity().onBackPressed();
                             } catch (Exception e) {
                                 e.printStackTrace();
