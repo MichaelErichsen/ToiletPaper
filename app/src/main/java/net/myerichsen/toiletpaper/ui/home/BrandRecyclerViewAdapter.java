@@ -14,7 +14,9 @@ import net.myerichsen.toiletpaper.ui.home.BrandModel.BrandItem;
 import java.util.List;
 
 /*
- * Copyright (c) 2020. Michael Erichsen. The program is distributed under the terms of the GNU Affero General Public License v3.0
+ * Copyright (c) 2020. Michael Erichsen.
+ *
+ * The program is distributed under the terms of the GNU Affero General Public License v3.0
  */
 
 /**
@@ -69,13 +71,7 @@ public class BrandRecyclerViewAdapter extends RecyclerView.Adapter<BrandRecycler
 
     @Override
     public int getItemCount() {
-        // FIXME     java.lang.NullPointerException: Attempt to invoke interface method 'int java.util.List.size()' on a null object reference
         return fbValues.size();
-    }
-
-    public interface OnItemClickListener {
-        void onItemClick(BrandItem item);
-        // TODO Return brand
     }
 
     /**

@@ -1,5 +1,7 @@
 <!--
-  ~ Copyright (c) 2020. Michael Erichsen. The program is distributed under the terms of the GNU Affero General Public License v3.0
+  ~ Copyright (c) 2020. Michael Erichsen.
+  ~
+  ~ The program is distributed under the terms of the GNU Affero General Public License v3.0
   -->
 
 <resources xmlns:tools="http://schemas.android.com/tools">
@@ -49,12 +51,10 @@
     <string name="kilo_price">Kilopris</string>
     <string name="comment">Kommentar</string>
     <string name="suppliers">Butikker</string>
-
     <string name="menu_about">Om</string>
     <string name="about_heading">\nInspiration, kilder og kodestumper er planket fra\n\n</string>
     <string name="scan">Scan</string>
     <string name="search">Søg</string>
-    <!--    <string name="uid">UID</string>-->
     <string name="menu_pd">Produktdata</string>
     <string name="meter_price">Pris pr. meter</string>
     <string name="menu_products">Produkter</string>
@@ -105,7 +105,7 @@
     <string name="title_activity_settings">Indstillinger</string>
     <string name="supplier_deleted">Butik slettet</string>
     <string name="nav_header_desc">Navigationsoverskrift</string>
-    <string name="version_text">Toiletpapir\n\nVersion %1$s</string>
+    <string name="version_text">Toiletpapir\nVersion %1$s</string>
     <string name="toiletpaper">Toiletpapir</string>
     <string name="priceDevelopment">Prisudvikling</string>
     <string name="sheetPrice">Pris pr. ark</string>
@@ -120,7 +120,7 @@
     <string name="label_price_development">Prisudvikling</string>
     <string name="price_development">Prisudvikling</string>
     <string name="package_price_kr">Pris i kr. pr. pakke</string>
-    <string name="filter_itemno_or_brand">Filtrer varenumre eller varemærker</string>
+    <string name="filter_itemno_or_brand">Filtrér varenumre eller varemærker</string>
     <string name="item_no">Varenummer</string>
     <string name="brand">Varemærke</string>
     <string name="select">Vælg</string>
@@ -146,8 +146,10 @@
     <string name="home_help_text">
         Hovedbillede for programmet.\n
         Indtast alle kendte data og klik på beregn nederst på billedet.\n
-        Varenummer kan scannes. Det kan slås op i databasen.\n
+        Varenummer kan scannes eller slås op i databasen.\n
         Varemærke kan slås op i databasen.\n
+        Hvis varenummer eller varemærke ikke er komplet eller entydigt, vises et valgbillede.
+        Hvis det er fundet og entydigt, vises alle data fra databasen.\n
         De indtastede data gemmes med gemmeknappen nederst.\n
         Der kan foretages opslag på Pricerunner med Pricerunnerknappen.\n
         Beregnede værdier markeres som sådan. Ved indtastning fjernes markeringen.
@@ -159,6 +161,8 @@
     <string name="brand_list_help_text">Oversigt over fundne varemærker.\nVed valg af en række
         returneres denne til hovedbilledet, og der søges efter denne i databasen.
     </string>
+    <string name="item_no_list_help_text">Oversigt over fundne varenumre.\nVed valg af en række
+        returneres denne til hovedbilledet, og der søges efter denne i databasen.</string>
     <string name="supplier_details_home_help_text">
         Detaljer for en butik.\n
         Herfra kan en ny butik oprettes i databasen, eller den viste kan slettes.\n
@@ -184,7 +188,7 @@
         Sorteret produktliste.\n
         Alle produkter i databasen, filtreret med det valgte butiksfilter, og sorteret efter den
         valgte sorteringsnøgle.\n
-         Detaljer for produktet vises ved klik på en række.
+        Detaljer for produktet vises ved klik på en række.
     </string>
     <string name="compare_help_text">
         Sammenlign.\n
@@ -197,5 +201,5 @@
     <string name="please_be_a_patient">Vent venligst, men data indsættes</string>
     <string name="version_string">Version %1$s</string>
     <string name="found_item_numbers">Fundne varenumre</string>
-    <string name="enter_itemno_prompt">Indtast et varenummer eller begynbdelsen af det</string>
+    <string name="enter_itemno_prompt">Indtast et varenummer eller begyndelsen af det</string>
 </resources>

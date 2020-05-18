@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?><!--
-  ~ Copyright (c) 2020. Michael Erichsen. The program is distributed under the terms of the GNU Affero General Public License v3.0
+  ~ Copyright (c) 2020. Michael Erichsen.
+  ~
+  ~ The program is distributed under the terms of the GNU Affero General Public License v3.0
   -->
 
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
@@ -58,9 +60,6 @@
         <argument
             android:name="brand"
             app:argType="string" />
-        <action
-            android:id="@+id/action_nav_brand_to_nav_product_details"
-            app:destination="@id/nav_product_details" />
     </fragment>
 
     <fragment
@@ -181,8 +180,5 @@
         <argument
             android:name="itemNo"
             app:argType="string" />
-        <action
-            android:id="@+id/action_nav_item_no_to_nav_product_details"
-            app:destination="@id/nav_product_details" />
     </fragment>
 </navigation>

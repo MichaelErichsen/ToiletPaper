@@ -1,6 +1,8 @@
 package net.myerichsen.toiletpaper.ui.suppliers;
 /*
- * Copyright (c) 2020. Michael Erichsen. The program is distributed under the terms of the GNU Affero General Public License v3.0
+ * Copyright (c) 2020. Michael Erichsen.
+ *
+ * The program is distributed under the terms of the GNU Affero General Public License v3.0
  */
 
 /**

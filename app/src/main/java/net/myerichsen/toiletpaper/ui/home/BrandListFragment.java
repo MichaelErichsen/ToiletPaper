@@ -15,8 +15,9 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.snackbar.Snackbar;
+
 import net.myerichsen.toiletpaper.R;
-import net.myerichsen.toiletpaper.TPDbAdapter;
 import net.myerichsen.toiletpaper.ui.home.BrandModel.BrandItem;
 
 import java.util.Objects;
@@ -24,7 +25,9 @@ import java.util.Objects;
 import static net.myerichsen.toiletpaper.ui.home.HomeFragment.BRAND;
 
 /*
- * Copyright (c) 2020. Michael Erichsen. The program is distributed under the terms of the GNU Affero General Public License v3.0
+ * Copyright (c) 2020. Michael Erichsen.
+ *
+ * The program is distributed under the terms of the GNU Affero General Public License v3.0
  */
 
 /**
@@ -35,11 +38,11 @@ import static net.myerichsen.toiletpaper.ui.home.HomeFragment.BRAND;
  */
 public class BrandListFragment extends Fragment {
     private static final String ARG_COLUMN_COUNT = "column-count";
-    //    private final TableRow.LayoutParams llp = new TableRow.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+    private String brand;
+    private Snackbar snackbar;
+
     private int mColumnCount = 2;
     private OnListFragmentInteractionListener fbListener;
-    private Context context;
-    private String brand;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -83,7 +86,7 @@ public class BrandListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_brand_list, container, false);
-        context = getContext();
+        Context context1 = getContext();
         View snackView = requireActivity().findViewById(android.R.id.content);
 
         // Set the adapter
@@ -95,8 +98,22 @@ public class BrandListFragment extends Fragment {
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-            recyclerView.setAdapter(new BrandRecyclerViewAdapter(BrandModel.ITEMS, fbListener));
             BrandModel brandModel = new BrandModel(context, brand);
+            if (brandModel.ITEMS.size() == 0) {
+                snackbar = Snackbar
+                        .make(snackView,
+                                R.string.brand_not_found, Snackbar.LENGTH_LONG);
+                snackbar.show();
+                requireActivity().onBackPressed();
+                return null;
+            } else if (brandModel.ITEMS.size() == 1) {
+                Bundle result = new Bundle();
+                result.putString(BRAND, brandModel.ITEMS.get(0).brand);
+                getActivity().getSupportFragmentManager().setFragmentResult("brandRequestKey", result);
+                requireActivity().onBackPressed();
+                return null;
+            }
+            recyclerView.setAdapter(new BrandRecyclerViewAdapter(brandModel.ITEMS, fbListener));
         }
         hideSoftKeyboard(requireActivity());
 
@@ -106,11 +123,27 @@ public class BrandListFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        final TPDbAdapter adapter = new TPDbAdapter(context);
 
         if (getArguments() != null) {
             brand = getArguments().getString(BRAND);
         }
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if (context instanceof BrandListFragment.OnListFragmentInteractionListener) {
+            fbListener = (BrandListFragment.OnListFragmentInteractionListener) context;
+        } else {
+            throw new RuntimeException(context.toString()
+                    + " must implement OnListFragmentInteractionListener");
+        }
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        fbListener = null;
     }
 
     /**

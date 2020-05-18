@@ -31,7 +31,9 @@ import java.io.IOException;
 import static net.myerichsen.toiletpaper.ui.home.HomeFragment.ITEM_NO;
 
 /*
- * Copyright (c) 2020. Michael Erichsen. The program is distributed under the terms of the GNU Affero General Public License v3.0
+ * Copyright (c) 2020. Michael Erichsen.
+ *
+ * The program is distributed under the terms of the GNU Affero General Public License v3.0
  */
 
 public class ScanFragment extends Fragment {
@@ -155,7 +157,7 @@ public class ScanFragment extends Fragment {
                             Bundle result = new Bundle();
                             result.putString(ITEM_NO, barcodeData);
                             try {
-                                getParentFragmentManager().setFragmentResult("itemNoRequestKey", result);
+                                getActivity().getSupportFragmentManager().setFragmentResult("itemNoRequestKey", result);
                                 requireActivity().onBackPressed();
                             } catch (Exception e) {
                                 e.printStackTrace();

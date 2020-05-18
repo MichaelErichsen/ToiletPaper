@@ -13,6 +13,12 @@ import net.myerichsen.toiletpaper.ui.prices.PriceModel.PriceItem;
 
 import java.util.List;
 
+/*
+ * Copyright (c) 2020. Michael Erichsen.
+ *
+ * The program is distributed under the terms of the GNU Affero General Public License v3.0
+ */
+
 /**
  * {@link RecyclerView.Adapter} that can display a {@link PriceModel.PriceItem} and makes a call to the
  * specified {@link OnListFragmentInteractionListener}.
@@ -21,10 +27,6 @@ public class PricesRecyclerViewAdapter extends RecyclerView.Adapter<PricesRecycl
     private final List<PriceModel.PriceItem> mValues;
     private final OnListFragmentInteractionListener mListener;
 
-    public interface OnItemClickListener {
-        void onItemClick(PriceItem item);
-    }
-
     /**
      * The view holder objects are managed by an adapter, which you create by extending
      * RecyclerView.Adapter. The adapter creates view holders as needed. The adapter also binds the
@@ -32,8 +34,8 @@ public class PricesRecyclerViewAdapter extends RecyclerView.Adapter<PricesRecycl
      * calling the adapter's onBindViewHolder() method. That method uses the view holder's position
      * to determine what the contents should be, based on its list position.
      *
-     * @param items
-     * @param listener
+     * @param items    A list of price items
+     * @param listener A list fragment interaction listener
      */
     public PricesRecyclerViewAdapter(List<PriceItem> items, OnListFragmentInteractionListener listener) {
         mValues = items;
@@ -72,18 +74,22 @@ public class PricesRecyclerViewAdapter extends RecyclerView.Adapter<PricesRecycl
         return mValues.size();
     }
 
+    public interface OnItemClickListener {
+        void onItemClick(PriceItem item);
+    }
+
     /**
      * Each view holder is in charge of displaying a single item with a view.
      */
     public class ViewHolder extends RecyclerView.ViewHolder {
-        public final View mView;
-        public final TextView mItemNo;
-        public final TextView mBrand;
-        public final TextView mPackagePrice;
-        public final TextView mTimeStamp;
-        public PriceModel.PriceItem mItem;
+        final View mView;
+        final TextView mItemNo;
+        final TextView mBrand;
+        final TextView mPackagePrice;
+        final TextView mTimeStamp;
+        PriceModel.PriceItem mItem;
 
-        public ViewHolder(View view) {
+        ViewHolder(View view) {
             super(view);
             mView = view;
             mItemNo = view.findViewById(R.id.plItemNo);

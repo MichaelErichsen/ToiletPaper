@@ -14,7 +14,9 @@ import net.myerichsen.toiletpaper.ui.prices.PriceModel.PriceItem;
 import java.util.List;
 
 /*
- * Copyright (c) 2020. Michael Erichsen. The program is distributed under the terms of the GNU Affero General Public License v3.0
+ * Copyright (c) 2020. Michael Erichsen.
+ *
+ * The program is distributed under the terms of the GNU Affero General Public License v3.0
  */
 
 /**
@@ -32,7 +34,7 @@ public class PriceRecyclerViewAdapter extends RecyclerView.Adapter<PriceRecycler
      * calling the adapter's onBindViewHolder() method. That method uses the view holder's position
      * to determine what the contents should be, based on its list position.
      *
-     * @param items List of price items
+     * @param items    List of price items
      * @param listener The OnListFragmentInteractionListener
      */
     public PriceRecyclerViewAdapter(List<PriceItem> items, OnListFragmentInteractionListener listener) {

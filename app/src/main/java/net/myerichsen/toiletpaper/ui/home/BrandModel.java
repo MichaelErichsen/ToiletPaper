@@ -9,7 +9,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /*
- * Copyright (c) 2020. Michael Erichsen. The program is distributed under the terms of the GNU Affero General Public License v3.0
+ * Copyright (c) 2020. Michael Erichsen.
+ *
+ * The program is distributed under the terms of the GNU Affero General Public License v3.0
  */
 
 /**
@@ -22,7 +24,7 @@ public class BrandModel {
     /**
      * An array of brand items.
      */
-    public static List<BrandItem> ITEMS;
+    public List<BrandItem> ITEMS;
 
     public BrandModel(Context context, String brand) {
         ITEMS = new ArrayList<>();
@@ -39,6 +41,10 @@ public class BrandModel {
             lpm = adapter.getProductModels("BRAND LIKE ?", brand, "TIME_STAMP");
         } else return;
 
+        if (lpm.size() == 0) {
+            return;
+        }
+
         for (ProductModel pm : lpm) {
             addItem(new BrandItem(pm.getItemNo(),
                     pm.getBrand(), pm.getSupplier(),
@@ -46,8 +52,7 @@ public class BrandModel {
         }
     }
 
-
-    private static void addItem(BrandItem item) {
+    private void addItem(BrandItem item) {
         ITEMS.add(item);
     }
 

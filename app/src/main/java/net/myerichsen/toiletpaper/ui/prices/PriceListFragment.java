@@ -16,15 +16,15 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import net.myerichsen.toiletpaper.R;
-import net.myerichsen.toiletpaper.TPDbAdapter;
 import net.myerichsen.toiletpaper.ui.home.HomeFragment;
 import net.myerichsen.toiletpaper.ui.prices.PriceModel.PriceItem;
 
 import java.util.Objects;
 
-
 /*
- * Copyright (c) 2020. Michael Erichsen. The program is distributed under the terms of the GNU Affero General Public License v3.0
+ * Copyright (c) 2020. Michael Erichsen.
+ *
+ * The program is distributed under the terms of the GNU Affero General Public License v3.0
  */
 
 /**
@@ -40,7 +40,6 @@ public class PriceListFragment extends Fragment {
 
     private int mColumnCount = 2;
     private OnListFragmentInteractionListener mListener;
-    private Context context;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -86,7 +85,7 @@ public class PriceListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_prices_list, container, false);
-        context = getContext();
+        Context context = getContext();
 
         // Set the adapter
         if (root instanceof RecyclerView) {
@@ -98,7 +97,7 @@ public class PriceListFragment extends Fragment {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
             PriceModel priceModel = new PriceModel(context, itemNo, brand);
-            recyclerView.setAdapter(new PriceRecyclerViewAdapter(PriceModel.ITEMS, mListener));
+            recyclerView.setAdapter(new PriceRecyclerViewAdapter(priceModel.ITEMS, mListener));
         }
         hideSoftKeyboard(requireActivity());
 
@@ -108,8 +107,6 @@ public class PriceListFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-        TPDbAdapter adapter = new TPDbAdapter(context);
 
         if (getArguments() != null) {
             itemNo = getArguments().getString(HomeFragment.ITEM_NO);

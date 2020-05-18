@@ -9,7 +9,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /*
- * Copyright (c) 2020. Michael Erichsen. The program is distributed under the terms of the GNU Affero General Public License v3.0
+ * Copyright (c) 2020. Michael Erichsen.
+ *
+ * The program is distributed under the terms of the GNU Affero General Public License v3.0
  */
 
 /**
@@ -21,14 +23,13 @@ public class ItemNoModel {
     /**
      * An array of ItemNo items.
      */
-    public static List<ItemNoItem> ITEMS;
+    public List<ItemNoItem> ITEMS;
 
     public ItemNoModel(Context context, String itemNo) {
         ITEMS = new ArrayList<>();
 
         TPDbAdapter adapter = new TPDbAdapter(context);
 
-        // TODO Change to using %
         List<ProductModel> lpm;
         if ((itemNo != null) && (!itemNo.equals(""))) {
 
@@ -39,6 +40,10 @@ public class ItemNoModel {
             lpm = adapter.getProductModels("ITEM_NO LIKE ?", itemNo, "TIME_STAMP");
         } else return;
 
+        if (lpm.size() == 0) {
+            return;
+        }
+
         for (ProductModel pm : lpm) {
             addItem(new ItemNoItem(pm.getItemNo(),
                     pm.getBrand(), pm.getSupplier(),
@@ -46,8 +51,7 @@ public class ItemNoModel {
         }
     }
 
-
-    private static void addItem(ItemNoItem item) {
+    private void addItem(ItemNoItem item) {
         ITEMS.add(item);
     }
 

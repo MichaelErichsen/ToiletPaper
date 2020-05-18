@@ -8,7 +8,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import net.myerichsen.toiletpaper.R;
 
 /*
- * Copyright (c) 2020. Michael Erichsen. The program is distributed under the terms of the GNU Affero General Public License v3.0
+ * Copyright (c) 2020. Michael Erichsen.
+ *
+ * The program is distributed under the terms of the GNU Affero General Public License v3.0
  */
 
 public class SettingsActivity extends AppCompatActivity {
