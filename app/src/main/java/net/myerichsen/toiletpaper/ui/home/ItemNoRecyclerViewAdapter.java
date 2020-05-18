@@ -75,9 +75,9 @@ public class ItemNoRecyclerViewAdapter extends RecyclerView.Adapter<ItemNoRecycl
     }
 
 
-    public interface OnItemClickListener {
-        void onItemClick(ItemNoItem item);
-    }
+//    public interface OnItemClickListener {
+//        void onItemClick(ItemNoItem item);
+//    }
 
     /**
      * Each view holder is in charge of displaying a single item with a view.

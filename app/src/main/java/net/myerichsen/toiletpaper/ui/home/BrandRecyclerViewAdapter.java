@@ -14,7 +14,9 @@ import net.myerichsen.toiletpaper.ui.home.BrandModel.BrandItem;
 import java.util.List;
 
 /*
- * Copyright (c) 2020. Michael Erichsen. The program is distributed under the terms of the GNU Affero General Public License v3.0
+ * Copyright (c) 2020. Michael Erichsen.
+ *
+ * The program is distributed under the terms of the GNU Affero General Public License v3.0
  */
 
 /**
@@ -73,10 +75,9 @@ public class BrandRecyclerViewAdapter extends RecyclerView.Adapter<BrandRecycler
         return fbValues.size();
     }
 
-    public interface OnItemClickListener {
-        void onItemClick(BrandItem item);
-        // TODO Return brand
-    }
+//    public interface OnItemClickListener {
+//        void onItemClick(BrandItem item);
+//    }
 
     /**
      * Each view holder is in charge of displaying a single item with a view.

@@ -86,7 +86,6 @@ public class ItemNoListFragment extends Fragment {
 
         // Set the adapter
         if (root instanceof RecyclerView) {
-//            Context context = root.getContext();
             RecyclerView recyclerView = (RecyclerView) root;
             if (mColumnCount <= 1) {
                 recyclerView.setLayoutManager(new LinearLayoutManager(context));

@@ -27,10 +27,8 @@ import androidx.preference.PreferenceManager;
 import com.google.android.material.navigation.NavigationView;
 
 import net.myerichsen.toiletpaper.ui.home.BrandListFragment;
-import net.myerichsen.toiletpaper.ui.home.BrandListFragmentDirections;
 import net.myerichsen.toiletpaper.ui.home.BrandModel;
 import net.myerichsen.toiletpaper.ui.home.ItemNoListFragment;
-import net.myerichsen.toiletpaper.ui.home.ItemNoListFragmentDirections;
 import net.myerichsen.toiletpaper.ui.home.ItemNoModel;
 import net.myerichsen.toiletpaper.ui.prices.PriceListFragment;
 import net.myerichsen.toiletpaper.ui.prices.PriceListFragmentDirections;
@@ -42,9 +40,13 @@ import java.util.List;
 import java.util.Objects;
 
 import static androidx.navigation.Navigation.findNavController;
+import static net.myerichsen.toiletpaper.ui.home.HomeFragment.BRAND;
+import static net.myerichsen.toiletpaper.ui.home.HomeFragment.ITEM_NO;
 
 /*
- * Copyright (c) 2020. Michael Erichsen. The program is distributed under the terms of the GNU Affero General Public License v3.0
+ * Copyright (c) 2020. Michael Erichsen.
+ *
+ * The program is distributed under the terms of the GNU Affero General Public License v3.0
  */
 
 public class MainActivity extends AppCompatActivity implements PriceListFragment.OnListFragmentInteractionListener,
@@ -199,24 +201,26 @@ public class MainActivity extends AppCompatActivity implements PriceListFragment
     }
 
     @Override
-    public void onListFragmentInteraction(PriceModel.PriceItem item) {
-        int uid = item.uid;
-        PriceListFragmentDirections.ActionNavPricesListToNavProductDetails action =
-                PriceListFragmentDirections.actionNavPricesListToNavProductDetails(uid);
-        Navigation.findNavController(this, R.id.nav_host_fragment).navigate(action);
+    public void onListFragmentInteraction(ItemNoModel.ItemNoItem item) {
+        Bundle result = new Bundle();
+        result.putString(ITEM_NO, item.itemNo);
+        FragmentManager f = getSupportFragmentManager();
+        getSupportFragmentManager().setFragmentResult("itemNoRequestKey", result);
+        onBackPressed();
     }
 
     @Override
     public void onListFragmentInteraction(BrandModel.BrandItem item) {
-        int uid = item.uid;
-        BrandListFragmentDirections.ActionNavBrandToNavProductDetails action =
-                BrandListFragmentDirections.actionNavBrandToNavProductDetails(uid);
+        Bundle result = new Bundle();
+        result.putString(BRAND, item.brand);
+        getSupportFragmentManager().setFragmentResult("brandRequestKey", result);
+        onBackPressed();
     }
 
     @Override
-    public void onListFragmentInteraction(ItemNoModel.ItemNoItem item) {
-        int uid = item.uid;
-        ItemNoListFragmentDirections.ActionNavItemNoToNavProductDetails action =
-                ItemNoListFragmentDirections.actionNavItemNoToNavProductDetails(uid);
+    public void onListFragmentInteraction(PriceModel.PriceItem item) {
+        PriceListFragmentDirections.ActionNavPricesListToNavProductDetails action =
+                PriceListFragmentDirections.actionNavPricesListToNavProductDetails(item.uid);
+        Navigation.findNavController(this, R.id.nav_host_fragment).navigate(action);
     }
 }

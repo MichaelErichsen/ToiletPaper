@@ -23,6 +23,7 @@ import android.widget.Spinner;
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatImageButton;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentResultListener;
 import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
@@ -41,7 +42,9 @@ import java.util.List;
 import java.util.Objects;
 
 /*
- * Copyright (c) 2020. Michael Erichsen. The program is distributed under the terms of the GNU Affero General Public License v3.0
+ * Copyright (c) 2020. Michael Erichsen.
+ *
+ * The program is distributed under the terms of the GNU Affero General Public License v3.0
  */
 
 public class HomeFragment extends Fragment {
@@ -601,15 +604,15 @@ public class HomeFragment extends Fragment {
         return pm;
     }
 
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
 
-        getParentFragmentManager().setFragmentResultListener("itemNoRequestKey", this,
+        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+        fragmentManager.setFragmentResultListener("itemNoRequestKey", this,
                 itemNoFragmentResultListener());
-        getParentFragmentManager().setFragmentResultListener("brandRequestKey", this,
+        fragmentManager.setFragmentResultListener("brandRequestKey", this,
                 brandFragmentResultListener());
     }
 

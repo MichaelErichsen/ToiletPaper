@@ -1,5 +1,7 @@
 <!--
-  ~ Copyright (c) 2020. Michael Erichsen. The program is distributed under the terms of the GNU Affero General Public License v3.0
+  ~ Copyright (c) 2020. Michael Erichsen.
+  ~
+  ~ The program is distributed under the terms of the GNU Affero General Public License v3.0
   -->
 
 <resources xmlns:tools="http://schemas.android.com/tools">
@@ -146,8 +148,10 @@
     <string name="home_help_text">
         Hovedbillede for programmet.\n
         Indtast alle kendte data og klik på beregn nederst på billedet.\n
-        Varenummer kan scannes. Det kan slås op i databasen.\n
+        Varenummer kan scannes eller slås op i databasen.\n
         Varemærke kan slås op i databasen.\n
+        Hvis varenummer eller varemærke ikke er komplet eller entydigt, vises et valgbillede.
+        Hvis det er fundet og entydigt, vises alle data fra databasen.\n
         De indtastede data gemmes med gemmeknappen nederst.\n
         Der kan foretages opslag på Pricerunner med Pricerunnerknappen.\n
         Beregnede værdier markeres som sådan. Ved indtastning fjernes markeringen.
