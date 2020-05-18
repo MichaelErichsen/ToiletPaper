@@ -25,7 +25,7 @@ import java.util.Objects;
  */
 
 /**
- * About fragment.
+ * Display static information about the program
  */
 public class AboutFragment extends Fragment {
 
@@ -35,6 +35,12 @@ public class AboutFragment extends Fragment {
     public AboutFragment() {
     }
 
+    /**
+     * @param inflater           Layout inflater
+     * @param container          View Group
+     * @param savedInstanceState Saved Instance state
+     * @return The inflated view of the about fragment
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -53,28 +59,33 @@ public class AboutFragment extends Fragment {
         versionTextView.setText(getString(R.string.version_text, BuildConfig.VERSION_NAME));
         versionTextView.setTextSize(fontSize);
 
-        TextView textView = root.findViewById(R.id.textView);
-        textView.setTextSize(fontSize);
-        TextView textView18 = root.findViewById(R.id.textView18);
-        textView18.setTextSize(fontSize);
-        TextView textView2 = root.findViewById(R.id.textView2);
-        textView2.setTextSize(fontSize);
-        TextView textView3 = root.findViewById(R.id.textView3);
-        textView3.setTextSize(fontSize);
-        TextView textView4 = root.findViewById(R.id.textView4);
-        textView4.setTextSize(fontSize);
-        TextView textView5 = root.findViewById(R.id.textView5);
-        textView5.setTextSize(fontSize);
-        TextView textView6 = root.findViewById(R.id.textView6);
-        textView6.setTextSize(fontSize);
-        TextView textView7 = root.findViewById(R.id.textView7);
-        textView7.setTextSize(fontSize);
+        ((TextView) root.findViewById(R.id.textView)).setTextSize(fontSize);
+        ((TextView) root.findViewById(R.id.textView18)).setTextSize(fontSize);
+        ((TextView) root.findViewById(R.id.textView2)).setTextSize(fontSize);
+        ((TextView) root.findViewById(R.id.textView3)).setTextSize(fontSize);
+        ((TextView) root.findViewById(R.id.textView4)).setTextSize(fontSize);
+        ((TextView) root.findViewById(R.id.textView5)).setTextSize(fontSize);
+        ((TextView) root.findViewById(R.id.textView6)).setTextSize(fontSize);
+        ((TextView) root.findViewById(R.id.textView7)).setTextSize(fontSize);
         ((TextView) root.findViewById(R.id.ftsTextView)).setTextSize(fontSize);
+        ((TextView) root.findViewById(R.id.graphTextView)).setTextSize(fontSize);
 
-        // TODO Also handle graphTextView
         return root;
     }
 
+    /**
+     * This hook is called whenever an item in your options menu is selected.
+     * The default implementation simply returns false to have the normal
+     * processing happen (calling the item's Runnable or sending a message to
+     * its Handler as appropriate).  You can use this method for any items
+     * for which you would like to do processing without those other
+     * facilities.
+     *
+     * @param item The menu item that was selected.
+     * @return boolean Return false to allow normal menu processing to
+     * proceed, true to consume it here.
+     * @see #onCreateOptionsMenu
+     */
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         return super.onOptionsItemSelected(item);
