@@ -370,10 +370,10 @@ public class HomeFragment extends Fragment {
         scanBtn.setOnClickListener(scanBtnOnClickListener());
 
         AppCompatImageButton searchItemNoBtn = root.findViewById(R.id.searchItemNoBtn);
-        searchItemNoBtn.setOnClickListener(searchItemNoBtnOnclickListener());
+        searchItemNoBtn.setOnClickListener(searchItemNoBtnOnClickListener());
 
         AppCompatImageButton searchBrandBtn = root.findViewById(R.id.searchBrandBtn);
-        searchBrandBtn.setOnClickListener(searchBrandBtnOnclickListener());
+        searchBrandBtn.setOnClickListener(searchBrandBtnOnClickListener());
 
         return root;
     }
@@ -439,11 +439,11 @@ public class HomeFragment extends Fragment {
         };
     }
 
-    private View.OnClickListener searchItemNoBtnOnclickListener() {
+    private View.OnClickListener searchItemNoBtnOnClickListener() {
         return new View.OnClickListener() {
             public void onClick(View v) {
                 hideSoftKeyboard(activity);
-                itemNo = itemNoEditText.getText().toString();
+                itemNo = Objects.requireNonNull(itemNoEditText.getText()).toString();
                 if (itemNo.equals("")) {
                     snackbar = Snackbar
                             .make(snackView,
@@ -458,11 +458,11 @@ public class HomeFragment extends Fragment {
         };
     }
 
-    private View.OnClickListener searchBrandBtnOnclickListener() {
+    private View.OnClickListener searchBrandBtnOnClickListener() {
         return new View.OnClickListener() {
             public void onClick(View v) {
                 hideSoftKeyboard(activity);
-                brand = brandEditText.getText().toString();
+                brand = Objects.requireNonNull(brandEditText.getText()).toString();
                 if (brand.equals("")) {
                     snackbar = Snackbar
                             .make(snackView,
@@ -531,7 +531,7 @@ public class HomeFragment extends Fragment {
     }
 
     private int getIntFromLayout(TextInputEditText et) {
-        String s = et.getText().toString();
+        String s = Objects.requireNonNull(et.getText()).toString();
 
         if (s.equals("")) {
             return 0;
@@ -545,7 +545,7 @@ public class HomeFragment extends Fragment {
     }
 
     private Float getFloatFromLayout(TextInputEditText et) {
-        String s = et.getText().toString();
+        String s = Objects.requireNonNull(et.getText()).toString();
 
         if (s.equals("")) {
             return (float) 0;
@@ -559,7 +559,7 @@ public class HomeFragment extends Fragment {
     }
 
     private String getStringFromLayout(TextInputEditText et) {
-        return et.getText().toString();
+        return Objects.requireNonNull(et.getText()).toString();
     }
 
     private String getStringFromLayout(Spinner spinner) {
@@ -609,7 +609,7 @@ public class HomeFragment extends Fragment {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
 
-        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+        FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();
         fragmentManager.setFragmentResultListener("itemNoRequestKey", this,
                 itemNoFragmentResultListener());
         fragmentManager.setFragmentResultListener("brandRequestKey", this,
@@ -732,16 +732,16 @@ public class HomeFragment extends Fragment {
 
         // TODO Paper weight (g per m2) ???
 
-        /**
-         * Package weight 1088 g
-         * Roll weigth = 1088 /  packagerolls 8 = 136 g
-         * Sheet weight = 136 / rollsheets 255 = 0,5333... g
-         *
-         * Sheet area = sheet length 125 * sheet width 97 = 12125 mm2
-         * Sheets per m2 = 1 / 12125 * 1000000 = 82,47
-         *
-         * g per m2 = 0,533.. * 82,47 = 44 g per m2
-         */
+//        /**
+//         * Package weight 1088 g
+//         * Roll weigth = 1088 /  packagerolls 8 = 136 g
+//         * Sheet weight = 136 / rollsheets 255 = 0,5333... g
+//         *
+//         * Sheet area = sheet length 125 * sheet width 97 = 12125 mm2
+//         * Sheets per m2 = 1 / 12125 * 1000000 = 82,47
+//         *
+//         * g per m2 = 0,533.. * 82,47 = 44 g per m2
+//         */
 
         // TODO Roll weight
 
@@ -749,14 +749,14 @@ public class HomeFragment extends Fragment {
 //            boolean fKiloPrice = multiply(sheetLengthEditText, sheetLengthCheckBox, rollSheetsEditText, null, rollLengthEditText, rollLengthCheckBox, 100);
 
         // TODO Price per meter = price per package / rolls per package / roll length
-        /**
-         * Package price 34.95 kr
-         * Package rolls 9
-         * Roll Price 34.95 / 9 = 3,88 kr
-         *
-         * Roll length = 31 m
-         * Meter price = 3,88 / 31 = 0,125
-         */
+//        /**
+//         * Package price 34.95 kr
+//         * Package rolls 9
+//         * Roll Price 34.95 / 9 = 3,88 kr
+//         *
+//         * Roll length = 31 m
+//         * Meter price = 3,88 / 31 = 0,125
+//         */
         boolean fMeterPrice = false;
         try {
             fMeterPrice = divide(packagePriceEditText,
@@ -792,7 +792,7 @@ public class HomeFragment extends Fragment {
         String s3;
 
         if ((cb != null) && !(cb.isChecked())) {
-            s3 = product.getText().toString();
+            s3 = Objects.requireNonNull(product.getText()).toString();
 
             if ((!s3.isEmpty()) && (Integer.parseInt(s3) > 0)) {
                 return false;
@@ -800,11 +800,11 @@ public class HomeFragment extends Fragment {
         }
 
         // Then test for zero values
-        s1 = multiplicand.getText().toString();
+        s1 = Objects.requireNonNull(multiplicand.getText()).toString();
         if ((s1.isEmpty()) || (s1.equals("0"))) {
             return false;
         }
-        s2 = multiplier.getText().toString();
+        s2 = Objects.requireNonNull(multiplier.getText()).toString();
         if ((s2.isEmpty()) || (s2.equals("0"))) {
             return false;
         }
@@ -821,7 +821,7 @@ public class HomeFragment extends Fragment {
         String s3;
 
         if ((cb != null) && !(cb.isChecked())) {
-            s3 = quotient.getText().toString();
+            s3 = Objects.requireNonNull(quotient.getText()).toString();
 
             if ((!s3.isEmpty()) && (Float.parseFloat(s3) > 0)) {
                 return false;
@@ -829,11 +829,11 @@ public class HomeFragment extends Fragment {
         }
 
         // Then test for zero values
-        s1 = dividend.getText().toString();
+        s1 = Objects.requireNonNull(dividend.getText()).toString();
         if ((s1.isEmpty()) || (s1.equals("0") || (s1.equals("0.0")))) {
             return false;
         }
-        s2 = divisor.getText().toString();
+        s2 = Objects.requireNonNull(divisor.getText()).toString();
         if ((s2.isEmpty()) || (s2.equals("0") || (s2.equals("0.0")))) {
             return false;
         }
@@ -852,7 +852,7 @@ public class HomeFragment extends Fragment {
         String s1, s2, s3, s4;
 
         if ((cb != null) && !(cb.isChecked())) {
-            s4 = quotient.getText().toString();
+            s4 = Objects.requireNonNull(quotient.getText()).toString();
 
             if ((!s4.isEmpty()) && (Float.parseFloat(s4) > 0)) {
                 return false;
@@ -860,15 +860,15 @@ public class HomeFragment extends Fragment {
         }
 
         // Then test for zero values
-        s1 = dividend.getText().toString();
+        s1 = Objects.requireNonNull(dividend.getText()).toString();
         if ((s1.isEmpty()) || (s1.equals("0") || (s1.equals("0.0")))) {
             return false;
         }
-        s2 = divisor.getText().toString();
+        s2 = Objects.requireNonNull(divisor.getText()).toString();
         if ((s2.isEmpty()) || (s2.equals("0") || (s2.equals("0.0")))) {
             return false;
         }
-        s3 = divisor2.getText().toString();
+        s3 = Objects.requireNonNull(divisor2.getText()).toString();
         if ((s3.isEmpty()) || (s3.equals("0") || (s3.equals("0.0")))) {
             return false;
         }

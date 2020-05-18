@@ -1,4 +1,6 @@
-<?xml version="1.0" encoding="utf-8"?><!--
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
   ~ Copyright (c) 2020. Michael Erichsen.
   ~
   ~ The program is distributed under the terms of the GNU Affero General Public License v3.0
@@ -15,7 +17,6 @@
         android:id="@+id/priceSelectPrompt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
         android:text="@string/filter_itemno_or_brand"
         android:textAlignment="viewStart"
         android:textSize="24sp"
@@ -24,33 +25,61 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/pItemNoTextInputLayout"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_weight="1"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/priceSelectPrompt">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/pItemNoEditText"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="@string/item_no" />
+            android:layout_weight="1"
+            android:ems="15"
+            android:hint="@string/item_no"
+            android:importantForAutofill="no"
+            android:inputType="text" />
     </com.google.android.material.textfield.TextInputLayout>
+
+    <ImageButton
+        android:id="@+id/pSearchItemNoBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/search"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/pItemNoTextInputLayout"
+        app:layout_constraintTop_toBottomOf="@+id/priceSelectPrompt"
+        app:srcCompat="@drawable/baseline_search_black_24dp" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/pBrandTextInputLayout"
-        android:layout_width="409dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_weight="1"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/pItemNoTextInputLayout">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/pBrandEditText"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="@string/brand" />
+            android:layout_weight="1"
+            android:ems="15"
+            android:hint="@string/brand"
+            android:inputType="text" />
     </com.google.android.material.textfield.TextInputLayout>
+
+    <ImageButton
+        android:id="@+id/pSearchBrandBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:contentDescription="@string/search"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/pBrandTextInputLayout"
+        app:layout_constraintTop_toTopOf="@+id/pBrandTextInputLayout"
+        app:srcCompat="@drawable/baseline_search_black_24dp" />
 
     <ImageButton
         android:id="@+id/priceSelectionBtn"
