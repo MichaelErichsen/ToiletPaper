@@ -118,31 +118,16 @@ public class PriceSelectFragment extends Fragment {
         searchBrandBtn.setOnClickListener(searchBrandBtnOnclickListener());
 
         AppCompatImageButton priceSelectionBtn = root.findViewById(R.id.priceSelectionBtn);
-        priceSelectionBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                try {
-                    String itemNo = Objects.requireNonNull(pItemNoEditText.getText()).toString();
-                    String brand = Objects.requireNonNull(pBrandEditText.getText()).toString();
-
-                    if (itemNo.equals("") && brand.equals("")) {
-                        complain();
-                    } else {
-                        PriceSelectFragmentDirections.ActionNavPriceSelectToNavPricesList action =
-                                PriceSelectFragmentDirections.actionNavPriceSelectToNavPricesList(Objects.requireNonNull(pItemNoEditText.getText()).toString(),
-                                        Objects.requireNonNull(pBrandEditText.getText()).toString());
-                        Navigation.findNavController(v).navigate(action);
-                    }
-                } catch (Exception e) {
-                    snackbar = Snackbar
-                            .make(requireActivity().findViewById(android.R.id.content), Objects.requireNonNull(e.getMessage()), Snackbar.LENGTH_LONG);
-                    snackbar.show();
-                }
-            }
-        });
+        priceSelectionBtn.setOnClickListener(priceSelectionBtnOnClickListener());
 
         AppCompatImageButton graphSelectionBtn = root.findViewById(R.id.graphSelectionBtn);
-        graphSelectionBtn.setOnClickListener(new View.OnClickListener() {
+        graphSelectionBtn.setOnClickListener(graphSelectionBtnOnClickListener());
+
+        return root;
+    }
+
+    private View.OnClickListener graphSelectionBtnOnClickListener() {
+        return new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 try {
@@ -163,8 +148,32 @@ public class PriceSelectFragment extends Fragment {
                     snackbar.show();
                 }
             }
-        });
-        return root;
+        };
+    }
+
+    private View.OnClickListener priceSelectionBtnOnClickListener() {
+        return new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    String itemNo = Objects.requireNonNull(pItemNoEditText.getText()).toString();
+                    String brand = Objects.requireNonNull(pBrandEditText.getText()).toString();
+
+                    if (itemNo.equals("") && brand.equals("")) {
+                        complain();
+                    } else {
+                        PriceSelectFragmentDirections.ActionNavPriceSelectToNavPricesList action =
+                                PriceSelectFragmentDirections.actionNavPriceSelectToNavPricesList(Objects.requireNonNull(pItemNoEditText.getText()).toString(),
+                                        Objects.requireNonNull(pBrandEditText.getText()).toString());
+                        Navigation.findNavController(v).navigate(action);
+                    }
+                } catch (Exception e) {
+                    snackbar = Snackbar
+                            .make(requireActivity().findViewById(android.R.id.content), Objects.requireNonNull(e.getMessage()), Snackbar.LENGTH_LONG);
+                    snackbar.show();
+                }
+            }
+        };
     }
 
     private View.OnClickListener searchItemNoBtnOnClickListener() {
@@ -228,7 +237,7 @@ public class PriceSelectFragment extends Fragment {
                         snackbar.show();
                     } else {
                         pItemNoEditText.setText(lpm.get(0).getItemNo());
-                        pBrandEditText.setText("");
+                        pBrandEditText.setText(lpm.get(0).getBrand());
                     }
                 } catch (Exception e) {
                     snackbar = Snackbar
@@ -261,8 +270,8 @@ public class PriceSelectFragment extends Fragment {
                                         R.string.brand_not_found, Snackbar.LENGTH_LONG);
                         snackbar.show();
                     } else {
+                        pItemNoEditText.setText(lpm.get(0).getItemNo());
                         pBrandEditText.setText(lpm.get(0).getBrand());
-                        pItemNoEditText.setText("");
                     }
                 } catch (Exception e) {
                     snackbar = Snackbar
@@ -272,5 +281,4 @@ public class PriceSelectFragment extends Fragment {
             }
         };
     }
-
 }
