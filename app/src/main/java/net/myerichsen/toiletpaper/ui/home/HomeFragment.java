@@ -41,8 +41,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-// TODO Make brand and item number cuttable
-
 /*
  * Copyright (c) 2020. Michael Erichsen.
  *
@@ -390,22 +388,9 @@ public class HomeFragment extends Fragment {
             public void onClick(View v) {
                 try {
                     brand = Objects.requireNonNull(brandEditText.getText()).toString();
-//                    itemNo = itemNoEditText.getText().toString();
-//                    String supplier = (String) suppliersSpinner.getSelectedItem();
-//                    List<SupplierModel> spm = adapter.getSupplierModels("SUPPLIER=?", supplier);
-//                    String chain = spm.get(0).getChain();
 
                     Intent browserIntent = new Intent(Intent.ACTION_VIEW,
                             Uri.parse("https://www.google.com/search?q=\"" + brand + "\""));
-//
-//                    Intent browserIntent = new Intent(Intent.ACTION_VIEW,
-//                            Uri.parse("https://www.google.com/search?q=\"" +
-//                                    brand +
-//                                    "\"+" +
-//                                    itemNo +
-//                                    "+" +
-//                                    chain));
-
                     startActivity(browserIntent);
                 } catch (Exception e) {
                     snackbar = Snackbar
