@@ -41,6 +41,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+// TODO Make brand and item number cuttable
+
 /*
  * Copyright (c) 2020. Michael Erichsen.
  *
@@ -522,7 +524,6 @@ public class HomeFragment extends Fragment {
             }
         };
     }
-
 
     private void populateLayoutFromProductModel(ProductModel pm) {
         try {
