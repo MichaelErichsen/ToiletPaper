@@ -151,7 +151,8 @@
         Hvis varenummer eller varemærke ikke er komplet eller entydigt, vises et valgbillede.
         Hvis det er fundet og entydigt, vises alle data fra databasen.\n
         De indtastede data gemmes med gemmeknappen nederst.\n
-        Der kan foretages opslag på Pricerunner med Pricerunnerknappen.\n
+        Der kan foretages opslag på varemærket hos Google med Googleknappen.\n
+        Der kan foretages opslag på toiletpapir generelt hos Pricerunner med Pricerunnerknappen.\n
         Beregnede værdier markeres som sådan. Ved indtastning fjernes markeringen.
     </string>
     <string name="scan_help_text">Scan en stregkode eller QR-kode.\n
