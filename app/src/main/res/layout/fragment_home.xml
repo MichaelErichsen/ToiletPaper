@@ -134,7 +134,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:ems="10"
+                    android:ems="15"
                     android:hint="@string/count"
                     android:importantForAutofill="no"
                     android:inputType="number" />
@@ -161,7 +161,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:ems="10"
+                    android:ems="15"
                     android:hint="@string/count"
                     android:importantForAutofill="no"
                     android:inputType="number" />
@@ -188,7 +188,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:ems="10"
+                    android:ems="15"
                     android:hint="@string/mm"
                     android:importantForAutofill="no"
                     android:inputType="number" />
@@ -284,7 +284,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:ems="10"
+                    android:ems="15"
                     android:hint="@string/kr"
                     android:importantForAutofill="no"
                     android:inputType="numberDecimal" />
@@ -330,7 +330,6 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1"
             android:orientation="horizontal">
 
             <com.google.android.material.textfield.TextInputLayout
@@ -345,7 +344,6 @@
                     android:id="@+id/paperWeightEditText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
                     android:ems="10"
                     android:hint="@string/gm2"
                     android:importantForAutofill="no"
@@ -399,7 +397,6 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1"
             android:orientation="horizontal">
 
             <com.google.android.material.textfield.TextInputLayout
@@ -414,7 +411,6 @@
                     android:id="@+id/kiloPriceEditText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
                     android:ems="10"
                     android:hint="@string/kr"
                     android:importantForAutofill="no"
@@ -434,7 +430,6 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1"
             android:orientation="horizontal">
 
             <com.google.android.material.textfield.TextInputLayout
@@ -449,7 +444,6 @@
                     android:id="@+id/meterPriceEditText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
                     android:ems="10"
                     android:hint="@string/kr"
                     android:importantForAutofill="no"
@@ -469,7 +463,6 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1"
             android:orientation="horizontal">
 
             <com.google.android.material.textfield.TextInputLayout
@@ -484,7 +477,6 @@
                     android:id="@+id/sheetPriceEditText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
                     android:ems="10"
                     android:hint="@string/kr"
                     android:importantForAutofill="no"
@@ -519,6 +511,7 @@
                 style="@android:style/Widget.Spinner"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:spinnerMode="dropdown" />
 
         </LinearLayout>
@@ -526,7 +519,6 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1"
             android:baselineAligned="false"
             android:orientation="horizontal">
 
@@ -542,7 +534,6 @@
                     android:id="@+id/commentEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
                     android:ems="10"
                     android:gravity="top|start"
                     android:hint="@string/comment"
@@ -563,6 +554,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:background="#FFFFFF"
                 android:contentDescription="@string/action_calculate"
                 android:src="@drawable/calculator" />
 
@@ -571,14 +563,26 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:background="#FFFFFF"
                 android:contentDescription="@string/action_save"
                 android:src="@drawable/baseline_save_black_48dp" />
+
+            <ImageButton
+                android:id="@+id/googleBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:background="#FFFFFF"
+                android:contentDescription="@string/google_search"
+                android:src="@drawable/common_google_signin_btn_icon_light_normal" />
 
             <ImageButton
                 android:id="@+id/pricerunnerBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:background="#FFFFFF"
                 android:contentDescription="@string/action_pricerunner"
                 android:src="@drawable/pricerunner_48dp" />
         </LinearLayout>

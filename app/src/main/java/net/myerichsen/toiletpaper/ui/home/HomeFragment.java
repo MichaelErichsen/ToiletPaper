@@ -357,15 +357,6 @@ public class HomeFragment extends Fragment {
         commentEditText = root.findViewById(R.id.commentEditText);
 
         // Buttons
-        AppCompatImageButton calculateBtn = root.findViewById(R.id.calculateBtn);
-        calculateBtn.setOnClickListener(calculateBtnOnClickListener());
-
-        AppCompatImageButton saveBtn = root.findViewById(R.id.saveBtn);
-        saveBtn.setOnClickListener(saveBtnOnClickListener());
-
-        AppCompatImageButton pricerunnerBtn = root.findViewById(R.id.pricerunnerBtn);
-        pricerunnerBtn.setOnClickListener(priceRunnerOnClickListener());
-
         AppCompatImageButton scanBtn = root.findViewById(R.id.scanBtn);
         scanBtn.setOnClickListener(scanBtnOnClickListener());
 
@@ -375,7 +366,52 @@ public class HomeFragment extends Fragment {
         AppCompatImageButton searchBrandBtn = root.findViewById(R.id.searchBrandBtn);
         searchBrandBtn.setOnClickListener(searchBrandBtnOnClickListener());
 
+        AppCompatImageButton calculateBtn = root.findViewById(R.id.calculateBtn);
+        calculateBtn.setOnClickListener(calculateBtnOnClickListener());
+
+        AppCompatImageButton saveBtn = root.findViewById(R.id.saveBtn);
+        saveBtn.setOnClickListener(saveBtnOnClickListener());
+
+        AppCompatImageButton googleBtn = root.findViewById(R.id.googleBtn);
+        googleBtn.setOnClickListener(googleOnClickListener());
+
+        AppCompatImageButton pricerunnerBtn = root.findViewById(R.id.pricerunnerBtn);
+        pricerunnerBtn.setOnClickListener(priceRunnerOnClickListener());
+
+
         return root;
+    }
+
+    private View.OnClickListener googleOnClickListener() {
+        return new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    brand = Objects.requireNonNull(brandEditText.getText()).toString();
+//                    itemNo = itemNoEditText.getText().toString();
+//                    String supplier = (String) suppliersSpinner.getSelectedItem();
+//                    List<SupplierModel> spm = adapter.getSupplierModels("SUPPLIER=?", supplier);
+//                    String chain = spm.get(0).getChain();
+
+                    Intent browserIntent = new Intent(Intent.ACTION_VIEW,
+                            Uri.parse("https://www.google.com/search?q=\"" + brand + "\""));
+//
+//                    Intent browserIntent = new Intent(Intent.ACTION_VIEW,
+//                            Uri.parse("https://www.google.com/search?q=\"" +
+//                                    brand +
+//                                    "\"+" +
+//                                    itemNo +
+//                                    "+" +
+//                                    chain));
+
+                    startActivity(browserIntent);
+                } catch (Exception e) {
+                    snackbar = Snackbar
+                            .make(snackView, Objects.requireNonNull(e.getMessage()), Snackbar.LENGTH_LONG);
+                    snackbar.show();
+                }
+            }
+        };
     }
 
     private AdapterView.OnItemSelectedListener getSpinnerListener() {
@@ -787,7 +823,7 @@ public class HomeFragment extends Fragment {
         return fSheetLength | fSheetPrice | fRollPrice | fMeterPrice | fSheetPrice;
     }
 
-    private boolean multiply(TextInputEditText multiplicand, TextInputEditText multiplier, TextInputEditText product, CheckBox cb, int precision) {
+    private boolean multiply(TextInputEditText multiplicand, TextInputEditText multiplier, TextInputEditText product, CheckBox cb, @SuppressWarnings("SameParameterValue") int precision) {
         String s1, s2;
         String s3;
 
@@ -848,7 +884,7 @@ public class HomeFragment extends Fragment {
     private boolean divide(TextInputEditText dividend,
                            TextInputEditText divisor,
                            TextInputEditText divisor2,
-                           TextInputEditText quotient, CheckBox cb, int precision) {
+                           TextInputEditText quotient, CheckBox cb, @SuppressWarnings("SameParameterValue") int precision) {
         String s1, s2, s3, s4;
 
         if ((cb != null) && !(cb.isChecked())) {

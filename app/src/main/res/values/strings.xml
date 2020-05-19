@@ -203,4 +203,5 @@
     <string name="version_string">Version %1$s</string>
     <string name="found_item_numbers">Fundne varenumre</string>
     <string name="enter_itemno_prompt">Indtast et varenummer eller begyndelsen af det</string>
+    <string name="google_search">Google søgning</string>
 </resources>
