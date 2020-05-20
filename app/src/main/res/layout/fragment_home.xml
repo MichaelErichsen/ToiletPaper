@@ -39,7 +39,8 @@
                     android:ems="10"
                     android:hint="@string/item_no"
                     android:importantForAutofill="no"
-                    android:inputType="text" />
+                    android:inputType="text"
+                    android:textAlignment="viewEnd" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <ImageButton
@@ -80,6 +81,7 @@
                     android:ems="10"
                     android:hint="@string/brand"
                     android:importantForAutofill="no"
+                    android:textAlignment="viewEnd"
                     android:inputType="text" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -134,6 +136,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:textAlignment="viewEnd"
                     android:ems="15"
                     android:hint="@string/count"
                     android:importantForAutofill="no"
@@ -161,6 +164,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:textAlignment="viewEnd"
                     android:ems="15"
                     android:hint="@string/count"
                     android:importantForAutofill="no"
@@ -189,6 +193,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:ems="15"
+                    android:textAlignment="viewEnd"
                     android:hint="@string/mm"
                     android:importantForAutofill="no"
                     android:inputType="number" />
@@ -216,6 +221,7 @@
                     android:layout_weight="1"
                     android:ems="10"
                     android:hint="@string/mm"
+                    android:textAlignment="viewEnd"
                     android:importantForAutofill="no"
                     android:inputType="number" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -250,6 +256,7 @@
                     android:layout_weight="1"
                     android:ems="10"
                     android:hint="@string/m"
+                    android:textAlignment="viewEnd"
                     android:importantForAutofill="no"
                     android:inputType="number" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -284,6 +291,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:textAlignment="viewEnd"
                     android:ems="15"
                     android:hint="@string/kr"
                     android:importantForAutofill="no"
@@ -312,6 +320,7 @@
                     android:layout_weight="1"
                     android:ems="10"
                     android:hint="@string/kr"
+                    android:textAlignment="viewEnd"
                     android:importantForAutofill="no"
                     android:inputType="numberDecimal" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -345,6 +354,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:ems="10"
+                    android:textAlignment="viewEnd"
                     android:hint="@string/gm2"
                     android:importantForAutofill="no"
                     android:inputType="numberDecimal" />
@@ -378,6 +388,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:textAlignment="viewEnd"
                     android:ems="10"
                     android:hint="@string/g_per_roll"
                     android:importantForAutofill="no"
@@ -412,6 +423,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:ems="10"
+                    android:textAlignment="viewEnd"
                     android:hint="@string/kr"
                     android:importantForAutofill="no"
                     android:inputType="numberDecimal" />
@@ -445,6 +457,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:ems="10"
+                    android:textAlignment="viewEnd"
                     android:hint="@string/kr"
                     android:importantForAutofill="no"
                     android:inputType="numberDecimal" />
@@ -478,6 +491,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:ems="10"
+                    android:textAlignment="viewEnd"
                     android:hint="@string/kr"
                     android:importantForAutofill="no"
                     android:inputType="numberDecimal" />
@@ -536,7 +550,6 @@
                     android:layout_height="wrap_content"
                     android:ems="10"
                     android:gravity="top|start"
-                    android:hint="@string/comment"
                     android:importantForAutofill="no"
                     android:inputType="textMultiLine" />
             </com.google.android.material.textfield.TextInputLayout>
