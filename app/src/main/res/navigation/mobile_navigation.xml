@@ -72,6 +72,9 @@
         <action
             android:id="@+id/action_nav_compare_to_nav_compare_details"
             app:destination="@id/nav_compare_details" />
+        <action
+            android:id="@+id/action_nav_compare_to_nav_compare_list"
+            app:destination="@id/nav_compare_list" />
     </fragment>
 
     <fragment
@@ -187,6 +190,21 @@
         tools:layout="@layout/fragment_item_no_list">
         <argument
             android:name="itemNo"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/nav_compare_list"
+        android:name="net.myerichsen.toiletpaper.ui.compare.CompareListFragment"
+        android:label="@string/sorted_prices"
+        tools:layout="@layout/fragment_compare_list_list">
+        <action
+            android:id="@+id/action_nav_compare_list_to_nav_product_details"
+            app:destination="@id/nav_product_details" />
+        <argument
+            android:name="sortFilter"
+            app:argType="string" />
+        <argument
+            android:name="sortKey"
             app:argType="string" />
     </fragment>
 </navigation>

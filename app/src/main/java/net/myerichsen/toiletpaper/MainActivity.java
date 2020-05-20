@@ -26,6 +26,9 @@ import androidx.preference.PreferenceManager;
 
 import com.google.android.material.navigation.NavigationView;
 
+import net.myerichsen.toiletpaper.ui.compare.CompareListFragment;
+import net.myerichsen.toiletpaper.ui.compare.CompareListFragmentDirections;
+import net.myerichsen.toiletpaper.ui.compare.CompareModel;
 import net.myerichsen.toiletpaper.ui.home.BrandListFragment;
 import net.myerichsen.toiletpaper.ui.home.BrandModel;
 import net.myerichsen.toiletpaper.ui.home.ItemNoListFragment;
@@ -50,7 +53,8 @@ import static net.myerichsen.toiletpaper.ui.home.HomeFragment.ITEM_NO;
  */
 
 public class MainActivity extends AppCompatActivity implements PriceListFragment.OnListFragmentInteractionListener,
-        ItemNoListFragment.OnListFragmentInteractionListener, BrandListFragment.OnListFragmentInteractionListener {
+        ItemNoListFragment.OnListFragmentInteractionListener, BrandListFragment.OnListFragmentInteractionListener,
+        CompareListFragment.OnListFragmentInteractionListener {
     private AppBarConfiguration mAppBarConfiguration;
 
     @Override
@@ -153,6 +157,7 @@ public class MainActivity extends AppCompatActivity implements PriceListFragment
                 text.setText(getString(R.string.scan_help_text));
                 break;
             case "Sorteret produktliste":
+            case "Sorterede priser":
                 text.setText(getString(R.string.sorted_product_list_help_text));
                 break;
             case "Toiletpapir":
@@ -223,6 +228,13 @@ public class MainActivity extends AppCompatActivity implements PriceListFragment
     public void onListFragmentInteraction(PriceModel.PriceItem item) {
         PriceListFragmentDirections.ActionNavPricesListToNavProductDetails action =
                 PriceListFragmentDirections.actionNavPricesListToNavProductDetails(item.uid);
+        Navigation.findNavController(this, R.id.nav_host_fragment).navigate(action);
+    }
+
+    @Override
+    public void onListFragmentInteraction(CompareModel.CompareItem item) {
+        CompareListFragmentDirections.ActionNavCompareListToNavProductDetails action =
+                CompareListFragmentDirections.actionNavCompareListToNavProductDetails(item.uid);
         Navigation.findNavController(this, R.id.nav_host_fragment).navigate(action);
     }
 }

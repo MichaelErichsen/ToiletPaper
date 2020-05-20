@@ -1,4 +1,4 @@
-package net.myerichsen.toiletpaper.ui.home;
+package net.myerichsen.toiletpaper.ui.compare;
 
 import android.app.Activity;
 import android.content.Context;
@@ -13,14 +13,10 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.material.snackbar.Snackbar;
-
 import net.myerichsen.toiletpaper.R;
-import net.myerichsen.toiletpaper.ui.home.BrandModel.BrandItem;
+import net.myerichsen.toiletpaper.ui.compare.CompareModel.CompareItem;
 
 import java.util.Objects;
-
-import static net.myerichsen.toiletpaper.ui.home.HomeFragment.BRAND;
 
 /*
  * Copyright (c) 2020. Michael Erichsen.
@@ -29,31 +25,29 @@ import static net.myerichsen.toiletpaper.ui.home.HomeFragment.BRAND;
  */
 
 /**
- * A fragment representing a list af brands
+ * A fragment representing a list of Items.
  * <p/>
  * Activities containing this fragment MUST implement the {@link OnListFragmentInteractionListener}
  * interface.
  */
-public class BrandListFragment extends Fragment {
+public class CompareListFragment extends Fragment {
     private static final String ARG_COLUMN_COUNT = "column-count";
-    private String brand;
+    private String sortFilter;
+    private String sortKey;
 
     private int mColumnCount = 2;
-    private OnListFragmentInteractionListener fbListener;
+    private OnListFragmentInteractionListener mListener;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
      */
-    public BrandListFragment() {
+    public CompareListFragment() {
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment
-     */
-    public static BrandListFragment newInstance(int columnCount) {
-        BrandListFragment fragment = new BrandListFragment();
+    @SuppressWarnings("unused")
+    public static CompareListFragment newInstance(int columnCount) {
+        CompareListFragment fragment = new CompareListFragment();
         Bundle args = new Bundle();
         args.putInt(ARG_COLUMN_COUNT, columnCount);
         fragment.setArguments(args);
@@ -75,15 +69,15 @@ public class BrandListFragment extends Fragment {
 
         if (getArguments() != null) {
             mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
-            brand = getArguments().getString(BRAND);
+            sortFilter = getArguments().getString("sortFilter");
+            sortKey = getArguments().getString("sortKey");
         }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View root = inflater.inflate(R.layout.fragment_brand_list, container, false);
-        View snackView = requireActivity().findViewById(android.R.id.content);
+        View root = inflater.inflate(R.layout.fragment_compare_list_list, container, false);
 
         // Set the adapter
         if (root instanceof RecyclerView) {
@@ -94,22 +88,8 @@ public class BrandListFragment extends Fragment {
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-            BrandModel brandModel = new BrandModel(context, brand);
-            if (brandModel.ITEMS.size() == 0) {
-                Snackbar snackbar = Snackbar
-                        .make(snackView,
-                                R.string.brand_not_found, Snackbar.LENGTH_LONG);
-                snackbar.show();
-                requireActivity().onBackPressed();
-                return null;
-            } else if (brandModel.ITEMS.size() == 1) {
-                Bundle result = new Bundle();
-                result.putString(BRAND, brandModel.ITEMS.get(0).brand);
-                requireActivity().getSupportFragmentManager().setFragmentResult("brandRequestKey", result);
-                requireActivity().onBackPressed();
-                return null;
-            }
-            recyclerView.setAdapter(new BrandRecyclerViewAdapter(brandModel.ITEMS, fbListener));
+            CompareModel compareModel = new CompareModel(context, sortFilter, sortKey);
+            recyclerView.setAdapter(new CompareRecyclerViewAdapter(compareModel.ITEMS, mListener));
         }
         hideSoftKeyboard(requireActivity());
 
@@ -121,15 +101,16 @@ public class BrandListFragment extends Fragment {
 //        super.onViewCreated(view, savedInstanceState);
 //
 //        if (getArguments() != null) {
-//            brand = getArguments().getString(BRAND);
+//            sortFilter = getArguments().getString("sortFilter");
+//            sortKey = getArguments().getString("sortKey");
 //        }
 //    }
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if (context instanceof BrandListFragment.OnListFragmentInteractionListener) {
-            fbListener = (BrandListFragment.OnListFragmentInteractionListener) context;
+        if (context instanceof OnListFragmentInteractionListener) {
+            mListener = (OnListFragmentInteractionListener) context;
         } else {
             throw new RuntimeException(context.toString()
                     + " must implement OnListFragmentInteractionListener");
@@ -139,7 +120,7 @@ public class BrandListFragment extends Fragment {
     @Override
     public void onDetach() {
         super.onDetach();
-        fbListener = null;
+        mListener = null;
     }
 
     /**
@@ -153,6 +134,6 @@ public class BrandListFragment extends Fragment {
      * >Communicating with Other Fragments</a> for more information.
      */
     public interface OnListFragmentInteractionListener {
-        void onListFragmentInteraction(BrandItem item);
+        void onListFragmentInteraction(CompareItem item);
     }
 }

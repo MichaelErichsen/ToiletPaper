@@ -94,6 +94,28 @@ public class TPDbAdapter {
         return lpm;
     }
 
+    /**
+     * Select everything from product table with selection arguments ordered
+     *
+     * @param orderColumn Column to order by
+     * @return List of product models
+     */
+    public List<ProductModel> getProductModels(String orderColumn) {
+        List<ProductModel> lpm = new ArrayList<>();
+
+        SQLiteDatabase db = tpDbHelper.getReadableDatabase();
+
+        Cursor cursor = db.query(TpDbHelper.TABLE_PRODUCT, pdColumns, null, null, null, null, orderColumn);
+
+        if (cursor.getCount() > 0) {
+            while (cursor.moveToNext()) {
+                lpm.add(populateProductModel(cursor));
+            }
+        }
+        cursor.close();
+
+        return lpm;
+    }
 
     /**
      * Insert a product row

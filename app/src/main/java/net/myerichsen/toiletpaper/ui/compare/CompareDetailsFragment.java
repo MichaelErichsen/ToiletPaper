@@ -123,10 +123,10 @@ public class CompareDetailsFragment extends Fragment {
         tableRow.addView(addCell("Uid"));
         tableLayout.addView(tableRow);
 
-        List<ProductModel> lpd;
+        List<ProductModel> lpm;
 
         try {
-            lpd = adapter.getProductModelsSorted(sortKey, sortFilter);
+            lpm = adapter.getProductModelsSorted(sortKey, sortFilter);
         } catch (Exception e) {
             Snackbar snackbar = Snackbar
                     .make(root.findViewById(android.R.id.content), Objects.requireNonNull(e.getMessage()), Snackbar.LENGTH_LONG);
@@ -134,7 +134,7 @@ public class CompareDetailsFragment extends Fragment {
             return;
         }
 
-        if (lpd.size() == 0) {
+        if (lpm.size() == 0) {
             try {
                 Snackbar snackbar = Snackbar
                         .make(root.findViewById(android.R.id.content), R.string.no_products_found, Snackbar.LENGTH_LONG);
@@ -145,7 +145,7 @@ public class CompareDetailsFragment extends Fragment {
             return;
         }
 
-        for (ProductModel pd : lpd) {
+        for (ProductModel pd : lpm) {
             tableRow = new TableRow(context);
             tableRow.setBackgroundColor(Color.BLACK);
             tableRow.setPadding(2, 2, 2, 2); //Border between rows

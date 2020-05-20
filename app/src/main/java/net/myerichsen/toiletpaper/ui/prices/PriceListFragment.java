@@ -8,8 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -85,11 +83,11 @@ public class PriceListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_prices_list, container, false);
-        Context context = getContext();
 
         // Set the adapter
         if (root instanceof RecyclerView) {
             RecyclerView recyclerView = (RecyclerView) root;
+            Context context = root.getContext();
 
             if (mColumnCount <= 1) {
                 recyclerView.setLayoutManager(new LinearLayoutManager(context));
@@ -104,15 +102,15 @@ public class PriceListFragment extends Fragment {
         return root;
     }
 
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-
-        if (getArguments() != null) {
-            itemNo = getArguments().getString(HomeFragment.ITEM_NO);
-            brand = getArguments().getString(HomeFragment.BRAND);
-        }
-    }
+//    @Override
+//    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+//        super.onViewCreated(view, savedInstanceState);
+//
+//        if (getArguments() != null) {
+//            itemNo = getArguments().getString(HomeFragment.ITEM_NO);
+//            brand = getArguments().getString(HomeFragment.BRAND);
+//        }
+//    }
 
     @Override
     public void onAttach(Context context) {

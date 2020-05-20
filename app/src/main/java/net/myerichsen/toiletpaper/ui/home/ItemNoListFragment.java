@@ -8,8 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -39,7 +37,6 @@ import static net.myerichsen.toiletpaper.ui.home.HomeFragment.ITEM_NO;
 public class ItemNoListFragment extends Fragment {
     private static final String ARG_COLUMN_COUNT = "column-count";
     private String itemNo;
-    private Snackbar snackbar;
 
     private int mColumnCount = 2;
     private OnListFragmentInteractionListener fiListener;
@@ -100,7 +97,7 @@ public class ItemNoListFragment extends Fragment {
 
             ItemNoModel itemNoModel = new ItemNoModel(context, itemNo);
             if (itemNoModel.ITEMS.size() == 0) {
-                snackbar = Snackbar
+                Snackbar snackbar = Snackbar
                         .make(snackView,
                                 R.string.itemno_not_found, Snackbar.LENGTH_LONG);
                 snackbar.show();
@@ -109,7 +106,7 @@ public class ItemNoListFragment extends Fragment {
             } else if (itemNoModel.ITEMS.size() == 1) {
                 Bundle result = new Bundle();
                 result.putString(ITEM_NO, itemNoModel.ITEMS.get(0).itemNo);
-                getActivity().getSupportFragmentManager().setFragmentResult("itemNoRequestKey", result);
+                requireActivity().getSupportFragmentManager().setFragmentResult("itemNoRequestKey", result);
                 requireActivity().onBackPressed();
                 return null;
             }
@@ -120,14 +117,14 @@ public class ItemNoListFragment extends Fragment {
         return root;
     }
 
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-
-        if (getArguments() != null) {
-            itemNo = getArguments().getString(HomeFragment.ITEM_NO);
-        }
-    }
+//    @Override
+//    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+//        super.onViewCreated(view, savedInstanceState);
+//
+//        if (getArguments() != null) {
+//            itemNo = getArguments().getString(HomeFragment.ITEM_NO);
+//        }
+//    }
 
     @Override
     public void onAttach(Context context) {

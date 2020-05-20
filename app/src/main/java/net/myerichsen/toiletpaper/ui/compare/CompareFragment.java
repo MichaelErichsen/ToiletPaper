@@ -15,8 +15,6 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 import androidx.preference.PreferenceManager;
@@ -38,24 +36,28 @@ import java.util.Objects;
  */
 
 public class CompareFragment extends Fragment {
-    private String sortKey = "PAPER_WEIGHT";
+    private String sortKey = "KILO_PRICE";
     private String sortFilter = "ALL";
+    private View root;
+    private Snackbar snackbar;
+    private SharedPreferences preferences;
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
+    }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        View root = inflater.inflate(R.layout.fragment_compare, container, false);
+        root = inflater.inflate(R.layout.fragment_compare, container, false);
         Context context = getContext();
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(Objects.requireNonNull(context));
-        float fontSize = Float.parseFloat(preferences.getString("fontsize", "24"));
-        View snackView = requireActivity().findViewById(android.R.id.content);
-
         TPDbAdapter adapter = new TPDbAdapter(context);
-
-        ActionBar ab = ((AppCompatActivity) requireActivity()).getSupportActionBar();
-        if (ab != null) {
-            ab.setDisplayHomeAsUpEnabled(true);
-        }
+        View snackView = requireActivity().findViewById(android.R.id.content);
+        preferences = PreferenceManager.getDefaultSharedPreferences(Objects.requireNonNull(context));
+        float fontSize = Float.parseFloat(preferences.getString("fontsize", "24"));
+        sortKey = preferences.getString("sortkey", "KILO_PRICE");
 
         ((RadioButton) root.findViewById(R.id.radioButton1)).setTextSize(fontSize);
         ((RadioButton) root.findViewById(R.id.radioButton2)).setTextSize(fontSize);
@@ -65,16 +67,17 @@ public class CompareFragment extends Fragment {
         ((TextView) root.findViewById(R.id.textView8)).setTextSize(fontSize);
         ((TextView) root.findViewById(R.id.textView9)).setTextSize(fontSize);
 
+
         Spinner filterSpinner = root.findViewById(R.id.filterSpinner);
 
-        List<SupplierModel> lsd = new ArrayList<>();
+        List<SupplierModel> lsm = new ArrayList<>();
         ArrayList<String> supplierArrayList = new ArrayList<>();
         supplierArrayList.add("ALL");
 
         boolean goOn = true;
 
         try {
-            lsd = adapter.getSupplierModels();
+            lsm = adapter.getSupplierModels();
         } catch (Exception e) {
             Snackbar snackbar = Snackbar
                     .make(snackView, Objects.requireNonNull(e.getMessage()), Snackbar.LENGTH_LONG);
@@ -82,7 +85,7 @@ public class CompareFragment extends Fragment {
             goOn = false;
         }
 
-        if ((goOn) && (lsd.size() == 0)) {
+        if ((goOn) && (lsm.size() == 0)) {
             Snackbar snackbar = Snackbar
                     .make(snackView, "Tabellen er tom", Snackbar.LENGTH_LONG);
             snackbar.show();
@@ -90,8 +93,8 @@ public class CompareFragment extends Fragment {
         }
 
         if (goOn) {
-            for (int i = 0; i < lsd.size(); i++) {
-                supplierArrayList.add(lsd.get(i).getSupplier());
+            for (int i = 0; i < lsm.size(); i++) {
+                supplierArrayList.add(lsm.get(i).getSupplier());
             }
         }
 
@@ -111,7 +114,56 @@ public class CompareFragment extends Fragment {
         });
 
         RadioGroup rg = root.findViewById(R.id.sortKeyRadioGroup);
-        rg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+        rg.setOnCheckedChangeListener(radioGroupOnCheckedChangeListener());
+
+        switch (sortKey) {
+            case "PAPER_WEIGHT":
+                rg.check(R.id.radioButton1);
+                break;
+            case "KILO_PRICE":
+                rg.check(R.id.radioButton2);
+                break;
+            case "METER_PRICE":
+                rg.check(R.id.radioButton3);
+                break;
+            case "SHEET_PRICE":
+                rg.check(R.id.radioButton4);
+                break;
+            default:
+                throw new IllegalStateException("Unexpected value: " + sortKey);
+        }
+
+        TextView executeCompareTextView = root.findViewById(R.id.executeCompareTextView);
+
+        executeCompareTextView.setOnClickListener(executeCompareOnClickListener());
+        return root;
+    }
+
+    private View.OnClickListener executeCompareOnClickListener() {
+        return new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    if ((sortKey.equals("KILO_PRICE")) || (sortKey.equals("METER_PRICE"))) {
+                        CompareFragmentDirections.ActionNavCompareToNavCompareList action =
+                                CompareFragmentDirections.actionNavCompareToNavCompareList(sortFilter, sortKey);
+                        Navigation.findNavController(root).navigate(action);
+                    } else {
+                        CompareFragmentDirections.ActionNavCompareToNavCompareDetails action =
+                                CompareFragmentDirections.actionNavCompareToNavCompareDetails(sortKey, sortFilter);
+                        Navigation.findNavController(v).navigate(action);
+                    }
+                } catch (Exception e) {
+                    Snackbar snackbar = Snackbar
+                            .make(requireActivity().findViewById(android.R.id.content), Objects.requireNonNull(e.getMessage()), Snackbar.LENGTH_LONG);
+                    snackbar.show();
+                }
+            }
+        };
+    }
+
+    private RadioGroup.OnCheckedChangeListener radioGroupOnCheckedChangeListener() {
+        return new RadioGroup.OnCheckedChangeListener() {
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 switch (checkedId) {
                     case R.id.radioButton1:
@@ -127,30 +179,13 @@ public class CompareFragment extends Fragment {
                         sortKey = "SHEET_PRICE";
                         break;
                     default:
-                        Snackbar snackbar = Snackbar
-                                .make(requireActivity().findViewById(android.R.id.content), "Unexpected value: " + checkedId, Snackbar.LENGTH_LONG);
-                        snackbar.show();
                         throw new IllegalStateException("Unexpected value: " + checkedId);
                 }
-            }
-        });
 
-        TextView executeCompareTextView = root.findViewById(R.id.executeCompareTextView);
-
-        executeCompareTextView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                try {
-                    CompareFragmentDirections.ActionNavCompareToNavCompareDetails action =
-                            CompareFragmentDirections.actionNavCompareToNavCompareDetails(sortKey, sortFilter);
-                    Navigation.findNavController(v).navigate(action);
-                } catch (Exception e) {
-                    Snackbar snackbar = Snackbar
-                            .make(requireActivity().findViewById(android.R.id.content), Objects.requireNonNull(e.getMessage()), Snackbar.LENGTH_LONG);
-                    snackbar.show();
-                }
+                SharedPreferences.Editor editor = preferences.edit();
+                editor.putString("sortkey", sortKey);
+                editor.apply();
             }
-        });
-        return root;
+        };
     }
 }

@@ -195,8 +195,9 @@
     <string name="compare_help_text">
         Sammenlign.\n
         Butikker kan filtreres med filteringsnøglen øverst.\n
-        Sorteringsmøgle vælges nedenfor.\n
-        Klik på¨den grønne linie nederst for at se den sorterede liste.
+        Sorteringsnøgle vælges nedenfor.\n
+        Sorteringsnøglen huskes til næste gang.\n
+        Klik på den grønne linje nederst for at se den sorterede liste.
     </string>
     <string name="g_per_roll" tools:ignore="Typos">g pr. rulle</string>
     <string name="roll_weight">Rullevægt</string>
@@ -205,4 +206,5 @@
     <string name="found_item_numbers">Fundne varenumre</string>
     <string name="enter_itemno_prompt">Indtast et varenummer eller begyndelsen af det</string>
     <string name="google_search">Google søgning</string>
+    <string name="sorted_prices">Sorterede priser</string>
 </resources>
