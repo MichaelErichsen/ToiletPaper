@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright (c) 2020. Michael Erichsen.
+  ~
+  ~ The program is distributed under the terms of the GNU Affero General Public License v3.0
+  -->
+
+<full-backup-content>
+    <exclude
+        domain="database"
+        path="TOILET_PAPER_DATABASE" />
+    <!-- Exclude specific shared preferences that contain GCM registration Id -->
+</full-backup-content>

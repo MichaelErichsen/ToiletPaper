@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright (c) 2020. Michael Erichsen.
+  ~
+  ~ The program is distributed under the terms of the GNU Affero General Public License v3.0
+  -->
+
+<adaptive-icon xmlns:android="http://schemas.android.com/apk/res/android">
+    <background android:drawable="@color/tp_launcher_background" />
+    <foreground android:drawable="@mipmap/tp_launcher_foreground" />
+</adaptive-icon>
