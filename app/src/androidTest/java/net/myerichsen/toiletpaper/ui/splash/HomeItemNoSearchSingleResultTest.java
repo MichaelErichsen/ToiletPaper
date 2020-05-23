@@ -42,7 +42,7 @@ import static org.hamcrest.Matchers.is;
 @SuppressWarnings("deprecation")
 @LargeTest
 @RunWith(AndroidJUnit4.class)
-public class HomeItemNoSearchSingleResult {
+public class HomeItemNoSearchSingleResultTest {
 
     @Rule
     public ActivityTestRule<SplashActivity> mActivityTestRule = new ActivityTestRule<>(SplashActivity.class);
