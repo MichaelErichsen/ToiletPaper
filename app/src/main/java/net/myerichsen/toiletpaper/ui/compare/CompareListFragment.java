@@ -8,7 +8,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import net.myerichsen.toiletpaper.R;
 import net.myerichsen.toiletpaper.ui.compare.CompareModel.CompareItem;
@@ -29,7 +34,9 @@ import java.util.Objects;
  */
 public class CompareListFragment extends Fragment {
     private static final String ARG_COLUMN_COUNT = "column-count";
-
+    private String sortFilter;
+    private String sortKey;
+    private int mColumnCount = 1;
     private OnListFragmentInteractionListener mListener;
 
     /**
@@ -63,27 +70,46 @@ public class CompareListFragment extends Fragment {
 
         if (getArguments() != null) {
             int mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
-            String sortFilter = getArguments().getString("sortFilter");
-            String sortKey = getArguments().getString("sortKey");
+            sortFilter = getArguments().getString("sortFilter");
+            sortKey = getArguments().getString("sortKey");
         }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View root = inflater.inflate(R.layout.fragment_compare_list_list, container, false);
-        return root;
+        return inflater.inflate(R.layout.fragment_compare_list_list, container, false);
     }
 
-//    @Override
-//    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-//        super.onViewCreated(view, savedInstanceState);
-//
-//        if (getArguments() != null) {
-//            sortFilter = getArguments().getString("sortFilter");
-//            sortKey = getArguments().getString("sortKey");
-//        }
-//    }
+    /**
+     * Called immediately after {@link #onCreateView(LayoutInflater, ViewGroup, Bundle)}
+     * has returned, but before any saved state has been restored in to the view.
+     * This gives subclasses a chance to initialize themselves once
+     * they know their view hierarchy has been completely created.  The fragment's
+     * view hierarchy is not however attached to its parent at this point.
+     *
+     * @param view               The View returned by {@link #onCreateView(LayoutInflater, ViewGroup, Bundle)}.
+     * @param savedInstanceState If non-null, this fragment is being re-constructed
+     */
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        // Set the adapter
+        if (view instanceof RecyclerView) {
+            RecyclerView recyclerView = (RecyclerView) view;
+            Context context = view.getContext();
+
+            if (mColumnCount <= 1) {
+                recyclerView.setLayoutManager(new LinearLayoutManager(context));
+            } else {
+                recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
+            }
+            CompareModel compareModel = new CompareModel(context, sortFilter, sortKey);
+            recyclerView.setAdapter(new CompareRecyclerViewAdapter(compareModel.ITEMS, mListener));
+        }
+        hideSoftKeyboard(requireActivity());
+    }
 
     @Override
     public void onAttach(@SuppressWarnings("NullableProblems") Context context) {

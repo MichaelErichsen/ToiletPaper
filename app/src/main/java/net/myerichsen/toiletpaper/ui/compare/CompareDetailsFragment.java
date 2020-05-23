@@ -66,7 +66,7 @@ public class CompareDetailsFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         root = inflater.inflate(R.layout.fragment_compare_details, container, false);
-        context = getContext();
+
         return root;
     }
 
@@ -87,6 +87,7 @@ public class CompareDetailsFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        context = getContext();
         TPDbAdapter adapter = new TPDbAdapter(context);
 
         if (getArguments() != null) {

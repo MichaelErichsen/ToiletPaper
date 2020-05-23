@@ -12,10 +12,6 @@ import java.util.List;
 
 import static java.math.RoundingMode.HALF_UP;
 
-
-
-
-
 /*
  * Copyright (c) 2020. Michael Erichsen.
  *
@@ -33,8 +29,7 @@ public class CompareModel {
      */
     public List<CompareItem> ITEMS;
 
-    public CompareModel(
-            Context context, String sortFilter, String sortKey) {
+    public CompareModel(Context context, String sortFilter, String sortKey) {
         if (sortFilter == null)
             return;
 

@@ -113,17 +113,7 @@ public class CompareFragment extends Fragment {
         ArrayAdapter<String> supplierArrayAdapter = new ArrayAdapter<>(Objects.requireNonNull(context), android.R.layout.simple_spinner_item, supplierArrayList);
         supplierArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         filterSpinner.setAdapter(supplierArrayAdapter);
-        filterSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                sortFilter = parent.getSelectedItem().toString();
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-            }
-        });
+        filterSpinner.setOnItemSelectedListener(filterSpinnerOnItemSelectedListener());
 
         RadioGroup rg = view.findViewById(R.id.sortKeyRadioGroup);
         rg.setOnCheckedChangeListener(radioGroupOnCheckedChangeListener());
@@ -148,6 +138,20 @@ public class CompareFragment extends Fragment {
         TextView executeCompareTextView = view.findViewById(R.id.executeCompareTextView);
 
         executeCompareTextView.setOnClickListener(executeCompareOnClickListener());
+    }
+
+    private AdapterView.OnItemSelectedListener filterSpinnerOnItemSelectedListener() {
+        return new AdapterView.OnItemSelectedListener() {
+
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                sortFilter = parent.getSelectedItem().toString();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        };
     }
 
     private View.OnClickListener executeCompareOnClickListener() {

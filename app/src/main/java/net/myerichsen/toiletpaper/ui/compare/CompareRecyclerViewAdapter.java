@@ -1,10 +1,13 @@
 package net.myerichsen.toiletpaper.ui.compare;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.preference.PreferenceManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import net.myerichsen.toiletpaper.R;
@@ -12,6 +15,7 @@ import net.myerichsen.toiletpaper.ui.compare.CompareListFragment.OnListFragmentI
 import net.myerichsen.toiletpaper.ui.compare.CompareModel.CompareItem;
 
 import java.util.List;
+import java.util.Objects;
 
 /*
  * Copyright (c) 2020. Michael Erichsen.
@@ -26,6 +30,8 @@ import java.util.List;
 public class CompareRecyclerViewAdapter extends RecyclerView.Adapter<CompareRecyclerViewAdapter.ViewHolder> {
     private final List<CompareItem> mValues;
     private final OnListFragmentInteractionListener mListener;
+    private View root;
+    private float fontSize;
 
     /**
      * The view holder objects are managed by an adapter, which you create by extending
@@ -44,9 +50,12 @@ public class CompareRecyclerViewAdapter extends RecyclerView.Adapter<CompareRecy
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext())
+        root = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.fragment_compare_list, parent, false);
-        return new ViewHolder(view);
+        Context context = root.getContext();
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(Objects.requireNonNull(context));
+        fontSize = Float.parseFloat(preferences.getString("fontsize", "24"));
+        return new ViewHolder(root);
     }
 
     @Override
@@ -56,6 +65,11 @@ public class CompareRecyclerViewAdapter extends RecyclerView.Adapter<CompareRecy
         holder.clBrandView.setText(mValues.get(position).clBrand);
         holder.clKiloPriceView.setText(mValues.get(position).clKiloPrice);
         holder.clMeterPriceView.setText(mValues.get(position).clMeterPrice);
+
+        ((TextView) root.findViewById(R.id.clItemNo)).setTextSize(fontSize);
+        ((TextView) root.findViewById(R.id.clBrand)).setTextSize(fontSize);
+        ((TextView) root.findViewById(R.id.clKiloPrice)).setTextSize(fontSize);
+        ((TextView) root.findViewById(R.id.clMeterPrice)).setTextSize(fontSize);
 
         holder.clView.setOnClickListener(new View.OnClickListener() {
             @Override
