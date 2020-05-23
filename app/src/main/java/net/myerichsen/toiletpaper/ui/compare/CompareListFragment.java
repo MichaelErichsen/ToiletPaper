@@ -36,7 +36,6 @@ public class CompareListFragment extends Fragment {
     private static final String ARG_COLUMN_COUNT = "column-count";
     private String sortFilter;
     private String sortKey;
-    private int mColumnCount = 1;
     private OnListFragmentInteractionListener mListener;
 
     /**
@@ -100,6 +99,7 @@ public class CompareListFragment extends Fragment {
             RecyclerView recyclerView = (RecyclerView) view;
             Context context = view.getContext();
 
+            int mColumnCount = 1;
             if (mColumnCount <= 1) {
                 recyclerView.setLayoutManager(new LinearLayoutManager(context));
             } else {
