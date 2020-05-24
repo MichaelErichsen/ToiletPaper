@@ -100,6 +100,7 @@ public class CompareListFragment extends Fragment {
             Context context = view.getContext();
 
             int mColumnCount = 1;
+            //noinspection ConstantConditions
             if (mColumnCount <= 1) {
                 recyclerView.setLayoutManager(new LinearLayoutManager(context));
             } else {
