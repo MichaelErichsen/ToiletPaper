@@ -11,7 +11,9 @@ import org.junit.runners.Suite;
 
 // Runs all unit tests.
 @RunWith(Suite.class)
-@Suite.SuiteClasses({HomeHelpTest.class,
+@Suite.SuiteClasses({
+        AboutTest.class,
+        HomeHelpTest.class,
         HomeItemNoSearchSeveralResultsTest.class,
         HomeItemNoSearchSeveralResultsTest.class,
         CompareTest.class})
