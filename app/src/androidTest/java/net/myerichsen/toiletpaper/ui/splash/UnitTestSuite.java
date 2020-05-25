@@ -13,10 +13,11 @@ import org.junit.runners.Suite;
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
         AboutTest.class,
-        HomeHelpTest.class,
-        HomeItemNoSearchSeveralResultsTest.class,
-        HomeItemNoSearchSeveralResultsTest.class,
-        CompareTest.class})
+        CompareTest.class,
+        HomeTest.class,
+        PricesTest.class,
+        ProductTest.class,
+        SupplierTest.class})
 public class UnitTestSuite {
 }
 

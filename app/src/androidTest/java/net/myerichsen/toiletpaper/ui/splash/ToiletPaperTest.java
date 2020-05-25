@@ -5,23 +5,18 @@ import android.view.ViewGroup;
 import android.view.ViewParent;
 
 import androidx.test.espresso.ViewInteraction;
-import androidx.test.filters.LargeTest;
 import androidx.test.rule.ActivityTestRule;
-import androidx.test.runner.AndroidJUnit4;
 
 import net.myerichsen.toiletpaper.R;
 
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
+import org.hamcrest.core.IsInstanceOf;
 import org.junit.Rule;
-import org.junit.Test;
-import org.junit.runner.RunWith;
 
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
-import static androidx.test.espresso.action.ViewActions.closeSoftKeyboard;
-import static androidx.test.espresso.action.ViewActions.replaceText;
 import static androidx.test.espresso.action.ViewActions.scrollTo;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.contrib.RecyclerViewActions.actionOnItemAtPosition;
@@ -31,6 +26,7 @@ import static androidx.test.espresso.matcher.ViewMatchers.withContentDescription
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.allOf;
+import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.is;
 
 /*
@@ -39,15 +35,15 @@ import static org.hamcrest.Matchers.is;
  * The program is distributed under the terms of the GNU Affero General Public License v3.0
  */
 
+/**
+ * Superclass for espresso tests
+ */
 @SuppressWarnings("deprecation")
-@LargeTest
-@RunWith(AndroidJUnit4.class)
-public class HomeItemNoSearchSingleResultTest {
-
+class ToiletPaperTest {
     @Rule
     public ActivityTestRule<SplashActivity> mActivityTestRule = new ActivityTestRule<>(SplashActivity.class);
 
-    private static Matcher<View> childAtPosition(
+    static Matcher<View> childAtPosition(
             final Matcher<View> parentMatcher, final int position) {
 
         return new TypeSafeMatcher<View>() {
@@ -66,8 +62,61 @@ public class HomeItemNoSearchSingleResultTest {
         };
     }
 
-    @Test
-    public void homeItemNoSearchSingleResult() {
+    void drawerPosition(int position) {
+        ViewInteraction appCompatImageButton2 = onView(
+                allOf(withContentDescription("Open navigation drawer"),
+                        childAtPosition(
+                                allOf(withId(R.id.toolbar),
+                                        childAtPosition(
+                                                withClassName(is("com.google.android.material.appbar.AppBarLayout")),
+                                                0)),
+                                1),
+                        isDisplayed()));
+        appCompatImageButton2.perform(click());
+
+        ViewInteraction navigationMenuItemView = onView(
+                allOf(childAtPosition(
+                        allOf(withId(R.id.design_navigation_view),
+                                childAtPosition(
+                                        withId(R.id.nav_view),
+                                        0)),
+                        position),
+                        isDisplayed()));
+        navigationMenuItemView.perform(click());
+    }
+
+    void help(String substring) {
+        ViewInteraction actionMenuItemView = onView(
+                allOf(withId(R.id.fragment_help), withContentDescription("Hjælp"),
+                        childAtPosition(
+                                childAtPosition(
+                                        withId(R.id.toolbar),
+                                        2),
+                                0),
+                        isDisplayed()));
+        actionMenuItemView.perform(click());
+
+        ViewInteraction textView = onView(
+                allOf(withId(R.id.HelpDialogTextView), withText(containsString(substring)),
+                        childAtPosition(
+                                childAtPosition(
+                                        IsInstanceOf.<View>instanceOf(android.widget.ScrollView.class),
+                                        0),
+                                1),
+                        isDisplayed()));
+        textView.check(matches(withText(containsString(substring))));
+
+        ViewInteraction appCompatButton = onView(
+                allOf(withId(R.id.helpDialogButtonOK), withText("OK"),
+                        childAtPosition(
+                                childAtPosition(
+                                        withClassName(is("android.widget.ScrollView")),
+                                        0),
+                                2)));
+        appCompatButton.perform(scrollTo(), click());
+    }
+
+    void initialLoad() {
         ViewInteraction overflowMenuButton = onView(
                 allOf(withContentDescription("More options"),
                         childAtPosition(
@@ -105,34 +154,5 @@ public class HomeItemNoSearchSingleResultTest {
                                 1),
                         isDisplayed()));
         appCompatImageButton.perform(click());
-
-        ViewInteraction textInputEditText = onView(
-                allOf(withId(R.id.itemNoEditText),
-                        childAtPosition(
-                                childAtPosition(
-                                        withId(R.id.pItemNoTextInputLayout),
-                                        0),
-                                0),
-                        isDisplayed()));
-        textInputEditText.perform(replaceText("7"), closeSoftKeyboard());
-
-        ViewInteraction appCompatImageButton2 = onView(
-                allOf(withId(R.id.searchItemNoBtn), withContentDescription("Søg"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withClassName(is("android.widget.LinearLayout")),
-                                        0),
-                                2)));
-        appCompatImageButton2.perform(scrollTo(), click());
-
-        ViewInteraction editText = onView(
-                allOf(withId(R.id.itemNoEditText), withText("7311041080306"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withId(R.id.pItemNoTextInputLayout),
-                                        0),
-                                0),
-                        isDisplayed()));
-        editText.check(matches(withText("7311041080306")));
     }
 }
