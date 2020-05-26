@@ -150,10 +150,12 @@
         Varemærke kan slås op i databasen.\n
         Hvis varenummer eller varemærke ikke er komplet eller entydigt, vises et valgbillede.
         Hvis det er fundet og entydigt, vises alle data fra databasen.\n
+        Manglende værdier beregnes ved tryk på beregningsknappen.
+        Beregnede værdier markeres som sådan. Ved indtastning fjernes markeringen.\n
         De indtastede data gemmes med gemmeknappen nederst.\n
         Der kan foretages opslag på varemærket hos Google med Googleknappen.\n
         Der kan foretages opslag på toiletpapir generelt hos Pricerunner med Pricerunnerknappen.\n
-        Beregnede værdier markeres som sådan. Ved indtastning fjernes markeringen.
+        Antallet af felter på billedet styres med indstilingen \"Avanceret inddataformat\".
     </string>
     <string name="scan_help_text">Scan en stregkode eller QR-kode.\n
         Telefonen vil bippe, og koden vil blive vist nedenfor.\n
