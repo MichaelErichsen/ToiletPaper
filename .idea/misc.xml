@@ -2,6 +2,9 @@
 <project version="4">
   <component name="EntryPointsManager">
     <pattern value="net.myerichsen.toiletpaper.ui.home.BrandListFragment" method="newInstance" />
+    <pattern value="net.myerichsen.toiletpaper.ui.products.ProductDetailsFragment" method="newInstance" />
+    <pattern value="net.myerichsen.toiletpaper.ui.compare.CompareDetailsFragment" />
+    <pattern value="net.myerichsen.toiletpaper.ui.compare.CompareDetailsFragment" method="newInstance" />
   </component>
   <component name="JavadocGenerationManager">
     <option name="OUTPUT_DIRECTORY" value="$USER_HOME$/Documents/Android/javadoc" />

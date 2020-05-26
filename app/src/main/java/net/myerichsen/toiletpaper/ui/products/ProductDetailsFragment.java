@@ -125,6 +125,7 @@ public class ProductDetailsFragment extends Fragment {
         addTableRow(productDetailTableLayout, "Pakkepris", pm.getPackagePrice());
         addTableRow(productDetailTableLayout, "Rullepris", pm.getRollPrice());
         addTableRow(productDetailTableLayout, "Papirvægt", pm.getPaperWeight());
+        addTableRow(productDetailTableLayout, "Pakkevægt", pm.getPackageWeight());
         addTableRow(productDetailTableLayout, "Rullevægt", pm.getRollWeight());
         addTableRow(productDetailTableLayout, "Kilopris", pm.getKiloPrice());
         addTableRow(productDetailTableLayout, "Meterpris", pm.getMeterPrice());

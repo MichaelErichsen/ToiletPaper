@@ -182,6 +182,45 @@ public class HomeFragment extends Fragment {
         // Brand
         brandEditText = view.findViewById(R.id.brandEditText);
 
+        // Suppliers
+        suppliersSpinner = view.findViewById(R.id.suppliersSpinner);
+
+        List<SupplierModel> lsm = new ArrayList<>();
+        ArrayList<String> supplierArrayList = new ArrayList<>();
+
+        boolean goOn = true;
+        int spinnerIndex = 0;
+
+        try {
+            lsm = adapter.getSupplierModels();
+        } catch (Exception e) {
+            goOn = false;
+        }
+
+        if ((goOn) && (lsm.size() == 0)) {
+            goOn = false;
+        }
+
+        if (goOn) {
+            String item;
+            String defaultSupplier = preferences.getString("defaultsupplier", "");
+
+            for (int i = 0; i < lsm.size(); i++) {
+                item = lsm.get(i).getSupplier();
+                supplierArrayList.add(item);
+
+                if (item.equals(defaultSupplier)) {
+                    spinnerIndex = i;
+                }
+            }
+        }
+
+        ArrayAdapter<String> supplierArrayAdapter = new ArrayAdapter<>(context, android.R.layout.simple_spinner_item, supplierArrayList);
+        supplierArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        suppliersSpinner.setAdapter(supplierArrayAdapter);
+        suppliersSpinner.setSelection(spinnerIndex);
+        suppliersSpinner.setOnItemSelectedListener(getSpinnerListener());
+
         // Layers
         layersSpinner = view.findViewById(R.id.layersSpinner);
         ArrayList<String> layerArrayList = new ArrayList<>();
@@ -196,6 +235,49 @@ public class HomeFragment extends Fragment {
 
         // Package rolls
         packageRollsEditText = view.findViewById(R.id.packageRollsEditText);
+
+        // Package price
+        packagePriceEditText = view.findViewById(R.id.packagePriceEditText);
+
+        // Kilo price
+        kiloPriceEditText = view.findViewById(R.id.kiloPriceEditText);
+        kiloPriceCheckBox = view.findViewById(R.id.kiloPriceCheckBox);
+        kiloPriceEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (kiloPriceEditText.hasFocus())
+                    kiloPriceCheckBox.setChecked(false);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+            }
+        });
+
+        // Package weight
+        packageWeightEditText = view.findViewById(R.id.packageWeightEditText);
+        packageWeightCheckBox = view.findViewById(R.id.packageWeightCheckBox);
+        packageWeightEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (packageWeightEditText.hasFocus())
+                    packageWeightCheckBox.setChecked(false);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+            }
+        });
+
+        // Advanced starts here
 
         // Roll sheets
         rollSheetsEditText = view.findViewById(R.id.rollSheetsEditText);
@@ -241,9 +323,6 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        // Package price
-        packagePriceEditText = view.findViewById(R.id.packagePriceEditText);
-
         // Roll price
         rollPriceEditText = view.findViewById(R.id.rollPriceEditText);
         rollPriceCheckBox = view.findViewById(R.id.rollPriceCheckBox);
@@ -282,25 +361,6 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        // Package weight
-        packageWeightEditText = view.findViewById(R.id.packageWeightEditText);
-        packageWeightCheckBox = view.findViewById(R.id.packageWeightCheckBox);
-        packageWeightEditText.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (packageWeightEditText.hasFocus())
-                    packageWeightCheckBox.setChecked(false);
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-            }
-        });
-
         // roll weight
         rollWeightEditText = view.findViewById(R.id.rollWeightEditText);
         rollWeightCheckBox = view.findViewById(R.id.rollWeightCheckBox);
@@ -313,25 +373,6 @@ public class HomeFragment extends Fragment {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if (rollWeightEditText.hasFocus())
                     rollWeightCheckBox.setChecked(false);
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-            }
-        });
-
-        // Kilo price
-        kiloPriceEditText = view.findViewById(R.id.kiloPriceEditText);
-        kiloPriceCheckBox = view.findViewById(R.id.kiloPriceCheckBox);
-        kiloPriceEditText.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (kiloPriceEditText.hasFocus())
-                    kiloPriceCheckBox.setChecked(false);
             }
 
             @Override
@@ -377,47 +418,33 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        // Suppliers
-        suppliersSpinner = view.findViewById(R.id.suppliersSpinner);
-
-        List<SupplierModel> lsm = new ArrayList<>();
-        ArrayList<String> supplierArrayList = new ArrayList<>();
-
-        boolean goOn = true;
-        int spinnerIndex = 0;
-
-        try {
-            lsm = adapter.getSupplierModels();
-        } catch (Exception e) {
-            goOn = false;
-        }
-
-        if ((goOn) && (lsm.size() == 0)) {
-            goOn = false;
-        }
-
-        if (goOn) {
-            String item;
-            String defaultSupplier = preferences.getString("defaultsupplier", "");
-
-            for (int i = 0; i < lsm.size(); i++) {
-                item = lsm.get(i).getSupplier();
-                supplierArrayList.add(item);
-
-                if (item.equals(defaultSupplier)) {
-                    spinnerIndex = i;
-                }
-            }
-        }
-
-        ArrayAdapter<String> supplierArrayAdapter = new ArrayAdapter<>(context, android.R.layout.simple_spinner_item, supplierArrayList);
-        supplierArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        suppliersSpinner.setAdapter(supplierArrayAdapter);
-        suppliersSpinner.setSelection(spinnerIndex);
-        suppliersSpinner.setOnItemSelectedListener(getSpinnerListener());
-
         // Comments
         commentEditText = view.findViewById(R.id.commentEditText);
+
+        boolean visible = preferences.getBoolean("advancedscreen", true);
+        int visibility;
+        if (visible) {
+            visibility = View.VISIBLE;
+        } else {
+            visibility = View.GONE;
+        }
+        commentEditText.setVisibility(visibility);
+        meterPriceCheckBox.setVisibility(visibility);
+        meterPriceEditText.setVisibility(visibility);
+        paperWeightCheckBox.setVisibility(visibility);
+        paperWeightEditText.setVisibility(visibility);
+        rollLengthCheckBox.setVisibility(visibility);
+        rollLengthEditText.setVisibility(visibility);
+        rollPriceCheckBox.setVisibility(visibility);
+        rollPriceEditText.setVisibility(visibility);
+        rollSheetsEditText.setVisibility(visibility);
+        rollWeightCheckBox.setVisibility(visibility);
+        rollWeightEditText.setVisibility(visibility);
+        sheetLengthCheckBox.setVisibility(visibility);
+        sheetLengthEditText.setVisibility(visibility);
+        sheetPriceCheckBox.setVisibility(visibility);
+        sheetPriceEditText.setVisibility(visibility);
+        sheetWidthEditText.setVisibility(visibility);
 
         // Buttons
         AppCompatImageButton scanBtn = view.findViewById(R.id.scanBtn);
@@ -755,7 +782,7 @@ public class HomeFragment extends Fragment {
      * Calculate all calculable fields
      */
     private boolean calculate() {
-        // Sheet length = roll length / sheets pet roll (OK)
+        // Sheet length = roll length / sheets pet roll
         boolean fSheetLength = false;
         try {
             fSheetLength = divide(rollLengthEditText,
@@ -768,7 +795,7 @@ public class HomeFragment extends Fragment {
             sheetLengthCheckBox.setChecked(false);
         }
 
-        // Roll length = sheet length * sheets per roll (OK)
+        // Roll length = sheet length * sheets per roll
         boolean fRollLength = false;
         try {
             fRollLength = multiply(sheetLengthEditText, rollSheetsEditText,
@@ -780,7 +807,7 @@ public class HomeFragment extends Fragment {
             rollLengthCheckBox.setChecked(false);
         }
 
-        // Price per roll = price per package / rolls per package (OK)
+        // Price per roll = price per package / rolls per package
         boolean fRollPrice = false;
         try {
             fRollPrice = divide(packagePriceEditText, packageRollsEditText,
@@ -791,8 +818,6 @@ public class HomeFragment extends Fragment {
             rollPriceEditText.setText("0.0");
             rollPriceCheckBox.setChecked(false);
         }
-
-        // TODO Paper weight (g per m2) ???
 
 //        /**
 //         * Package weight 1088 g
@@ -816,14 +841,6 @@ public class HomeFragment extends Fragment {
             rollWeightCheckBox.setChecked(false);
         }
 
-        //        /**
-//         * Package price 34.95 kr
-//         * Package rolls 9
-//         * Roll Price 34.95 / 9 = 3,88 kr
-//         *
-//         * Roll length = 31 m
-//         * Meter price = 3,88 / 31 = 0,125
-//         */
         boolean fMeterPrice = false;
         try {
             fMeterPrice = divide(packagePriceEditText,
@@ -837,7 +854,6 @@ public class HomeFragment extends Fragment {
             meterPriceCheckBox.setChecked(false);
         }
 
-        // TODO Price per sheet = price per package / rolls pr package / sheets per roll
         boolean fSheetPrice = false;
         try {
             fSheetPrice = divide(packagePriceEditText,

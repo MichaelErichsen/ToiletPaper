@@ -56,7 +56,6 @@ public class CompareDetailsFragment extends Fragment {
      * Use this factory method to create a new instance of
      * this fragment
      */
-    @SuppressWarnings("unused")
     public static CompareDetailsFragment newInstance() {
         return new CompareDetailsFragment();
     }

@@ -66,8 +66,8 @@ public class ProductModel {
         this.rollPrice_c = rollPrice_c;
         this.paperWeight = paperWeight;
         this.paperWeight_c = paperWeight_c;
-        this.packageWeight = paperWeight;
-        this.packageWeight_c = paperWeight_c;
+        this.packageWeight = packageWeight;
+        this.packageWeight_c = packageWeight_c;
         this.rollWeight = rollWeight;
         this.rollWeight_c = rollWeight_c;
         this.kiloPrice = kiloPrice;
