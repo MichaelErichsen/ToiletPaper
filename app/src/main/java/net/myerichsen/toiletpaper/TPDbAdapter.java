@@ -547,14 +547,15 @@ public class TPDbAdapter {
                     "nemlig.com", "Litauen");
             tpHelper.insertData(pm);
 
-            pm = new ProductModel("?", "Lotus Comfort",
+            pm = new ProductModel("?", "Lotus Comfort 8",
                     3, 8, 155, 98, 125, 0, (float) 19.1, 0,
                     (float) 22, (float) 2.75, 1, 0, 0,
-                    0, 0, 0, 0, (float) 29.06, 0, (float) 0.143979058, 1, (float) 0.017973856, 1, 
+                    0, 0, 0, 0, (float) 29.06, 0,
+                    (float) 0.143979058, 1, (float) 0.017973856, 1,
                     "nemlig.com", "");
             tpHelper.insertData(pm);
 
-            pm = new ProductModel("170190", "Lambi Classic Toilet Paper",
+            pm = new ProductModel("170190", "Lambi Classic 9",
                     3, 9, 255, 0, 125, 1,
                     (float) 31.9, 0, (float) 34.95, (float) 3.88, 1,
                     0, 0, (float) 0, 0, 0,
@@ -566,56 +567,83 @@ public class TPDbAdapter {
 
             pm = new ProductModel("70225", "Budget", 2, 10, 0,
                     0, 0, 0, (float) 0, 0, (float) 11.5, (float) 1.15,
-                    1, (float) 0, 0, (float) 1, 0, (float) 100, 1, (float) 11.5, 0, (float) 0, 0, (float) 0, 0, "Bilka", "Togo");
+                    1, (float) 1, 0, (float) 1, 0, (float) 100, 1, (float) 11.5, 0, (float) 0, 0, (float) 0, 0, "Bilka", "Togo");
             tpHelper.insertData(pm);
+
             pm = new ProductModel("?", "Coop Luxury", 4, 6, 0,
                     0, 0, 0, (float) 0, 0, (float) 21.95, (float) 3.583335, 1, (float) 0, 0, (float) 0.804, 0, (float) 134, 1, (float) 27.3, 0, (float) 0, 0, (float) 0, 0, "Kvickly Helsinge", " ");
             tpHelper.insertData(pm);
+
             pm = new ProductModel("?", "Irmas Blødt Toiletpapir", 5, 6, 0, 0, 0, 0, (float) 0, 0, (float) 34, (float) 5.66666666666667, 1, (float) 0, 0, (float) 0.733, 0, (float) 122.166666666667, 1, (float) 46.38, 0, (float) 0, 0, (float) 0, 0, "Kvickly Helsinge", " ");
             tpHelper.insertData(pm);
+
             pm = new ProductModel("?", "Irmas Toiletpapir ", 3, 8, 0, 0, 0, 0, (float) 0, 0, (float) 22, (float) 2.75, 1, (float) 0, 0, (float) 0.771, 0, (float) 0.096375, 1, (float) 28.53, 0, (float) 0, 0, (float) 0, 0, "Kvickly Helsinge", " ");
             tpHelper.insertData(pm);
+
             pm = new ProductModel("?", "Irmas Toiletpapir Ny Kvalitet", 3, 6, 0, 0, 0, 0, (float) 0, 0, (float) 36, (float) 6, 1, (float) 0, 0, (float) 0.835, 0, (float) 0.139166666666667, 1, (float) 43.11, 0, (float) 0, 0, (float) 0, 0, "Kvickly Helsinge", " ");
             tpHelper.insertData(pm);
+
             pm = new ProductModel("171267", "Kompakt", 4, 8, 0, 0, 0, 0, (float) 0, 0, (float) 20, (float) 2.5, 1, (float) 0, 0, (float) 0.976, 0, (float) 0.122, 1, (float) 20.49, 0, (float) 0, 0, (float) 0, 0, "Rema Vejby", " ");
             tpHelper.insertData(pm);
+
             pm = new ProductModel("75532", "Kæmpekøb Luksus", 2, 24, 0, 0, 0, 0, (float) 0, 0, (float) 50, (float) 2.08333333333333, 1, (float) 0, 0, (float) 3, 0, (float) 0.125, 1, (float) 16.66, 0, (float) 0, 0, (float) 0, 0, "Bilka", " ");
             tpHelper.insertData(pm);
+
             pm = new ProductModel("75111", "Lambi Classic 12", 3, 12, 0, 0, 0, 0, (float) 0, 0, (float) 39.95, (float) 3.32916666666667, 1, (float) 0, 0, (float) 1.16, 0, (float) 0.0966666666666667, 1, (float) 34.44, 0, (float) 0, 0, (float) 0, 0, "Bilka", " ");
             tpHelper.insertData(pm);
+
             pm = new ProductModel("75533", "Lambi Decorated", 3, 18, 0, 0, 0, 0, (float) 0, 0, (float) 69.95, (float) 3.88611111111111, 1, (float) 0, 0, (float) 1.75, 0, (float) 0.0972222222222222, 1, (float) 39.97, 0, (float) 0, 0, (float) 0, 0, "Bilka", " ");
             tpHelper.insertData(pm);
             pm = new ProductModel("75534", "Lambi Extra Long", 3, 9, 0, 0, 0, 0, (float) 0, 0, (float) 35, (float) 3.88888888888889, 1, (float) 0, 0, (float) 1.31, 0, (float) 0.145555555555556, 1, (float) 26.71, 0, (float) 0, 0, (float) 0, 0, "Bilka", " ");
             tpHelper.insertData(pm);
             pm = new ProductModel("24951", "Lambi Sensitive", 4, 6, 0, 0, 0, 0, (float) 0, 0, (float) 34.95, (float) 5.825, 1, (float) 0, 0, (float) 0.731, 0, (float) 0.121833333333333, 1, (float) 47.81, 0, (float) 0, 0, (float) 0, 0, "Kvickly Helsinge", " ");
             tpHelper.insertData(pm);
+
             pm = new ProductModel("70405", "Levevis ", 3, 8, 0, 0, 0, 0, (float) 0, 0, (float) 30, (float) 3.75, 1, (float) 0, 0, (float) 1085, 0, (float) 135.625, 1, (float) 27.64, 0, (float) 0, 0, (float) 0, 0, "Bilka", " ");
             tpHelper.insertData(pm);
-            pm = new ProductModel("?", "Lotus Comfort 8", 3, 8, 155, 98, 125, 0, (float) 19.1, 0, (float) 35.95, (float) 449.375, 1, (float) 0, 0, (float) 0.81, 0, (float) 0.10125, 1, (float) 44.38, 0, (float) 0, 0, (float) 0, 0, "Kvickly Helsinge", " ");
+
+            pm = new ProductModel("?", "Lotus Comfort 8",
+                    3, 8, 155, 98, 125, 0, (float) 19.1, 0,
+                    (float) 35.95, (float) 4.49375, 1, (float) 0, 0,
+                    (float) 0.81, 0, (float) 0.10125, 1, (float) 44.38, 0,
+                    (float) 0, 0, (float) 0.028991936, 1, "Kvickly Helsinge", " ");
             tpHelper.insertData(pm);
+
             pm = new ProductModel("64865", "Lotus Comfort 16", 3, 16, 0, 0, 0, 0, (float) 0, 0, (float) 69.95, (float) 4.371875, 1,
                     (float) 0, 0, (float) 1613, 0, (float) 100.8125, 1, (float) 43.37, 0, (float) 0, 0, (float) 0, 0, "Kvickly Helsinge", " ");
             tpHelper.insertData(pm);
+
             pm = new ProductModel("73051", "Lotus Just1", 5, 12, 0, 0, 0, 0, (float) 0, 0, (float) 59.95, (float) 4.99583333333333, 1, (float) 0, 0, (float) 1.26, 0, (float) 0.105, 1, (float) 47.57, 0, (float) 0, 0, (float) 0, 0, "Bilka", " ");
             tpHelper.insertData(pm);
+
             pm = new ProductModel("75535", "Lotus Royal", 3, 12, 0, 0, 0, 0, (float) 0, 0, (float) 46.95, (float) 39.125, 1, (float) 0, 0, (float) 1.14, 0, (float) 0.095, 1, (float) 41.18, 0, (float) 0, 0, (float) 0, 0, "Bilka", " ");
             tpHelper.insertData(pm);
+
             pm = new ProductModel("?", "Nemlig Basic", 2, 8, 0, 0, 0, 0, (float) 27.5, 0, (float) 9.2, (float) 1.15, 1, (float) 36, 0, (float) 0, 0, (float) 0, 0, (float) 12.11, 0, (float) 0.041818182, 1, (float) 0.005227273, 1, " nemlig.com", " Litauen");
             tpHelper.insertData(pm);
-            pm = new ProductModel("?", "Nemlig Plus", 3, 8, 200, 96, 125, 1, (float) 25, 0, (float) 20.4, (float) 2.55, 1, (float) 45, 0, (float) 0, 0, (float) 0, 0, (float) 23.61, 1, (float) 0.102, 1, (float) 0.01275, 1, " nemlig.com", " Litauen");
-            tpHelper.insertData(pm);
+
             pm = new ProductModel("170426", "Toiletpapir", 2, 8, 282, 97, 0, 0, (float) 35.2, 0, (float) 9.75, (float) 121.875, 1, (float) 32.6, 0, (float) 0.892, 0, (float) 111.5, 0, (float) 10.93, 0, (float) 0, 0, (float) 0, 0, "Rema Vejby", " ");
             tpHelper.insertData(pm);
+
             pm = new ProductModel("170209", "Toiletpapir Soft", 3, 6, 0, 0, 0, 0, (float) 0, 0, (float) 14, (float) 2.33333333333333, 1, (float) 0, 0, (float) 0.672, 0, (float) 0.112, 1, (float) 20.83, 0, (float) 0, 0, (float) 0, 0, "Rema Vejby", " ");
             tpHelper.insertData(pm);
+
             pm = new ProductModel("170016", "Toiletpapir Ultrasoft", 4, 10, 0, 0, 0, 0, (float) 21.8, 0, (float) 24, (float) 2.4, 1, (float) 62, 0, (float) 1.3, 0, (float) 130, 0, (float) 18.46, 0, (float) 0, 0, (float) 0, 0, "Rema Vejby", " ");
             tpHelper.insertData(pm);
-            pm = new ProductModel("63981", "Vores Toiletpapir 3", 3, 10, 0, 0, 0, 0, (float) 0, 0, (float) 25.5, (float) 2.55, 1, (float) 0, 0, (float) 1.3, 0, (float) 0.13, 1, (float) 196.15, 0, (float) 0, 0, (float) 0, 0, "Bilka", " ");
+
+            pm = new ProductModel("63981", "Vores Toiletpapir 3", 3, 10,
+                    0, 0, 0, 0, (float) 0, 0, (float) 25.5,
+                    (float) 2.55, 1, (float) 0, 0, (float) 1.3, 0,
+                    (float) 0.13, 1, (float) 196.15, 0, (float) 0, 0,
+                    (float) 0, 0, "Bilka", " ");
             tpHelper.insertData(pm);
+
             pm = new ProductModel("75536", "Vores Toiletpapir 4", 4, 10, 0, 0, 0, 0, (float) 0, 0, (float) 23.25, (float) 2.325, 1, (float) 0, 0, (float) 2, 0, (float) 0.2, 1, (float) 11.62, 0, (float) 0, 0, (float) 0, 0, "Bilka", " ");
             tpHelper.insertData(pm);
+
             pm = new ProductModel("?", "Xtra Toiletpapir", 2, 8, 0, 0, 0, 0, (float) 0, 0, (float) 9.5, (float) 11.875, 1, (float) 0, 0, (float) 0.664, 0, (float) 0.083, 1, (float) 14.31, 0, (float) 0, 0, (float) 0, 0, "Kvickly Helsinge", " ");
             tpHelper.insertData(pm);
+
             pm = new ProductModel("?", "Änglamark", 3, 8, 0, 0, 0, 0, (float) 0, 0, (float) 37.95, (float) 474.375, 1, (float) 0, 0, (float) 1126, 0, (float) 140.75, 1, (float) 33.7, 0, (float) 0, 0, (float) 0, 0, "Kvickly Helsinge", " ");
             tpHelper.insertData(pm);
 

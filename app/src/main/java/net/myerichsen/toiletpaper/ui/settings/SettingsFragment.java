@@ -40,7 +40,6 @@ public class SettingsFragment extends PreferenceFragmentCompat {
             TPDbAdapter adapter = new TPDbAdapter(getContext());
             SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(requireContext());
 
-            // TODO Implement simple and advanced screens
             SwitchPreferenceCompat advancedScreenPreference = findPreference("advancedscreen");
             Objects.requireNonNull(advancedScreenPreference).setOnPreferenceChangeListener(advancedScreenOnPreferenceChangeListener());
 

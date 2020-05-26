@@ -31,7 +31,7 @@
         app:title="Foretrukken butik" />
     <SwitchPreference
         android:id="@+id/splash_screen_preference"
-        android:defaultValue="false"
+        android:defaultValue="true"
         android:key="splashdisplay"
         android:summary="Skal forsiden vises, når programmet startes?"
         android:title="Forsidevisning" />
@@ -39,6 +39,7 @@
         android:id="@+id/advanced_screen_preference"
         android:key="advancedscreen"
         android:summary="Korte eller lange skærmbilleder"
+        app:defaultValue="true"
         app:title="Avanceret inddataformat" />
 </PreferenceScreen>
 
