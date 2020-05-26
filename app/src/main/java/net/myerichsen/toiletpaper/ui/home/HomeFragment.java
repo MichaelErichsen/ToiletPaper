@@ -78,6 +78,8 @@ public class HomeFragment extends Fragment {
     private CheckBox rollPriceCheckBox;
     private TextInputEditText paperWeightEditText;
     private CheckBox paperWeightCheckBox;
+    private TextInputEditText packageWeightEditText;
+    private CheckBox packageWeightCheckBox;
     private TextInputEditText rollWeightEditText;
     private CheckBox rollWeightCheckBox;
     private TextInputEditText kiloPriceEditText;
@@ -157,6 +159,8 @@ public class HomeFragment extends Fragment {
         ((TextInputEditText) view.findViewById(R.id.packageRollsEditText)).setTextSize(fontSize);
         ((TextInputEditText) view.findViewById(R.id.paperWeightEditText)).setTextSize(fontSize);
         ((Button) view.findViewById(R.id.paperWeightCheckBox)).setTextSize(fontSize);
+        ((TextInputEditText) view.findViewById(R.id.packageWeightEditText)).setTextSize(fontSize);
+        ((Button) view.findViewById(R.id.packageWeightCheckBox)).setTextSize(fontSize);
         ((TextInputEditText) view.findViewById(R.id.rollWeightEditText)).setTextSize(fontSize);
         ((Button) view.findViewById(R.id.rollWeightCheckBox)).setTextSize(fontSize);
         ((TextInputEditText) view.findViewById(R.id.rollLengthEditText)).setTextSize(fontSize);
@@ -272,6 +276,25 @@ public class HomeFragment extends Fragment {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if (paperWeightEditText.hasFocus())
                     paperWeightCheckBox.setChecked(false);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+            }
+        });
+
+        // Package weight
+        packageWeightEditText = view.findViewById(R.id.packageWeightEditText);
+        packageWeightCheckBox = view.findViewById(R.id.packageWeightCheckBox);
+        packageWeightEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (packageWeightEditText.hasFocus())
+                    packageWeightCheckBox.setChecked(false);
             }
 
             @Override
@@ -551,6 +574,8 @@ public class HomeFragment extends Fragment {
             rollPriceCheckBox.setChecked(pm.getRollPrice_c() != 0);
             paperWeightEditText.setText(String.valueOf(pm.getPaperWeight()));
             paperWeightCheckBox.setChecked(pm.getPaperWeight_c() != 0);
+            packageWeightEditText.setText(String.valueOf(pm.getPackageWeight()));
+            packageWeightCheckBox.setChecked(pm.getPackageWeight_c() != 0);
             kiloPriceEditText.setText(String.valueOf(pm.getKiloPrice()));
             kiloPriceCheckBox.setChecked(pm.getKiloPrice_c() != 0);
             meterPriceEditText.setText(String.valueOf(pm.getMeterPrice()));
@@ -631,6 +656,8 @@ public class HomeFragment extends Fragment {
             pm.setRollPrice_c(getIntFromLayout(rollPriceCheckBox));
             pm.setPaperWeight(getFloatFromLayout(paperWeightEditText));
             pm.setPaperWeight_c(getIntFromLayout(paperWeightCheckBox));
+            pm.setPackageWeight(getFloatFromLayout(packageWeightEditText));
+            pm.setPackageWeight_c(getIntFromLayout(packageWeightCheckBox));
             pm.setRollWeight(getFloatFromLayout(rollWeightEditText));
             pm.setRollWeight_c(getIntFromLayout(rollWeightCheckBox));
             pm.setKiloPrice(getFloatFromLayout(kiloPriceEditText));
@@ -781,11 +808,7 @@ public class HomeFragment extends Fragment {
 
         // TODO Roll weight
 
-        // TODO Kilo price ???
-//            boolean fKiloPrice = multiply(sheetLengthEditText, sheetLengthCheckBox, rollSheetsEditText, null, rollLengthEditText, rollLengthCheckBox, 100);
-
-        // TODO Price per meter = price per package / rolls per package / roll length
-//        /**
+        //        /**
 //         * Package price 34.95 kr
 //         * Package rolls 9
 //         * Roll Price 34.95 / 9 = 3,88 kr

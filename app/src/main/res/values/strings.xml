@@ -209,4 +209,6 @@
     <string name="sorted_prices">Sorterede priser</string>
     <string name="empty_table">Tabellen er tom</string>
     <string name="preferred_supplier">Foretrukken butik: </string>
+    <string name="package_weight">Pakkevægt</string>
+    <string name="kg">kg</string>
 </resources>

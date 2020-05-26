@@ -24,6 +24,8 @@ public class ProductModel {
     private int rollPrice_c = 0;
     private float paperWeight = 0;
     private int paperWeight_c = 0;
+    private float packageWeight = 0;
+    private int packageWeight_c = 0;
     private float rollWeight = 0;
     private int rollWeight_c = 0;
     private float kiloPrice = 0;
@@ -44,17 +46,12 @@ public class ProductModel {
     public ProductModel() {
     }
 
-    public ProductModel(String itemNo, String brand, int layers, int packageRolls, int rollSheets,
-                        int sheetWidth,
-                        int sheetLength, int sheetLength_c,
-                        float rollLength, int rollLength_c,
-                        float packagePrice,
-                        float rollPrice, int rollPrice_c,
-                        float paperWeight, int paperWeight_c,
-                        float rollWeight, int rollWeight_c,
-                        float kiloPrice, int kiloPrice_c,
-                        float meterPrice, int meterPrice_c,
-                        float sheetPrice, int sheetPrice_c,
+    public ProductModel(String itemNo, String brand,
+                        int layers, int packageRolls, int rollSheets, int sheetWidth, int sheetLength, int sheetLength_c,
+                        float rollLength, int rollLength_c, float packagePrice, float rollPrice, int rollPrice_c,
+                        float packageWeight, int packageWeight_c, float paperWeight, int paperWeight_c,
+                        float rollWeight, int rollWeight_c, float kiloPrice, int kiloPrice_c,
+                        float meterPrice, int meterPrice_c, float sheetPrice, int sheetPrice_c,
                         String supplier, String comments) {
         this.layers = layers;
         this.packageRolls = packageRolls;
@@ -69,6 +66,8 @@ public class ProductModel {
         this.rollPrice_c = rollPrice_c;
         this.paperWeight = paperWeight;
         this.paperWeight_c = paperWeight_c;
+        this.packageWeight = paperWeight;
+        this.packageWeight_c = paperWeight_c;
         this.rollWeight = rollWeight;
         this.rollWeight_c = rollWeight_c;
         this.kiloPrice = kiloPrice;
@@ -105,6 +104,22 @@ public class ProductModel {
 
     public void setPackageRolls(int packageRolls) {
         this.packageRolls = packageRolls;
+    }
+
+    public float getPackageWeight() {
+        return packageWeight;
+    }
+
+    public void setPackageWeight(float packageWeight) {
+        this.packageWeight = packageWeight;
+    }
+
+    public int getPackageWeight_c() {
+        return packageWeight_c;
+    }
+
+    public void setPackageWeight_c(int packageWeight_c) {
+        this.packageWeight_c = packageWeight_c;
     }
 
     public int getRollSheets() {
