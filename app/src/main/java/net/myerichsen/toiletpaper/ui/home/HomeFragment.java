@@ -60,7 +60,6 @@ public class HomeFragment extends Fragment {
 
     private TPDbAdapter adapter;
     private Activity activity;
-    private Snackbar snackbar;
     private View snackView;
 
     private TextInputEditText itemNoEditText;
@@ -806,7 +805,16 @@ public class HomeFragment extends Fragment {
 //         * g per m2 = 0,533.. * 82,47 = 44 g per m2
 //         */
 
-        // TODO Roll weight
+        boolean fRollWeight = false;
+        try {
+            fRollWeight = divide(packageWeightEditText, packageRollsEditText, rollWeightEditText,
+                    rollWeightCheckBox, 1000);
+        } catch (Exception ignored) {
+        }
+        if (!fRollWeight) {
+            rollWeightEditText.setText("0.0");
+            rollWeightCheckBox.setChecked(false);
+        }
 
         //        /**
 //         * Package price 34.95 kr
@@ -843,7 +851,7 @@ public class HomeFragment extends Fragment {
             sheetPriceCheckBox.setChecked(false);
         }
 
-        return fSheetLength | fSheetPrice | fRollPrice | fMeterPrice | fSheetPrice;
+        return fSheetLength | fSheetPrice | fRollPrice | fMeterPrice | fSheetPrice | fRollLength;
     }
 
     private boolean multiply(TextInputEditText multiplicand, TextInputEditText multiplier, TextInputEditText product, CheckBox cb, @SuppressWarnings("SameParameterValue") int precision) {
