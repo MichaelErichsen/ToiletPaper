@@ -32,7 +32,7 @@ public class AboutTest extends ToiletPaperTest {
         drawerPosition(6);
 
         ViewInteraction textView = onView(
-                allOf(withId(R.id.versionTextView), withText("Toiletpapir\nVersion 1.5"),
+                allOf(withId(R.id.versionTextView), withText(containsString("Toiletpapir\nVersion")),
                         childAtPosition(
                                 allOf(withId(R.id.aboutConstraintLayout),
                                         childAtPosition(
