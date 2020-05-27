@@ -28,6 +28,8 @@ import java.util.Objects;
  */
 public class AboutFragment extends Fragment {
 
+    // TODO Mention https://sourceforge.net/projects/opencsv/files/latest/download
+    // TODO Mention 'com.jjoe64:graphview:4.2.2'
     /**
      * Required empty public constructor
      */
