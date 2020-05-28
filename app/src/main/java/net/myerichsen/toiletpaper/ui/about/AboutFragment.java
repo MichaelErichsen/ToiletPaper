@@ -28,8 +28,6 @@ import java.util.Objects;
  */
 public class AboutFragment extends Fragment {
 
-    // TODO Mention https://sourceforge.net/projects/opencsv/files/latest/download
-    // TODO Mention 'com.jjoe64:graphview:4.2.2'
     /**
      * Required empty public constructor
      */
@@ -86,15 +84,11 @@ public class AboutFragment extends Fragment {
         versionTextView.setTextSize(fontSize);
 
         ((TextView) view.findViewById(R.id.textView)).setTextSize(fontSize);
+        ((TextView) view.findViewById(R.id.aboutIncludedJars)).setTextSize(fontSize);
         ((TextView) view.findViewById(R.id.textView18)).setTextSize(fontSize);
         ((TextView) view.findViewById(R.id.textView2)).setTextSize(fontSize);
         ((TextView) view.findViewById(R.id.textView3)).setTextSize(fontSize);
         ((TextView) view.findViewById(R.id.textView4)).setTextSize(fontSize);
         ((TextView) view.findViewById(R.id.textView5)).setTextSize(fontSize);
-        ((TextView) view.findViewById(R.id.textView6)).setTextSize(fontSize);
-        ((TextView) view.findViewById(R.id.textView7)).setTextSize(fontSize);
-        ((TextView) view.findViewById(R.id.ftsTextView)).setTextSize(fontSize);
-        ((TextView) view.findViewById(R.id.graphTextView)).setTextSize(fontSize);
-
     }
 }

@@ -3,6 +3,7 @@ package net.myerichsen.toiletpaper.ui.settings;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ProgressBar;
 
 import androidx.preference.DropDownPreference;
 import androidx.preference.Preference;
@@ -128,8 +129,10 @@ public class SettingsFragment extends PreferenceFragmentCompat {
             @Override
             public boolean onPreferenceClick(Preference preference) {
                 try {
-                    Snackbar.make(snackView, R.string.please_be_a_patient, Snackbar.LENGTH_LONG).show();
+                    ProgressBar initialLoadProgressBar = requireActivity().findViewById(R.id.initialLoadProgressBar);
+                    initialLoadProgressBar.setVisibility(View.VISIBLE);
                     adapter.doInitialLoad();
+                    initialLoadProgressBar.setVisibility(View.GONE);
                     Snackbar.make(snackView, R.string.initial_load_done, Snackbar.LENGTH_LONG).show();
                     return true;
                 } catch (Exception e) {

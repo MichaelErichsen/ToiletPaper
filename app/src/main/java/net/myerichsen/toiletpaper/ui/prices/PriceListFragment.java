@@ -38,7 +38,7 @@ public class PriceListFragment extends Fragment {
     private String itemNo;
     private String brand;
 
-    private int mColumnCount = 2;
+    private int mColumnCount = 1;
     private OnListFragmentInteractionListener mListener;
 
     /**

@@ -11,7 +11,7 @@
     <string name="action_settings">Indstillinger</string>
     <string name="menu_home">Toiletpapir</string>
 
-    <string name="intro">
+    <string name="about_intro">
         \nDette er en prototype til et supermarkedsprogram, der skal kunne sammenligne produkter.
         \n\nI første omgang behandler det toiletpapir.\n\n
         Indtast de data, du kender, og lad programmet beregne resten.\n\n
@@ -25,6 +25,11 @@
         * Produktliste\n
         * Butiksliste\n
         * Om\n\n
+    </string>
+    <string name="about_included_jars">
+        Dette program anvender\n
+        * Opencsv (Apache 2.0 licens), https://sourceforge.net/projects/opencsv\n
+        * Graphview (Apache 2.0 licens), https://github.com/jjoe64/GraphView
     </string>
     <string name="action_calculate">Beregn</string>
     <string name="action_save">Gem</string>
