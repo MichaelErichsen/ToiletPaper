@@ -41,7 +41,7 @@ public class SupplierTest extends ToiletPaperTest {
         initialLoad();
 
         drawerPosition(5);
-        
+
         ViewInteraction textView5 = onView(
                 allOf(withText("Rema Vejby"),
                         childAtPosition(
@@ -52,7 +52,7 @@ public class SupplierTest extends ToiletPaperTest {
                         isDisplayed()));
         textView5.check(matches(withText("Rema Vejby")));
 
-        help(   "Oversigt over kendte butikker.");
+        help("Oversigt over kendte butikker.");
 
         ViewInteraction tableRow2 = onView(
                 childAtPosition(
@@ -73,7 +73,7 @@ public class SupplierTest extends ToiletPaperTest {
                         isDisplayed()));
         editText.check(matches(withText("REMA 1000")));
 
-        help(  "Detaljer for en butik.");
+        help("Detaljer for en butik.");
 
         ViewInteraction textInputEditText = onView(
                 allOf(withId(R.id.supplierDetailSupplierEditText), withText("Rema Vejby"),

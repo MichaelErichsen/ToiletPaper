@@ -51,7 +51,7 @@ public class HomeTest extends ToiletPaperTest {
     }
 
     private void homeHelp() {
-        help( "Hovedbillede for programmet.");
+        help("Hovedbillede for programmet.");
     }
 
     private void homeItemNoSearchSeveralResults() {

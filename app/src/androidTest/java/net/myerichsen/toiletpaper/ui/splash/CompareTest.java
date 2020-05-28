@@ -28,9 +28,9 @@ import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.anything;
 import static org.hamcrest.Matchers.is;
 
-/**
+/*
  * Copyright (c) 2020. Michael Erichsen.
- * <p>
+ *
  * The program is distributed under the terms of the GNU Affero General Public License v3.0
  */
 
@@ -98,7 +98,7 @@ public class CompareTest extends ToiletPaperTest {
                                 6)));
         appCompatTextView2.perform(scrollTo(), click());
 
-        help(  "Sorteret produktliste.");
+        help("Sorteret produktliste.");
 
         ViewInteraction tableRow = onView(
                 childAtPosition(
@@ -109,7 +109,7 @@ public class CompareTest extends ToiletPaperTest {
                         5));
         tableRow.perform(scrollTo(), click());
 
-        help(    "Produktdetaljer.");
+        help("Produktdetaljer.");
 
         ViewInteraction appCompatImageButton3 = onView(
                 allOf(withContentDescription("Navigate up"),
@@ -162,7 +162,7 @@ public class CompareTest extends ToiletPaperTest {
                                 6)));
         appCompatTextView3.perform(scrollTo(), click());
 
-        help(   "Sorteret produktliste.");
+        help("Sorteret produktliste.");
 
         ViewInteraction textView6 = onView(
                 allOf(withId(R.id.clBrand), withText("Tork Advanced Extra Soft T4"),

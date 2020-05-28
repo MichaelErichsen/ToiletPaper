@@ -40,9 +40,9 @@ public class TPDbAdapter {
             TpDbHelper.KILO_PRICE,
             TpDbHelper.KILO_PRICE_C, TpDbHelper.METER_PRICE, TpDbHelper.METER_PRICE_C,
             TpDbHelper.SHEET_PRICE, TpDbHelper.SHEET_PRICE_C, TpDbHelper.SUPPLIER,
-            TpDbHelper.COMMENTS, TpDbHelper.ITEM_NO, TpDbHelper.BRAND, 
+            TpDbHelper.COMMENTS, TpDbHelper.ITEM_NO, TpDbHelper.BRAND,
             TpDbHelper.TIME_STAMP};
-    private final String[] sdColumns = {TpDbHelper.SUPPLIER, 
+    private final String[] sdColumns = {TpDbHelper.SUPPLIER,
             TpDbHelper.CHAIN, TpDbHelper.TIME_STAMP};
     private final String[] countColumn = {"COUNT(*)"};
 
@@ -152,7 +152,7 @@ public class TPDbAdapter {
 
         SQLiteDatabase db = tpDbHelper.getReadableDatabase();
 
-        Cursor cursor = db.query(TpDbHelper.TABLE_PRODUCT, pdColumns, null, 
+        Cursor cursor = db.query(TpDbHelper.TABLE_PRODUCT, pdColumns, null,
                 null, null, null, TpDbHelper.BRAND);
 
         while (cursor.moveToNext()) {
@@ -168,7 +168,7 @@ public class TPDbAdapter {
     public void doInitialLoad() throws Exception {
         // TODO Remove clear statements
         deleteSupplier("*");
-        deleteProduct(null);
+        deleteProduct();
         tpDbHelper.loadInitialData();
     }
 
@@ -182,7 +182,7 @@ public class TPDbAdapter {
 
         SQLiteDatabase db = tpDbHelper.getReadableDatabase();
 
-        Cursor cursor = db.query(TpDbHelper.TABLE_SUPPLIER, sdColumns, null, 
+        Cursor cursor = db.query(TpDbHelper.TABLE_SUPPLIER, sdColumns, null,
                 null, null, null, TpDbHelper.SUPPLIER);
 
         while (cursor.moveToNext()) {
@@ -308,12 +308,12 @@ public class TPDbAdapter {
             throw new Exception("Ingen produkter slettet med løbenummer " + uid);
     }
 
-    public void deleteProduct(String s) throws Exception {
+    private void deleteProduct() {
         SQLiteDatabase db = tpDbHelper.getWritableDatabase();
         db.delete(TpDbHelper.TABLE_PRODUCT, null, null);
     }
 
-    public void deleteSupplier(String supplier) throws Exception {
+    public void deleteSupplier(String supplier) {
         SQLiteDatabase db = tpDbHelper.getWritableDatabase();
         String[] whereArgs = {supplier};
         if (supplier.equals("*")) {
@@ -329,11 +329,11 @@ public class TPDbAdapter {
         SQLiteDatabase db = tpDbHelper.getReadableDatabase();
 
         if (sortFilter.equals("ALL")) {
-            cursor = db.query(TpDbHelper.TABLE_PRODUCT, pdColumns, null, 
+            cursor = db.query(TpDbHelper.TABLE_PRODUCT, pdColumns, null,
                     null, null, null, sortKey + " DESC");
         } else {
             String[] args = {sortFilter};
-            cursor = db.query(TpDbHelper.TABLE_PRODUCT, pdColumns, "SUPPLIER=?", args, 
+            cursor = db.query(TpDbHelper.TABLE_PRODUCT, pdColumns, "SUPPLIER=?", args,
                     null, null, sortKey + " DESC");
         }
 
@@ -352,7 +352,7 @@ public class TPDbAdapter {
         SQLiteDatabase db = tpDbHelper.getReadableDatabase();
 
         String[] args = {supplier};
-        Cursor cursor = db.query(TpDbHelper.TABLE_SUPPLIER, sdColumns, selection, args, 
+        Cursor cursor = db.query(TpDbHelper.TABLE_SUPPLIER, sdColumns, selection, args,
                 null, null, null);
 
         if (cursor.getCount() > 0) {
@@ -481,7 +481,7 @@ public class TPDbAdapter {
             }
             cursor.close();
 
-            cursor = db.query(TABLE_PRODUCT, adapter.countColumn, null, 
+            cursor = db.query(TABLE_PRODUCT, adapter.countColumn, null,
                     null, null, null, null, null);
             if (cursor.getCount() > 0) {
                 if (cursor.moveToNext()) {

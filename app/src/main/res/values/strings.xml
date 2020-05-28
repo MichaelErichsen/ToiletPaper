@@ -25,6 +25,9 @@
         * Produktliste\n
         * Butiksliste\n
         * Om\n\n
+        Programmet bruger adgang til kameraet for at scanne streg- og QR-koder.\n
+        Det bruger adgang til telefonens filer for at indlæse præfabrikerede data om butikker og
+        produkter.\n\n
     </string>
     <string name="about_included_jars">
         Dette program anvender\n

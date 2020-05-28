@@ -41,7 +41,7 @@ public class ProductTest extends ToiletPaperTest {
 
         drawerPosition(4);
 
-        help( "Oversigt over kendte produkter.");
+        help("Oversigt over kendte produkter.");
 
         ViewInteraction textView2 = onView(
                 allOf(withText("First Price Toiletpapir 2-lags"),
@@ -62,7 +62,7 @@ public class ProductTest extends ToiletPaperTest {
                         1));
         tableRow.perform(scrollTo(), click());
 
-        help(     "Produktdetaljer.");
+        help("Produktdetaljer.");
 
         ViewInteraction textView4 = onView(
                 allOf(withText("7311041080306"),
