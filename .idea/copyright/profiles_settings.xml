@@ -3,8 +3,5 @@
     <module2copyright>
       <element module="All" copyright="Michael" />
     </module2copyright>
-    <LanguageOptions name="JAVA">
-      <option name="fileLocation" value="3" />
-    </LanguageOptions>
   </settings>
 </component>

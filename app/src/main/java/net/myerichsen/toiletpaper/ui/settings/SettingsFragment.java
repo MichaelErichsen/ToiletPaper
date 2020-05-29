@@ -1,3 +1,9 @@
+/*
+ * Copyright (c) 2020. Michael Erichsen.
+ *
+ * The program is distributed under the terms of the GNU Affero General Public License v3.0
+ */
+
 package net.myerichsen.toiletpaper.ui.settings;
 
 import android.content.SharedPreferences;
@@ -21,12 +27,6 @@ import net.myerichsen.toiletpaper.ui.suppliers.SupplierModel;
 import java.lang.ref.WeakReference;
 import java.util.List;
 import java.util.Objects;
-
-/*
- * Copyright (c) 2020. Michael Erichsen.
- *
- * The program is distributed under the terms of the GNU Affero General Public License v3.0
- */
 
 /**
  * Settings screen
@@ -150,7 +150,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
         private final WeakReference<SettingsActivity> activityReference;
         private final TPDbAdapter adapter;
         private ProgressBar initialLoadProgressBar;
-        private View snackView;
+        private final View snackView;
 
         // only retain a weak reference to the activity
         InitLoadTask(SettingsActivity context) {

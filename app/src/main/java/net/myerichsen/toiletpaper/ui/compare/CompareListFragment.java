@@ -1,3 +1,9 @@
+/*
+ * Copyright (c) 2020. Michael Erichsen.
+ *
+ * The program is distributed under the terms of the GNU Affero General Public License v3.0
+ */
+
 package net.myerichsen.toiletpaper.ui.compare;
 
 import android.app.Activity;
@@ -20,12 +26,6 @@ import net.myerichsen.toiletpaper.ui.compare.CompareModel.CompareItem;
 
 import java.util.Objects;
 
-/*
- * Copyright (c) 2020. Michael Erichsen.
- *
- * The program is distributed under the terms of the GNU Affero General Public License v3.0
- */
-
 /**
  * A fragment representing a list of Items.
  * <p/>
@@ -37,6 +37,7 @@ public class CompareListFragment extends Fragment {
     private String sortFilter;
     private String sortKey;
     private OnListFragmentInteractionListener mListener;
+    private int mColumnCount;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -68,7 +69,7 @@ public class CompareListFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
         if (getArguments() != null) {
-            int mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
+            mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
             sortFilter = getArguments().getString("sortFilter");
             sortKey = getArguments().getString("sortKey");
         }
@@ -99,8 +100,6 @@ public class CompareListFragment extends Fragment {
             RecyclerView recyclerView = (RecyclerView) view;
             Context context = view.getContext();
 
-            int mColumnCount = 1;
-            //noinspection ConstantConditions
             if (mColumnCount <= 1) {
                 recyclerView.setLayoutManager(new LinearLayoutManager(context));
             } else {
