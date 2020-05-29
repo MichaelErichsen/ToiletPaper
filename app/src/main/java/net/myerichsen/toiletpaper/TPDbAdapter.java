@@ -166,9 +166,8 @@ public class TPDbAdapter {
      * Do an initial load
      */
     public void doInitialLoad() throws Exception {
-        // TODO Remove clear statements
-        deleteSupplier("*");
-        deleteProduct();
+//        deleteSupplier("*");
+//        deleteProduct();
         tpDbHelper.loadInitialData();
     }
 
