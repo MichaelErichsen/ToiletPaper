@@ -1,3 +1,9 @@
+/*
+ * Copyright (c) 2020. Michael Erichsen.
+ *
+ * The program is distributed under the terms of the GNU Affero General Public License v3.0
+ */
+
 package net.myerichsen.toiletpaper.ui.compare;
 
 import android.content.Context;
@@ -29,18 +35,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-/*
- * Copyright (c) 2020. Michael Erichsen.
- *
- * The program is distributed under the terms of the GNU Affero General Public License v3.0
- */
-
 /**
  * Screen to select sort filter and sort key for comparison of products
  */
 public class CompareFragment extends Fragment {
+    public static final String ALL = "ALLE";
     private String sortKey = "KILO_PRICE";
-    private String sortFilter = "ALL";
+    private String sortFilter = ALL;
     private SharedPreferences preferences;
 
     @Override
@@ -88,7 +89,7 @@ public class CompareFragment extends Fragment {
 
         List<SupplierModel> lsm = new ArrayList<>();
         ArrayList<String> supplierArrayList = new ArrayList<>();
-        supplierArrayList.add("ALL");
+        supplierArrayList.add(ALL);
 
         boolean goOn = true;
 

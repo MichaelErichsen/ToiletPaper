@@ -1,3 +1,9 @@
+/*
+ * Copyright (c) 2020. Michael Erichsen.
+ *
+ * The program is distributed under the terms of the GNU Affero General Public License v3.0
+ */
+
 package net.myerichsen.toiletpaper;
 
 import android.content.ContentValues;
@@ -8,6 +14,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import com.opencsv.CSVReader;
 
+import net.myerichsen.toiletpaper.ui.compare.CompareFragment;
 import net.myerichsen.toiletpaper.ui.products.ProductModel;
 import net.myerichsen.toiletpaper.ui.suppliers.SupplierModel;
 
@@ -18,12 +25,6 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
-
-/*
- * Copyright (c) 2020. Michael Erichsen.
- *
- * The program is distributed under the terms of the GNU Affero General Public License v3.0
- */
 
 /**
  * Database helper for product and supplier tables
@@ -327,7 +328,7 @@ public class TPDbAdapter {
         List<ProductModel> lpm = new ArrayList<>();
         SQLiteDatabase db = tpDbHelper.getReadableDatabase();
 
-        if (sortFilter.equals("ALL")) {
+        if (sortFilter.equals(CompareFragment.ALL)) {
             cursor = db.query(TpDbHelper.TABLE_PRODUCT, pdColumns, null,
                     null, null, null, sortKey + " DESC");
         } else {
@@ -440,6 +441,7 @@ public class TPDbAdapter {
 
         private static final String DROP_SUPPLIER_TABLE = "DROP TABLE IF EXISTS " + TABLE_SUPPLIER;
         private final Context context;
+        private static final long timeout = 0;
 
         TpDbHelper(Context context) {
             super(context, DATABASE_NAME, null, DATABASE_Version);
@@ -539,7 +541,7 @@ public class TPDbAdapter {
                             data[25].trim(),
                             data[26]);
                     adapter.insertData(pm);
-                    TimeUnit.SECONDS.sleep(1);
+                    TimeUnit.SECONDS.sleep(timeout);
                 }
 
             } catch (IOException | InterruptedException e) {

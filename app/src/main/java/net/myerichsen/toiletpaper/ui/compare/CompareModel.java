@@ -1,3 +1,9 @@
+/*
+ * Copyright (c) 2020. Michael Erichsen.
+ *
+ * The program is distributed under the terms of the GNU Affero General Public License v3.0
+ */
+
 package net.myerichsen.toiletpaper.ui.compare;
 
 import android.content.Context;
@@ -11,12 +17,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static java.math.RoundingMode.HALF_UP;
-
-/*
- * Copyright (c) 2020. Michael Erichsen.
- *
- * The program is distributed under the terms of the GNU Affero General Public License v3.0
- */
 
 /**
  * Helper class for providing content for user interfaces created by
@@ -38,7 +38,7 @@ public class CompareModel {
         TPDbAdapter adapter = new TPDbAdapter(context);
 
         List<ProductModel> lpm;
-        if ((sortFilter.equals("ALL"))) {
+        if ((sortFilter.equals(CompareFragment.ALL))) {
             lpm = adapter.getProductModels(sortKey);
         } else {
             lpm = adapter.getProductModels("SUPPLIER=?", sortFilter, sortKey);

@@ -24,7 +24,6 @@ import net.myerichsen.toiletpaper.R;
 import net.myerichsen.toiletpaper.TPDbAdapter;
 import net.myerichsen.toiletpaper.ui.suppliers.SupplierModel;
 
-import java.lang.ref.WeakReference;
 import java.util.List;
 import java.util.Objects;
 
@@ -135,7 +134,6 @@ public class SettingsFragment extends PreferenceFragmentCompat {
                 try {
                     InitLoadTask initLoadTask = new InitLoadTask((SettingsActivity) getActivity());
                     initLoadTask.execute();
-//                    Snackbar.make(snackView, R.string.initial_load_done, Snackbar.LENGTH_LONG).show();
                     return true;
                 } catch (Exception e) {
                     Snackbar.make(snackView, Objects.requireNonNull(e.getMessage()), Snackbar.LENGTH_LONG).show();
@@ -146,15 +144,15 @@ public class SettingsFragment extends PreferenceFragmentCompat {
         };
     }
 
+    /**
+     * Asynchronous task to do the initial load
+     */
     private static class InitLoadTask extends AsyncTask<Void, Void, String> {
-        private final WeakReference<SettingsActivity> activityReference;
         private final TPDbAdapter adapter;
         private ProgressBar initialLoadProgressBar;
         private final View snackView;
 
-        // only retain a weak reference to the activity
         InitLoadTask(SettingsActivity context) {
-            activityReference = new WeakReference<>(context);
             adapter = new TPDbAdapter(context);
             initialLoadProgressBar = context.findViewById(R.id.initialLoadProgressBar);
             snackView = context.findViewById(android.R.id.content);
@@ -198,7 +196,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
             try {
                 adapter.doInitialLoad();
             } catch (Exception e) {
-                e.printStackTrace();
+                Snackbar.make(snackView, e.getMessage(), Snackbar.LENGTH_LONG).show();
             }
             return null;
         }
@@ -222,9 +220,6 @@ public class SettingsFragment extends PreferenceFragmentCompat {
             initialLoadProgressBar.setVisibility(View.GONE);
             initialLoadProgressBar = null;
             Snackbar.make(snackView, R.string.initial_load_done, Snackbar.LENGTH_LONG).show();
-            // get a reference to the activity if it is still there
-//            SettingsActivity activity = activityReference.get();
-//            if (activity == null || activity.isFinishing()) return;
         }
     }
 }

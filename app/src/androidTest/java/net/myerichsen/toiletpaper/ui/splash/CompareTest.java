@@ -1,3 +1,9 @@
+/*
+ * Copyright (c) 2020. Michael Erichsen.
+ *
+ * The program is distributed under the terms of the GNU Affero General Public License v3.0
+ */
+
 package net.myerichsen.toiletpaper.ui.splash;
 
 import android.view.View;
@@ -27,12 +33,6 @@ import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.anything;
 import static org.hamcrest.Matchers.is;
-
-/*
- * Copyright (c) 2020. Michael Erichsen.
- *
- * The program is distributed under the terms of the GNU Affero General Public License v3.0
- */
 
 @SuppressWarnings("deprecation")
 @LargeTest
@@ -205,14 +205,14 @@ public class CompareTest extends ToiletPaperTest {
         appCompatTextView4.perform(scrollTo(), click());
 
         ViewInteraction textView7 = onView(
-                allOf(withId(R.id.clKiloPrice), withText("10.93"),
+                allOf(withId(R.id.clItemNo), withText("70225"),
                         childAtPosition(
                                 childAtPosition(
                                         IsInstanceOf.<View>instanceOf(android.widget.LinearLayout.class),
                                         1),
                                 0),
                         isDisplayed()));
-        textView7.check(matches(withText("10.93")));
+        textView7.check(matches(withText("70225")));
 
         ViewInteraction recyclerView2 = onView(
                 allOf(withId(R.id.list),
@@ -222,14 +222,14 @@ public class CompareTest extends ToiletPaperTest {
         recyclerView2.perform(actionOnItemAtPosition(1, click()));
 
         ViewInteraction textView8 = onView(
-                allOf(withText("5705830002242"),
+                allOf(withText("70225"),
                         childAtPosition(
                                 childAtPosition(
                                         IsInstanceOf.<View>instanceOf(android.widget.TableRow.class),
                                         1),
                                 0),
                         isDisplayed()));
-        textView8.check(matches(withText("5705830002242")));
+        textView8.check(matches(withText("70225")));
 
         ViewInteraction appCompatImageButton6 = onView(
                 allOf(withContentDescription("Navigate up"),
