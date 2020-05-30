@@ -24,7 +24,6 @@ import static androidx.test.espresso.action.ViewActions.scrollTo;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withClassName;
-import static androidx.test.espresso.matcher.ViewMatchers.withContentDescription;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.allOf;
@@ -34,7 +33,6 @@ import static org.hamcrest.Matchers.is;
 @LargeTest
 @RunWith(AndroidJUnit4.class)
 public class ProductTest extends ToiletPaperTest {
-
     @Test
     public void productTest() {
         initialLoad();
@@ -43,15 +41,15 @@ public class ProductTest extends ToiletPaperTest {
 
         help("Oversigt over kendte produkter.");
 
-        ViewInteraction textView2 = onView(
-                allOf(withText("First Price Toiletpapir 2-lags"),
+        ViewInteraction textView = onView(
+                allOf(withText("Budget"),
                         childAtPosition(
                                 childAtPosition(
                                         IsInstanceOf.<View>instanceOf(android.widget.TableRow.class),
                                         0),
                                 0),
                         isDisplayed()));
-        textView2.check(matches(withText("First Price Toiletpapir 2-lags")));
+        textView.check(matches(withText("Budget")));
 
         ViewInteraction tableRow = onView(
                 childAtPosition(
@@ -64,26 +62,14 @@ public class ProductTest extends ToiletPaperTest {
 
         help("Produktdetaljer.");
 
-        ViewInteraction textView4 = onView(
-                allOf(withText("7311041080306"),
+        ViewInteraction textView3 = onView(
+                allOf(withText("70225"),
                         childAtPosition(
                                 childAtPosition(
                                         IsInstanceOf.<View>instanceOf(android.widget.TableRow.class),
                                         1),
                                 0),
                         isDisplayed()));
-        textView4.check(matches(withText("7311041080306")));
-
-        ViewInteraction appCompatImageButton3 = onView(
-                allOf(withContentDescription("Navigate up"),
-                        childAtPosition(
-                                allOf(withId(R.id.toolbar),
-                                        childAtPosition(
-                                                withClassName(is("com.google.android.material.appbar.AppBarLayout")),
-                                                0)),
-                                1),
-                        isDisplayed()));
-        appCompatImageButton3.perform(click());
+        textView3.check(matches(withText("70225")));
     }
-
 }
