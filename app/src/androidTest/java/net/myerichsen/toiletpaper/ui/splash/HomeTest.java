@@ -1,3 +1,9 @@
+/*
+ * Copyright (c) 2020. Michael Erichsen.
+ *
+ * The program is distributed under the terms of the GNU Affero General Public License v3.0
+ */
+
 package net.myerichsen.toiletpaper.ui.splash;
 
 import android.view.View;
@@ -26,12 +32,6 @@ import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.is;
-
-/*
- * Copyright (c) 2020. Michael Erichsen.
- *
- * The program is distributed under the terms of the GNU Affero General Public License v3.0
- */
 
 /**
  * Unit test of home screen
@@ -82,14 +82,14 @@ public class HomeTest extends ToiletPaperTest {
         recyclerView2.perform(actionOnItemAtPosition(2, click()));
 
         ViewInteraction editText = onView(
-                allOf(withId(R.id.itemNoEditText), withText("WW-101012"),
+                allOf(withId(R.id.itemNoEditText), withText("WW-166808"),
                         childAtPosition(
                                 childAtPosition(
                                         withId(R.id.pItemNoTextInputLayout),
                                         0),
                                 0),
                         isDisplayed()));
-        editText.check(matches(withText("WW-101012")));
+        editText.check(matches(withText("WW-166808")));
     }
 
     private void homeItemNoSearchSingleResult() {
@@ -101,7 +101,7 @@ public class HomeTest extends ToiletPaperTest {
                                         0),
                                 0),
                         isDisplayed()));
-        textInputEditText.perform(replaceText("7"), closeSoftKeyboard());
+        textInputEditText.perform(replaceText("7311041080"), closeSoftKeyboard());
 
         ViewInteraction appCompatImageButton2 = onView(
                 allOf(withId(R.id.searchItemNoBtn), withContentDescription("Søg"),
@@ -144,14 +144,14 @@ public class HomeTest extends ToiletPaperTest {
         appCompatImageButton3.perform(scrollTo(), click());
 
         ViewInteraction editText = onView(
-                allOf(withId(R.id.brandEditText), withText("Irma Tusindfryd Toiletpapir"),
+                allOf(withId(R.id.brandEditText), withText("Irmas Blødt Toiletpapir"),
                         childAtPosition(
                                 childAtPosition(
                                         withId(R.id.brandTextInputLayout),
                                         0),
                                 0),
                         isDisplayed()));
-        editText.check(matches(withText("Irma Tusindfryd Toiletpapir")));
+        editText.check(matches(withText("Irmas Blødt Toiletpapir")));
 
         ViewInteraction textInputEditText8 = onView(
                 allOf(withId(R.id.brandEditText),
@@ -173,14 +173,14 @@ public class HomeTest extends ToiletPaperTest {
         appCompatImageButton6.perform(scrollTo(), click());
 
         ViewInteraction textView = onView(
-                allOf(withId(R.id.fbSupplier), withText("nemlig.com"),
+                allOf(withId(R.id.fbSupplier), withText("Bilka"),
                         childAtPosition(
                                 childAtPosition(
                                         IsInstanceOf.<View>instanceOf(android.widget.LinearLayout.class),
                                         1),
                                 0),
                         isDisplayed()));
-        textView.check(matches(withText("nemlig.com")));
+        textView.check(matches(withText("Bilka")));
 
         ViewInteraction recyclerView2 = onView(
                 allOf(withId(R.id.brandList),
@@ -190,14 +190,14 @@ public class HomeTest extends ToiletPaperTest {
         recyclerView2.perform(actionOnItemAtPosition(0, click()));
 
         ViewInteraction editText2 = onView(
-                allOf(withId(R.id.brandEditText), withText("Lotus Comfort"),
+                allOf(withId(R.id.brandEditText), withText("Lambi Classic 12"),
                         childAtPosition(
                                 childAtPosition(
                                         withId(R.id.brandTextInputLayout),
                                         0),
                                 0),
                         isDisplayed()));
-        editText2.check(matches(withText("Lotus Comfort")));
+        editText2.check(matches(withText("Lambi Classic 12")));
 
         ViewInteraction appCompatImageButton7 = onView(
                 allOf(withId(R.id.calculateBtn), withContentDescription("Beregn"),
@@ -210,14 +210,14 @@ public class HomeTest extends ToiletPaperTest {
         appCompatImageButton7.perform(scrollTo(), click());
 
         ViewInteraction editText3 = onView(
-                allOf(withId(R.id.sheetPriceEditText), withText("0.017741935"),
+                allOf(withId(R.id.kiloPriceEditText), withText("34.44"),
                         childAtPosition(
                                 childAtPosition(
                                         withId(R.id.sheetPriceTextInputLayout),
                                         0),
                                 0),
                         isDisplayed()));
-        editText3.check(matches(withText("0.017741935")));
+        editText3.check(matches(withText("34.44")));
 
         ViewInteraction appCompatImageButton8 = onView(
                 allOf(withId(R.id.saveBtn), withContentDescription("Gem"),
