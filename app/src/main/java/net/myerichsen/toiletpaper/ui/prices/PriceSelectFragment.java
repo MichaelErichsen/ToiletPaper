@@ -1,3 +1,9 @@
+/*
+ * Copyright (c) 2020. Michael Erichsen.
+ *
+ * The program is distributed under the terms of the GNU Affero General Public License v3.0
+ */
+
 package net.myerichsen.toiletpaper.ui.prices;
 
 import android.app.Activity;
@@ -29,17 +35,12 @@ import java.util.Objects;
 import static net.myerichsen.toiletpaper.ui.home.HomeFragment.BRAND;
 import static net.myerichsen.toiletpaper.ui.home.HomeFragment.ITEM_NO;
 
-/*
- * Copyright (c) 2020. Michael Erichsen.
- *
- * The program is distributed under the terms of the GNU Affero General Public License v3.0
- */
-
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link PriceSelectFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
+@SuppressWarnings("unused")
 public class PriceSelectFragment extends Fragment {
     private TPDbAdapter adapter;
     private Activity activity;
@@ -68,6 +69,7 @@ public class PriceSelectFragment extends Fragment {
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      */
+    @SuppressWarnings("unused")
     public static PriceSelectFragment newInstance() {
         PriceSelectFragment fragment = new PriceSelectFragment();
         Bundle args = new Bundle();

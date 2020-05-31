@@ -29,10 +29,18 @@
         Det bruger adgang til telefonens filer for at indlæse præfabrikerede data om butikker og
         produkter.\n\n
     </string>
-    <string name="about_included_jars">
+    <string name="about_included_jars1">
         Dette program anvender\n
-        * Opencsv (Apache 2.0 licens), https://sourceforge.net/projects/opencsv\n
-        * Graphview (Apache 2.0 licens), https://github.com/jjoe64/GraphView
+        * Opencsv (Apache 2.0 licens)
+    </string>
+    <string name="about_included_jars2">
+        https://sourceforge.net/projects/opencsv
+    </string>
+    <string name="about_included_jars3">
+        * Graphview (Apache 2.0 licens)
+    </string>
+    <string name="about_included_jars4">
+        https://github.com/jjoe64/GraphView
     </string>
     <string name="action_calculate">Beregn</string>
     <string name="action_save">Gem</string>

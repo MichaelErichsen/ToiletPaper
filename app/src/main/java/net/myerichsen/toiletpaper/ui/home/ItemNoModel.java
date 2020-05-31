@@ -1,3 +1,9 @@
+/*
+ * Copyright (c) 2020. Michael Erichsen.
+ *
+ * The program is distributed under the terms of the GNU Affero General Public License v3.0
+ */
+
 package net.myerichsen.toiletpaper.ui.home;
 
 import android.content.Context;
@@ -7,12 +13,6 @@ import net.myerichsen.toiletpaper.ui.products.ProductModel;
 
 import java.util.ArrayList;
 import java.util.List;
-
-/*
- * Copyright (c) 2020. Michael Erichsen.
- *
- * The program is distributed under the terms of the GNU Affero General Public License v3.0
- */
 
 /**
  * Helper class for providing sample content for user interfaces created by
@@ -47,7 +47,7 @@ public class ItemNoModel {
         for (ProductModel pm : lpm) {
             addItem(new ItemNoItem(pm.getItemNo(),
                     pm.getBrand(), pm.getSupplier(),
-                    pm.getTimestamp(), pm.getUid()));
+                    pm.getTimestamp()));
         }
     }
 
@@ -63,14 +63,14 @@ public class ItemNoModel {
         public final String brand;
         public final String supplier;
         public final String timeStamp;
-        public final int uid;
+        // --Commented out by Inspection (31-05-2020 12:05):public final int uid;
 
-        ItemNoItem(String itemNo, String brand, String supplier, String timeStamp, int uid) {
+        ItemNoItem(String itemNo, String brand, String supplier, String timeStamp) {
             this.itemNo = itemNo;
             this.brand = brand;
             this.supplier = supplier;
             this.timeStamp = timeStamp;
-            this.uid = uid;
+//            this.uid = uid;
         }
 
         @Override

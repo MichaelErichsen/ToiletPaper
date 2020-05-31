@@ -49,15 +49,50 @@
             app:layout_constraintTop_toBottomOf="@id/textView18" />
 
         <TextView
-            android:id="@+id/aboutIncludedJars"
+            android:id="@+id/aboutIncludedJars1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
-            android:text="@string/about_included_jars"
+            android:text="@string/about_included_jars1"
             android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/divider3" />
+
+        <TextView
+            android:id="@+id/aboutIncludedJars2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:autoLink="web"
+            android:text="@string/about_included_jars2"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/aboutIncludedJars1" />
+
+        <TextView
+            android:id="@+id/aboutIncludedJars3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="@string/about_included_jars3"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/aboutIncludedJars2" />
+
+        <TextView
+            android:id="@+id/aboutIncludedJars4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:autoLink="web"
+            android:text="@string/about_included_jars4"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/aboutIncludedJars3" />
 
         <View
             android:id="@+id/divider4"
@@ -67,7 +102,7 @@
             android:background="?android:attr/listDivider"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/aboutIncludedJars" />
+            app:layout_constraintTop_toBottomOf="@id/aboutIncludedJars4" />
 
         <TextView
             android:id="@+id/textView"

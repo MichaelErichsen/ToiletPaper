@@ -308,10 +308,12 @@ public class TPDbAdapter {
             throw new Exception("Ingen produkter slettet med løbenummer " + uid);
     }
 
-    private void deleteProduct() {
-        SQLiteDatabase db = tpDbHelper.getWritableDatabase();
-        db.delete(TpDbHelper.TABLE_PRODUCT, null, null);
-    }
+// --Commented out by Inspection START (31-05-2020 12:07):
+//    private void deleteProduct() {
+//        SQLiteDatabase db = tpDbHelper.getWritableDatabase();
+//        db.delete(TpDbHelper.TABLE_PRODUCT, null, null);
+//    }
+// --Commented out by Inspection STOP (31-05-2020 12:07)
 
     public void deleteSupplier(String supplier) {
         SQLiteDatabase db = tpDbHelper.getWritableDatabase();
@@ -441,7 +443,7 @@ public class TPDbAdapter {
 
         private static final String DROP_SUPPLIER_TABLE = "DROP TABLE IF EXISTS " + TABLE_SUPPLIER;
         private final Context context;
-        private static final long timeout = 0;
+        private static final long timeout = 1;
 
         TpDbHelper(Context context) {
             super(context, DATABASE_NAME, null, DATABASE_Version);
@@ -564,7 +566,7 @@ public class TPDbAdapter {
                             data[0].trim(),
                             data[1].trim());
                     adapter.insertData(sm);
-                    TimeUnit.SECONDS.sleep(1);
+                    TimeUnit.SECONDS.sleep(timeout);
                 }
 
             } catch (IOException | InterruptedException e) {

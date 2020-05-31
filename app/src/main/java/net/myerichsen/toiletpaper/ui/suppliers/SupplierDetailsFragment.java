@@ -1,3 +1,9 @@
+/*
+ * Copyright (c) 2020. Michael Erichsen.
+ *
+ * The program is distributed under the terms of the GNU Affero General Public License v3.0
+ */
+
 package net.myerichsen.toiletpaper.ui.suppliers;
 
 import android.content.Context;
@@ -22,12 +28,6 @@ import net.myerichsen.toiletpaper.TPDbAdapter;
 
 import java.util.Objects;
 
-/*
- * Copyright (c) 2020. Michael Erichsen.
- *
- * The program is distributed under the terms of the GNU Affero General Public License v3.0
- */
-
 /**
  * Display and maintain supplier details
  */
@@ -49,6 +49,7 @@ public class SupplierDetailsFragment extends Fragment {
      * Use this factory method to create a new instance of
      * this fragment
      */
+    @SuppressWarnings("unused")
     public static SupplierDetailsFragment newInstance() {
         return new SupplierDetailsFragment();
     }

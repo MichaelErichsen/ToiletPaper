@@ -150,7 +150,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
     private static class InitLoadTask extends AsyncTask<Void, Void, String> {
         private final TPDbAdapter adapter;
         private ProgressBar initialLoadProgressBar;
-        private final View snackView;
+        private View snackView;
 
         InitLoadTask(SettingsActivity context) {
             adapter = new TPDbAdapter(context);
@@ -196,7 +196,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
             try {
                 adapter.doInitialLoad();
             } catch (Exception e) {
-                Snackbar.make(snackView, e.getMessage(), Snackbar.LENGTH_LONG).show();
+                Snackbar.make(snackView, Objects.requireNonNull(e.getMessage()), Snackbar.LENGTH_LONG).show();
             }
             return null;
         }
@@ -220,6 +220,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
             initialLoadProgressBar.setVisibility(View.GONE);
             initialLoadProgressBar = null;
             Snackbar.make(snackView, R.string.initial_load_done, Snackbar.LENGTH_LONG).show();
+            snackView = null;
         }
     }
 }

@@ -1,3 +1,9 @@
+/*
+ * Copyright (c) 2020. Michael Erichsen.
+ *
+ * The program is distributed under the terms of the GNU Affero General Public License v3.0
+ */
+
 package net.myerichsen.toiletpaper.ui.home;
 
 import android.app.Activity;
@@ -23,12 +29,6 @@ import java.util.Objects;
 
 import static net.myerichsen.toiletpaper.ui.home.HomeFragment.ITEM_NO;
 
-/*
- * Copyright (c) 2020. Michael Erichsen.
- *
- * The program is distributed under the terms of the GNU Affero General Public License v3.0
- */
-
 /**
  * A fragment representing a list of Items.
  * <p/>
@@ -53,6 +53,7 @@ public class ItemNoListFragment extends Fragment {
      * Use this factory method to create a new instance of
      * this fragment
      */
+    @SuppressWarnings("unused")
     public static ItemNoListFragment newInstance(int columnCount) {
         ItemNoListFragment fragment = new ItemNoListFragment();
         Bundle args = new Bundle();

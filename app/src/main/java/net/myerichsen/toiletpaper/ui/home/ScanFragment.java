@@ -1,3 +1,9 @@
+/*
+ * Copyright (c) 2020. Michael Erichsen.
+ *
+ * The program is distributed under the terms of the GNU Affero General Public License v3.0
+ */
+
 package net.myerichsen.toiletpaper.ui.home;
 
 import android.Manifest;
@@ -30,12 +36,6 @@ import java.io.IOException;
 
 import static net.myerichsen.toiletpaper.ui.home.HomeFragment.ITEM_NO;
 
-/*
- * Copyright (c) 2020. Michael Erichsen.
- *
- * The program is distributed under the terms of the GNU Affero General Public License v3.0
- */
-
 public class ScanFragment extends Fragment {
     private static final int REQUEST_CAMERA_PERMISSION = 201;
     private Context context;
@@ -57,6 +57,7 @@ public class ScanFragment extends Fragment {
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      */
+    @SuppressWarnings("unused")
     public static ScanFragment newInstance() {
         return new ScanFragment();
     }

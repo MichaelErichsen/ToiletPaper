@@ -1,3 +1,9 @@
+/*
+ * Copyright (c) 2020. Michael Erichsen.
+ *
+ * The program is distributed under the terms of the GNU Affero General Public License v3.0
+ */
+
 package net.myerichsen.toiletpaper;
 
 import android.annotation.SuppressLint;
@@ -12,7 +18,6 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -46,12 +51,6 @@ import static androidx.navigation.Navigation.findNavController;
 import static net.myerichsen.toiletpaper.ui.home.HomeFragment.BRAND;
 import static net.myerichsen.toiletpaper.ui.home.HomeFragment.ITEM_NO;
 
-/*
- * Copyright (c) 2020. Michael Erichsen.
- *
- * The program is distributed under the terms of the GNU Affero General Public License v3.0
- */
-
 public class MainActivity extends AppCompatActivity implements PriceListFragment.OnListFragmentInteractionListener,
         ItemNoListFragment.OnListFragmentInteractionListener, BrandListFragment.OnListFragmentInteractionListener,
         CompareListFragment.OnListFragmentInteractionListener {
@@ -61,8 +60,8 @@ public class MainActivity extends AppCompatActivity implements PriceListFragment
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+//        Toolbar toolbar = findViewById(R.id.toolbar);
+//        setSupportActionBar(toolbar);
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
 

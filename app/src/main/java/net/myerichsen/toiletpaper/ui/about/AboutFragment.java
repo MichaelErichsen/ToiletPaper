@@ -1,3 +1,9 @@
+/*
+ * Copyright (c) 2020. Michael Erichsen.
+ *
+ * The program is distributed under the terms of the GNU Affero General Public License v3.0
+ */
+
 package net.myerichsen.toiletpaper.ui.about;
 
 import android.content.Context;
@@ -16,12 +22,6 @@ import net.myerichsen.toiletpaper.BuildConfig;
 import net.myerichsen.toiletpaper.R;
 
 import java.util.Objects;
-
-/*
- * Copyright (c) 2020. Michael Erichsen.
- *
- * The program is distributed under the terms of the GNU Affero General Public License v3.0
- */
 
 /**
  * Display static information about the program
@@ -84,7 +84,10 @@ public class AboutFragment extends Fragment {
         versionTextView.setTextSize(fontSize);
 
         ((TextView) view.findViewById(R.id.textView)).setTextSize(fontSize);
-        ((TextView) view.findViewById(R.id.aboutIncludedJars)).setTextSize(fontSize);
+        ((TextView) view.findViewById(R.id.aboutIncludedJars1)).setTextSize(fontSize);
+        ((TextView) view.findViewById(R.id.aboutIncludedJars2)).setTextSize(fontSize);
+        ((TextView) view.findViewById(R.id.aboutIncludedJars3)).setTextSize(fontSize);
+        ((TextView) view.findViewById(R.id.aboutIncludedJars4)).setTextSize(fontSize);
         ((TextView) view.findViewById(R.id.textView18)).setTextSize(fontSize);
         ((TextView) view.findViewById(R.id.textView2)).setTextSize(fontSize);
         ((TextView) view.findViewById(R.id.textView3)).setTextSize(fontSize);

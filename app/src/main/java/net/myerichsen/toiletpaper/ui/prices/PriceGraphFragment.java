@@ -1,3 +1,9 @@
+/*
+ * Copyright (c) 2020. Michael Erichsen.
+ *
+ * The program is distributed under the terms of the GNU Affero General Public License v3.0
+ */
+
 package net.myerichsen.toiletpaper.ui.prices;
 
 import android.app.Activity;
@@ -29,15 +35,10 @@ import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
-/*
- * Copyright (c) 2020. Michael Erichsen.
- *
- * The program is distributed under the terms of the GNU Affero General Public License v3.0
- */
-
 /**
  * Display a graph with a line for each price at viewable scales along a time line
  */
+@SuppressWarnings("unused")
 public class PriceGraphFragment extends Fragment {
     private String itemNo;
     private String brand;
@@ -57,6 +58,7 @@ public class PriceGraphFragment extends Fragment {
      * @param brand  Brand
      * @return A new instance of the class
      */
+    @SuppressWarnings("unused")
     public static PriceGraphFragment newInstance(String itemNo, String brand) {
         PriceGraphFragment fragment = new PriceGraphFragment();
         Bundle args = new Bundle();
