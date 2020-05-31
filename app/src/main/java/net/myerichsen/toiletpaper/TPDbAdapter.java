@@ -13,6 +13,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import com.opencsv.CSVReader;
+import com.opencsv.exceptions.CsvException;
 
 import net.myerichsen.toiletpaper.ui.compare.CompareFragment;
 import net.myerichsen.toiletpaper.ui.products.ProductModel;
@@ -546,7 +547,7 @@ public class TPDbAdapter {
                     TimeUnit.SECONDS.sleep(timeout);
                 }
 
-            } catch (IOException | InterruptedException e) {
+            } catch (IOException | InterruptedException | CsvException e) {
                 e.printStackTrace();
             }
         }
@@ -569,7 +570,7 @@ public class TPDbAdapter {
                     TimeUnit.SECONDS.sleep(timeout);
                 }
 
-            } catch (IOException | InterruptedException e) {
+            } catch (IOException | InterruptedException | CsvException e) {
                 e.printStackTrace();
             }
         }
