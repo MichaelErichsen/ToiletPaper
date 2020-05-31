@@ -114,7 +114,7 @@ public class PricesTest extends ToiletPaperTest {
         ViewInteraction appCompatImageButton6 = onView(
                 allOf(withContentDescription("Navigate up"),
                         childAtPosition(
-                                allOf(withId(R.id.toolbar),
+                                allOf(withId(R.id.action_bar),
                                         childAtPosition(
                                                 withClassName(is("com.google.android.material.appbar.AppBarLayout")),
                                                 0)),
@@ -125,7 +125,7 @@ public class PricesTest extends ToiletPaperTest {
         ViewInteraction appCompatImageButton7 = onView(
                 allOf(withContentDescription("Navigate up"),
                         childAtPosition(
-                                allOf(withId(R.id.toolbar),
+                                allOf(withId(R.id.action_bar),
                                         childAtPosition(
                                                 withClassName(is("com.google.android.material.appbar.AppBarLayout")),
                                                 0)),

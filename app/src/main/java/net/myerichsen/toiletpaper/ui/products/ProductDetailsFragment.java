@@ -1,3 +1,9 @@
+/*
+ * Copyright (c) 2020. Michael Erichsen.
+ *
+ * The program is distributed under the terms of the GNU Affero General Public License v3.0
+ */
+
 package net.myerichsen.toiletpaper.ui.products;
 
 import android.content.Context;
@@ -24,12 +30,6 @@ import net.myerichsen.toiletpaper.TPDbAdapter;
 
 import java.util.List;
 import java.util.Objects;
-
-/*
- * Copyright (c) 2020. Michael Erichsen.
- *
- * The program is distributed under the terms of the GNU Affero General Public License v3.0
- */
 
 /**
  * Display and maintain product details
@@ -135,7 +135,11 @@ public class ProductDetailsFragment extends Fragment {
         addTableRow(productDetailTableLayout, "Timestamp", pm.getTimestamp());
 
         ImageButton productDeleteBtn = root.findViewById(R.id.productDeleteBtn);
-        productDeleteBtn.setOnClickListener(new View.OnClickListener() {
+        productDeleteBtn.setOnClickListener(deleteProduct(adapter));
+    }
+
+    private View.OnClickListener deleteProduct(final TPDbAdapter adapter) {
+        return new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 try {
@@ -144,7 +148,7 @@ public class ProductDetailsFragment extends Fragment {
                     Snackbar.make(snackView, Objects.requireNonNull(e.getMessage()), Snackbar.LENGTH_LONG).show();
                 }
             }
-        });
+        };
     }
 
     private void addTableRow(TableLayout tableLayout, String uid2, String uid3) {

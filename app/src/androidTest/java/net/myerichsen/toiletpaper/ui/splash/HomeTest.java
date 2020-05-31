@@ -54,7 +54,7 @@ public class HomeTest extends ToiletPaperTest {
 //                allOf(withContentDescription("More options"),
 //                        childAtPosition(
 //                                childAtPosition(
-//                                        withId(R.id.toolbar),
+//                                        withId(R.id.action_bar),
 //                                        2),
 //                                1),
 //                        isDisplayed()));
@@ -94,7 +94,7 @@ public class HomeTest extends ToiletPaperTest {
 //                allOf(withId(R.id.fragment_help), withContentDescription("Hjælp"),
 //                        childAtPosition(
 //                                childAtPosition(
-//                                        withId(R.id.toolbar),
+//                                        withId(R.id.action_bar),
 //                                        2),
 //                                0),
 //                        isDisplayed()));
@@ -163,7 +163,7 @@ public class HomeTest extends ToiletPaperTest {
 //                allOf(withId(R.id.fragment_help), withContentDescription("Hjælp"),
 //                        childAtPosition(
 //                                childAtPosition(
-//                                        withId(R.id.toolbar),
+//                                        withId(R.id.action_bar),
 //                                        2),
 //                                0),
 //                        isDisplayed()));
@@ -191,7 +191,7 @@ public class HomeTest extends ToiletPaperTest {
         ViewInteraction appCompatImageButton4 = onView(
                 allOf(withContentDescription("Navigate up"),
                         childAtPosition(
-                                allOf(withId(R.id.toolbar),
+                                allOf(withId(R.id.action_bar),
                                         childAtPosition(
                                                 withClassName(is("com.google.android.material.appbar.AppBarLayout")),
                                                 0)),
@@ -213,7 +213,7 @@ public class HomeTest extends ToiletPaperTest {
 //        ViewInteraction appCompatImageButton6 = onView(
 //                allOf(withContentDescription("Open navigation drawer"),
 //                        childAtPosition(
-//                                allOf(withId(R.id.toolbar),
+//                                allOf(withId(R.id.action_bar),
 //                                        childAtPosition(
 //                                                withClassName(is("com.google.android.material.appbar.AppBarLayout")),
 //                                                0)),
@@ -256,7 +256,7 @@ public class HomeTest extends ToiletPaperTest {
 //                allOf(withId(R.id.fragment_help), withContentDescription("Hjælp"),
 //                        childAtPosition(
 //                                childAtPosition(
-//                                        withId(R.id.toolbar),
+//                                        withId(R.id.action_bar),
 //                                        2),
 //                                0),
 //                        isDisplayed()));
@@ -303,7 +303,7 @@ public class HomeTest extends ToiletPaperTest {
 //        ViewInteraction appCompatImageButton8 = onView(
 //                allOf(withContentDescription("Open navigation drawer"),
 //                        childAtPosition(
-//                                allOf(withId(R.id.toolbar),
+//                                allOf(withId(R.id.action_bar),
 //                                        childAtPosition(
 //                                                withClassName(is("com.google.android.material.appbar.AppBarLayout")),
 //                                                0)),
@@ -346,7 +346,7 @@ public class HomeTest extends ToiletPaperTest {
 //                allOf(withId(R.id.fragment_help), withContentDescription("Hjælp"),
 //                        childAtPosition(
 //                                childAtPosition(
-//                                        withId(R.id.toolbar),
+//                                        withId(R.id.action_bar),
 //                                        2),
 //                                0),
 //                        isDisplayed()));
@@ -393,7 +393,7 @@ public class HomeTest extends ToiletPaperTest {
 //        ViewInteraction appCompatImageButton10 = onView(
 //                allOf(withContentDescription("Open navigation drawer"),
 //                        childAtPosition(
-//                                allOf(withId(R.id.toolbar),
+//                                allOf(withId(R.id.action_bar),
 //                                        childAtPosition(
 //                                                withClassName(is("com.google.android.material.appbar.AppBarLayout")),
 //                                                0)),

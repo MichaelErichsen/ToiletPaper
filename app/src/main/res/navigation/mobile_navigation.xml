@@ -44,7 +44,6 @@
         <action
             android:id="@+id/action_nav_home_to_nav_item_no"
             app:destination="@id/nav_item_no" />
-
     </fragment>
 
     <fragment
@@ -149,6 +148,7 @@
             android:name="brand"
             app:argType="string" />
     </fragment>
+
     <fragment
         android:id="@+id/nav_price_select"
         android:name="net.myerichsen.toiletpaper.ui.prices.PriceSelectFragment"
@@ -167,6 +167,7 @@
             android:id="@+id/action_nav_price_select_to_nav_item_no"
             app:destination="@id/nav_item_no" />
     </fragment>
+
     <fragment
         android:id="@+id/nav_prices_list"
         android:name="net.myerichsen.toiletpaper.ui.prices.PriceListFragment"
@@ -182,6 +183,7 @@
             android:id="@+id/action_nav_prices_list_to_nav_product_details"
             app:destination="@id/nav_product_details" />
     </fragment>
+
     <fragment
         android:id="@+id/nav_item_no"
         android:name="net.myerichsen.toiletpaper.ui.home.ItemNoListFragment"
@@ -191,6 +193,7 @@
             android:name="itemNo"
             app:argType="string" />
     </fragment>
+
     <fragment
         android:id="@+id/nav_compare_list"
         android:name="net.myerichsen.toiletpaper.ui.compare.CompareListFragment"

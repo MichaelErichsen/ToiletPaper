@@ -1,3 +1,9 @@
+/*
+ * Copyright (c) 2020. Michael Erichsen.
+ *
+ * The program is distributed under the terms of the GNU Affero General Public License v3.0
+ */
+
 package net.myerichsen.toiletpaper.ui.splash;
 
 import android.view.View;
@@ -29,12 +35,6 @@ import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.is;
 
-/*
- * Copyright (c) 2020. Michael Erichsen.
- *
- * The program is distributed under the terms of the GNU Affero General Public License v3.0
- */
-
 /**
  * Superclass for espresso tests
  */
@@ -63,16 +63,16 @@ class ToiletPaperTest {
     }
 
     void drawerPosition(int position) {
-        ViewInteraction appCompatImageButton2 = onView(
+        ViewInteraction appCompatImageButton = onView(
                 allOf(withContentDescription("Open navigation drawer"),
                         childAtPosition(
-                                allOf(withId(R.id.toolbar),
+                                allOf(withId(R.id.action_bar),
                                         childAtPosition(
-                                                withClassName(is("com.google.android.material.appbar.AppBarLayout")),
+                                                withId(R.id.action_bar_container),
                                                 0)),
                                 1),
                         isDisplayed()));
-        appCompatImageButton2.perform(click());
+        appCompatImageButton.perform(click());
 
         ViewInteraction navigationMenuItemView = onView(
                 allOf(childAtPosition(
@@ -90,7 +90,7 @@ class ToiletPaperTest {
                 allOf(withId(R.id.fragment_help), withContentDescription("Hjælp"),
                         childAtPosition(
                                 childAtPosition(
-                                        withId(R.id.toolbar),
+                                        withId(R.id.action_bar),
                                         2),
                                 0),
                         isDisplayed()));
@@ -121,7 +121,7 @@ class ToiletPaperTest {
                 allOf(withContentDescription("More options"),
                         childAtPosition(
                                 childAtPosition(
-                                        withId(R.id.toolbar),
+                                        withId(R.id.action_bar),
                                         2),
                                 1),
                         isDisplayed()));
