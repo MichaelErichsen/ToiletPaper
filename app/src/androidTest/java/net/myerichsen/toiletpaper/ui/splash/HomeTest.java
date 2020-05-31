@@ -38,86 +38,11 @@ import static org.hamcrest.Matchers.is;
 @RunWith(AndroidJUnit4.class)
 public class HomeTest extends ToiletPaperTest {
 
-//    @Rule
-//    public ActivityTestRule<SplashActivity> mActivityTestRule = new ActivityTestRule<>(SplashActivity.class);
-//
-//    @Rule
-//    public GrantPermissionRule mGrantPermissionRule =
-//            GrantPermissionRule.grant(
-//                    "android.permission.CAMERA");
-
     @Test
     public void homeTest() {
         initialLoad();
 
-//        ViewInteraction overflowMenuButton = onView(
-//                allOf(withContentDescription("More options"),
-//                        childAtPosition(
-//                                childAtPosition(
-//                                        withId(R.id.action_bar),
-//                                        2),
-//                                1),
-//                        isDisplayed()));
-//        overflowMenuButton.perform(click());
-//
-//        ViewInteraction appCompatTextView = onView(
-//                allOf(withId(R.id.title), withText("Indstillinger"),
-//                        childAtPosition(
-//                                childAtPosition(
-//                                        withId(R.id.content),
-//                                        0),
-//                                0),
-//                        isDisplayed()));
-//        appCompatTextView.perform(click());
-//
-//        ViewInteraction recyclerView = onView(
-//                allOf(withId(R.id.recycler_view),
-//                        childAtPosition(
-//                                withId(android.R.id.list_container),
-//                                0)));
-//        recyclerView.perform(actionOnItemAtPosition(1, click()));
-//
-//        ViewInteraction appCompatImageButton = onView(
-//                allOf(withContentDescription("Navigate up"),
-//                        childAtPosition(
-//                                allOf(withId(R.id.action_bar),
-//                                        childAtPosition(
-//                                                withId(R.id.action_bar_container),
-//                                                0)),
-//                                1),
-//                        isDisplayed()));
-//        appCompatImageButton.perform(click());
-
         help("Hovedbillede for programmet.");
-
-//        ViewInteraction actionMenuItemView = onView(
-//                allOf(withId(R.id.fragment_help), withContentDescription("Hjælp"),
-//                        childAtPosition(
-//                                childAtPosition(
-//                                        withId(R.id.action_bar),
-//                                        2),
-//                                0),
-//                        isDisplayed()));
-//        actionMenuItemView.perform(click());
-//
-//        ViewInteraction textView = onView(
-//                allOf(withId(R.id.HelpDialogTextView), withText("Hovedbillede for programmet.\n Indtast alle kendte data og klik på beregn nederst på billedet.\n Varenummer kan scannes eller slås op i databasen.\n Varemærke kan slås op i databasen.\n Hvis varenummer eller varemærke ikke er komplet eller entydigt, vises et valgbillede. Hvis det er fundet og entydigt, vises alle data fra databasen.\n Manglende værdier beregnes ved tryk på beregningsknappen. Beregnede værdier markeres som sådan. Ved indtastning fjernes markeringen.\n De indtastede data gemmes med gemmeknappen nederst.\n Der kan foretages opslag på varemærket hos Google med Googleknappen.\n Der kan foretages opslag på toiletpapir generelt hos Pricerunner med Pricerunnerknappen.\n Antallet af felter på billedet styres med indstilingen \"Avanceret inddataformat\"."),
-//                        childAtPosition(
-//                                childAtPosition(
-//                                        IsInstanceOf.<View>instanceOf(android.widget.ScrollView.class),
-//                                        0),
-//                                1),
-//                        isDisplayed()));
-//        textView.check(matches(withText("Hovedbillede for programmet.  Indtast alle kendte data og klik på beregn nederst på billedet.  Varenummer kan scannes eller slås op i databasen.  Varemærke kan slås op i databasen.  Hvis varenummer eller varemærke ikke er komplet eller entydigt, vises et valgbillede. Hvis det er fundet og entydigt, vises alle data fra databasen.  Manglende værdier beregnes ved tryk på beregningsknappen. Beregnede værdier markeres som sådan. Ved indtastning fjernes markeringen.  De indtastede data gemmes med gemmeknappen nederst.  Der kan foretages opslag på varemærket hos Google med Googleknappen.  Der kan foretages opslag på toiletpapir generelt hos Pricerunner med Pricerunnerknappen.  Antallet af felter på billedet styres med indstilingen \"Avanceret inddataformat\".")));
-//
-//        ViewInteraction appCompatButton = onView(
-//                allOf(withId(R.id.helpDialogButtonOK), withText("OK"),
-//                        childAtPosition(
-//                                childAtPosition(
-//                                        withClassName(is("android.widget.ScrollView")),
-//                                        0),
-//                                2)));
-//        appCompatButton.perform(scrollTo(), click());
 
         ViewInteraction textInputEditText = onView(
                 allOf(withId(R.id.itemNoEditText),
@@ -159,41 +84,12 @@ public class HomeTest extends ToiletPaperTest {
 
         help("Scan en stregkode eller QR-kode.");
 
-//        ViewInteraction actionMenuItemView2 = onView(
-//                allOf(withId(R.id.fragment_help), withContentDescription("Hjælp"),
-//                        childAtPosition(
-//                                childAtPosition(
-//                                        withId(R.id.action_bar),
-//                                        2),
-//                                0),
-//                        isDisplayed()));
-//        actionMenuItemView2.perform(click());
-//
-//        ViewInteraction textView2 = onView(
-//                allOf(withId(R.id.HelpDialogTextView), withText("Scan en stregkode eller QR-kode.\n Telefonen vil bippe, og koden vil blive vist nedenfor.\n Koden indsættes i hovedbilledet, og der søges efter denne i databasen."),
-//                        childAtPosition(
-//                                childAtPosition(
-//                                        IsInstanceOf.<View>instanceOf(android.widget.ScrollView.class),
-//                                        0),
-//                                1),
-//                        isDisplayed()));
-//        textView2.check(matches(withText("Scan en stregkode eller QR-kode.  Telefonen vil bippe, og koden vil blive vist nedenfor.  Koden indsættes i hovedbilledet, og der søges efter denne i databasen.")));
-//
-//        ViewInteraction appCompatButton2 = onView(
-//                allOf(withId(R.id.helpDialogButtonOK), withText("OK"),
-//                        childAtPosition(
-//                                childAtPosition(
-//                                        withClassName(is("android.widget.ScrollView")),
-//                                        0),
-//                                2)));
-//        appCompatButton2.perform(scrollTo(), click());
-
         ViewInteraction appCompatImageButton4 = onView(
                 allOf(withContentDescription("Navigate up"),
                         childAtPosition(
                                 allOf(withId(R.id.action_bar),
                                         childAtPosition(
-                                                withClassName(is("com.google.android.material.appbar.AppBarLayout")),
+                                                withId(R.id.action_bar_container),
                                                 0)),
                                 1),
                         isDisplayed()));
@@ -209,27 +105,6 @@ public class HomeTest extends ToiletPaperTest {
         appCompatImageButton5.perform(scrollTo(), click());
 
         drawerPosition(1);
-
-//        ViewInteraction appCompatImageButton6 = onView(
-//                allOf(withContentDescription("Open navigation drawer"),
-//                        childAtPosition(
-//                                allOf(withId(R.id.action_bar),
-//                                        childAtPosition(
-//                                                withClassName(is("com.google.android.material.appbar.AppBarLayout")),
-//                                                0)),
-//                                1),
-//                        isDisplayed()));
-//        appCompatImageButton6.perform(click());
-//
-//        ViewInteraction navigationMenuItemView = onView(
-//                allOf(childAtPosition(
-//                        allOf(withId(R.id.design_navigation_view),
-//                                childAtPosition(
-//                                        withId(R.id.nav_view),
-//                                        0)),
-//                        1),
-//                        isDisplayed()));
-//        navigationMenuItemView.perform(click());
 
         ViewInteraction textInputEditText2 = onView(
                 allOf(withId(R.id.brandEditText),
@@ -252,35 +127,6 @@ public class HomeTest extends ToiletPaperTest {
 
         help("Oversigt over fundne varemærker.");
 
-//        ViewInteraction actionMenuItemView3 = onView(
-//                allOf(withId(R.id.fragment_help), withContentDescription("Hjælp"),
-//                        childAtPosition(
-//                                childAtPosition(
-//                                        withId(R.id.action_bar),
-//                                        2),
-//                                0),
-//                        isDisplayed()));
-//        actionMenuItemView3.perform(click());
-//
-//        ViewInteraction textView3 = onView(
-//                allOf(withId(R.id.HelpDialogTextView), withText("Oversigt over fundne varemærker.\nVed valg af en række returneres denne til hovedbilledet, og der søges efter denne i databasen."),
-//                        childAtPosition(
-//                                childAtPosition(
-//                                        IsInstanceOf.<View>instanceOf(android.widget.ScrollView.class),
-//                                        0),
-//                                1),
-//                        isDisplayed()));
-//        textView3.check(matches(withText("Oversigt over fundne varemærker. Ved valg af en række returneres denne til hovedbilledet, og der søges efter denne i databasen.")));
-//
-//        ViewInteraction appCompatButton3 = onView(
-//                allOf(withId(R.id.helpDialogButtonOK), withText("OK"),
-//                        childAtPosition(
-//                                childAtPosition(
-//                                        withClassName(is("android.widget.ScrollView")),
-//                                        0),
-//                                2)));
-//        appCompatButton3.perform(scrollTo(), click());
-
         ViewInteraction recyclerView2 = onView(
                 allOf(withId(R.id.brandList),
                         childAtPosition(
@@ -299,27 +145,6 @@ public class HomeTest extends ToiletPaperTest {
         editText2.check(matches(withText("Lambi Classic 12")));
 
         drawerPosition(1);
-
-//        ViewInteraction appCompatImageButton8 = onView(
-//                allOf(withContentDescription("Open navigation drawer"),
-//                        childAtPosition(
-//                                allOf(withId(R.id.action_bar),
-//                                        childAtPosition(
-//                                                withClassName(is("com.google.android.material.appbar.AppBarLayout")),
-//                                                0)),
-//                                1),
-//                        isDisplayed()));
-//        appCompatImageButton8.perform(click());
-//
-//        ViewInteraction navigationMenuItemView2 = onView(
-//                allOf(childAtPosition(
-//                        allOf(withId(R.id.design_navigation_view),
-//                                childAtPosition(
-//                                        withId(R.id.nav_view),
-//                                        0)),
-//                        1),
-//                        isDisplayed()));
-//        navigationMenuItemView2.perform(click());
 
         ViewInteraction textInputEditText3 = onView(
                 allOf(withId(R.id.itemNoEditText),
@@ -342,35 +167,6 @@ public class HomeTest extends ToiletPaperTest {
 
         help("Oversigt over fundne varenumre.");
 
-//        ViewInteraction actionMenuItemView4 = onView(
-//                allOf(withId(R.id.fragment_help), withContentDescription("Hjælp"),
-//                        childAtPosition(
-//                                childAtPosition(
-//                                        withId(R.id.action_bar),
-//                                        2),
-//                                0),
-//                        isDisplayed()));
-//        actionMenuItemView4.perform(click());
-//
-//        ViewInteraction textView4 = onView(
-//                allOf(withId(R.id.HelpDialogTextView), withText("Oversigt over fundne varenumre.\nVed valg af en række returneres denne til hovedbilledet, og der søges efter denne i databasen."),
-//                        childAtPosition(
-//                                childAtPosition(
-//                                        IsInstanceOf.<View>instanceOf(android.widget.ScrollView.class),
-//                                        0),
-//                                1),
-//                        isDisplayed()));
-//        textView4.check(matches(withText("Oversigt over fundne varenumre. Ved valg af en række returneres denne til hovedbilledet, og der søges efter denne i databasen.")));
-//
-//        ViewInteraction appCompatButton4 = onView(
-//                allOf(withId(R.id.helpDialogButtonOK), withText("OK"),
-//                        childAtPosition(
-//                                childAtPosition(
-//                                        withClassName(is("android.widget.ScrollView")),
-//                                        0),
-//                                2)));
-//        appCompatButton4.perform(scrollTo(), click());
-
         ViewInteraction recyclerView3 = onView(
                 allOf(withId(R.id.itemNoList),
                         childAtPosition(
@@ -389,27 +185,6 @@ public class HomeTest extends ToiletPaperTest {
         editText3.check(matches(withText("75532")));
 
         drawerPosition(1);
-
-//        ViewInteraction appCompatImageButton10 = onView(
-//                allOf(withContentDescription("Open navigation drawer"),
-//                        childAtPosition(
-//                                allOf(withId(R.id.action_bar),
-//                                        childAtPosition(
-//                                                withClassName(is("com.google.android.material.appbar.AppBarLayout")),
-//                                                0)),
-//                                1),
-//                        isDisplayed()));
-//        appCompatImageButton10.perform(click());
-//
-//        ViewInteraction navigationMenuItemView3 = onView(
-//                allOf(childAtPosition(
-//                        allOf(withId(R.id.design_navigation_view),
-//                                childAtPosition(
-//                                        withId(R.id.nav_view),
-//                                        0)),
-//                        1),
-//                        isDisplayed()));
-//        navigationMenuItemView3.perform(click());
 
         ViewInteraction textInputEditText4 = onView(
                 allOf(withId(R.id.brandEditText),
@@ -459,34 +234,5 @@ public class HomeTest extends ToiletPaperTest {
                                 0),
                         isDisplayed()));
         editText5.check(matches(withText("100.0")));
-
-//        ViewInteraction appCompatImageButton13 = onView(
-//                allOf(withId(R.id.googleBtn), withContentDescription("Google søgning"),
-//                        childAtPosition(
-//                                allOf(withId(R.id.buttonLinearLayout),
-//                                        childAtPosition(
-//                                                withClassName(is("android.widget.LinearLayout")),
-//                                                18)),
-//                                2)));
-//        appCompatImageButton13.perform(scrollTo(), click());
     }
-
-//    private static Matcher<View> childAtPosition(
-//            final Matcher<View> parentMatcher, final int position) {
-//
-//        return new TypeSafeMatcher<View>() {
-//            @Override
-//            public void describeTo(Description description) {
-//                description.appendText("Child at position " + position + " in parent ");
-//                parentMatcher.describeTo(description);
-//            }
-//
-//            @Override
-//            public boolean matchesSafely(View view) {
-//                ViewParent parent = view.getParent();
-//                return parent instanceof ViewGroup && parentMatcher.matches(parent)
-//                        && view.equals(((ViewGroup) parent).getChildAt(position));
-//            }
-//        };
-//    }
 }

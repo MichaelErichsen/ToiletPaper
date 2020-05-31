@@ -18,6 +18,7 @@ import org.junit.runners.Suite;
         PricesTest.class,
         ProductTest.class,
         SupplierTest.class})
+
 public class UnitTestSuite {
 }
 

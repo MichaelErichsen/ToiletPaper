@@ -117,7 +117,7 @@ public class SupplierTest extends ToiletPaperTest {
                         childAtPosition(
                                 allOf(withId(R.id.action_bar),
                                         childAtPosition(
-                                                withClassName(is("com.google.android.material.appbar.AppBarLayout")),
+                                                withId(R.id.action_bar_container),
                                                 0)),
                                 1),
                         isDisplayed()));
@@ -156,7 +156,7 @@ public class SupplierTest extends ToiletPaperTest {
                         childAtPosition(
                                 allOf(withId(R.id.action_bar),
                                         childAtPosition(
-                                                withClassName(is("com.google.android.material.appbar.AppBarLayout")),
+                                                withId(R.id.action_bar_container),
                                                 0)),
                                 1),
                         isDisplayed()));
